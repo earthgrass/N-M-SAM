@@ -9,6 +9,10 @@ M4: 82 passed in unit-only suite; constant-Hessian six-candidate identity, exact
 residual decomposition, zero-radius undefined direction, compatible L2 subtraction,
 constant ranking and label rejection. Numerical equality is unit evidence only,
 not experimental support for route A. Dataset/GPU mechanism validation pending.
+M5 unit suite: 88 passed; four curvature classes over six supports, KKT/grid
+reference, hard case, zero-gradient one-step counterexample, new support domain,
+DeltaF=DeltaL+DeltaS and exact quadratic local-model identity. No network research
+experiment was executed. These are UNIT_TESTED, not evidence of improved accuracy.
 
 No historical results are reused. Each stage below is updated only after execution.
 

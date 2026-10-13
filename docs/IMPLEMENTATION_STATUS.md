@@ -1,6 +1,10 @@
 # Implementation status
 
 CURRENT POLICY: code/unit tests only. DATASET_PENDING; GPU_VALIDATION_PENDING.
+M5 supported single/multi-step robust proxy, local quadratic robust proxy and
+small FP64 global quadratic trust-region reference CODE_COMPLETE / UNIT_TESTED.
+Global certificates apply ONLY to the explicit small quadratic, never to network
+one-step/finite-step inner maximization. Route B empirical validation pending.
 M4 direction path, residual decomposition, six/joint candidate generation, labelled
 ranking/MAE/RMSE/Spearman/regret CODE_COMPLETE / UNIT_TESTED (82 tests).
 No A mechanism study executed after the policy change.
