@@ -1,12 +1,10 @@
-from nmsam.experiment.runner import run_dense_cpu
+from nmsam.core.step_types import SAMStepReport
+from nmsam.experiment.metrics import step_metrics
 
 
-def test_cpu_smoke_reproducible_actual_metrics(tmp_path):
-    one = run_dense_cpu("configs/dense_sam_official_toy.yaml", tmp_path)
-    two = run_dense_cpu("configs/dense_sam_official_toy.yaml", tmp_path)
-    assert one["metrics"] == two["metrics"]
-    assert len(one["metrics"]) == 3
-    assert all(m["forward_passes"] == 2 and m["restoration_error"] == 0
-               for m in one["metrics"])
-    assert len(list(tmp_path.glob("dense_*.json"))) == 2
+def test_metrics_serialization_without_training():
+    report=SAMStepReport(1.,1.1,.1,.5,2.,3.,.05,3.,0.,2,False)
+    result=step_metrics(report,1)
+    assert result["task_loss"]==1. and result["optimizer_loss"]==1.1
+    assert result["forward_passes"]==2 and "trace" not in result
 

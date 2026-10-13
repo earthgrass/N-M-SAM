@@ -15,7 +15,9 @@ from nmsam.utils.seed import seed_everything
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("--archive-path");p.add_argument("--cache-dir",default="../N-M-SAM-DATA-CACHE")
     p.add_argument("--max-batches",type=int,default=2);p.add_argument("--model",choices=["tiny","resnet18"],default="tiny")
-    p.add_argument("--seed",type=int,default=0);a=p.parse_args()
+    p.add_argument("--seed",type=int,default=0);p.add_argument("--execute",action="store_true");a=p.parse_args()
+    if not a.execute:
+        print(json.dumps({"dry_run":True,"methods":METHODS,"status":"GPU_VALIDATION_PENDING"}));raise SystemExit(0)
     if not 1<=a.max_batches<=16: p.error("bounded CPU protocol permits 1..16 batches")
     seed_everything(a.seed)
     data=cifar_loaders(a.archive_path,a.cache_dir,batch_size=2,seed=a.seed) if a.archive_path else None

@@ -1,5 +1,11 @@
 # Implementation-v1 actual experiment log
 
+USER OVERRIDE RECEIVED after M3 code creation: stop all research/training smoke.
+An already-completed M3 CLI produced effective_smoke_a5e241fc4ae544b0ab95cae72889c1b4
+before the stop could cancel it. It is historical only. No additional dataset reads
+or research execution follow this override. Subsequent entries are UNIT_TESTED.
+M3 unit-only suite: 80 passed (actual runtime recorded by test output), plus compileall.
+
 No historical results are reused. Each stage below is updated only after execution.
 
 M2.0 P0: data source was missing from the stable Git tree due to unanchored data/.

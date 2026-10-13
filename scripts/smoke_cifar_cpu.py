@@ -12,11 +12,15 @@ from nmsam.utils.seed import seed_everything
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument("--archive-path", required=True)
+    p.add_argument("--archive-path")
+    p.add_argument("--execute",action="store_true")
     p.add_argument("--cache-dir", default="../N-M-SAM-DATA-CACHE")
     p.add_argument("--max-batches", type=int, default=2)
     p.add_argument("--epochs", type=int, default=1)
     args = p.parse_args()
+    if not args.execute:
+        print(json.dumps({"dry_run":True,"status":"DATASET_PENDING"}));raise SystemExit(0)
+    if not args.archive_path:p.error("--execute requires --archive-path")
     if not 1 <= args.max_batches <= 2 or args.epochs != 1:
         p.error("smoke restricted to 1 epoch and <=2 batches")
     seed_everything(0)

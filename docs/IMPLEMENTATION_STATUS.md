@@ -1,5 +1,13 @@
 # Implementation status
 
+CURRENT POLICY: code/unit tests only. DATASET_PENDING; GPU_VALIDATION_PENDING.
+M3 functional effective loss, true gradient/HVP/Hessian toy reference, fixed BN/RNG,
+sampler and full checkpoint serialization CODE_COMPLETE / UNIT_TESTED.
+Existing training-loop smoke test replaced with pure metric serialization; checkpoint
+validation now checks one small-tensor step and immediate state restoration only.
+All experimental CLIs default dry-run. Historical bootstrap/run notes below do not
+describe current research verification status.
+
 Implementation-v1: M2.0 G0/G1 IMPLEMENTED_AND_TESTED (see EXPERIMENT_LOG).
 M2.1 G2 IMPLEMENTED_AND_TESTED: 73 tests; four core methods two batches
 on FakeData and real CIFAR. Subsequent M2.2–M7 gates pending.

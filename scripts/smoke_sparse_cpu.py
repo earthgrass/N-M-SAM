@@ -16,7 +16,9 @@ from nmsam.experiment.metrics import step_metrics
 
 if __name__=="__main__":
     p=argparse.ArgumentParser(); p.add_argument("--archive-path");
-    p.add_argument("--cache-dir",default="../N-M-SAM-DATA-CACHE"); a=p.parse_args()
+    p.add_argument("--cache-dir",default="../N-M-SAM-DATA-CACHE");p.add_argument("--execute",action="store_true"); a=p.parse_args()
+    if not a.execute:
+        print(json.dumps({"dry_run":True,"status":"GPU_VALIDATION_PENDING"}));raise SystemExit(0)
     seed_everything(0)
     data=cifar_loaders(a.archive_path,a.cache_dir) if a.archive_path else None
     loader=data["train"] if data else fake_loader(batch_size=4,steps=2,seed=0)
