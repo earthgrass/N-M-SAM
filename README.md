@@ -19,4 +19,5 @@ Each dense run writes actual metrics and provenance under gitignored `results/`.
 
 See [status](docs/IMPLEMENTATION_STATUS.md), [parity](docs/01_OFFICIAL_SAM_PARITY.md),
 [interfaces](docs/02_MATH_AND_INTERFACE_CONTRACT.md), and [roadmap](docs/05_RESEARCH_ROADMAP.md).
+Actual test and smoke evidence: [validation](docs/VALIDATION.md).
 
