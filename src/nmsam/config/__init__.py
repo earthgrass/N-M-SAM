@@ -1,0 +1,2 @@
+"""Validated experiment configuration."""
+

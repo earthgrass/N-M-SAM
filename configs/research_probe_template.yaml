@@ -1,0 +1,9 @@
+# Design template, not accepted by the dense runner and not executable.
+status: PLANNED
+task_loss: cross_entropy_without_l2
+state_policy: fixed_batch_buffers_rng
+candidate_scope: sampled_single_blocks
+inner_solver: one_step_robust_proxy
+selection_split: training_calibration
+evaluation_split: independent_holdout
+
