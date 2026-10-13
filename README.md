@@ -13,6 +13,10 @@ Validation: `python -m pytest -q`.
 CPU toy entry point (M1): `python scripts/smoke_dense_cpu.py --config configs/dense_sam_official_toy.yaml`.
 No dataset downloads or long training are authorized by these commands.
 
+SGD smoke: `python scripts/smoke_dense_cpu.py --config configs/dense_sgd_toy.yaml`.
+2:4 primitive smoke: `python scripts/smoke_nm_cpu.py` (no sparse training).
+Each dense run writes actual metrics and provenance under gitignored `results/`.
+
 See [status](docs/IMPLEMENTATION_STATUS.md), [parity](docs/01_OFFICIAL_SAM_PARITY.md),
 [interfaces](docs/02_MATH_AND_INTERFACE_CONTRACT.md), and [roadmap](docs/05_RESEARCH_ROADMAP.md).
 

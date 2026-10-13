@@ -44,3 +44,13 @@ MaskSpec, MaskLayout, MaskCandidate and MaskTransition include shape, N/M,
 support and q with snapshot identity. These are design contracts, not implemented
 research algorithms.
 
+M1.5 structural APIs now implemented:
+`MaskSpec(n,m)` validates integers; `MaskLayout(shape,spec).groups(tensor)`
+returns [out,row_width/M,M], `restore(groups)` returns the original weight shape.
+`build_magnitude_mask(W,spec)` returns same-shape bool M;
+`validate_mask(M,layout)` returns None or raises for illegal structure;
+`enumerate_masks(spec)` returns [C(M,N),M] bool candidates;
+`mask_delta(W,M,M',spec)` returns detached same-shape q. These modules depend on
+torch and each other only, and never invoke SAM or Hessian code. Builders operate
+only on explicitly selected tensors; they do not choose model-wide mask scope.
+
