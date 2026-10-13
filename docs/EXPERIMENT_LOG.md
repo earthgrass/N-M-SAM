@@ -17,6 +17,14 @@ M6: 91 passed after correcting a test's boolean support-to-parameter unpack cast
 Analytic cross-block identity, positive-definite restricted solution, indefinite
 trust-region legality, 36 legal two-block combinations, and matched backward
 budget interfaces tested. Actual model recovery/compensation performance pending.
+M7 code-only integration: 110 passed, 0 failed, 0 skipped; compileall/diff clean.
+Configuration dry-run enumerates 18 declared baseline jobs without querying CUDA
+or opening datasets. Tests cover default execution guard, tiny synthetic archive,
+single-step full checkpoint/RNG/modes/grads and corrupt-load rollback, eval state
+restoration, hashes/sampler, configuration and report rejection checks.
+Dense SAM source diff against cd33d2e4 is empty. No archives/weights tracked.
+Runtime GPU/AMP/DDP, real dataset deployment and A/B/C findings remain pending;
+AMP/DDP activation fails closed. Additional selection designs will be documents only.
 
 No historical results are reused. Each stage below is updated only after execution.
 

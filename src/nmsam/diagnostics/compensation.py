@@ -83,9 +83,9 @@ def robust_compensation(loss,center,support,budget,rho,*,outer_steps=1,inner_ste
             "derivative":"one_step_Danskin_surrogate","task_after":float(loss(center+v))}
 
 
-def compare_compensation(loss,z,q,support,budget,rho,*,max_hvps=4,outer_steps=1,inner_steps=1):
-    quadratic=compensate_task(loss,z,q,support,budget,max_hvps=max_hvps)
-    robust=robust_compensation(loss,z+q,support,budget,rho,outer_steps=outer_steps,inner_steps=inner_steps)
+def compare_compensation(loss,z,q,support,budget,rho,*,max_hvps=4,outer_steps=1,inner_steps=1,restarts=1,damping=.001):
+    quadratic=compensate_task(loss,z,q,support,budget,max_hvps=max_hvps,damping=damping)
+    robust=robust_compensation(loss,z+q,support,budget,rho,outer_steps=outer_steps,inner_steps=inner_steps,restarts=restarts)
     comparisons={"mask_only":{"v":torch.zeros_like(z),"backward_calls":0},
         "quadratic":quadratic,"robust":robust,
         "sgd_matched_quadratic":recovery_sgd(loss,z+q,support,budget,steps=quadratic["backward_calls"]),
@@ -93,7 +93,7 @@ def compare_compensation(loss,z,q,support,budget,rho,*,max_hvps=4,outer_steps=1,
     for result in comparisons.values():
         v=result["v"]
         if v.norm()>budget+1e-6 or (v[~support]!=0).any():raise ArithmeticError("illegal compensation")
-        measured=robust_proxy(loss,z+q+v,support,rho,steps=inner_steps)
+        measured=robust_proxy(loss,z+q+v,support,rho,steps=inner_steps,restarts=restarts)
         result.update(task_loss=float(loss(z+q+v)),robust_proxy=measured["value"],
                       measurement_backwards=measured["backward_evaluations"],v_norm=float(v.norm()))
     return comparisons

@@ -1,4 +1,4 @@
-# N:M x SAM — Bootstrap v0.1
+# N:M x SAM — Implementation v1 (code and unit validation)
 
 Fresh src-layout PyTorch research project with independent Git root history.
 No old source, results or model weights are migrated.
@@ -10,14 +10,20 @@ cross-framework numerical/accuracy reproduction.
 
 Setup: `python -m pip install -e ".[test]"`.
 Validation: `python -m pytest -q`.
-CPU toy entry point (M1): `python scripts/smoke_dense_cpu.py --config configs/dense_sam_official_toy.yaml`.
-No dataset downloads or long training are authorized by these commands.
+Default deployment validation: `python scripts/run_experiment.py --config configs/gpu_baselines.yaml`.
+All experiment CLIs are dry-run by default. Real execution requires --execute
+and separate user authorization for GPU/resources. DATASET_PENDING and
+GPU_VALIDATION_PENDING remain; code availability is not experimental validation.
 
 SGD smoke: `python scripts/smoke_dense_cpu.py --config configs/dense_sgd_toy.yaml`.
 2:4 primitive smoke: `python scripts/smoke_nm_cpu.py` (no sparse training).
-Each dense run writes actual metrics and provenance under gitignored `results/`.
+Legacy smoke CLIs also require --execute. No data downloads are implemented.
 
 See [status](docs/IMPLEMENTATION_STATUS.md), [parity](docs/01_OFFICIAL_SAM_PARITY.md),
 [interfaces](docs/02_MATH_AND_INTERFACE_CONTRACT.md), and [roadmap](docs/05_RESEARCH_ROADMAP.md).
-Actual test and smoke evidence: [validation](docs/VALIDATION.md).
+Current [architecture/APIs](docs/ARCHITECTURE_AND_API.md), [GPU deployment](docs/GPU_DEPLOYMENT.md),
+[unit log and historical pre-policy runs](docs/EXPERIMENT_LOG.md).
+Bootstrap-only historical evidence: [validation](docs/VALIDATION.md).
+Only magnitude/Taylor production mask policies are implemented; future selection
+proposals are design documents and must be reviewed before implementation.
 

@@ -1,0 +1,20 @@
+kind: baseline
+model: resnet18
+device: cuda
+precision: fp32
+amp: false
+ddp: false
+seeds: [0, 1, 2]
+methods: [Dense-SGD, Dense-SAM, "2:4-SGD-Magnitude", "2:4-SAM-Magnitude", "2:4-SAM-Taylor-g1", "2:4-SAM-Taylor-g2"]
+epochs: 200
+batch_size: 128
+lr: 0.1
+momentum: 0.9
+nesterov: true
+rho: 0.05
+l2_reg: 0.001
+scheduler: cosine
+mask_interval: 20
+archive_path: ${NMSAM_ARCHIVE}
+dataset_cache_dir: ${NMSAM_CACHE}
+output_dir: results/formal

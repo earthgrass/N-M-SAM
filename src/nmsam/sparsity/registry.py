@@ -64,7 +64,7 @@ class MaskRegistry:
             validate_mask(mask, MaskLayout(tuple(p.shape)))
             if mask.device != p.device:
                 raise ValueError("mask/master device mismatch")
-        self.masks={k:v.detach().clone() for k,v in state["masks"].items()}
+        self.masks={k:v.detach().to(dtype=torch.bool).clone() for k,v in state["masks"].items()}
         self.version=state["version"]; self.ste=state["ste"]
         self.excluded=dict(state["excluded"])
 
@@ -76,6 +76,8 @@ class MaskRegistry:
     def frozen(self):
         if self.locked:
             raise RuntimeError("nested sparse step")
+        parameters=dict(self.model.named_parameters())
+        for name,mask in self.masks.items():validate_mask(mask,MaskLayout(tuple(parameters[name].shape)))
         snapshot=self.state_dict(); self.locked=True
         try:
             yield snapshot

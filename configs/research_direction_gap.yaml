@@ -1,0 +1,11 @@
+kind: direction_gap
+model: resnet18
+device: cuda
+seeds: [0]
+batch_size: 2
+state_mode: eval_fixed_buffers
+target_layer: layer1.0.conv1.weight
+block_ids: [0]
+rho: 0.05
+checkpoint: ${NMSAM_CHECKPOINT}
+output_dir: results/route_A

@@ -1,0 +1,9 @@
+kind: baseline
+device: cuda
+seeds: [0]
+methods: ["2:4-SAM-Magnitude"]
+ste: false
+epochs: 200
+batch_size: 128
+mask_interval: 20
+output_dir: results/ablation_pure

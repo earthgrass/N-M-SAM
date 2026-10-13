@@ -10,7 +10,8 @@ import torch
 
 def quadratic_maximum(h,b,support,rho,*,tol=1e-12,max_dimension=64):
     if (b.ndim!=1 or h.shape!=(len(b),len(b)) or support.shape!=b.shape
-            or b.dtype!=torch.float64 or h.dtype!=torch.float64 or len(b)>max_dimension):
+            or b.dtype!=torch.float64 or h.dtype!=torch.float64 or len(b)>max_dimension
+            or support.dtype!=torch.bool or support.device!=b.device or h.device!=b.device):
         raise ValueError("small FP64 matching quadratic required")
     if not math.isfinite(rho) or rho<0 or not torch.isfinite(h).all() or not torch.isfinite(b).all():
         raise ValueError("finite quadratic and nonnegative radius required")

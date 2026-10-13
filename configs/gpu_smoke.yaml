@@ -1,0 +1,13 @@
+kind: baseline
+model: tiny
+device: cuda
+seeds: [0]
+epochs: 1
+batch_size: 4
+max_batches: 2
+eval_max_batches: 2
+scheduler: constant
+mask_interval: 1
+archive_path: ${NMSAM_ARCHIVE}
+dataset_cache_dir: ${NMSAM_CACHE}
+output_dir: results/gpu_smoke

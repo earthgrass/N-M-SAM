@@ -1,49 +1,29 @@
-# Implementation status
+# Current implementation status — 2026-10-13
 
-CURRENT POLICY: code/unit tests only. DATASET_PENDING; GPU_VALIDATION_PENDING.
-M6 joint legal candidates, coupling identity, quadratic/Steihaug/robust compensation
-and matched-backward recovery SGD interfaces CODE_COMPLETE / UNIT_TESTED (91 tests).
-Trust-region/damping statuses are explicit; network compensation is an approximate
-research solver, not a global/new method claim. Route C empirical validation pending.
-M5 supported single/multi-step robust proxy, local quadratic robust proxy and
-small FP64 global quadratic trust-region reference CODE_COMPLETE / UNIT_TESTED.
-Global certificates apply ONLY to the explicit small quadratic, never to network
-one-step/finite-step inner maximization. Route B empirical validation pending.
-M4 direction path, residual decomposition, six/joint candidate generation, labelled
-ranking/MAE/RMSE/Spearman/regret CODE_COMPLETE / UNIT_TESTED (82 tests).
-No A mechanism study executed after the policy change.
-M3 functional effective loss, true gradient/HVP/Hessian toy reference, fixed BN/RNG,
-sampler and full checkpoint serialization CODE_COMPLETE / UNIT_TESTED.
-Existing training-loop smoke test replaced with pure metric serialization; checkpoint
-validation now checks one small-tensor step and immediate state restoration only.
-All experimental CLIs default dry-run. Historical bootstrap/run notes below do not
-describe current research verification status.
+Current scope: CODE_COMPLETE / UNIT_TESTED; DATASET_PENDING; GPU_VALIDATION_PENDING.
+No research performance, accuracy or novelty claim follows from unit tests.
 
-Implementation-v1: M2.0 G0/G1 IMPLEMENTED_AND_TESTED (see EXPERIMENT_LOG).
-M2.1 G2 IMPLEMENTED_AND_TESTED: 73 tests; four core methods two batches
-on FakeData and real CIFAR. Subsequent M2.2–M7 gates pending.
-M2.2 G3 IMPLEMENTED_AND_TESTED: 75 tests; six methods completed FakeData
-and CIFAR two-batch fair smoke. Bootstrap status below is historical.
+| Stage | Implemented scope | Current status |
+| --- | --- | --- |
+| P0 | anchored ignores, tracked data package, independent-clone source test | CODE_COMPLETE / UNIT_TESTED |
+| M2 | offline TAR safety/hash/parser/transforms/split, CIFAR ResNet18, master/PureMasked/STE, fixed sparse SAM, dynamic masks, six baselines | CODE_COMPLETE / UNIT_TESTED; real deployment DATASET_PENDING |
+| M3 | pure effective functional CE, true gradients, fixed BN/RNG, candidate q, HVP/full small-toy Hessian, atomic full-state checkpoint and rollback, sampler | CODE_COMPLETE / UNIT_TESTED |
+| M4 | task gradient path, h_obs/Hu, q/u/a/r, residual curvature, six candidates, ranking/errors/cost | CODE_COMPLETE / UNIT_TESTED; route A GPU_VALIDATION_PENDING |
+| M5 | supported single/multi-step network proxies, quadratic robust proxy, small FP64 global quadratic reference including hard case | CODE_COMPLETE / UNIT_TESTED; route B GPU_VALIDATION_PENDING |
+| M6 | legal two-block combinations, cross coupling, quadratic/Steihaug/robust compensation, matched-backward recovery controls | CODE_COMPLETE / UNIT_TESTED; route C GPU_VALIDATION_PENDING |
+| M7 | default dry-run GPU entry, 18-run baseline matrix, A/B/C and ablation configs, cosine schedule/eval, checkpoint/resume, compressed logs, CSV/JSON/report export | CODE_COMPLETE / UNIT_TESTED; GPU_VALIDATION_PENDING |
+| CUDA single device | FP32/FP64 execution path | CODE_COMPLETE; GPU_VALIDATION_PENDING |
+| AMP / DDP | capability reporting, compatibility design and fail-closed activation guards | UNIT_TESTED; actual training backends NOT_IMPLEMENTED |
+| Innovative Mask Selection | none installed; only Magnitude/Taylor baseline policies | DESIGN_ONLY pending review |
 
-M0: configuration, src-layout, attribution, interface and research contracts IMPLEMENTED.
-M0 validation PASSED: `python -m pytest -q`: 10 passed in 0.20s (2026-10-13).
-M1: core loss/batch/report, dense SAM, SGD, TinyMLP, FakeData, runner IMPLEMENTED.
-M1 validation PASSED: 35 passed in 9.38s; actual CPU SAM smoke 3 steps,
-task CE 1.3439754247665405, optimizer J 1.3500630855560303,
-epsilon norm 0.05000000074505806, restoration error 0.0.
-Environment: Python 3.12.10, torch 2.13.0+cpu, torchvision 0.28.0+cpu,
-pytest 9.1.1. No GPU verification performed.
-M1.5: MaskSpec/MaskLayout, magnitude builder, legality, six candidates and
-structural q IMPLEMENTED. Validation PASSED: 57 passed in 9.44s;
-CPU mask smoke reports 6 candidates and exactly 2 retained entries per group
-for Linear [3,8] and Conv [2,2,2,2]. No sparse training performed.
-M2: STE, pure effective loss, support policy, Sparse-SAM PLANNED.
-Diagnostics A/B/C, HVP, functional probes, ranking, compensation PLANNED.
-ResNet/CIFAR, schedulers, full checkpoint/resume, CUDA/DDP/AMP PLANNED.
+Latest full local unit suite: 110 passed, 0 failed, 0 skipped. Python 3.12.10,
+torch 2.13.0+cpu, torchvision 0.28.0+cpu, pytest 9.1.1. compileall and diff check clean.
+No user CIFAR file, FakeData loop, ResNet training or A/B/C study runs after the
+user's code-only override. Tests use small fixed tensors/models, analytic quadratics
+and a self-generated ten-image archive fixture. GPU/dataset-dependent tests are
+not claimed passing. All experiment CLIs require explicit --execute.
 
-Dense-SGD CPU smoke PASSED: 3 steps, task CE 1.294036626815796,
-J 1.3001116514205933, epsilon 0.0, one forward per step, restoration error 0.0.
-M1/M1.5 validation above ran on work-in-progress before their phase commits;
-runner records git_dirty and source SHA explicitly. Final clean-tree validation
-is recorded in VALIDATION.md when completed.
-
+Dense kernel src/nmsam/sam remains byte-identical to rebuild-v1@cd33d2e4.
+Runtime data sources are tracked; no TAR/model/checkpoint enters Git.
+See ARCHITECTURE_AND_API, GPU_DEPLOYMENT, RESULTS_LIMITATIONS and EXPERIMENT_LOG.
+Historical Bootstrap/run notes are retained in VALIDATION and EXPERIMENT_LOG only.

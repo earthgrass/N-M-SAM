@@ -1,0 +1,13 @@
+kind: objective_gap
+model: resnet18
+device: cuda
+seeds: [0]
+batch_size: 2
+target_layer: layer1.0.conv1.weight
+block_ids: [0]
+rho: 0.05
+inner_steps: 5
+restarts: 2
+perturbation_domain: new_support
+checkpoint: ${NMSAM_CHECKPOINT}
+output_dir: results/route_B

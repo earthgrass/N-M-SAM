@@ -10,16 +10,20 @@ def project_ball(delta,support,rho):
 
 
 def supported_ascent(value_fn,gradient_fn,z,support,rho,*,steps=1,restarts=1,step_size=None,seed=0):
-    if not math.isfinite(rho) or rho<0 or steps<1 or restarts<1 or support.shape!=z.shape:
+    if (not math.isfinite(rho) or rho<0 or type(steps) is not int or type(restarts) is not int
+            or steps<1 or restarts<1 or support.shape!=z.shape or support.dtype!=torch.bool
+            or support.device!=z.device):
         raise ValueError("invalid robust probe budget/domain")
     if step_size is not None and (not math.isfinite(step_size) or step_size<=0):
         raise ValueError("positive finite step size required")
     generator=torch.Generator(device=z.device).manual_seed(seed)
     best_delta=torch.zeros_like(z);best=float(value_fn(best_delta));initial=[]
+    if not math.isfinite(best):raise FloatingPointError("nonfinite initial inner value")
     for restart in range(restarts):
         delta=torch.zeros_like(z) if restart==0 else project_ball(torch.randn(z.shape,device=z.device,
                  dtype=z.dtype,generator=generator),support,rho)
         initial.append(float(value_fn(delta)))
+        if not math.isfinite(initial[-1]):raise FloatingPointError("nonfinite restart value")
         if initial[-1]>best:best,best_delta=initial[-1],delta.clone()
         for _ in range(steps):
             g=gradient_fn(delta).detach()*support

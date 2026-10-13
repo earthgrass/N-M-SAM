@@ -19,20 +19,24 @@ def sha256(path: Path) -> str:
 
 
 def checked_members(archive: tarfile.TarFile) -> list[tarfile.TarInfo]:
-    members = archive.getmembers()
+    members = []
     seen, total = set(), 0
-    if len(members) > 100:
-        raise ValueError("too many archive members")
-    for member in members:
+    allowed_files={name for name,_ in CIFAR10.train_list+CIFAR10.test_list}|{"batches.meta","readme.html"}
+    for member in archive:
+        members.append(member)
+        if len(members)>100:raise ValueError("too many archive members")
         name = member.name
         path = PurePosixPath(name)
         if (path.is_absolute() or ntpath.isabs(name) or "\\" in name or ":" in name
                 or ".." in path.parts or not path.parts
                 or path.parts[0] != "cifar-10-batches-py"):
             raise ValueError(f"unsafe or unsupported member: {name}")
-        if name in seen or not (member.isfile() or member.isdir()):
+        normalized=path.as_posix()
+        if normalized in seen or not (member.isfile() or member.isdir()):
             raise ValueError("duplicate/link/special archive entry rejected")
-        seen.add(name)
+        if (member.isdir() and len(path.parts)!=1) or (member.isfile() and (len(path.parts)!=2 or path.name not in allowed_files)):
+            raise ValueError("unsupported CIFAR Python file layout")
+        seen.add(normalized)
         total += member.size
         if total > MAX_BYTES or member.size < 0:
             raise ValueError("archive exceeds extraction budget")

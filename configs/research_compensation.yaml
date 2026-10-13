@@ -1,0 +1,15 @@
+kind: compensation
+model: resnet18
+device: cuda
+seeds: [0]
+batch_size: 2
+target_layer: layer1.0.conv1.weight
+block_ids: [0, 1]
+rho: 0.05
+compensation_budget: 0.1
+max_hvps: 4
+damping: 0.001
+joint_candidate_limit: 6
+inner_steps: 1
+checkpoint: ${NMSAM_CHECKPOINT}
+output_dir: results/route_C
