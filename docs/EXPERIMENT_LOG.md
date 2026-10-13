@@ -23,3 +23,11 @@ CIFAR final CE: dense SGD 2.3202581; dense SAM 2.3673310;
 sparse SGD 2.3439302; sparse SAM 2.3931329. Sparse epsilon=.05, restoration=0.
 This core smoke uses dense L2=0 and sparse default master L2=.001 and is NOT
 a fair method comparison. M2.2 will enforce one explicit L2 protocol for all six.
+
+M2.2 G3 PASSED: 75 passed in 7.15s; six methods each completed 2 batches of
+FakeData and real CIFAR with common L2=.001, seed0, constant LR and shared batches.
+Actual CIFAR artifact run_id=a92364ecb8024b64945b97d4bd27e59f, code source e91872f
+plus recorded dirty tree. Final CE in method order: 2.5459023,2.5925188,2.5381720,
+2.5787444,2.5750530,2.5391388. Mask updates occur only after complete step;
+Taylor scores W_pre*g_pre. These perturbed-point training CE values do not imply
+better test generalization. Full local JSON records timing, flips, legality and labels.

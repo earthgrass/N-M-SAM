@@ -3,7 +3,8 @@
 Implementation-v1: M2.0 G0/G1 IMPLEMENTED_AND_TESTED (see EXPERIMENT_LOG).
 M2.1 G2 IMPLEMENTED_AND_TESTED: 73 tests; four core methods two batches
 on FakeData and real CIFAR. Subsequent M2.2–M7 gates pending.
-Bootstrap status below is historical.
+M2.2 G3 IMPLEMENTED_AND_TESTED: 75 tests; six methods completed FakeData
+and CIFAR two-batch fair smoke. Bootstrap status below is historical.
 
 M0: configuration, src-layout, attribution, interface and research contracts IMPLEMENTED.
 M0 validation PASSED: `python -m pytest -q`: 10 passed in 0.20s (2026-10-13).
