@@ -1,0 +1,24 @@
+CIFAR-ResNet18 architecture sanity
+input: [2, 3, 32, 32]
+stem: [2, 64, 32, 32]
+layer1: [2, 64, 32, 32]
+layer2: [2, 128, 16, 16]
+layer3: [2, 256, 8, 8]
+layer4: [2, 512, 4, 4]
+gap: [2, 512]
+logits: [2, 10]
+
+{
+  "total_parameters": 11173962,
+  "trainable_parameters": 11173962,
+  "conv2d_parameters": 11159232,
+  "linear_parameters": 5130,
+  "batchnorm_learnable_parameters": 9600,
+  "fp32_parameter_memory_mib": 42.625282287597656
+}
+
+{
+  "number_of_sparse_wrappers": 0,
+  "number_of_nm_masks": 0,
+  "number_of_sparse_parameters": 0
+}

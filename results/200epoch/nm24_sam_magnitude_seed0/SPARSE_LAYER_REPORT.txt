@@ -1,0 +1,31 @@
+N:M SPARSE LAYER REPORT
+scope: phase1
+configured N:M: 2:4
+theoretical full-block sparsity: 0.500000
+selected layers: 17
+total N:M blocks: 2747648
+selected weight elements: 10990592
+actual overall Conv2d/Linear weight sparsity: 0.492218
+
+layer	status	type	shape	blocks	tail_weights	reason
+conv1	dense	Conv2d	(64, 3, 3, 3)	0	0	Phase-1 default excludes first convolution
+layer1.0.conv1	sparse	Conv2d	(64, 64, 3, 3)	9216	0	selected by scope=phase1
+layer1.0.conv2	sparse	Conv2d	(64, 64, 3, 3)	9216	0	selected by scope=phase1
+layer1.1.conv1	sparse	Conv2d	(64, 64, 3, 3)	9216	0	selected by scope=phase1
+layer1.1.conv2	sparse	Conv2d	(64, 64, 3, 3)	9216	0	selected by scope=phase1
+layer2.0.conv1	sparse	Conv2d	(128, 64, 3, 3)	18432	0	selected by scope=phase1
+layer2.0.conv2	sparse	Conv2d	(128, 128, 3, 3)	36864	0	selected by scope=phase1
+layer2.0.shortcut.0	dense	Conv2d	(128, 64, 1, 1)	0	0	Phase-1 default excludes 1x1/downsample convolution
+layer2.1.conv1	sparse	Conv2d	(128, 128, 3, 3)	36864	0	selected by scope=phase1
+layer2.1.conv2	sparse	Conv2d	(128, 128, 3, 3)	36864	0	selected by scope=phase1
+layer3.0.conv1	sparse	Conv2d	(256, 128, 3, 3)	73728	0	selected by scope=phase1
+layer3.0.conv2	sparse	Conv2d	(256, 256, 3, 3)	147456	0	selected by scope=phase1
+layer3.0.shortcut.0	dense	Conv2d	(256, 128, 1, 1)	0	0	Phase-1 default excludes 1x1/downsample convolution
+layer3.1.conv1	sparse	Conv2d	(256, 256, 3, 3)	147456	0	selected by scope=phase1
+layer3.1.conv2	sparse	Conv2d	(256, 256, 3, 3)	147456	0	selected by scope=phase1
+layer4.0.conv1	sparse	Conv2d	(512, 256, 3, 3)	294912	0	selected by scope=phase1
+layer4.0.conv2	sparse	Conv2d	(512, 512, 3, 3)	589824	0	selected by scope=phase1
+layer4.0.shortcut.0	dense	Conv2d	(512, 256, 1, 1)	0	0	Phase-1 default excludes 1x1/downsample convolution
+layer4.1.conv1	sparse	Conv2d	(512, 512, 3, 3)	589824	0	selected by scope=phase1
+layer4.1.conv2	sparse	Conv2d	(512, 512, 3, 3)	589824	0	selected by scope=phase1
+linear	sparse	Linear	(10, 512)	1280	0	selected by scope=phase1

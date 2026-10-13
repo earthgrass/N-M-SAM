@@ -1,0 +1,11 @@
+{
+  "command": "CUDA_VISIBLE_DEVICES=0 python -m nm_sam_cifar10.strong_sparse_sgd --config nm_sam_cifar10/configs/strong_2to4_sgd_magnitude_seed0.yaml --allow-full-training",
+  "config_path": "nm_sam_cifar10/configs/strong_2to4_sgd_magnitude_seed0.yaml",
+  "config_sha256": "1b6c59960f3707212711abb9ca57df445f4ec6cd3e18429863aee0b17dddabb4",
+  "formal_epochs": 200,
+  "protocol": "M_(t+1)=Top2(|W_t|), pre-update score",
+  "seed": 0,
+  "source_path": "nm_sam_cifar10/strong_sparse_sgd.py",
+  "source_sha256": "f9efa02892f4f499bcf175ed1509a80813a3c9e06a734c8ec6d75074fe12c596",
+  "start_time": "2026-09-28T11:03:12.250234+08:00"
+}

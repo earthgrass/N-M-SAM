@@ -1,0 +1,1040 @@
+{
+  "archive_scope": "six 200-epoch GPU experiments; curated dependency-complete archive, not one historical checkout",
+  "superseded_commit": "53c09e48aa3373f7530baac4c44112ef3d28a215",
+  "historical_environment": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "torchvision": "0.23.0+cu128",
+    "gpu": "NVIDIA GeForce RTX 5090"
+  },
+  "experiments": [
+    {
+      "run": "dense_sgd_seed0",
+      "epochs": 200,
+      "metric_rows": 200,
+      "global_step": 78200,
+      "final_test_accuracy": 0.9585,
+      "source_status": "CONFIRMED",
+      "last_metric_matches": true
+    },
+    {
+      "run": "dense_sam_seed0",
+      "epochs": 200,
+      "metric_rows": 200,
+      "global_step": 78200,
+      "final_test_accuracy": 0.9647,
+      "source_status": "CONFIRMED",
+      "last_metric_matches": true
+    },
+    {
+      "run": "nm24_sgd_magnitude_seed0",
+      "epochs": 200,
+      "metric_rows": 200,
+      "global_step": 78200,
+      "final_test_accuracy": 0.9607,
+      "source_status": "CONFIRMED",
+      "last_metric_matches": true
+    },
+    {
+      "run": "nm24_sam_magnitude_seed0",
+      "epochs": 200,
+      "metric_rows": 200,
+      "global_step": 78200,
+      "final_test_accuracy": 0.964,
+      "source_status": "CONFIRMED",
+      "last_metric_matches": true
+    },
+    {
+      "run": "nm24_sam_taylor_g1_seed0",
+      "epochs": 200,
+      "metric_rows": 200,
+      "global_step": 78200,
+      "final_test_accuracy": 0.9196,
+      "source_status": "CONFIRMED",
+      "last_metric_matches": true
+    },
+    {
+      "run": "nm24_sam_taylor_g2_seed0",
+      "epochs": 200,
+      "metric_rows": 200,
+      "global_step": 78200,
+      "final_test_accuracy": 0.9487,
+      "source_status": "CONFIRMED",
+      "last_metric_matches": true
+    }
+  ],
+  "limitations": [
+    "CPU tests validate implementation; full 200-epoch GPU experiments were not rerun.",
+    "Archive contains separate dependency snapshots for the historical Dense-SGD run and the other five methods."
+  ],
+  "files": [
+    {
+      "path": "nm_sam_cifar10/data/cifar10.py",
+      "sha256": "e8937ed87a4938017784a7605d1612d3556c4bd55328e55efe648a392368b7bb",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/data/cifar10.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/data/strong_baseline_transforms.py",
+      "sha256": "3aedca9a66370176fd9c1470f8ff5c8d16d5e7f17b13b476ea195ec3b234952e",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/data/strong_baseline_transforms.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/data/__init__.py",
+      "sha256": "eac724e4a08db73306f3119c85c801573d871529cd531743419deaeaff786843",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/data/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/models/audit.py",
+      "sha256": "f8cad7d28df45ac6a5f6f79d75f652bb5c68498d0f1d0a9f238024ebe3fc30f8",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/models/audit.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/models/resnet_cifar.py",
+      "sha256": "9b90be2af773773ab5234295c4bf2f9aa9818f3d0711b889a1d8e263af04215e",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/models/resnet_cifar.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/models/simple_cnn.py",
+      "sha256": "1cbd29af6b684763cb928a862c1f81d3ea502c7cb9abf1dd636f37a6dc69f9c7",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/models/simple_cnn.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/models/__init__.py",
+      "sha256": "94b683f8192f3f02379c9363758f1565e99bbea89a4dda610a3841fccaac32b7",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/models/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/optim/optimizer_factory.py",
+      "sha256": "272787190d51a1e7885121448e15e5893bd6b072c9277e73c7e6a2befc7481ac",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/optim/optimizer_factory.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/optim/sam.py",
+      "sha256": "736b50c6b6e73bddd5b9b54e3dde7781e5640380193b37e6be1923a2ce6488e3",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/optim/sam.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/optim/__init__.py",
+      "sha256": "92238f03b8be1736c951be59d430221053a2d30f07b4107941cc819ddefabfef",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/optim/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/sparsity/mask.py",
+      "sha256": "0825e161811c0a5a56389c9da40a4b763ed8d286b3f90973847487cefa19207e",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/sparsity/mask.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/sparsity/mask_manager.py",
+      "sha256": "f12bfc71395bca898e4cc35ce03aa7ed1fab992da0ec4e87630bd0c533da20ca",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/sparsity/mask_manager.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/sparsity/mask_scores.py",
+      "sha256": "aff2bf87948c005fe66c9afa9a36e03b8850660b33778546b984c90e998aa3b5",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/sparsity/mask_scores.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/sparsity/nm_mask.py",
+      "sha256": "cb3be017976f7243f7012b2858c2f2d49f7af6f5540bad01730a6f89070f436f",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/sparsity/nm_mask.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/sparsity/parametrization.py",
+      "sha256": "072f326dc3b16506615ea20edeb7782e1bc1b8abd56ad09ec640cc0c2238842b",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/sparsity/parametrization.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/sparsity/perturbation.py",
+      "sha256": "e9f7a65d4698e6582bf01c4ddddd5e0c9d82c95a94d83fc85cbc705e443170e5",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/sparsity/perturbation.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/sparsity/sparse_layers.py",
+      "sha256": "9a0a5ffd9f7e3018c9e001811146e329698e08a3c1d6655c2a029cfd740c4774",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/sparsity/sparse_layers.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/sparsity/__init__.py",
+      "sha256": "4e59eaa05dc323174a2e473362f5a0d99876313a48578d41802b7b1b808fd509",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/sparsity/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/trainers/sam_step.py",
+      "sha256": "7023954c1ab6f274e0a46ed5dafb2908c8f7c7a69c53f1e3f917ba1c4c9de0f2",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/trainers/sam_step.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/trainers/sgd_step.py",
+      "sha256": "9b293f885d40245894f0f4b9f1299220da3868218595605492bd975e04a79b7a",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/trainers/sgd_step.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/trainers/__init__.py",
+      "sha256": "bdc41f80de97f70016f9293d072019e5b7eb59bba826c077168034d0086eb302",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/trainers/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/metrics/efficiency.py",
+      "sha256": "0945a8b721dc0b1a1824641ffdf4fd65c40e651571d782fc3b02370d0ac1241f",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/metrics/efficiency.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/metrics/logger.py",
+      "sha256": "c5808236cd216835eb675dc94944804dbd0911c0529971f3241ff7f5500f65fb",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/metrics/logger.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/metrics/sanity.py",
+      "sha256": "f7e5324e1605eea766a6de23803b3b2b2fe476f1d595720b9d61abddb48344de",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/metrics/sanity.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/metrics/sharpness.py",
+      "sha256": "8694f43d7241c9ff11b4a8bb1b7393aeed7b42012ba81b9164c788583cbc6a74",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/metrics/sharpness.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/metrics/sparsity_metrics.py",
+      "sha256": "e32b170fc969c67d8587628aab753d3a52757288af5a13c73ffb233c695cec00",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/metrics/sparsity_metrics.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/metrics/task_metrics.py",
+      "sha256": "981018f6ea2fafba72b172cf5b97f336822fd12ad7297e8cce7ced5414fcbeb9",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/metrics/task_metrics.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/metrics/__init__.py",
+      "sha256": "75bfc284d339ae333519ac8167eab870a7f46d6bc20bff552aa0398fe9e63677",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/metrics/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/utils/seed.py",
+      "sha256": "82da2d5b113ccdd03c86077c616ca26c737eb7aa1867239deab38481ef91c535",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/utils/seed.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/utils/time.py",
+      "sha256": "e3e08bcc0e5044e0237c8ddf1aa6504cc483a33dc3b84dbf4764fa808d56039d",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/utils/time.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/utils/__init__.py",
+      "sha256": "b552dcad9c9a626cb83037ab3afae608cf49d359d13414d6d2f6eff601bcced2",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/utils/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/__init__.py",
+      "sha256": "43051b7a0e85966d9ca30ac16990852d03bf3dd616d23beb17f5023ecdfaaa21",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/strong_sam.py",
+      "sha256": "8451ab9583bc89fe4fed75bb7c6abc753ea4cbea5a6b4629007cd9eb188d21b5",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/strong_sam.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/strong_sparse_sgd.py",
+      "sha256": "f9efa02892f4f499bcf175ed1509a80813a3c9e06a734c8ec6d75074fe12c596",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/strong_sparse_sgd.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/configs/strong_2to4_sam_magnitude_seed0.yaml",
+      "sha256": "b1df5694e4431d891de76792d563f4fd8bfac36e6537af8de04262c2a7ebd615",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/configs/strong_2to4_sam_magnitude_seed0.yaml",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/configs/strong_2to4_sam_taylor_g1_seed0.yaml",
+      "sha256": "caab8477c19dee347f6dd0636cbe017839ddbfc71d2ebe50109ae48e99e58b17",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/configs/strong_2to4_sam_taylor_g1_seed0.yaml",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/configs/strong_2to4_sam_taylor_g2_seed0.yaml",
+      "sha256": "a5e176f4b5dd9d965480e2fc1e96ef18c8356b6e377fd7283e65ac9e7fc97ece",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/configs/strong_2to4_sam_taylor_g2_seed0.yaml",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/configs/strong_2to4_sgd_magnitude_seed0.yaml",
+      "sha256": "1b6c59960f3707212711abb9ca57df445f4ec6cd3e18429863aee0b17dddabb4",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/configs/strong_2to4_sgd_magnitude_seed0.yaml",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/configs/strong_dense_sam_seed0.yaml",
+      "sha256": "88a385279c5e1978d85829d8271e59b8ca7a62315c1c6d3343412e788a78c377",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/configs/strong_dense_sam_seed0.yaml",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_augmentation_consistency.py",
+      "sha256": "6bb4abe5f15c3c184a6ea37b70468563576556c89b2f0b5e6f320489d49d698f",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_augmentation_consistency.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_checkpoint_resume.py",
+      "sha256": "5154fa6ad87d23ea051090c769ce68835856ff03226c568c6cdd78f5eedbb644",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_checkpoint_resume.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_mask.py",
+      "sha256": "af79c55a24e4d7eaa7851b07daeb1b49b4ebac48e8c774f199cc4dba362caff9",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_mask.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_mask_reference_time.py",
+      "sha256": "a5af18606b9e6ff7c4d87c6b15be75bac7b9260a2d637fbbfa3033b327456879",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_mask_reference_time.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_mask_timing.py",
+      "sha256": "4ab0b1a909149e1974048be4114a7a49c86465c4fe7221092c7bb3cca1f5ec90",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_mask_timing.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_model_architecture.py",
+      "sha256": "ad22fd931c993da6ca67938f0eaf2c50a7d6532843fdec1d98dd94e2b570637e",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_model_architecture.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_nm_legality.py",
+      "sha256": "92c799e3b29907f41e748cdccbf08a722265d1f0c12af1d521066dec0f3976ef",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_nm_legality.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_sam.py",
+      "sha256": "15f1f87fd13cc3ae4a561c8aa142cf0f4bcb60f60f8132706ef95a29be8ed210",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_sam.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_sam_aware_mask.py",
+      "sha256": "b7103b2000c7fe8d568317ab808d81a06232b928e8308f221d2911d4da2763f9",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_sam_aware_mask.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_sam_bn.py",
+      "sha256": "b892ec82439d1c2989acbf25e22da91124ae842d1963671e2dab43672ef7339c",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_sam_bn.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_sam_global_norm.py",
+      "sha256": "9a012dc07a45c316886979d904b83facaa19def8c91ecaaf2d0518d03fc1ff75",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_sam_global_norm.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_sam_taylor_g1_g2.py",
+      "sha256": "5d27af53cc7533dc5b1518ae90e8f6e4a65b867ba1533b280df1c3b3414557e8",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_sam_taylor_g1_g2.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_sharpness.py",
+      "sha256": "dc198d18b1c1ce3af8613c3d84deeff45aa9a8eb0060e5cee14280f69678d6fe",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_sharpness.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_sparse_sam_radius.py",
+      "sha256": "90967a92e6bd29ff61b13035d00b388b680dbd53af770a72faa14da43d335d30",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_sparse_sam_radius.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_sparse_sgd_path.py",
+      "sha256": "98668fb30746bf189fcbf2bc01ebd202dd176f8640c56799318c8e3c15a65c7b",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_sparse_sgd_path.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_sparse_sgd_protocol.py",
+      "sha256": "27cf4834100934d1b32ad18ca4fb52546c47298917b61e0473e996edeb4d68e0",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_sparse_sgd_protocol.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_ste.py",
+      "sha256": "0ffe18040fab50f6a9419dbe50235304085fc2637b95930d61c6f4a6a15db413",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_ste.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_strong_baseline_transforms.py",
+      "sha256": "49b56eb80660d833b7294b61b9707c24e126905da499b7ee3c59936739f9f96b",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_strong_baseline_transforms.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/test_strong_sam_protocol.py",
+      "sha256": "53ef9f282df204a881a207c3aa607245f733ab0a62fed668315678c1f7b2addc",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/test_strong_sam_protocol.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/tests/__init__.py",
+      "sha256": "7e9af23c4d8769e855436c950c52874ef9d5ac0c36f24531913b3ca965d6860f",
+      "origin": "gpu_validation_bundle_preupdate.tar.gz!nm_sam_cifar10/tests/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/utils/seed.py",
+      "sha256": "82da2d5b113ccdd03c86077c616ca26c737eb7aa1867239deab38481ef91c535",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/utils/seed.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/utils/time.py",
+      "sha256": "e3e08bcc0e5044e0237c8ddf1aa6504cc483a33dc3b84dbf4764fa808d56039d",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/utils/time.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/utils/__init__.py",
+      "sha256": "b552dcad9c9a626cb83037ab3afae608cf49d359d13414d6d2f6eff601bcced2",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/utils/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/strong_baseline.py",
+      "sha256": "575be1a1fa9eaa971b49bea8763aceb2dab9215665cdf24720d8b862fd7e6cba",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/strong_baseline.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/__init__.py",
+      "sha256": "43051b7a0e85966d9ca30ac16990852d03bf3dd616d23beb17f5023ecdfaaa21",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/data/cifar10.py",
+      "sha256": "2d52b0bf2d1ff9e30dc21d63458fae8b6235042bb9965f97a0692940ea044bae",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/data/cifar10.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/data/strong_baseline_transforms.py",
+      "sha256": "229ca6c72a523cc2dfd34952e4ac5747e80c608a1766469311752b600f236423",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/data/strong_baseline_transforms.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/data/__init__.py",
+      "sha256": "eac724e4a08db73306f3119c85c801573d871529cd531743419deaeaff786843",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/data/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/models/audit.py",
+      "sha256": "f8cad7d28df45ac6a5f6f79d75f652bb5c68498d0f1d0a9f238024ebe3fc30f8",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/models/audit.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/models/resnet_cifar.py",
+      "sha256": "9b90be2af773773ab5234295c4bf2f9aa9818f3d0711b889a1d8e263af04215e",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/models/resnet_cifar.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/models/simple_cnn.py",
+      "sha256": "1cbd29af6b684763cb928a862c1f81d3ea502c7cb9abf1dd636f37a6dc69f9c7",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/models/simple_cnn.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/models/__init__.py",
+      "sha256": "94b683f8192f3f02379c9363758f1565e99bbea89a4dda610a3841fccaac32b7",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/models/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/sparsity/mask.py",
+      "sha256": "560f2443b7bc5682209a77a0dd1214e24fa554cd7e3dfa74acd19bccc1deac6d",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/sparsity/mask.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/sparsity/mask_manager.py",
+      "sha256": "c16ea2241cf75e5e83b48c6c0b537d1098d3fe38e258a4db789784b9af80e0d7",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/sparsity/mask_manager.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/sparsity/mask_scores.py",
+      "sha256": "1313f822f9298e211a47a645561aede120a0a069a610e30844979962908cebf6",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/sparsity/mask_scores.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/sparsity/nm_mask.py",
+      "sha256": "cb3be017976f7243f7012b2858c2f2d49f7af6f5540bad01730a6f89070f436f",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/sparsity/nm_mask.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/sparsity/parametrization.py",
+      "sha256": "48077274f01d2f52955bb136c16d7084505e92d1df7dad9a12fa905d241ea4dd",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/sparsity/parametrization.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/sparsity/perturbation.py",
+      "sha256": "e9f7a65d4698e6582bf01c4ddddd5e0c9d82c95a94d83fc85cbc705e443170e5",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/sparsity/perturbation.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/sparsity/sparse_layers.py",
+      "sha256": "9a0a5ffd9f7e3018c9e001811146e329698e08a3c1d6655c2a029cfd740c4774",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/sparsity/sparse_layers.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/sparsity/__init__.py",
+      "sha256": "4e59eaa05dc323174a2e473362f5a0d99876313a48578d41802b7b1b808fd509",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/sparsity/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/tests/test_baseline_resume.py",
+      "sha256": "92671c164efa595a8ef74c30738b7db68a50919e3007671838c6f3ca5f420afd",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/tests/test_baseline_resume.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/tests/test_strong_baseline_transforms.py",
+      "sha256": "49b56eb80660d833b7294b61b9707c24e126905da499b7ee3c59936739f9f96b",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/tests/test_strong_baseline_transforms.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "experiments/dense_sgd_200epoch/nm_sam_cifar10/tests/__init__.py",
+      "sha256": "7e9af23c4d8769e855436c950c52874ef9d5ac0c36f24531913b3ca965d6860f",
+      "origin": "phase2a_dense_sgd_seed0_20260921/nm_sam_cifar10_source.tar.gz!nm_sam_cifar10/tests/__init__.py",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sam_seed0/final_metrics.json",
+      "sha256": "3ca3d993ae4a8d67d38f59156a5166a82b321a757980a43b069fdcb0b2033157",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/dense_sam_seed0/final_metrics.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sam_seed0/mask_change_history.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/dense_sam_seed0/mask_change_history.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sam_seed0/metrics.csv",
+      "sha256": "cc2d499292c5bae7e16e1a6f35fdfc26ad56ebcb52482fa2d94f75827e59714d",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/dense_sam_seed0/metrics.csv",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sam_seed0/resolved_config.json",
+      "sha256": "ffbc11aab7f0f11cb2be625f7cf3580e265c97f258e76ad4b160c875ebfe3b20",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/dense_sam_seed0/resolved_config.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sam_seed0/server_train.log",
+      "sha256": "b57369a1cd84761a92c72bf990e9383966670c028fe7a17e72c1669b942fd79f",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/dense_sam_seed0/server_train.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_magnitude_seed0/final_metrics.json",
+      "sha256": "13b4769adaa135136fba1011658b1fe20ec3d546a5e01f2584fb395aa1572748",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_magnitude_seed0/final_metrics.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_magnitude_seed0/mask_change_history.json",
+      "sha256": "6184801bd98becb9b04afe8052b6e3e65ad3ed3eb215472d7c874a1f21ade7fb",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_magnitude_seed0/mask_change_history.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_magnitude_seed0/metrics.csv",
+      "sha256": "1541a2ccd11f477cd6badcd0d237d71ab685638a5fc14039375b9675faebff33",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_magnitude_seed0/metrics.csv",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_magnitude_seed0/resolved_config.json",
+      "sha256": "ebe0b9dea2d6cfd0f75ce287b0eecb31ea221ccfdc9716da62f58f00aa1410ea",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_magnitude_seed0/resolved_config.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_magnitude_seed0/server_train.log",
+      "sha256": "116e4c4ca79eeb29f986c31756dc81cb8dbde511d39badf443dc02d15b98301f",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_magnitude_seed0/server_train.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_magnitude_seed0/SPARSE_LAYER_REPORT.txt",
+      "sha256": "b937708bdc2b6b40cffdca23b4e4c29c85096893f4620d962d0df546dc7c2217",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_magnitude_seed0/SPARSE_LAYER_REPORT.txt",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g1_seed0/final_metrics.json",
+      "sha256": "c89a9374364345d1295c7150eab7e4d9ead28a685dadc97700b72334e7dbc7c7",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g1_seed0/final_metrics.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g1_seed0/mask_change_history.json",
+      "sha256": "a39d4a0811e0f80f7c7e13af4d071a9112746affc60bf58d245a57fdfd1f16d0",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g1_seed0/mask_change_history.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g1_seed0/metrics.csv",
+      "sha256": "56fd73c383750c3060a0af693dad69d5cc123a58ddf25ca4e57a5ceb40b10b0c",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g1_seed0/metrics.csv",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g1_seed0/resolved_config.json",
+      "sha256": "5e5bac52debbbc5f76d58bca4e14ef0db07983357c42e4b6f75a0cedb1ac85dd",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g1_seed0/resolved_config.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g1_seed0/server_train.log",
+      "sha256": "c39abb3af1bb4c33bad48af8fa384fa17798b990dcf6773eeb8e82e2e067f44c",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g1_seed0/server_train.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g1_seed0/SPARSE_LAYER_REPORT.txt",
+      "sha256": "b937708bdc2b6b40cffdca23b4e4c29c85096893f4620d962d0df546dc7c2217",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g1_seed0/SPARSE_LAYER_REPORT.txt",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g2_seed0/final_metrics.json",
+      "sha256": "cd3e042516e986d994784fc2d29b81b70619bb0f0698b8fe33e5741d2b588362",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g2_seed0/final_metrics.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g2_seed0/mask_change_history.json",
+      "sha256": "44d65ac86d86611a743f4a68f581ab50dacf06b30b965b207797e73ec4b26cea",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g2_seed0/mask_change_history.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g2_seed0/metrics.csv",
+      "sha256": "756e9c196ab04102af547024f60e222ebf4abadd64ce85d8171212376a0cc38e",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g2_seed0/metrics.csv",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g2_seed0/resolved_config.json",
+      "sha256": "4f086f9ea2023ebca8d5f395f256d11944da45c0825296561c719587ca0efb86",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g2_seed0/resolved_config.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g2_seed0/server_train.log",
+      "sha256": "423c874fb0b66c966210b20599b8471f7c0aa18ee793d229039f3073256e9721",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g2_seed0/server_train.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sam_taylor_g2_seed0/SPARSE_LAYER_REPORT.txt",
+      "sha256": "b937708bdc2b6b40cffdca23b4e4c29c85096893f4620d962d0df546dc7c2217",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sam_taylor_g2_seed0/SPARSE_LAYER_REPORT.txt",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/sam_server/server_environment.json",
+      "sha256": "da0f10634e994d7ab826456812d950e56750a07471f30bf890d15edf7373bc76",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/server_environment.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/sam_server/server_tests.log",
+      "sha256": "2d86b5662bcdabc65943f42f1be0bfa6f31348e12184f28333d09fddb719b463",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/server_tests.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/sam_server/server_finalize.log",
+      "sha256": "e99cbaa8e066dab2b0ec4212cb3ff1f34ada466a9a17e3bf41bac8841df6edbc",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/server_finalize.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/sam_server/nvidia_smi.log",
+      "sha256": "c59e3394135d53954424bbe24f7203a3363934370bc59ef62f6fbd7ed21fc888",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nvidia_smi.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/SOURCE_SHA256SUMS.txt",
+      "sha256": "6f04dffefe5222843b4da649d0eb314ffffcea9d12396a14685934a50131cd91",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/SOURCE_SHA256SUMS.txt",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/experiment_metadata.json",
+      "sha256": "e6d6b886c65a92787a7ed3fb32304ac45eeb14f4dffa83aa9a6e5fb4d2efbc48",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/experiment_metadata.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/environment_snapshot.json",
+      "sha256": "e069c61886d69b7bd672a2d05b952939d490a4043436f052eed507d2b21a98bb",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/environment_snapshot.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/formal_launcher.log",
+      "sha256": "ad14e4b2fb5212443774bc978ffdaf26f3f71e871144e57d19f7edab131de3ae",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/formal_launcher.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/server_train.log",
+      "sha256": "1db4f4f3a5e1ea0c824b38da7fba0c2b3f524c69c37e68d7adc8bf5dfc7d03b1",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/server_train.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/resolved_config.json",
+      "sha256": "b749becc503a75450e6a7a59daafc7608e1f035f2c2240bf786f4676758e86ad",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/resolved_config.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/SPARSE_LAYER_REPORT.txt",
+      "sha256": "b937708bdc2b6b40cffdca23b4e4c29c85096893f4620d962d0df546dc7c2217",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/SPARSE_LAYER_REPORT.txt",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/metrics.csv",
+      "sha256": "20a017a362dd5ca0284d580c67d7881c6ea9a07f39d4d47b1d7025b386e2a16e",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/metrics.csv",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/mask_change_history.json",
+      "sha256": "663d9bfa9262976d5ceba438ab24d321bd98ecfd583e2499a7c3b0701bbe5c81",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/mask_change_history.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/training_monitor_10min.log",
+      "sha256": "670c0ad9d6ad56290e125cd908e6b25da47e97a03e6c73ac1de53aa056e99620",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/training_monitor_10min.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/final_metrics.json",
+      "sha256": "bd6f2c3293fe0817c6f2b1403f14c3d0dac40a5b2133d71aa4709c8a9c3171d2",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/final_metrics.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/nm24_sgd_magnitude_seed0/process_exit_code.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "origin": "strong_gpu_v1_nm24_sgd_magnitude_seed0_results.tar.gz!nm_sam_cifar10/results/strong_gpu_v1/nm24_sgd_magnitude_seed0/process_exit_code.txt",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/accuracy.png",
+      "sha256": "235862a6cee36fd494433c7765f27b8bea7753bd7eab2a14568552f5228ad9b4",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!accuracy.png",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/architecture.txt",
+      "sha256": "ecc8515fffe5c9c9cc7605d7b694be4c89680772d406cdf3e5aa8c2a5182beab",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!architecture.txt",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/config.json",
+      "sha256": "b06b74360da36cd87504c7af371c6984a2ec107eba0da30311e54379eed00157",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!config.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/environment.txt",
+      "sha256": "aabcb6471dc9052e66a717b0c6bc0321e0c259d99f67a583425a318b16156e4e",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!environment.txt",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/epoch_metrics.csv",
+      "sha256": "bbd51ce8177de459461c9f54b1bdf1a7d425e43d1281ac32462f21c3665b518e",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!epoch_metrics.csv",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/final_metrics.json",
+      "sha256": "7cb6570895d1b565aa891ec377a30e588a8501c0b64b210c3117b5f34cfc6ccf",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!final_metrics.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/learning_rate.png",
+      "sha256": "533fb475cdf55404bfd8dfcff094a66e42013568eee11465fbd3b5d2f450e469",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!learning_rate.png",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/lr_curve.csv",
+      "sha256": "ec21e0a685992ac62a697dee917e97a86bbafc5e225c52ec97dd8b128a5490ad",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!lr_curve.csv",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/nvidia_smi.log",
+      "sha256": "8d5e85ded073eb6128afea1afbf5da39f90a5649707320e6daee9ab453987bb9",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!nvidia_smi.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/python_version.log",
+      "sha256": "5b3e43dc38ca01e3f5a7854ba50d4330864b0c1e0f646650b2c78cf072acc366",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!python_version.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/sanity_results.json",
+      "sha256": "322e9ed31f52ad4f22ec96c89cd77bb488a04326573e41343b2403b312f62c10",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!sanity_results.json",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/server_finalize.log",
+      "sha256": "bd88475c6d6cac2fe848bb2b9b3665d48aa04197085b2622fd60da6a949a2d52",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!server_finalize.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/server_postfix_tests.log",
+      "sha256": "433c08f621e3ebcd92ba2b38fdab342ab8c761104f7882f374fa1d467f6fd73a",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!server_postfix_tests.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/server_preflight.log",
+      "sha256": "dd0f257c2adddb3255bf10e95aff79dd4188bd64fa50008fd11f44c99e395dc7",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!server_preflight.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/server_sanity.log",
+      "sha256": "0dda48e8fac93012717db4fb57fea80baf2cf70850647a823934676423c18431",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!server_sanity.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/server_tests.log",
+      "sha256": "195d9902d48a2ec1df79bd877a16c2e0f4abefaf052588aace0dae05067bdc67",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!server_tests.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/server_train.log",
+      "sha256": "a8acfed9f69349b40b6b18c0bacf071644e11ff9de9381e23b1700c027afd8c5",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!server_train.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/test_loss.png",
+      "sha256": "f6d4f94240a0f11122835b8456a0eed8bbf7a5b64b6c719f7e17b2b6a36a9e94",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!test_loss.png",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/torch_cuda_check.log",
+      "sha256": "b769d0cc1984dbd639c3f1bfdc46e609837c90764a5109bcf10987652c843d2e",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!torch_cuda_check.log",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/training_curves.png",
+      "sha256": "8546f224444a285224047652d0bc8ee624b1143067eefc1c6b38c4503b90e692",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!training_curves.png",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/train_log.csv",
+      "sha256": "bbd51ce8177de459461c9f54b1bdf1a7d425e43d1281ac32462f21c3665b518e",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!train_log.csv",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "results/200epoch/dense_sgd_seed0/train_loss.png",
+      "sha256": "87effe08ff768ba7ba5e50cc4e8c5dc7de75ec2a9b910787f426023c1ee3ee18",
+      "origin": "phase2a_dense_sgd_seed0_20260921/dense_sgd_seed0_results.tar.gz!train_loss.png",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "nm_sam_cifar10/CODE_SNAPSHOT_SHA256.txt",
+      "sha256": "e971a7e23c56e8265d2377ca44434aa30ac8e345378b823a868811bd4af0bf83",
+      "origin": "strong_gpu_v1_results.tar.gz!nm_sam_cifar10/CODE_SNAPSHOT_SHA256.txt",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "path": "pytest.ini",
+      "sha256": "3f3973662078cb8a5949669a88e33ddcabd0136b5f55eef0dc7f12f692402174",
+      "origin": "generated test discovery configuration",
+      "confidence": "CONFIRMED"
+    }
+  ],
+  "dense_source_archive_sha256": "72c0d84cedb5cddfdeee848685da931df5a1a5338789adb0c87bf78ad073e649",
+  "sparse_sgd_hash_binding": {
+    "source_sha256": "f9efa02892f4f499bcf175ed1509a80813a3c9e06a734c8ec6d75074fe12c596",
+    "config_sha256": "1b6c59960f3707212711abb9ca57df445f4ec6cd3e18429863aee0b17dddabb4",
+    "start_time": "2026-09-28T11:03:12.250234+08:00",
+    "matching_retained_files": [
+      "nm_sam_cifar10/__init__.py",
+      "nm_sam_cifar10/data/__init__.py",
+      "nm_sam_cifar10/data/cifar10.py",
+      "nm_sam_cifar10/data/strong_baseline_transforms.py",
+      "nm_sam_cifar10/metrics/__init__.py",
+      "nm_sam_cifar10/metrics/efficiency.py",
+      "nm_sam_cifar10/metrics/logger.py",
+      "nm_sam_cifar10/metrics/sanity.py",
+      "nm_sam_cifar10/metrics/sharpness.py",
+      "nm_sam_cifar10/metrics/sparsity_metrics.py",
+      "nm_sam_cifar10/metrics/task_metrics.py",
+      "nm_sam_cifar10/models/__init__.py",
+      "nm_sam_cifar10/models/audit.py",
+      "nm_sam_cifar10/models/resnet_cifar.py",
+      "nm_sam_cifar10/models/simple_cnn.py",
+      "nm_sam_cifar10/optim/__init__.py",
+      "nm_sam_cifar10/optim/optimizer_factory.py",
+      "nm_sam_cifar10/optim/sam.py",
+      "nm_sam_cifar10/sparsity/__init__.py",
+      "nm_sam_cifar10/sparsity/mask.py",
+      "nm_sam_cifar10/sparsity/mask_manager.py",
+      "nm_sam_cifar10/sparsity/mask_scores.py",
+      "nm_sam_cifar10/sparsity/nm_mask.py",
+      "nm_sam_cifar10/sparsity/parametrization.py",
+      "nm_sam_cifar10/sparsity/perturbation.py",
+      "nm_sam_cifar10/sparsity/sparse_layers.py",
+      "nm_sam_cifar10/strong_sam.py",
+      "nm_sam_cifar10/strong_sparse_sgd.py",
+      "nm_sam_cifar10/tests/__init__.py",
+      "nm_sam_cifar10/tests/test_augmentation_consistency.py",
+      "nm_sam_cifar10/tests/test_checkpoint_resume.py",
+      "nm_sam_cifar10/tests/test_mask.py",
+      "nm_sam_cifar10/tests/test_mask_reference_time.py",
+      "nm_sam_cifar10/tests/test_mask_timing.py",
+      "nm_sam_cifar10/tests/test_model_architecture.py",
+      "nm_sam_cifar10/tests/test_nm_legality.py",
+      "nm_sam_cifar10/tests/test_sam.py",
+      "nm_sam_cifar10/tests/test_sam_aware_mask.py",
+      "nm_sam_cifar10/tests/test_sam_bn.py",
+      "nm_sam_cifar10/tests/test_sam_global_norm.py",
+      "nm_sam_cifar10/tests/test_sam_taylor_g1_g2.py",
+      "nm_sam_cifar10/tests/test_sharpness.py",
+      "nm_sam_cifar10/tests/test_sparse_sam_radius.py",
+      "nm_sam_cifar10/tests/test_sparse_sgd_path.py",
+      "nm_sam_cifar10/tests/test_sparse_sgd_protocol.py",
+      "nm_sam_cifar10/tests/test_ste.py",
+      "nm_sam_cifar10/tests/test_strong_baseline_transforms.py",
+      "nm_sam_cifar10/tests/test_strong_sam_protocol.py",
+      "nm_sam_cifar10/trainers/__init__.py",
+      "nm_sam_cifar10/trainers/sam_step.py",
+      "nm_sam_cifar10/trainers/sgd_step.py",
+      "nm_sam_cifar10/utils/__init__.py",
+      "nm_sam_cifar10/utils/seed.py",
+      "nm_sam_cifar10/utils/time.py"
+    ],
+    "omitted_nonessential_historical_inventory_paths": [
+      "nm_sam_cifar10/audit_bn.py",
+      "nm_sam_cifar10/bn_ablation.py",
+      "nm_sam_cifar10/diagnose_sam.py",
+      "nm_sam_cifar10/evaluate.py",
+      "nm_sam_cifar10/finalize_strong_four.py",
+      "nm_sam_cifar10/forensic_audit/__init__.py",
+      "nm_sam_cifar10/forensic_audit/analyze_artifacts.py",
+      "nm_sam_cifar10/forensic_audit/build_evidence_manifest.py",
+      "nm_sam_cifar10/forensic_audit/checkpoint_audit.py",
+      "nm_sam_cifar10/forensic_audit/checkpoint_metadata_audit.py",
+      "nm_sam_cifar10/forensic_audit/generate_final_report.py",
+      "nm_sam_cifar10/forensic_audit/manual_score_test.py",
+      "nm_sam_cifar10/forensic_audit/print_final_gate.py",
+      "nm_sam_cifar10/forensic_audit/reference_nm.py",
+      "nm_sam_cifar10/forensic_audit/runtime_audit.py",
+      "nm_sam_cifar10/forensic_audit/score_stability_audit.py",
+      "nm_sam_cifar10/import time.py",
+      "nm_sam_cifar10/methods/__init__.py",
+      "nm_sam_cifar10/methods/dense_sam.py",
+      "nm_sam_cifar10/methods/dense_sgd.py",
+      "nm_sam_cifar10/methods/nm_sam.py",
+      "nm_sam_cifar10/methods/nm_sam_aware.py",
+      "nm_sam_cifar10/methods/nm_sgd.py",
+      "nm_sam_cifar10/plot.py",
+      "nm_sam_cifar10/run_five_method_smoke.py",
+      "nm_sam_cifar10/stability_grid.py",
+      "nm_sam_cifar10/strong_baseline.py",
+      "nm_sam_cifar10/tests/runtime_sanity.py",
+      "nm_sam_cifar10/tests/test_baseline_resume.py",
+      "nm_sam_cifar10/tests/test_method_composition.py",
+      "nm_sam_cifar10/trace_fixed.py",
+      "nm_sam_cifar10/trace_sam.py",
+      "nm_sam_cifar10/train.py"
+    ],
+    "mismatches": []
+  }
+}

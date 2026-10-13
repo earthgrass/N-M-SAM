@@ -1,0 +1,49 @@
+{
+  "config": {
+    "dataset": "CIFAR-10",
+    "train_size": 50000,
+    "test_size": 10000,
+    "num_classes": 10,
+    "model": "resnet18_cifar",
+    "epochs": 200,
+    "batch_size": 128,
+    "optimizer": "SGD",
+    "learning_rate": 0.1,
+    "momentum": 0.9,
+    "nesterov": false,
+    "weight_decay": 0.0005,
+    "scheduler": "CosineAnnealingLR",
+    "scheduler_t_max": 200,
+    "scheduler_step_unit": "epoch",
+    "scheduler_step_timing": "after each completed epoch",
+    "warmup_epochs": 0,
+    "cutout_holes": 1,
+    "cutout_length": 16,
+    "label_smoothing": 0.0,
+    "mixup": false,
+    "cutmix": false,
+    "autoaugment": false,
+    "randaugment": false,
+    "ema": false,
+    "amp": false,
+    "precision": "FP32",
+    "seed": 0,
+    "num_workers": 2,
+    "train_transform": [
+      "RandomCrop(32,padding=4)",
+      "RandomHorizontalFlip",
+      "ToTensor",
+      "Cutout(n_holes=1,length=16)",
+      "Normalize(CIFAR10_MEAN,CIFAR10_STD)"
+    ],
+    "test_transform": [
+      "ToTensor",
+      "Normalize(CIFAR10_MEAN,CIFAR10_STD)"
+    ],
+    "clean_train_eval_transform": [
+      "ToTensor",
+      "Normalize(CIFAR10_MEAN,CIFAR10_STD)"
+    ]
+  },
+  "config_hash": "af039c3dd85d450d8ac0d2e843ce05a9909421b45a61d7c0900f9bb823ea0bbe"
+}

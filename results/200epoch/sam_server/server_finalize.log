@@ -1,0 +1,41 @@
+============================================================
+STRONG GPU FOUR-METHOD EXPERIMENT
+============================================================
+Tests: 51 passed, 0 failed
+CUDA: GPU = ['NVIDIA GeForce RTX 5090']; PRE-FLIGHT = PASS
+Dense-SAM:
+    final_test_acc = 0.96470000
+    final_test_loss = 0.10215104
+    clean_train_acc = 0.99996000
+    epsilon/rho = 1.00000001
+    NaN/Inf = False/False
+2:4-SAM-Magnitude:
+    final_test_acc = 0.96400000
+    final_test_loss = 0.10756082
+    clean_train_acc = 0.99990000
+    epsilon/rho = 1.00000002
+    mask_change_mean = 0.03859753
+    mask_change_final = 0.00001292
+    bad_blocks = 0
+    NaN/Inf = False/False
+2:4-SAM-Taylor-g1:
+    final_test_acc = 0.91960000
+    final_test_loss = 0.24839990
+    clean_train_acc = 0.97434000
+    epsilon/rho = 1.00000003
+    mask_change_mean = 0.31901626
+    mask_change_final = 0.31111172
+    bad_blocks = 0
+    NaN/Inf = False/False
+2:4-SAM-Taylor-g2:
+    final_test_acc = 0.94870000
+    final_test_loss = 0.15380459
+    clean_train_acc = 0.99562000
+    epsilon/rho = 1.00000002
+    mask_change_mean = 0.32198763
+    mask_change_final = 0.31589618
+    bad_blocks = 0
+    NaN/Inf = False/False
+FULL_TRAINING_COMPLETED = YES
+ARTIFACTS = /root/autodl-tmp/strong_four_workspace/nm_sam_cifar10/STRONG_GPU_FOUR_METHOD_REPORT.md
+============================================================
