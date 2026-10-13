@@ -15,3 +15,11 @@ split SHA256=62d58f141ce65ae7e8cdc3f9e2f8c3d0faffadb95de902715bb2afd4e32c48ba.
 Actual counts=50000/10000; train-core=45000, validation=5000, classes=10.
 CPU TinyCNN two-batch SAM CE=2.4539566040,2.3158249855; epsilon=.05,
 restoration=0, 2 forwards each. This is a data/runtime smoke, not accuracy evidence.
+
+M2.1 G2 PASSED: 73 passed in 6.42s. Pure/STE inactive gradients, allowed global
+epsilon, mask lock, BN one update, rho=0 and fault rollback verified.
+FakeData and real CIFAR four-core methods each ran two batches.
+CIFAR final CE: dense SGD 2.3202581; dense SAM 2.3673310;
+sparse SGD 2.3439302; sparse SAM 2.3931329. Sparse epsilon=.05, restoration=0.
+This core smoke uses dense L2=0 and sparse default master L2=.001 and is NOT
+a fair method comparison. M2.2 will enforce one explicit L2 protocol for all six.
