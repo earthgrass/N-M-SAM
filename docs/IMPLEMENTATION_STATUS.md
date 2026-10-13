@@ -16,7 +16,7 @@ No research performance, accuracy or novelty claim follows from unit tests.
 | AMP / DDP | capability reporting, compatibility design and fail-closed activation guards | UNIT_TESTED; actual training backends NOT_IMPLEMENTED |
 | Innovative Mask Selection | none installed; only Magnitude/Taylor baseline policies | DESIGN_ONLY pending review |
 
-Latest full local unit suite: 110 passed, 0 failed, 0 skipped. Python 3.12.10,
+Latest full local unit suite: 111 passed, 0 failed, 0 skipped. Python 3.12.10,
 torch 2.13.0+cpu, torchvision 0.28.0+cpu, pytest 9.1.1. compileall and diff check clean.
 No user CIFAR file, FakeData loop, ResNet training or A/B/C study runs after the
 user's code-only override. Tests use small fixed tensors/models, analytic quadratics

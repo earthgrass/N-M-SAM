@@ -5,6 +5,7 @@ import torch
 from torch.func import functional_call
 from torch.nn import functional as F
 from nmsam.utils.seed import capture_rng,restore_rng
+from nmsam import __version__
 
 
 class EffectiveLoss:
@@ -25,9 +26,23 @@ class EffectiveLoss:
         self.z=self.master*self.support
         self.buffers={n:b.detach().clone() for n,b in model.named_buffers()}
         self.rng=capture_rng()
+        digest=hashlib.sha256()
+        digest.update(repr((__version__,torch.__version__,repr(self.model),state_mode,self.names,
+                            self.shapes,str(self.master.dtype),str(self.master.device),
+                            registry.version if registry else "dense")).encode())
+        def tensor_bytes(tensor):
+            digest.update(repr((tuple(tensor.shape),str(tensor.dtype))).encode())
+            digest.update(tensor.detach().cpu().contiguous().numpy().tobytes())
+        for tensor in (self.master,self.support,self.inputs,self.targets,self.rng.cpu):tensor_bytes(tensor)
+        for name,tensor in self.buffers.items():
+            digest.update(name.encode());tensor_bytes(tensor)
+        for tensor in self.rng.cuda or []:tensor_bytes(tensor)
+        digest.update(repr(self.rng.python).encode())
+        digest.update(repr((self.rng.numpy[0],self.rng.numpy[2:])).encode())
+        digest.update(self.rng.numpy[1].tobytes())
         self.labels={"objective":"task_CE","derivative":"effective_true","state_mode":state_mode,
             "mask_id":registry.version if registry else "dense",
-            "snapshot_id":hashlib.sha256(self.z.cpu().numpy().tobytes()).hexdigest()[:16]}
+            "snapshot_id":digest.hexdigest()}
 
     def unpack(self,vector):
         if vector.shape!=self.z.shape or vector.device!=self.z.device or vector.dtype!=self.z.dtype:

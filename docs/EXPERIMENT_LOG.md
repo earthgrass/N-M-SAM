@@ -25,6 +25,10 @@ restoration, hashes/sampler, configuration and report rejection checks.
 Dense SAM source diff against cd33d2e4 is empty. No archives/weights tracked.
 Runtime GPU/AMP/DDP, real dataset deployment and A/B/C findings remain pending;
 AMP/DDP activation fails closed. Additional selection designs will be documents only.
+Final fixed-context identity check: 111 passed. Snapshot hash now binds master
+including inactive coordinates, support, batch, buffers, RNG, layout/mode/version.
+This prevents identical effective Z from falsely identifying different candidate
+or data contexts. No training/research experiment accompanies this correction.
 
 No historical results are reused. Each stage below is updated only after execution.
 

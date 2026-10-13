@@ -9,7 +9,7 @@ C: cross-block coupling/compensation may outperform equal-budget recovery.
 ## Implementation and unit validation
 
 M2–M7 code and common tools are implemented; current small-tensor unit suite
-has 110 passed, zero failures/skips. This is CODE_COMPLETE / UNIT_TESTED evidence.
+has 111 passed, zero failures/skips. This is CODE_COMPLETE / UNIT_TESTED evidence.
 See IMPLEMENTATION_STATUS, ARCHITECTURE_AND_API and GPU_DEPLOYMENT for boundaries.
 
 ## Observations and counterexamples
