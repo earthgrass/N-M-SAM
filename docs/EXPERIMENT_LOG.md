@@ -29,6 +29,10 @@ Final fixed-context identity check: 111 passed. Snapshot hash now binds master
 including inactive coordinates, support, batch, buffers, RNG, layout/mode/version.
 This prevents identical effective Z from falsely identifying different candidate
 or data contexts. No training/research experiment accompanies this correction.
+Final independent remote clone @84545ffd: isolated venv (system libraries reused),
+editable 0.2.0 install with --no-deps --no-build-isolation; 111 passed in 22.76s.
+Import location points to that clean clone's src/nmsam, not the old editable checkout.
+No dataset/experiment was executed by this clean-clone gate.
 
 No historical results are reused. Each stage below is updated only after execution.
 

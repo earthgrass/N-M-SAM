@@ -19,6 +19,7 @@ Set environment variables (replace these example paths):
 ```bash
 export NMSAM_ARCHIVE=/srv/datasets/cifar-10-python.tar.gz
 export NMSAM_CACHE=/srv/datasets/nmsam-cache
+export CUDA_VISIBLE_DEVICES=0  # replace with the specifically approved GPU allocation
 export CUBLAS_WORKSPACE_CONFIG=:4096:8
 ```
 

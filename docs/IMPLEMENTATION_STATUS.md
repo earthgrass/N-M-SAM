@@ -26,4 +26,6 @@ not claimed passing. All experiment CLIs require explicit --execute.
 Dense kernel src/nmsam/sam remains byte-identical to rebuild-v1@cd33d2e4.
 Runtime data sources are tracked; no TAR/model/checkpoint enters Git.
 See ARCHITECTURE_AND_API, GPU_DEPLOYMENT, RESULTS_LIMITATIONS and EXPERIMENT_LOG.
+Three independent selection designs and their comparison are in docs/research;
+they remain DESIGN_ONLY. No production policy beyond Magnitude/Taylor was added.
 Historical Bootstrap/run notes are retained in VALIDATION and EXPERIMENT_LOG only.
