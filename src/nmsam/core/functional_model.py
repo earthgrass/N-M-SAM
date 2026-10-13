@@ -19,6 +19,7 @@ class EffectiveLoss:
         self.counts=tuple(p.numel() for p in model.parameters())
         self.master=torch.cat([p.detach().flatten() for p in model.parameters()]).clone()
         masks=registry.masks if registry else {}
+        self.sparse_names=tuple(masks)
         self.support=torch.cat([masks[n].flatten() if n in masks else torch.ones_like(p,dtype=torch.bool).flatten()
                                 for n,p in model.named_parameters()])
         self.z=self.master*self.support

@@ -1,6 +1,9 @@
 # Implementation status
 
 CURRENT POLICY: code/unit tests only. DATASET_PENDING; GPU_VALIDATION_PENDING.
+M4 direction path, residual decomposition, six/joint candidate generation, labelled
+ranking/MAE/RMSE/Spearman/regret CODE_COMPLETE / UNIT_TESTED (82 tests).
+No A mechanism study executed after the policy change.
 M3 functional effective loss, true gradient/HVP/Hessian toy reference, fixed BN/RNG,
 sampler and full checkpoint serialization CODE_COMPLETE / UNIT_TESTED.
 Existing training-loop smoke test replaced with pure metric serialization; checkpoint

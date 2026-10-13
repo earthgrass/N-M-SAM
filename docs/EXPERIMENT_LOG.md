@@ -5,6 +5,10 @@ An already-completed M3 CLI produced effective_smoke_a5e241fc4ae544b0ab95cae7288
 before the stop could cancel it. It is historical only. No additional dataset reads
 or research execution follow this override. Subsequent entries are UNIT_TESTED.
 M3 unit-only suite: 80 passed (actual runtime recorded by test output), plus compileall.
+M4: 82 passed in unit-only suite; constant-Hessian six-candidate identity, exact
+residual decomposition, zero-radius undefined direction, compatible L2 subtraction,
+constant ranking and label rejection. Numerical equality is unit evidence only,
+not experimental support for route A. Dataset/GPU mechanism validation pending.
 
 No historical results are reused. Each stage below is updated only after execution.
 
