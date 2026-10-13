@@ -1,0 +1,9 @@
+[2026-09-20 12:07:47] Config: {"method": "dense_sam", "model": "resnet18_cifar", "seed": 0, "epochs": 2, "batch_size": 128, "lr": 0.01, "momentum": 0.9, "weight_decay": 0.0005, "nesterov": false, "rho": 0.05, "adaptive": false, "n": 2, "m": 4, "mask_update_interval": 20, "sharpness_interval": 1, "num_workers": 0, "data_root": "./nm_sam_cifar10/data/cifar10", "output_dir": "./nm_sam_cifar10/results/phase1_fixed/dense_sam_seed0", "subset_train": 4000, "subset_test": 1000, "eval_subset": 1024, "device": "auto", "deterministic": false, "milestones": null, "gamma": 0.1, "use_fake_data": false, "fake_train_size": 2000, "fake_test_size": 500}
+[2026-09-20 12:07:47] Method profile: {'is_sparse': False, 'optimizer': 'sam', 'mask_score': None}
+[2026-09-20 12:07:47] Device: cpu
+[2026-09-20 12:07:50] Train set: 4000 samples, Test set: 1000 samples
+[2026-09-20 12:07:50] Sparsity: disabled (dense training)
+[2026-09-20 12:09:16] Epoch 000: train_loss=2.3319 train_acc=0.1572 test_loss=1.9620 test_acc=0.2800 time=79.6s sharpness=0.5033 ||eps||/rho=1.000000
+[2026-09-20 12:10:43] Epoch 001: train_loss=2.0459 train_acc=0.2422 test_loss=1.7621 test_acc=0.3370 time=80.1s sharpness=0.2429 ||eps||/rho=1.000000
+[2026-09-20 12:10:43] DONE: {"best_test_acc": 0.337, "final_test_acc": 0.337, "final_test_loss": 1.7620889444351195, "final_train_loss": 2.045887142419815, "total_time_sec": 159.69149769999785, "avg_epoch_time_sec": 79.84574884999893}
+[2026-09-20 12:10:43] Output dir: ./nm_sam_cifar10/results/phase1_fixed/dense_sam_seed0

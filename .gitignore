@@ -1,0 +1,146 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments / package managers
+venv/
+.venv/
+env/
+.conda/
+.python-version
+poetry.lock
+Pipfile.lock
+uv.lock
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Secrets / credentials — explicit never-commit
+*.env
+*.env.*
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*
+secret*
+*.secret
+*.password
+*.token
+*id_rsa*
+*id_ed25519*
+
+# Raw datasets
+data/cifar10/cifar-10-batches-py/
+data/cifar10/*.tar.gz
+data/**/*.bin
+data/**/*.pkl
+data/**/*.tar.gz
+data/**/raw/
+
+# Checkpoints / model weights (large binary blobs)
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.bin
+
+# Archives / packaged snapshots
+archives/
+*.tar.gz
+*.tar
+*.zip
+*.7z
+*.rar
+*.sha256
+
+# Forensics / later-version audit work (NOT part of initial archive)
+forensic_audit/
+docs/audits/
+
+# Later-version / smoke / phase-2+ result directories
+results/strong_*/
+results/smoke_*/
+results/short_real*/
+results/method_architecture_*/
+results/sam_diagnosis_quick/
+results/phase1_fixed/stability_grid/
+results/strong_cnn_baseline/
+
+# Later-version / refactor / GPU / server reports
+*STRONG_*.md
+*STRONG_*.json
+*2TO4_SGD*.md
+*GPU_*.md
+*MASK_REFERENCE_TIME_AUDIT.md
+*MASK_*_AUDIT.md
+*SERVER_PHASE2A*.md
+*STRONG_FOUR*.md
+*NEW_2TO4_SGD_AUDIT.md
+*UPDATED_2TO4_SGD_AUDIT.md
+*FINAL_2TO4_SGD_MAGNITUDE_REPORT.md
+*SAM_FIX_REPORT.md
+*SAM_AUDIT_REPORT.md
+*METHOD_ARCHITECTURE_REPORT.md
+*STRONG_SAM_CODE_AUDIT.json
+*G1_G2_IMPLEMENTATION_AUDIT.*
+*CODE_SNAPSHOT_SHA256.txt
+
+# Later-version configs (Strong / smoke)
+configs/smoke_strong_*.yaml
+configs/strong_*.yaml
+
+# Later-version top-level driver scripts (Strong / smoke / finalize)
+strong_baseline.py
+strong_sam.py
+strong_sparse_sgd.py
+finalize_strong_four.py
+run_five_method_smoke.py
+import time.py
+import*.py
+
+# Later-version refactor / phase-2+ test scripts
+tests/test_strong_sam_protocol.py
+tests/test_sparse_sgd_path.py
+tests/test_sparse_sgd_protocol.py
+tests/test_checkpoint_resume.py
+tests/test_baseline_resume.py
+tests/test_mask_reference_time.py
+tests/test_mask_timing.py
+tests/test_sam_taylor_g1_g2.py
+
+# Later-version refactor / phase-2+ shell scripts
+scripts/resume_phase2a_strong_baseline.sh
+scripts/run_phase2a_strong_baseline.sh
+scripts/run_strong_four_server.sh
+
+# Scratch / temp / driver log dumps
+_driver.log
+_stability_driver.log
+tmp/
+temp/
+scratch/
+*.tmp
+*.bak
+
+# Build / dist
+build/
+dist/
+out/

@@ -1,0 +1,29 @@
+{
+  "method": "dense_sgd",
+  "model": "resnet18_cifar",
+  "seed": 0,
+  "epochs": 5,
+  "batch_size": 128,
+  "lr": 0.1,
+  "momentum": 0.9,
+  "weight_decay": 5e-4,
+  "nesterov": false,
+  "rho": 0.05,
+  "adaptive": false,
+  "n": 2,
+  "m": 4,
+  "sparse_scope": "phase1",
+  "mask_update_interval": 100,
+  "sharpness_interval": 1,
+  "num_workers": 2,
+  "data_root": "./data/cifar10",
+  "output_dir": "./results/dense_sgd_seed0",
+  "subset_train": null,
+  "subset_test": null,
+  "eval_subset": 1024,
+  "device": "auto",
+  "augmentation": {
+    "train": ["RandomCrop(32,padding=4)", "RandomHorizontalFlip", "ToTensor", "Normalize"],
+    "test": ["ToTensor", "Normalize"]
+  }
+}

@@ -1,0 +1,26 @@
+[2026-09-20 12:23:01] Config: {"method": "nm_sam_aware", "model": "resnet18_cifar", "seed": 0, "epochs": 2, "batch_size": 128, "lr": 0.01, "momentum": 0.9, "weight_decay": 0.0005, "nesterov": false, "rho": 0.05, "adaptive": false, "n": 2, "m": 4, "mask_update_interval": 20, "sharpness_interval": 1, "num_workers": 0, "data_root": "./nm_sam_cifar10/data/cifar10", "output_dir": "./nm_sam_cifar10/results/phase1_fixed/nm_sam_aware_seed0", "subset_train": 4000, "subset_test": 1000, "eval_subset": 1024, "device": "auto", "deterministic": false, "milestones": null, "gamma": 0.1, "use_fake_data": false, "fake_train_size": 2000, "fake_test_size": 500}
+[2026-09-20 12:23:01] Method profile: {'is_sparse': True, 'optimizer': 'sam', 'mask_score': 'sam_taylor'}
+[2026-09-20 12:23:01] Device: cpu
+[2026-09-20 12:23:05] Train set: 4000 samples, Test set: 1000 samples
+[2026-09-20 12:23:05] Sparsity: 2:4 (n=2, m=4); wrapped 17 layers
+[2026-09-20 12:23:05]   - sparse layer: layer1.0.conv1 shape=(64, 64, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer1.0.conv2 shape=(64, 64, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer1.1.conv1 shape=(64, 64, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer1.1.conv2 shape=(64, 64, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer2.0.conv1 shape=(128, 64, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer2.0.conv2 shape=(128, 128, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer2.1.conv1 shape=(128, 128, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer2.1.conv2 shape=(128, 128, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer3.0.conv1 shape=(256, 128, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer3.0.conv2 shape=(256, 256, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer3.1.conv1 shape=(256, 256, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer3.1.conv2 shape=(256, 256, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer4.0.conv1 shape=(512, 256, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer4.0.conv2 shape=(512, 512, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer4.1.conv1 shape=(512, 512, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: layer4.1.conv2 shape=(512, 512, 3, 3)
+[2026-09-20 12:23:05]   - sparse layer: linear shape=(10, 512)
+[2026-09-20 12:24:31] Epoch 000: train_loss=2.2888 train_acc=0.1404 test_loss=1.9772 test_acc=0.2170 time=79.8s sharpness=0.3833 ||eps||/rho=1.000000
+[2026-09-20 12:26:01] Epoch 001: train_loss=2.1711 train_acc=0.2043 test_loss=2.0053 test_acc=0.2230 time=82.7s sharpness=0.9614 ||eps||/rho=1.000000
+[2026-09-20 12:26:01] DONE: {"best_test_acc": 0.223, "final_test_acc": 0.223, "final_test_loss": 2.005303867340088, "final_train_loss": 2.171091202646494, "total_time_sec": 162.48242839999148, "avg_epoch_time_sec": 81.24121419999574}
+[2026-09-20 12:26:01] Output dir: ./nm_sam_cifar10/results/phase1_fixed/nm_sam_aware_seed0
