@@ -1,6 +1,10 @@
 # Implementation status
 
 CURRENT POLICY: code/unit tests only. DATASET_PENDING; GPU_VALIDATION_PENDING.
+M6 joint legal candidates, coupling identity, quadratic/Steihaug/robust compensation
+and matched-backward recovery SGD interfaces CODE_COMPLETE / UNIT_TESTED (91 tests).
+Trust-region/damping statuses are explicit; network compensation is an approximate
+research solver, not a global/new method claim. Route C empirical validation pending.
 M5 supported single/multi-step robust proxy, local quadratic robust proxy and
 small FP64 global quadratic trust-region reference CODE_COMPLETE / UNIT_TESTED.
 Global certificates apply ONLY to the explicit small quadratic, never to network

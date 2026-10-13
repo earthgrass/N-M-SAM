@@ -13,6 +13,10 @@ M5 unit suite: 88 passed; four curvature classes over six supports, KKT/grid
 reference, hard case, zero-gradient one-step counterexample, new support domain,
 DeltaF=DeltaL+DeltaS and exact quadratic local-model identity. No network research
 experiment was executed. These are UNIT_TESTED, not evidence of improved accuracy.
+M6: 91 passed after correcting a test's boolean support-to-parameter unpack cast.
+Analytic cross-block identity, positive-definite restricted solution, indefinite
+trust-region legality, 36 legal two-block combinations, and matched backward
+budget interfaces tested. Actual model recovery/compensation performance pending.
 
 No historical results are reused. Each stage below is updated only after execution.
 

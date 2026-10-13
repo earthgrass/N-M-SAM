@@ -25,6 +25,9 @@ def load_checkpoint(path,trainer,sampler,expected):
     trainer.model.load_state_dict(state["model"])
     trainer.optimizer.load_state_dict(state["optimizer"])
     trainer.scheduler.load_state_dict(state["scheduler"])
-    if trainer.registry:trainer.registry.load_state_dict(state["mask"])
+    if trainer.registry:
+        parameters=dict(trainer.model.named_parameters())
+        state["mask"]["masks"]={k:v.to(parameters[k].device) for k,v in state["mask"]["masks"].items()}
+        trainer.registry.load_state_dict(state["mask"])
     trainer.step=state["step"];sampler.load_state_dict(state["sampler"]);restore_rng(state["rng"])
     return state["metadata"]
