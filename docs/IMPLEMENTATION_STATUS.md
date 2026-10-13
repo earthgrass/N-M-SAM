@@ -1,5 +1,8 @@
 # Implementation status
 
+Implementation-v1: M2.0 G0/G1 IMPLEMENTED_AND_TESTED (see EXPERIMENT_LOG).
+Subsequent M2.1–M7 implementation gates pending. Bootstrap status below is historical.
+
 M0: configuration, src-layout, attribution, interface and research contracts IMPLEMENTED.
 M0 validation PASSED: `python -m pytest -q`: 10 passed in 0.20s (2026-10-13).
 M1: core loss/batch/report, dense SAM, SGD, TinyMLP, FakeData, runner IMPLEMENTED.
