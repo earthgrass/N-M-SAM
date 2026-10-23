@@ -323,6 +323,13 @@ def diagnostic_run(root, output, device, method, dtype, steps, gamma, tag):
                 info = stepper.step(x.to(device), y.to(device)); torch.cuda.synchronize(device)
                 wall = time.perf_counter()-t
                 assert all(int(v) == bn_before[n]+1 for n,v in model.named_buffers() if n in bn_before)
+                buffers = dict(model.named_buffers())
+                assert all(bool(torch.isfinite(v).all()) for v in buffers.values()), "Nonfinite BN buffer"
+                variances = [v for n,v in buffers.items() if n.endswith("running_var")]
+                info["bn_running_var_min"] = min(float(v.min()) for v in variances)
+                info["bn_running_var_max"] = max(float(v.max()) for v in variances)
+                info["log_radius_l1"] = sum(float(s.double().abs().sum()) for s in stepper.geometry.logs)
+                info["volume_bound"] = c["geometry"]["volume_atol"]+c["geometry"]["volume_rtol"]*info["log_radius_l1"]
                 observed = observer.finish()
                 step += 1
                 records.append({"step": step, "epoch": epoch, "step_seconds_instrumented": wall,
