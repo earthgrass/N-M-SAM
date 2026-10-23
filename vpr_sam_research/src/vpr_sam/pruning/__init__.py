@@ -2,7 +2,7 @@
 from __future__ import annotations
 import torch
 from torch import nn
-from ..config import validate_pruning
+from ..config import validate_pruning, canonical_pruning
 from ..repro import finite
 
 
@@ -29,14 +29,15 @@ def nm_mask(weight, n, m, tail):
 
 def make_masks(model, protocol):
     validate_pruning(protocol)
+    protocol = canonical_pruning(protocol)
     layers = [(name, mod) for name, mod in model.named_modules() if isinstance(mod, (nn.Linear, nn.Conv2d))]
     first, last = layers[0][0], layers[-1][0]
     masks, report = {}, []
     for name, mod in layers:
         scope = protocol["scope"]
-        selected = not (scope in {"exclude_first", "exclude_first_last", "residual_and_head"} and name == first)
+        selected = not (scope in {"exclude_first", "exclude_first_last", "exclude_first_and_pointwise"} and name == first)
         selected &= not (scope == "exclude_first_last" and name == last)
-        selected &= not (scope == "residual_and_head" and isinstance(mod, nn.Conv2d) and mod.kernel_size == (1, 1))
+        selected &= not (scope == "exclude_first_and_pointwise" and isinstance(mod, nn.Conv2d) and mod.kernel_size == (1, 1))
         if selected:
             key = f"{name}.weight" if name else "weight"
             mask = nm_mask(mod.weight, protocol["n"], protocol["m"], protocol["tail"])
@@ -49,6 +50,22 @@ def make_masks(model, protocol):
     if not masks or not any(row["full_blocks"] for row in report):
         raise ValueError("Selected scope has no complete N:M blocks")
     return masks, report
+
+
+def sparsity_summary(model, layer_report):
+    """Report mask-induced sparsity with explicit independent denominators."""
+    deleted = sum(row["masked"] for row in layer_report)
+    targeted = sum(row["total"] for row in layer_report)
+    tails = sum(row["tail_weights"] for row in layer_report)
+    full_blocks = targeted - tails
+    all_parameters = sum(p.numel() for p in model.parameters())
+    return {"mask_deleted_parameters": deleted, "target_layer_weight_parameters": targeted,
+            "target_complete_block_parameters": full_blocks, "target_tail_parameters": tails,
+            "all_model_parameters": all_parameters,
+            "target_layer_sparsity": deleted / targeted,
+            "target_complete_block_sparsity": deleted / full_blocks,
+            "global_parameter_sparsity": deleted / all_parameters,
+            "definition": "mask-induced zeros; natural zeros are excluded from the deletion count"}
 
 
 @torch.no_grad()

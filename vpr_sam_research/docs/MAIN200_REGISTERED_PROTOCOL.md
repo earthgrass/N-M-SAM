@@ -1,0 +1,28 @@
+# Approved first 200-epoch campaign: seeds 0, 1, 2
+
+The user explicitly authorized all three seed pairs on 2026-10-23, replacing the earlier 2027/2028/2029 registration and the first-pair-only restriction. No independent 5–10 epoch calibration is performed. No old model weights are used. PR #1 remains unmerged.
+
+Six complete configurations in `configs/approved_main200/` freeze CIFAR-10 (45000 training / 5000 held-out validation), CIFAR-ResNet18, 200 epochs, batch 128, SGD lr 0.1 / momentum 0.9 / weight decay 0.0005 / no Nesterov, cosine eta_min 0, crop padding 4 / horizontal flip / normalization / no Cutout. SAM rho is 0.05. VPR gamma is 5.482145661475941e-8, log geometry FP64, warmup zero; model parameters FP32. AMP, TF32 and compile are disabled; deterministic algorithms and the existing named RNG streams are retained. The frozen geometry and step modules are unchanged.
+
+Operational choices: the audited 4 intra-op threads, 2 data workers, evaluation batch 256, and epoch-boundary checkpoints are retained. Inter-op threads and actual CUDA UUID are recorded and must match between methods. The public spherical probe uses rho 0.02 on the first **10** non-shuffled validation batches (2560 examples); their exact original sample IDs are recorded before any training, separately for each seed. Validation splits follow the existing seed-keyed split and match within each pair; splits are not forced to match across different seeds. Test data is integrity-checked but no test metrics are requested.
+
+For every seed, run SAM 200 epochs, then VPR 200 epochs, then validate the pair before pruning either final checkpoint. Each run has exactly 70400 optimization steps, a cosine horizon of 200 from epoch one, and no warm start. The first 10 epochs are monitoring only and do not introduce a stopping or selection rule. The campaign precomputes all three initial model hashes, full 200-epoch training order hashes, split identities, 20-epoch recovery order hashes, and probe IDs before starting. All six configs/scripts are frozen in one clean commit and their hashes remain constant throughout.
+
+Magnitude 2:4 pruning uses `exclude_first_last`, dense tails, existing stable tie handling, and no BN recalibration. Recovery uses a new SGD optimizer, fixed masks, 20 epochs (7040 steps), lr 0.005, momentum 0.9, weight decay 0.0005, no Nesterov, cosine eta_min zero. The required recovery `rho=0.05` config field is inert for SGD. `static_std=0.1` is an inert required schema field for SAM/VPR. Both dense and recovered selections are **final**, never best validation. Dense, hard-pruned and recovered validation metrics and common probes are saved per checkpoint. The existing analysis validates paired identities and equal recovery budgets, then produces cumulative seed-level reports/plots. No early accuracy or geometry trajectory changes gamma, LR, mask rules, recovery budget or ordering.
+
+`scripts/formal_main200.py` is a sequential controller, not a new optimizer/training implementation. It delegates to the audited CLI. Only one stage runs at once. It exclusively locks this campaign and refuses to overwrite run directories. It checks the clean commit, source/config/script hashes, single approved physical RTX 5090 UUID mapped to cuda:0, idle GPU, local Python/import paths, full official data MD5s, configs and disk reserve before training. At least 20 GiB must be free at startup; a 4 GiB operational reserve is enforced while running. Current artifacts are projected to fit within 10 GiB (six dense runs plus six fixed-mask recoveries, three rolling checkpoint slots each, atomic-save headroom and full histories); reserves are monitored rather than treated as a guaranteed size bound.
+
+Every 15 seconds the controller appends persistent GPU memory/utilization, free disk, current stage, completed epochs, latest epoch/step metrics and first-ten-epoch geometry maxima. Existing per-step numerical and volume gates remain authoritative. All step records, gradients/perturbation norms, update maxima, radii and volume are saved by the existing trainer at epoch checkpoints. An error, numerical gate, invalid checkpoint, resource floor or hardware query failure stops the queue, preserves failure evidence and terminates the active subprocess group if needed. There is no automatic retry or silent resume. SSH detachment is supported with `nohup`, redirected stdin/stdout/stderr, and a child process session per stage.
+
+Deployment uses the already audited isolated server project/environment and official dataset, retaining old artifacts untouched in their original namespaces. The working checkout is advanced to the newly frozen commit; old measured commits remain in Git. Runtime files go exclusively under `runs/main200_seeds012_v1/`. Large checkpoints and datasets remain on the server and are never added to GitHub.
+
+Launch once from the standalone Linux project, after the new commit is pushed and the tree is clean:
+
+```bash
+export VPR_FORMAL_APPROVED=YES CUBLAS_WORKSPACE_CONFIG=:4096:8 PYTHONHASHSEED=0
+nohup .venv/bin/python -u scripts/formal_main200.py --execute \
+  --commit <frozen-full-commit> --gpu-uuid <approved-physical-uuid> \
+  > artifacts/main200_seeds012_controller.log 2>&1 </dev/null &
+```
+
+The immutable launch commit, private full UUID, six config hashes and all expected identities are written in `runs/main200_seeds012_v1/control/gates.json`. Stage logs, telemetry, per-pair audits, checkpoint hashes, summaries and figure provenance are preserved. Monitoring must distinguish running/queued/completed/failed stages. Expected duration is measured after the actual first epochs; no overnight completion is promised.

@@ -35,6 +35,8 @@ def main(argv=None):
     p.add_argument("--baseline", default="sam")
     p.add_argument("--split", choices=("validation", "test"), default="validation")
     p.add_argument("--checkpoint", choices=("final", "best_validation"), default="final")
+    p.add_argument("--recovery-checkpoint", choices=("final", "best_validation"), default="final")
+    p.add_argument("--pruning-protocol", help="Select one explicit common N:M protocol when multiple exist")
     p = sub.add_parser("plot")
     p.add_argument("--summary", required=True)
     p.add_argument("--output", required=True)
@@ -75,7 +77,9 @@ def main(argv=None):
         result = evaluate_checkpoint(args.checkpoint, root, args.split)
     elif args.command == "summarize":
         from .analysis.report import summarize
-        result = summarize(root, args.runs, args.output, args.baseline, args.split, args.checkpoint)
+        pruning_protocol = load_config(project_path(root, args.pruning_protocol)) if args.pruning_protocol else None
+        result = summarize(root, args.runs, args.output, args.baseline, args.split, args.checkpoint,
+                           pruning_protocol, args.recovery_checkpoint)
     elif args.command == "plot":
         from .analysis.report import plot
         result = plot(root, args.summary, args.output)

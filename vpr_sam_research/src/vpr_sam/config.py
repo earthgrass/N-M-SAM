@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import json
 import math
+import re
 from pathlib import Path
 
 METHODS = {"sgd", "sam", "vpr", "static", "positive", "fixed_l2"}
@@ -51,6 +52,10 @@ def validate(c, *, formal_allowed=False):
         raise ValueError("Formal runs require ResNet18 and real CIFAR-10")
     if formal and not c["deterministic"]:
         raise ValueError("Formal protocol requires deterministic execution")
+    if not isinstance(c["device"], str) or not re.fullmatch(r"cpu|cuda(?::[0-9]+)?", c["device"]):
+        raise ValueError("Device must be cpu, cuda (smoke only), or explicit cuda:N")
+    if formal and not re.fullmatch(r"cuda:[0-9]+", c["device"]):
+        raise ValueError("Formal RTX 5090 experiments require the approved explicit CUDA device cuda:N")
     for key in ("validation_size", "augment", "cutout", "workers", "root", "download"):
         required(c["data"][key], f"data.{key}")
     if c["training"]["scheduler"] != "cosine" or c["training"]["epochs"] <= 0:
@@ -92,7 +97,13 @@ def validate(c, *, formal_allowed=False):
         raise ValueError("Invalid geometry precision/warmup")
     if o["method"] == "static" and g["static_std"] <= 0:
         raise ValueError("Static ablation requires explicit positive static_std")
-    if c["pruning"]["n"] is not None or c["pruning"]["m"] is not None:
+    if formal:
+        # The user requires a complete workflow protocol before formal training.
+        for section in ("pruning", "recovery"):
+            for key, value in c[section].items():
+                required(value, f"{section}.{key}")
+        validate_recovery(c["recovery"])
+    if formal or c["pruning"]["n"] is not None or c["pruning"]["m"] is not None:
         validate_pruning(c["pruning"])
     return c
 
@@ -101,16 +112,35 @@ def validate_pruning(p):
     n, m = p["n"], p["m"]
     if not isinstance(n, int) or not isinstance(m, int) or not 0 < n < m:
         raise ValueError("Specify integers 0<N<M; no default N:M")
-    if p["scope"] not in {"all", "exclude_first", "exclude_first_last", "residual_and_head"}:
+    if p["scope"] not in {"all", "exclude_first", "exclude_first_last", "exclude_first_and_pointwise", "residual_and_head"}:
         raise ValueError("Explicit pruning scope required")
     if p["score"] != "magnitude" or p["tail"] not in {"dense", "error"}:
         raise ValueError("First version uses magnitude; tail must be dense/error")
 
 
+def canonical_pruning(p):
+    validate_pruning(p)
+    result = copy.deepcopy(p)
+    if result["scope"] == "residual_and_head":
+        result["scope"] = "exclude_first_and_pointwise"
+    return result
+
+
+def validate_recovery(r):
+    if any(v is None for v in r.values()) or r["method"] not in {"sgd", "sam"}:
+        raise ValueError("Explicit positive recovery budget and common sgd/sam protocol required")
+    if type(r["epochs"]) is not int or r["epochs"] <= 0 or r["scheduler"] != "cosine":
+        raise ValueError("Recovery requires positive integer epochs and cosine scheduler")
+    for key in ("lr", "momentum", "weight_decay", "rho", "eta_min"):
+        if type(r[key]) not in (int, float) or not math.isfinite(r[key]) or r[key] < 0:
+            raise ValueError(f"Invalid recovery.{key}")
+    if r["lr"] <= 0 or r["rho"] <= 0 or r["momentum"] >= 1 or r["eta_min"] > r["lr"]:
+        raise ValueError("Invalid recovery optimizer/scheduler range")
+
+
 def recovery_config(c):
     r = c["recovery"]
-    if any(v is None for v in r.values()) or r["epochs"] <= 0 or r["method"] not in {"sgd", "sam"}:
-        raise ValueError("Explicit positive recovery budget and common sgd/sam protocol required")
+    validate_recovery(r)
     out = copy.deepcopy(c)
     out["optimizer"].update({k: r[k] for k in ("method", "lr", "momentum", "weight_decay", "rho")})
     out["training"].update({k: r[k] for k in ("epochs", "scheduler", "eta_min")})
@@ -120,9 +150,19 @@ def recovery_config(c):
 def comparison_protocol(c):
     """Exclude only research variables and paths, never fairness variables."""
     result = copy.deepcopy(c)
-    for key in ("output", "device", "threads"):
+    for key in ("output",):
         result.pop(key)
     result["data"].pop("root")
     result["optimizer"].pop("method")
+    if result["pruning"]["n"] is not None and result["pruning"]["m"] is not None:
+        result["pruning"] = canonical_pruning(result["pruning"])
     result["geometry"] = {}  # geometry is the declared research variable
+    return result
+
+
+def method_protocol(c):
+    """Within one method, seed changes must not hide hyperparameter changes."""
+    result = comparison_protocol(c)
+    result.pop("seed")
+    result["geometry"] = copy.deepcopy(c["geometry"])
     return result

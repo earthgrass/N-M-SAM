@@ -28,7 +28,10 @@ N、M、scope、tail 必须显式配置，没有正式默认 2:4。
 Linear 沿 in_features；Conv2d 每个输出通道展平 [in,kh,kw] 后连续 M 分块。
 这一逻辑分块不声称自动满足特定硬件稀疏 kernel 布局，也不宣称硬件加速。
 tail=dense 保留不足 M 的尾块；tail=error 拒绝尾块。统计实际全模型稀疏率与层报告。
-scope 支持 all、exclude_first、exclude_first_last、residual_and_head（排除首层及1×1卷积）。
+scope 支持 all、exclude_first、exclude_first_last、exclude_first_and_pointwise。
+最后一种明确排除首层及所有1×1卷积，包含其余 Conv 和 Linear 分类头。
+residual_and_head 保留为相同行为的旧别名；报告统一记录 canonical 名称与完整入选权重名称。
+同时报告目标层（含稠密尾块）稀疏率、完整块稀疏率与全模型稀疏率，列明各自分子分母。
 剪枝输出是实际参数归零，不是仅做评分。立即评估不做 BN 校准，报告 delta loss、accuracy drop、logit L2 和 KL。
 不把 checkpoint 中自然出现的数值零计为结构化 mask 删除数。
 
@@ -59,6 +62,12 @@ mid-epoch 恢复支持 workers>0，因为增强按样本/epoch 寻址且没有 p
 源代码发生变化后精确恢复被拒绝；不提供忽略校验的快捷选项。
 checkpoint 为 Python pickle，只加载可信的本项目文件。
 
+本轮 artifact schema=2（config schema 仍为1）。模型身份包含架构名、所有状态张量的shape/dtype/hash；
+配置、Mask 各有身份。评估、剪枝、恢复和统计都核对当前源码/配置/脚本身份，不仅断点恢复核对。
+评估和剪枝还重新构建数据 Manifest 并验证运行环境；JSON 结果绑定确切父 checkpoint 及来源。
+V1/schema1产物不自动迁移，不修改旧文件，也没有 ignore-provenance 开关。
+因此必须在同一冻结源码/配置集合下生成一个比较批次；修改源码或配置集合后不能静默混用旧结果。
+
 ## 统计
 
 独立随机种子是统计单位，不能把 batch/epoch 当独立重复。
@@ -67,9 +76,20 @@ checkpoint 为 Python pickle，只加载可信的本项目文件。
 至少两对 seed 提供固定随机源的 paired bootstrap percentile interval，少量 seed 只能探索性解释。
 正式比较仍需决定 seed 数量、调参预算及多重比较策略。
 
+校验分两层：同方法跨seed要求完整几何配置相同；跨方法允许几何研究变量不同，其余协议相同。
+硬剪枝准确率、损失、损失增量、准确率损伤，以及恢复后准确率和损失均提供各方法统计及配对差值。
+正负号统一为 method-baseline，损失/损伤越低越好。n=1 无区间，n>=2 提供探索性区间。
+剪枝比较要求相同N:M、canonical scope、tail、评分/分块/tie/BN规则、稠密checkpoint选择，以及完整seed集合。
+恢复比较额外核查预算/优化器、父hard checkpoint、同seed样本顺序和恢复checkpoint选择。
+不存在恢复结果时显式标记 unavailable；仅部分恢复完成则拒绝混合汇总。
+多个剪枝协议时必须通过 --pruning-protocol 显式选择一个，不能将它们混成一个统计组。
+test比较必须为dense/hard/recovered分别生成绑定对应checkpoint的test证据，不能把validation结果贴成test。
+
 ## 尚未批准的正式协议
 
 N:M、剪枝层范围/尾块、验证集大小、随机种子列表、训练预算与基础超参数、
 gamma/精度/warm-up、恢复预算、static_std、最终 checkpoint 选择规则、probe 预算、GPU 分配均未确定。
 configs/formal/*.json 中 null 是刻意的执行阻断，不是缺失的工程实现。
 先填写一个共同配置，再用 materialize_protocol.py 展开方法/seed，审核后才能执行。
+本项目采用全流程一次性冻结：正式train门禁同时要求剪枝和恢复协议完整且合法。
+这只加强执行约束，不在本轮选择具体N:M或任何正式超参数。正式剪枝不能用运行时override更换已批准协议。

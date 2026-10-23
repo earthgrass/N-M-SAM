@@ -92,18 +92,67 @@ def tensor_hash(state):
     h = hashlib.sha256()
     for name, tensor in sorted(state.items()):
         h.update(name.encode())
+        h.update(str(tensor.dtype).encode())
+        h.update(str(tuple(tensor.shape)).encode())
         h.update(tensor.detach().cpu().contiguous().numpy().tobytes())
     return h.hexdigest()
 
 
-def environment():
-    return {"python": platform.python_version(), "platform": platform.platform(),
+def validate_execution_record(config, record):
+    """Pure validation: never infer execution from a host's visible GPU list."""
+    if not isinstance(record, dict) or record.get("requested_device") != config["device"]:
+        raise ValueError("Missing/mismatched actual execution device record")
+    requested = torch.device(config["device"])
+    actual = torch.device(record["resolved_device"])
+    if requested.type != actual.type or (requested.index is not None and requested.index != actual.index):
+        raise ValueError("Requested/actual execution device mismatch; CPU/CUDA fallback forbidden")
+    if record.get("kind") != actual.type or record.get("threads") != config["threads"]:
+        raise ValueError("Execution device kind/thread configuration mismatch")
+    if type(record.get("interop_threads")) is not int or record["interop_threads"] < 1:
+        raise ValueError("Actual inter-op threads must be recorded")
+    if actual.type == "cuda" and actual.index is None:
+        raise ValueError("Actual CUDA execution index must be resolved")
+    if config["purpose"] == "formal":
+        if requested.type != "cuda" or requested.index is None:
+            raise ValueError("Formal execution requires approved explicit cuda:N")
+        if "RTX 5090" not in (record.get("gpu_name") or "") or record.get("compute_capability") != [12, 0]:
+            raise ValueError("Formal execution requires an actual RTX 5090 CUDA device")
+        if not record.get("gpu_uuid"):
+            raise ValueError("Formal CUDA device UUID must be recorded")
+
+
+def execution_record(config, actual_device=None):
+    requested = torch.device(config["device"])
+    actual = torch.device(actual_device) if actual_device is not None else requested
+    record = {"requested_device": config["device"], "kind": actual.type,
+              "threads": torch.get_num_threads(), "interop_threads": torch.get_num_interop_threads(),
+              "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
+              "gpu_name": None, "gpu_uuid": None, "compute_capability": None}
+    if actual.type == "cuda":
+        if not torch.cuda.is_available():
+            raise RuntimeError("Requested CUDA is unavailable; CPU fallback forbidden")
+        index = actual.index if actual.index is not None else torch.cuda.current_device()
+        actual = torch.device("cuda", index)
+        properties = torch.cuda.get_device_properties(index)
+        record.update(gpu_name=properties.name, gpu_uuid=str(properties.uuid) if getattr(properties, "uuid", None) else None,
+                      compute_capability=[properties.major, properties.minor])
+    record["resolved_device"] = str(actual)
+    validate_execution_record(config, record)
+    return record
+
+
+def environment(config=None, actual_device=None):
+    record = execution_record(config, actual_device) if config is not None else None
+    result = {"python": platform.python_version(), "platform": platform.platform(),
             "packages": {name: importlib.metadata.version(name)
                          for name in ("torch", "torchvision", "numpy", "matplotlib", "Pillow")},
             "cuda_runtime": torch.version.cuda,
-            "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+            "gpu": record["gpu_name"] if record is not None else (torch.cuda.get_device_name(0) if torch.cuda.is_available() else None),
             "cuda_capabilities": torch.cuda.get_arch_list() if torch.cuda.is_available() else [],
             "deterministic": torch.are_deterministic_algorithms_enabled()}
+    if config is not None:
+        result["execution"] = record
+    return result
 
 
 def finite(tensor, label: str):

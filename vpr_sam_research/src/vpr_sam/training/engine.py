@@ -9,22 +9,23 @@ from pathlib import Path
 
 import torch
 
-from ..config import validate, validate_pruning, recovery_config
+from ..config import validate, validate_pruning, recovery_config, canonical_pruning
 from ..data import build_data, loader
 from ..evaluation import evaluate, sphere_probe, output_change
 from ..models import build_model
 from ..optim import Stepper
-from ..pruning import make_masks, apply_masks, validate_masks
+from ..pruning import make_masks, apply_masks, validate_masks, sparsity_summary
+from ..provenance import (ARTIFACT_SCHEMA, seal_artifact, verify_artifact, artifact_reference)
 from ..repro import (atomic_json, atomic_save, environment, file_hash, project_path,
                      restore_rng, rng_state, seed_all, seed_for, source_hashes, tensor_hash)
+from ..repro import execution_record
 
 
 def read_checkpoint(path, root):
     path = project_path(root, str(path))
     # Only load locally generated/trusted checkpoints; torch pickle is not a safe interchange format.
     state = torch.load(path, map_location="cpu", weights_only=False)
-    if state.get("schema") != 1:
-        raise ValueError("Unsupported checkpoint schema")
+    verify_artifact(state, root)
     return state, path
 
 
@@ -40,8 +41,8 @@ def _check_resume(saved, c, root, manifest, stage, parent):
         raise ValueError("Resume dataset/split mismatch")
     if saved["source_hashes"] != source_hashes(root):
         raise ValueError("Source/config/scripts changed since checkpoint; exact resume refused")
-    env = environment()
-    for key in ("python", "platform", "packages", "cuda_runtime", "gpu", "cuda_capabilities", "deterministic"):
+    env = environment(c)
+    for key in ("python", "platform", "packages", "cuda_runtime", "gpu", "cuda_capabilities", "deterministic", "execution"):
         if saved["environment"][key] != env[key]:
             raise ValueError(f"Exact resume environment mismatch: {key}")
     if saved["parent"] != parent:
@@ -71,6 +72,7 @@ def train(c, root: Path, *, formal_allowed=False, resume=None, recover_from=None
         raise ValueError("Resume requires the original run directory")
     torch.set_num_threads(c["threads"])
     seed_all(seed_for(c["seed"], "initialization"), c["deterministic"])
+    execution_record(c)  # fail closed on unapproved/unavailable hardware before data IO
     datasets, manifest = build_data(c, root)
     device = torch.device(c["device"])
     if device.type == "cuda" and not torch.cuda.is_available():
@@ -79,6 +81,7 @@ def train(c, root: Path, *, formal_allowed=False, resume=None, recover_from=None
     init_hash = tensor_hash(model.state_dict())
     masks = None
     if stage == "recovery":
+        verify_artifact(parent_payload, root, manifest, check_environment=True)
         model.load_state_dict(parent_payload["model"])
         masks = parent_payload["masks"]
         if parent_payload["manifest"] != manifest:
@@ -94,7 +97,7 @@ def train(c, root: Path, *, formal_allowed=False, resume=None, recover_from=None
     best = float("-inf")
     order_hash = hashlib.sha256(b"vpr-order-v1").hexdigest()
     elapsed_before = 0.
-    provenance, env = source_hashes(root), environment()
+    provenance, env = source_hashes(root), environment(c, next(model.parameters()).device)
     if resume:
         state, resume_path = read_checkpoint(resume, root)
         if resume_path.parent != output:
@@ -118,7 +121,7 @@ def train(c, root: Path, *, formal_allowed=False, resume=None, recover_from=None
         torch.cuda.reset_peak_memory_stats(device)
 
     def save(name="last.pt"):
-        payload = {"schema": 1, "stage": stage, "config": c, "model": model.state_dict(),
+        payload = {"schema": ARTIFACT_SCHEMA, "stage": stage, "config": c, "model": model.state_dict(),
                    "stepper": stepper.state_dict(), "scheduler": scheduler.state_dict(),
                    "epoch": epoch, "next_batch": next_batch, "epoch_rows": epoch_rows,
                    "step_rows": step_rows, "accumulator": accumulator,
@@ -126,7 +129,7 @@ def train(c, root: Path, *, formal_allowed=False, resume=None, recover_from=None
                    "initialization_hash": init_hash, "manifest": manifest, "parent": parent,
                    "masks": masks, "rng": rng_state(), "source_hashes": provenance, "environment": env,
                    "elapsed_seconds": elapsed_before + time.perf_counter()-started}
-        atomic_save(output / name, payload)
+        atomic_save(output / name, seal_artifact(payload))
         atomic_json(output / "epochs.json", epoch_rows)
         atomic_json(output / "steps.json", step_rows)
 
@@ -173,9 +176,12 @@ def train(c, root: Path, *, formal_allowed=False, resume=None, recover_from=None
             epoch += 1
             next_batch = 0
             accumulator = {"loss": 0., "adversarial_loss": 0., "correct": 0, "count": 0}
-            save()
             if is_best:
                 save("best_validation.pt")
+            # Publish last only after its referenced best snapshot is durable.
+            # A crash immediately after last must leave a resumable run even
+            # when subsequent validation never improves on this first best.
+            save()
         save("final.pt")
         result = {"complete": True, "stage": stage, "purpose": c["purpose"], "method": c["optimizer"]["method"],
                   "seed": c["seed"], "steps": stepper.steps, "epochs": epoch,
@@ -185,6 +191,8 @@ def train(c, root: Path, *, formal_allowed=False, resume=None, recover_from=None
                   "elapsed_seconds": elapsed_before+time.perf_counter()-started,
                   "peak_cuda_bytes": torch.cuda.max_memory_allocated(device) if device.type == "cuda" else None,
                   "output": str(output), "parent": parent}
+        result["checkpoint_sha256"] = {name: file_hash(output / f"{name}.pt")
+                                       for name in ("final", "best_validation")}
         atomic_json(output / "summary.json", result)
         return result
     except BaseException as exc:
@@ -194,20 +202,24 @@ def train(c, root: Path, *, formal_allowed=False, resume=None, recover_from=None
 
 
 def evaluate_checkpoint(checkpoint, root, split="validation", probe=True):
+    if split not in {"validation", "test"}:
+        raise ValueError("Evaluation split must be validation/test")
     state, path = read_checkpoint(checkpoint, root)
     c = state["config"]
     torch.set_num_threads(c["threads"])
     seed_all(seed_for(c["seed"], "evaluation"), c["deterministic"])
     datasets, manifest = build_data(c, root)
-    if state["manifest"] != manifest:
-        raise ValueError("Evaluation data mismatch")
+    verify_artifact(state, root, manifest, check_environment=True)
     device = torch.device(c["device"])
     model = build_model(c["model"]).to(device)
     model.load_state_dict(state["model"])
     masks = state.get("masks")
+    if masks is not None:
+        validate_masks(model, masks, c["pruning"])
     result = {"split": split, "checkpoint_sha256": file_hash(path), "purpose": c["purpose"],
               "metrics": evaluate(model, _eval_loader(datasets, split, c), device),
               "probe_protocol": "common first-order L2 sphere; masked subspace after hard pruning"}
+    result["provenance"] = artifact_reference(state, path)
     if probe:
         values = []
         for index, (x, y, _) in enumerate(_eval_loader(datasets, split, c)):
@@ -227,13 +239,15 @@ def prune(checkpoint, root, protocol=None):
         raise ValueError("Pruning requires a dense training checkpoint")
     c = copy.deepcopy(state["config"])
     if protocol is not None:
+        if c["purpose"] == "formal" and canonical_pruning(protocol) != canonical_pruning(c["pruning"]):
+            raise ValueError("Formal pruning override differs from the approved full-workflow protocol")
         c["pruning"] = protocol
     validate_pruning(c["pruning"])
+    c["pruning"] = canonical_pruning(c["pruning"])
     torch.set_num_threads(c["threads"])
     seed_all(seed_for(c["seed"], "evaluation"), c["deterministic"])
     datasets, manifest = build_data(c, root)
-    if manifest != state["manifest"]:
-        raise ValueError("Pruning data mismatch")
+    verify_artifact(state, root, manifest, check_environment=True)
     device = torch.device(c["device"])
     original = build_model(c["model"]).to(device)
     original.load_state_dict(state["model"])
@@ -255,12 +269,18 @@ def prune(checkpoint, root, protocol=None):
               "output_change": change, "layers": layer_report, "bn_calibration": "none",
               "global_parameter_sparsity": sum(r["masked"] for r in layer_report)/sum(p.numel() for p in pruned.parameters()),
               "parent_sha256": file_hash(path), "purpose": c["purpose"]}
-    payload = {"schema": 1, "stage": "pruned", "config": c, "model": pruned.state_dict(),
+    report["sparsity"] = sparsity_summary(pruned, layer_report)
+    report["selection"] = {"scope": p["scope"], "included_weight_names": sorted(masks),
+                           "layout": "per_output_channel_flatten_in_kh_kw_or_in_features",
+                           "tie_rule": "stable_magnitude_descending_lower_index_first",
+                           "bn_calibration": "none"}
+    report["provenance"] = artifact_reference(state, path)
+    payload = {"schema": ARTIFACT_SCHEMA, "stage": "pruned", "config": c, "model": pruned.state_dict(),
                "masks": {name: mask.cpu() for name, mask in masks.items()}, "manifest": manifest,
                "initialization_hash": state["initialization_hash"], "report": report,
-               "source_hashes": source_hashes(root), "environment": environment(),
+               "source_hashes": source_hashes(root), "environment": environment(c, next(pruned.parameters()).device),
                "parent": {"path": str(path.relative_to(root)), "sha256": file_hash(path)}}
     output.mkdir(parents=True)
-    atomic_save(output / "pruned.pt", payload)
+    atomic_save(output / "pruned.pt", seal_artifact(payload))
     atomic_json(output / "pruning.json", report)
     return {"checkpoint": str((output / "pruned.pt").relative_to(root)), "report": report}

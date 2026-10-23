@@ -1,0 +1,50 @@
+{
+  "public_redacted_evidence": true,
+  "evidence": {
+    "execution": {
+      "requested_device": "cuda:0",
+      "kind": "cuda",
+      "threads": 4,
+      "interop_threads": 64,
+      "cuda_visible_devices": null,
+      "gpu_name": "NVIDIA GeForce RTX 5090",
+      "gpu_uuid": "UUID-REDACTED-9da3562d4ee9",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "resolved_device": "cuda:0"
+    },
+    "environment": {
+      "python": "3.12.3",
+      "platform": "Linux-5.15.0-78-generic-x86_64-with-glibc2.35",
+      "packages": {
+        "torch": "2.8.0+cu128",
+        "torchvision": "0.23.0+cu128",
+        "numpy": "2.2.6",
+        "matplotlib": "3.10.3",
+        "Pillow": "11.2.1"
+      },
+      "cuda_runtime": "12.8",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "cuda_capabilities": [
+        "sm_70",
+        "sm_75",
+        "sm_80",
+        "sm_86",
+        "sm_90",
+        "sm_100",
+        "sm_120"
+      ],
+      "deterministic": true
+    },
+    "nvidia_smi": "index, name, uuid, driver_version, memory.total [MiB], memory.used [MiB], utilization.gpu [%]\n0, NVIDIA GeForce RTX 5090, GPU-REDACTED-9da3562d4ee9, 595.71.05, 32607 MiB, 4 MiB, 0 %\n",
+    "python": "Python 3.12.3",
+    "pip_freeze": "absl-py==2.3.1\nanaconda-anon-usage @ file:///croot/anaconda-anon-usage_1710965072196/work\nanyio==4.10.0\narchspec @ file:///croot/archspec_1709217642129/work\nargon2-cffi==25.1.0\nargon2-cffi-bindings==25.1.0\narrow==1.3.0\nasttokens==3.0.0\nasync-lru==2.0.5\nattrs==25.3.0\nbabel==2.17.0\nbeautifulsoup4==4.13.4\nbleach==6.2.0\nboltons @ file:///work/perseverance-python-buildout/croot/boltons_1698851177130/work\nBrotli @ file:///croot/brotli-split_1714483155106/work\nbuild==1.2.2.post1\ncertifi @ file:///croot/certifi_1707229174982/work/certifi\ncffi @ file:///croot/cffi_1714483155441/work\ncharset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work\ncomm==0.2.3\nconda @ file:///croot/conda_1714403036266/work\nconda-content-trust @ file:///croot/conda-content-trust_1714483159009/work\nconda-libmamba-solver @ file:///croot/conda-libmamba-solver_1706733287605/work/src\nconda-package-handling @ file:///croot/conda-package-handling_1714483155348/work\nconda_package_streaming @ file:///work/perseverance-python-buildout/croot/conda-package-streaming_1698847176583/work\ncontourpy==1.3.3\ncryptography @ file:///croot/cryptography_1714660666131/work\ncycler==0.12.1\ndebugpy==1.8.16\ndecorator==5.2.1\ndefusedxml==0.7.1\ndistro @ file:///croot/distro_1714488253808/work\nexecuting==2.2.0\nfastjsonschema==2.21.1\nfilelock==3.18.0\nfonttools==4.59.0\nfqdn==1.5.1\nfsspec==2025.7.0\ngrpcio==1.74.0\nh11==0.16.0\nhttpcore==1.0.9\nhttpx==0.28.1\nidna @ file:///croot/idna_1714398848350/work\niniconfig==2.3.1\nipykernel==6.30.1\nipython==9.4.0\nipython_pygments_lexers==1.1.1\nipywidgets==8.1.7\nisoduration==20.11.0\njedi==0.19.2\nJinja2==3.1.6\njson5==0.12.0\njsonpatch @ file:///croot/jsonpatch_1714483231291/work\njsonpointer==2.1\njsonschema==4.25.0\njsonschema-specifications==2025.4.1\njupyter-events==0.12.0\njupyter-lsp==2.2.6\njupyter_client==8.6.3\njupyter_core==5.8.1\njupyter_server==2.16.0\njupyter_server_terminals==0.5.3\njupyterlab==4.4.5\njupyterlab-language-pack-zh-CN==4.4.post0\njupyterlab_pygments==0.3.0\njupyterlab_server==2.27.3\njupyterlab_widgets==3.0.15\nkiwisolver==1.4.8\nlark==1.2.2\nlibmambapy @ file:///croot/mamba-split_1714483352891/work/libmambapy\nMarkdown==3.8.2\nMarkupSafe==3.0.2\nmatplotlib==3.10.3\nmatplotlib-inline==0.1.7\nmenuinst @ file:///croot/menuinst_1714510563922/work\nmistune==3.1.3\nmpmath==1.3.0\nnbclient==0.10.2\nnbconvert==7.16.6\nnbformat==5.10.4\nnest-asyncio==1.6.0\nnetworkx==3.5\nnotebook_shim==0.2.4\nnumpy==2.2.6\nnvidia-cublas-cu12==12.8.4.1\nnvidia-cuda-cupti-cu12==12.8.90\nnvidia-cuda-nvrtc-cu12==12.8.93\nnvidia-cuda-runtime-cu12==12.8.90\nnvidia-cudnn-cu12==9.10.2.21\nnvidia-cufft-cu12==11.3.3.83\nnvidia-cufile-cu12==1.13.1.3\nnvidia-curand-cu12==10.3.9.90\nnvidia-cusolver-cu12==11.7.3.90\nnvidia-cusparse-cu12==12.5.8.93\nnvidia-cusparselt-cu12==0.7.1\nnvidia-nccl-cu12==2.27.3\nnvidia-nvjitlink-cu12==12.8.93\nnvidia-nvtx-cu12==12.8.90\noverrides==7.7.0\npackaging @ file:///croot/packaging_1710807400464/work\npandocfilters==1.5.1\nparso==0.8.4\npexpect==4.9.0\npillow==11.2.1\nplatformdirs @ file:///work/perseverance-python-buildout/croot/platformdirs_1701732573265/work\npluggy==1.7.0\nprometheus_client==0.22.1\nprompt_toolkit==3.0.51\nprotobuf==6.31.1\npsutil==7.0.0\nptyprocess==0.7.0\npure_eval==0.2.3\npycosat @ file:///croot/pycosat_1714510623388/work\npycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work\nPygments==2.19.2\npyparsing==3.2.3\npyproject_hooks==1.3.3\nPySocks @ file:///work/perseverance-python-buildout/croot/pysocks_1698845478203/work\npytest==8.4.1\npython-dateutil==2.9.0.post0\npython-json-logger==3.3.0\nPyYAML==6.0.2\npyzmq==27.0.1\nreferencing==0.36.2\nrequests @ file:///croot/requests_1707355572290/work\nrfc3339-validator==0.1.4\nrfc3986-validator==0.1.1\nrfc3987-syntax==1.1.0\nrpds-py==0.26.0\nruamel.yaml @ file:///work/perseverance-python-buildout/croot/ruamel.yaml_1698863605521/work\nSend2Trash==1.8.3\nsetuptools==80.9.0\nsix==1.17.0\nsniffio==1.3.1\nsoupsieve==2.7\nstack-data==0.6.3\nsupervisor==4.2.5\nsympy==1.14.0\ntensorboard==2.20.0\ntensorboard-data-server==0.7.2\nterminado==0.18.1\ntinycss2==1.4.0\ntorch @ https://download.pytorch.org/whl/cu128/torch-2.8.0%2Bcu128-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=4354fc05bb79b208d6995a04ca1ceef6a9547b1c4334435574353d381c55087c\ntorchvision @ https://download.pytorch.org/whl/cu128/torchvision-0.23.0%2Bcu128-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=9cb3c13997afcb44057ca10d943c6c4cba3068afde0f370965abce9c89fcffa9\ntornado==6.5.1\ntqdm @ file:///croot/tqdm_1714567712644/work\ntraitlets==5.14.3\ntriton==3.4.0\ntruststore @ file:///work/perseverance-python-buildout/croot/truststore_1701735771625/work\ntypes-python-dateutil==2.9.0.20250708\ntyping_extensions==4.14.1\nuri-template==1.3.0\nurllib3 @ file:///croot/urllib3_1707770551213/work\n-e git+https://github.com/earthgrass/N-M-SAM.git@bf4f123e01a9b0819376a4def7d2e82e5c56975d#egg=vpr_sam_research&subdirectory=../../../acceptance_fixed/vpr_sam_research\nwcwidth==0.2.13\nwebcolors==24.11.1\nwebencodings==0.5.1\nwebsocket-client==1.8.0\nWerkzeug==3.1.3\nwheel==0.45.1\nwidgetsnbextension==4.0.14\nzstandard @ file:///croot/zstandard_1714677652653/work\n",
+    "torch_path": "/root/autodl-tmp/vpr_acceptance_20261023/acceptance_fixed/vpr_sam_research/.venv/lib/python3.12/site-packages/torch/__init__.py",
+    "torch": "2.8.0+cu128",
+    "torch_cuda": "12.8",
+    "deterministic": true,
+    "kernels": "PASS"
+  }
+}

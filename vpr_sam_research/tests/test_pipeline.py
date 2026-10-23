@@ -54,6 +54,7 @@ def test_end_to_end_comparison(config,isolated_root):
         evaluated=evaluate_checkpoint(result["checkpoint"],isolated_root,"test")
         assert evaluated["metrics"]["count"]==8
         evaluate_checkpoint(f"runs/{method}/final.pt",isolated_root,"test")
+        evaluate_checkpoint(str((isolated_root/result["checkpoint"]).parent/"recovery/final.pt"),isolated_root,"test")
         paths.append(f"runs/{method}")
     report=summarize(isolated_root,paths,"runs/analysis")
     assert all(item["paired_identity_match"] for item in report["fairness"])
@@ -62,7 +63,7 @@ def test_end_to_end_comparison(config,isolated_root):
     test_report=summarize(isolated_root,paths,"runs/test_analysis",split="test")
     assert test_report["split"]=="test"
     figures=plot(isolated_root,"runs/analysis/summary.json","runs/analysis/figures")
-    assert figures["figures"]==5
+    assert figures["figures"]==7
 
 
 def test_guards(config,isolated_root):
