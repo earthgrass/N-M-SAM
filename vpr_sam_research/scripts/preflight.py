@@ -26,6 +26,7 @@ def main():
     result = environment()
     if args.require_5090:
         seed_all(0)
+        result = environment()
         result["execution"] = target_record(args.device, torch.get_num_threads())
         result["gpu"] = result["execution"]["gpu_name"]
         x = torch.ones(32, 32, device=args.device)

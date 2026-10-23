@@ -176,9 +176,12 @@ def train(c, root: Path, *, formal_allowed=False, resume=None, recover_from=None
             epoch += 1
             next_batch = 0
             accumulator = {"loss": 0., "adversarial_loss": 0., "correct": 0, "count": 0}
-            save()
             if is_best:
                 save("best_validation.pt")
+            # Publish last only after its referenced best snapshot is durable.
+            # A crash immediately after last must leave a resumable run even
+            # when subsequent validation never improves on this first best.
+            save()
         save("final.pt")
         result = {"complete": True, "stage": stage, "purpose": c["purpose"], "method": c["optimizer"]["method"],
                   "seed": c["seed"], "steps": stepper.steps, "epochs": epoch,
