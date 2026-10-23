@@ -3,10 +3,10 @@ from __future__ import annotations
 import hashlib
 import json
 
-from .repro import environment, file_hash, source_hashes, tensor_hash
+from .repro import environment, file_hash, source_hashes, tensor_hash, validate_execution_record
 
 ARTIFACT_SCHEMA = 2
-ENVIRONMENT_KEYS = ("python", "platform", "packages", "cuda_runtime", "gpu", "cuda_capabilities", "deterministic")
+ENVIRONMENT_KEYS = ("python", "platform", "packages", "cuda_runtime", "gpu", "cuda_capabilities", "deterministic", "execution")
 
 
 def json_hash(value):
@@ -34,6 +34,7 @@ def verify_artifact(state, root, manifest=None, *, check_environment=False):
         raise ValueError("Artifact source/config/scripts identity mismatch; postprocessing refused")
     if state.get("config_sha256") != json_hash(state["config"]):
         raise ValueError("Artifact config identity mismatch")
+    validate_execution_record(state["config"], state.get("environment", {}).get("execution"))
     if state.get("model_identity") != model_identity(state):
         raise ValueError("Artifact model identity mismatch")
     masks_hash = tensor_hash(state["masks"]) if state.get("masks") is not None else None
@@ -42,7 +43,7 @@ def verify_artifact(state, root, manifest=None, *, check_environment=False):
     if manifest is not None and state["manifest"] != manifest:
         raise ValueError("Artifact dataset/split identity mismatch")
     if check_environment:
-        current = environment()
+        current = environment(state["config"])
         for key in ENVIRONMENT_KEYS:
             if state["environment"][key] != current[key]:
                 raise ValueError(f"Artifact environment mismatch: {key}")

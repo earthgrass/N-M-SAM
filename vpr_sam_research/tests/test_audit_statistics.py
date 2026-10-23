@@ -81,7 +81,7 @@ def test_cross_method_geometric_parameters_are_allowed(config, isolated_root):
 
 
 def test_full_workflow_formal_gate(config):
-    c=copy.deepcopy(config);c.update(purpose="formal",model="resnet18")
+    c=copy.deepcopy(config);c.update(purpose="formal",model="resnet18",device="cuda:0")
     c["data"]["kind"]="cifar10"
     validate(c,formal_allowed=True)  # config validation only; does not load data/train
     for section in ("pruning", "recovery"):

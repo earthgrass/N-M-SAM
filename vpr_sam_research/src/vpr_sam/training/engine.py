@@ -18,6 +18,7 @@ from ..pruning import make_masks, apply_masks, validate_masks, sparsity_summary
 from ..provenance import (ARTIFACT_SCHEMA, seal_artifact, verify_artifact, artifact_reference)
 from ..repro import (atomic_json, atomic_save, environment, file_hash, project_path,
                      restore_rng, rng_state, seed_all, seed_for, source_hashes, tensor_hash)
+from ..repro import execution_record
 
 
 def read_checkpoint(path, root):
@@ -40,8 +41,8 @@ def _check_resume(saved, c, root, manifest, stage, parent):
         raise ValueError("Resume dataset/split mismatch")
     if saved["source_hashes"] != source_hashes(root):
         raise ValueError("Source/config/scripts changed since checkpoint; exact resume refused")
-    env = environment()
-    for key in ("python", "platform", "packages", "cuda_runtime", "gpu", "cuda_capabilities", "deterministic"):
+    env = environment(c)
+    for key in ("python", "platform", "packages", "cuda_runtime", "gpu", "cuda_capabilities", "deterministic", "execution"):
         if saved["environment"][key] != env[key]:
             raise ValueError(f"Exact resume environment mismatch: {key}")
     if saved["parent"] != parent:
@@ -71,6 +72,7 @@ def train(c, root: Path, *, formal_allowed=False, resume=None, recover_from=None
         raise ValueError("Resume requires the original run directory")
     torch.set_num_threads(c["threads"])
     seed_all(seed_for(c["seed"], "initialization"), c["deterministic"])
+    execution_record(c)  # fail closed on unapproved/unavailable hardware before data IO
     datasets, manifest = build_data(c, root)
     device = torch.device(c["device"])
     if device.type == "cuda" and not torch.cuda.is_available():
@@ -95,7 +97,7 @@ def train(c, root: Path, *, formal_allowed=False, resume=None, recover_from=None
     best = float("-inf")
     order_hash = hashlib.sha256(b"vpr-order-v1").hexdigest()
     elapsed_before = 0.
-    provenance, env = source_hashes(root), environment()
+    provenance, env = source_hashes(root), environment(c, next(model.parameters()).device)
     if resume:
         state, resume_path = read_checkpoint(resume, root)
         if resume_path.parent != output:
@@ -273,7 +275,7 @@ def prune(checkpoint, root, protocol=None):
     payload = {"schema": ARTIFACT_SCHEMA, "stage": "pruned", "config": c, "model": pruned.state_dict(),
                "masks": {name: mask.cpu() for name, mask in masks.items()}, "manifest": manifest,
                "initialization_hash": state["initialization_hash"], "report": report,
-               "source_hashes": source_hashes(root), "environment": environment(),
+               "source_hashes": source_hashes(root), "environment": environment(c, next(pruned.parameters()).device),
                "parent": {"path": str(path.relative_to(root)), "sha256": file_hash(path)}}
     output.mkdir(parents=True)
     atomic_save(output / "pruned.pt", seal_artifact(payload))

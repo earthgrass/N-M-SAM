@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import json
 import math
+import re
 from pathlib import Path
 
 METHODS = {"sgd", "sam", "vpr", "static", "positive", "fixed_l2"}
@@ -51,6 +52,10 @@ def validate(c, *, formal_allowed=False):
         raise ValueError("Formal runs require ResNet18 and real CIFAR-10")
     if formal and not c["deterministic"]:
         raise ValueError("Formal protocol requires deterministic execution")
+    if not isinstance(c["device"], str) or not re.fullmatch(r"cpu|cuda(?::[0-9]+)?", c["device"]):
+        raise ValueError("Device must be cpu, cuda (smoke only), or explicit cuda:N")
+    if formal and not re.fullmatch(r"cuda:[0-9]+", c["device"]):
+        raise ValueError("Formal RTX 5090 experiments require the approved explicit CUDA device cuda:N")
     for key in ("validation_size", "augment", "cutout", "workers", "root", "download"):
         required(c["data"][key], f"data.{key}")
     if c["training"]["scheduler"] != "cosine" or c["training"]["epochs"] <= 0:
@@ -145,7 +150,7 @@ def recovery_config(c):
 def comparison_protocol(c):
     """Exclude only research variables and paths, never fairness variables."""
     result = copy.deepcopy(c)
-    for key in ("output", "device", "threads"):
+    for key in ("output",):
         result.pop(key)
     result["data"].pop("root")
     result["optimizer"].pop("method")

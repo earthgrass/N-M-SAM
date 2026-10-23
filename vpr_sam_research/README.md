@@ -2,6 +2,7 @@
 
 V1 基线为 `758d628`。本轮针对性修复见 [审计整改报告](docs/AUDIT_FIXES.md)，
 包含剪枝/恢复配对统计、两层公平性校验和 schema 2 产物来源合同。冻结的优化器公式未修改。
+PR 1最后一轮设备一致性与绘图checkpoint修复见 [FINAL_AUDIT.md](docs/FINAL_AUDIT.md)。
 
 本目录可单独复制、安装和部署。运行时仅导入 `vpr_sam` 和声明的第三方依赖，
 不导入父目录历史 N+SAM 代码、不读取历史配置或 checkpoint。
@@ -92,7 +93,7 @@ log-radius RMS、每参数张量 log-volume、加法舍入误差、每步耗时�
 ## 正式协议完成后
 
 1. 复制 `configs/formal/vpr.json` 为 `configs/common_approved.json`。
-2. 共同填写所有 null，并确认 seed 列表、N:M、层范围、预算、学习率、精度、gamma、warm-up、恢复及探针。
+2. 共同填写所有 null，并确认 seed 列表、N:M、层范围、预算、学习率、精度、gamma、warm-up、恢复及探针；device必须改为批准的显式cuda:N。
 3. 用同一配置展开全部方法。`--seeds` 与 `--methods` 由批准后的协议填写；以下数字仅展示接口，不是正式选择。
 
 ```bash

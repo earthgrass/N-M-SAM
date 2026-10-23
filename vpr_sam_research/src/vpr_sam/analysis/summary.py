@@ -71,6 +71,10 @@ def summarize(root, run_paths, output, baseline="sam", split="validation", check
         if (method, seed) in seen:
             raise ValueError("Duplicate method/seed would create pseudoreplication")
         seen.add((method, seed))
+        if runs and c["device"] != runs[0]["protocol"]["device"]:
+            raise ValueError("Mixed CPU/CUDA or different approved CUDA devices cannot be compared")
+        if runs and c["threads"] != runs[0]["protocol"]["threads"]:
+            raise ValueError("Thread settings differ; comparisons require identical intra-op threads")
         within_method = method_protocol(c)
         if method in method_configs and method_configs[method] != within_method:
             raise ValueError(f"Within-method geometry/protocol mismatch for {method}; do not pool hyperparameter variants as seeds")
