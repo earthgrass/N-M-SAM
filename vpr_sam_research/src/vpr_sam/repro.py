@@ -92,6 +92,8 @@ def tensor_hash(state):
     h = hashlib.sha256()
     for name, tensor in sorted(state.items()):
         h.update(name.encode())
+        h.update(str(tensor.dtype).encode())
+        h.update(str(tuple(tensor.shape)).encode())
         h.update(tensor.detach().cpu().contiguous().numpy().tobytes())
     return h.hexdigest()
 

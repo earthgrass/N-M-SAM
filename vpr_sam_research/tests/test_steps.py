@@ -124,3 +124,62 @@ def test_nonfinite_second_gradient_before_outer_update(config):
     hook.remove()
     assert opt.steps==0 and not opt.base.state
     assert all(torch.equal(before[k],v) for k,v in model.state_dict().items())
+
+
+def test_nonunit_ellipsoid_full_step_matches_independent_reference(config):
+    """Covers non-unit A through g1 -> epsilon -> g2 -> SGD -> feedback."""
+    torch.manual_seed(53)
+    model=nn.Linear(3,2)
+    reference=copy.deepcopy(model)
+    opt=Stepper(model,config)
+    o=config["optimizer"]
+    reference_optimizer=torch.optim.SGD(reference.parameters(),lr=o["lr"],momentum=o["momentum"],
+                                         weight_decay=o["weight_decay"],nesterov=o["nesterov"])
+    s=torch.tensor([.2,-.1,.3,-.2,.1,-.3,.15,-.15],dtype=torch.float64)
+    offset=0
+    for state,p in zip(opt.geometry.logs,model.parameters()):
+        state.copy_(s[offset:offset+p.numel()].reshape_as(p));offset+=p.numel()
+        opt.base.state[p]["momentum_buffer"]=torch.full_like(p,.03)
+    for p in reference.parameters():reference_optimizer.state[p]["momentum_buffer"]=torch.full_like(p,.03)
+    x,y=torch.randn(5,3),torch.tensor([0,1,0,1,1])
+    center=[p.detach().clone() for p in reference.parameters()]
+    nn.functional.cross_entropy(reference(x),y).backward()
+    g1=torch.cat([p.grad.flatten().double() for p in reference.parameters()])
+    a=s.exp()
+    epsilon=(o["rho"]*a.square()*g1/(a*g1).norm()).float()
+    with torch.no_grad():
+        offset=0
+        for p in reference.parameters():
+            p.add_(epsilon[offset:offset+p.numel()].reshape_as(p));offset+=p.numel()
+    reference_optimizer.zero_grad(set_to_none=True)
+    nn.functional.cross_entropy(reference(x),y).backward()
+    with torch.no_grad():
+        for p,before in zip(reference.parameters(),center):p.copy_(before)
+    reference_optimizer.step()
+    info=opt.step(x,y)
+    for actual,expected in zip(model.parameters(),reference.parameters()):
+        assert torch.allclose(actual,expected,atol=1e-7,rtol=1e-6)
+        assert torch.allclose(opt.base.state[actual]["momentum_buffer"],
+                              reference_optimizer.state[expected]["momentum_buffer"],atol=1e-7,rtol=1e-6)
+    p=epsilon.double().square()/epsilon.double().square().sum()
+    expected_s=s+config["geometry"]["gamma"]*(1-len(s)*p)
+    actual_s=torch.cat([v.flatten() for v in opt.geometry.logs])
+    assert torch.allclose(actual_s,expected_s,atol=1e-9,rtol=1e-7)
+    assert info["eps_norm"]==pytest.approx(float(epsilon.double().norm()),rel=1e-6)
+
+
+def test_scope_alias_and_sparsity_denominators(config):
+    from vpr_sam.pruning import sparsity_summary
+    model=build_model("resnet18")
+    old=dict(config["pruning"],scope="residual_and_head")
+    new=dict(config["pruning"],scope="exclude_first_and_pointwise")
+    a,report=make_masks(model,old)
+    b,_=make_masks(model,new)
+    assert set(a)==set(b) and "linear.weight" in b and "conv1.weight" not in b
+    assert not any("shortcut.0" in name for name in b)
+    assert all(torch.equal(a[name],b[name]) for name in a)
+    totals=sparsity_summary(model,report)
+    assert totals["target_complete_block_sparsity"]==pytest.approx(2/3)
+    assert totals["target_layer_sparsity"] < totals["target_complete_block_sparsity"]  # classifier tail stays dense
+    assert totals["global_parameter_sparsity"] < totals["target_layer_sparsity"]
+    assert totals["mask_deleted_parameters"]==sum(int((~mask).sum()) for mask in a.values())

@@ -28,11 +28,16 @@ python -m pytest -q --basetemp=artifacts/pytest-temp --junitxml=artifacts/pytest
 python scripts/smoke_suite.py --run-id server_cpu_acceptance --include-resnet
 # 只做几何计算的 CUDA 性能与精度评估，仍不是正式训练
 python scripts/benchmark_geometry.py --device cuda --dimensions 100000 1000000 --steps 20 --output artifacts/geometry_cuda.json
+# 必须另行获批并在目标机器执行；真实 ResNet18 step time/显存及训练、恢复的严格断点对照
+python scripts/device_acceptance.py --device cuda --model resnet18 --run-id approved_cuda_acceptance
 ```
 
 CPU smoke 不能代替 GPU 训练路径。经批准再复制 smoke 配置到新文件，将 device 改为 cuda、
 保持 purpose=smoke 和极小预算，验证两次反向、显存、确定性及 GPU 断点恢复。
 GPU smoke 配置和结果须保存在本项目内；不要拿 CPU 配置加载 GPU checkpoint。
+device_acceptance.py 使用显式合成数据、两个极短的SAM/VPR流程，分别比较连续和断点恢复状态，
+并比较固定Mask恢复训练的连续/断点状态。输出每步时间、峰值CUDA显存、d_p_max与最大几何更新。
+CPU脚本路径验收使用 --device cpu --model tiny，不代表 CUDA 或真实 CIFAR-10 通过。
 
 ## 正式实验门槛
 

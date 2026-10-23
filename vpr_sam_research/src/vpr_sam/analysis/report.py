@@ -1,115 +1,16 @@
 from __future__ import annotations
-import csv
 import json
-import math
-from pathlib import Path
 
-import numpy as np
-
-from ..config import comparison_protocol
-from ..repro import atomic_json, project_path, seed_for, file_hash
-
-
-def summarize(root, run_paths, output, baseline="sam", split="validation", checkpoint="final"):
-    if split not in {"validation", "test"} or checkpoint not in {"final", "best_validation"}:
-        raise ValueError("Explicit common split/checkpoint selection required")
-    runs, groups, pairs, fairness, seen = [], {}, {}, [], set()
-    for relative in run_paths:
-        path = project_path(root, relative)
-        summary = json.loads((path / "summary.json").read_text(encoding="utf-8"))
-        c = json.loads((path / "config.json").read_text(encoding="utf-8"))
-        if not summary["complete"] or summary["stage"] != "train":
-            raise ValueError("Summarize completed dense-training runs only")
-        method, seed = c["optimizer"]["method"], c["seed"]
-        if (method, seed) in seen:
-            raise ValueError("Duplicate method/seed would create pseudoreplication")
-        seen.add((method, seed))
-        protocol = comparison_protocol(c)
-        protocol.pop("seed")
-        if runs and protocol != runs[0]["protocol"]:
-            raise ValueError("Non-research protocol mismatch; results cannot be pooled")
-        selected = path / f"{checkpoint}.pt"
-        if not selected.is_file():
-            raise ValueError(f"Missing selected checkpoint: {selected}")
-        selected_hash = file_hash(selected)
-        if split == "test":
-            evidence = path / f"evaluation_{checkpoint}_test.json"
-            if not evidence.is_file():
-                raise ValueError("Explicit frozen-test evaluation required before test aggregation")
-            evaluated = json.loads(evidence.read_text(encoding="utf-8"))
-            if evaluated["checkpoint_sha256"] != selected_hash:
-                raise ValueError("Test evaluation/checkpoint identity mismatch")
-            accuracy = evaluated["metrics"]["accuracy"]
-        elif checkpoint == "final":
-            accuracy = summary["final_validation"]["accuracy"]
-        else:
-            accuracy = summary["best_validation_accuracy"]
-        entry = {"path": str(path.relative_to(root)), "method": method, "seed": seed,
-                 "protocol": protocol, "summary": summary,
-                 "accuracy": accuracy, "split": split, "checkpoint": checkpoint,
-                 "checkpoint_sha256": selected_hash,
-                 "validation_accuracy": summary["final_validation"]["accuracy"]}
-        prune_reports = []
-        for report_path in sorted((path / "pruning").glob("*/pruning.json")):
-            report = json.loads(report_path.read_text(encoding="utf-8"))
-            if report["parent_sha256"] != selected_hash:
-                continue  # never mix pruning from final and best-validation sources
-            item = {"protocol": report["protocol"], "hard_loss_increase": report["hard_loss_increase"],
-                    "hard_accuracy": report["hard_validation"]["accuracy"],
-                    "source_checkpoint": report_path.parent.name}
-            recovery = report_path.parent / "recovery" / "summary.json"
-            if recovery.exists():
-                result = json.loads(recovery.read_text(encoding="utf-8"))
-                item["recovered_accuracy"] = result["final_validation"]["accuracy"]
-            prune_reports.append(item)
-        entry["pruning"] = prune_reports
-        runs.append(entry)
-        groups.setdefault(method, []).append(entry["accuracy"])
-        pairs.setdefault(seed, {})[method] = entry
-    if not runs:
-        raise ValueError("No runs")
-    for seed, methods in pairs.items():
-        identities = {(e["summary"]["initialization_hash"], e["summary"]["order_hash"],
-                       e["summary"]["dataset_fingerprint"]) for e in methods.values()}
-        if len(identities) != 1:
-            raise ValueError(f"Initialization/order/data mismatch at seed {seed}")
-        fairness.append({"seed": seed, "methods": sorted(methods), "paired_identity_match": True})
-    statistics = {method: {"n": len(values), "mean": float(np.mean(values)),
-                           "sample_std": float(np.std(values, ddof=1)) if len(values)>1 else None}
-                  for method, values in groups.items()}
-    paired = {}
-    for method in groups:
-        if method == baseline:
-            continue
-        seeds = sorted(s for s, methods in pairs.items() if baseline in methods and method in methods)
-        deltas = np.array([pairs[s][method]["accuracy"]-pairs[s][baseline]["accuracy"] for s in seeds])
-        interval = None
-        if len(deltas) >= 2:
-            rng = np.random.default_rng(seed_for(0, "paired-bootstrap", method, baseline))
-            means = deltas[rng.integers(0, len(deltas), size=(10000, len(deltas)))].mean(1)
-            interval = np.quantile(means, [.025, .975]).tolist()
-        paired[method] = {"baseline": baseline, "seeds": seeds, "n": len(seeds),
-                          "mean_difference": float(deltas.mean()) if len(deltas) else None,
-                          "paired_bootstrap_95_percentile_interval": interval,
-                          "unpaired_seeds": sorted(set(pairs)-set(seeds))}
-    out = project_path(root, output)
-    out.mkdir(parents=True, exist_ok=True)
-    result = {"runs": runs, "statistics": statistics, "paired": paired, "fairness": fairness,
-              "split": split, "checkpoint": checkpoint,
-              "note": "Synthetic runs are engineering evidence only. Small-n bootstrap is exploratory. Training plots use validation even when final test scores are aggregated."}
-    atomic_json(out / "summary.json", result)
-    with (out / "runs.csv").open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["path", "method", "seed", "split", "checkpoint", "accuracy"])
-        writer.writeheader()
-        writer.writerows({key: r[key] for key in writer.fieldnames} for r in runs)
-    return result
-
+from ..repro import project_path, source_hashes
+from .summary import summarize
 
 def plot(root, summary_path, output):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     result = json.loads(project_path(root, summary_path).read_text(encoding="utf-8"))
+    if result.get("source_hashes") != source_hashes(root):
+        raise ValueError("Summary source identity mismatch; regenerate the audited summary")
     out = project_path(root, output)
     out.mkdir(parents=True, exist_ok=True)
     plt.rcParams.update({"font.size": 10, "pdf.fonttype": 42, "ps.fonttype": 42})
@@ -138,9 +39,10 @@ def plot(root, summary_path, output):
     plt.close(fig)
     # Geometry histograms and per-layer migration from method's own final state.
     import torch
+    from ..training.engine import read_checkpoint
     fig, ax = plt.subplots(figsize=(7, 4), constrained_layout=True)
     for run in result["runs"]:
-        checkpoint = torch.load(project_path(root, run["path"]) / "final.pt", map_location="cpu", weights_only=False)
+        checkpoint, _ = read_checkpoint(project_path(root, run["path"]) / "final.pt", root)
         logs = checkpoint["stepper"]["geometry"]["logs"]
         if not logs:
             continue  # sphere baselines have no stored anisotropic state
@@ -191,4 +93,43 @@ def plot(root, summary_path, output):
     fig.savefig(out / "migration_recovery.png", dpi=180)
     fig.savefig(out / "migration_recovery.pdf")
     plt.close(fig)
-    return {"output": str(out), "figures": 5}
+    figure_count = 5
+    post = result.get("postprocessing", {})
+    if post.get("status") == "available":
+        stages = [("Hard-pruned accuracy", post["hard"]["accuracy"])]
+        if post["recovery"]["status"] == "available":
+            stages.append(("Recovered accuracy", post["recovery"]["accuracy"]))
+        fig, axes = plt.subplots(1, len(stages), figsize=(6 * len(stages), 4), squeeze=False, constrained_layout=True)
+        for ax, (title, stats) in zip(axes.flat, stages):
+            methods = list(stats["statistics"])
+            means = [stats["statistics"][m]["mean"] for m in methods]
+            errors = [stats["statistics"][m]["sample_std"] or 0. for m in methods]
+            ax.bar(methods, means, yerr=errors, capsize=4)
+            ax.set(title=title, ylabel=f"{result['split'].title()} accuracy: mean ± sample SD", ylim=(0, 1))
+            ax.set_xticks(range(len(methods)), [f"{m}\nn={stats['statistics'][m]['n']}" for m in methods])
+        fig.savefig(out / "paired_pruning_recovery_means.png", dpi=180)
+        fig.savefig(out / "paired_pruning_recovery_means.pdf")
+        plt.close(fig)
+        comparisons = [(title, method, paired) for title, stats in stages
+                       for method, paired in stats["paired"].items() if paired["n"]]
+        fig, ax = plt.subplots(figsize=(9, max(3.5, .55 * len(comparisons))), constrained_layout=True)
+        labels = []
+        for index, (title, method, paired) in enumerate(comparisons):
+            stage_label = "Hard" if title.startswith("Hard") else "Recovery"
+            labels.append(f"{stage_label}: {method} - {paired['baseline']} (n={paired['n']})")
+            ax.scatter(list(paired["differences_by_seed"].values()), [index] * paired["n"], alpha=.6)
+            ci = paired["paired_bootstrap_95_percentile_interval"]
+            if ci is not None:
+                ax.plot(ci, [index, index], color="black", linewidth=2)
+            ax.scatter(paired["mean_difference"], index, marker="D", color="black")
+        ax.set_yticks(range(len(labels)), labels)
+        ax.axvline(0, color="grey", linestyle="--")
+        title = "Paired differences; bars = bootstrap percentile 95% interval"
+        if result["runs"][0]["protocol"]["purpose"] == "smoke":
+            title = "Synthetic smoke: " + title
+        ax.set(xlabel="Same-seed accuracy difference", title=title)
+        fig.savefig(out / "paired_pruning_recovery_differences.png", dpi=180)
+        fig.savefig(out / "paired_pruning_recovery_differences.pdf")
+        plt.close(fig)
+        figure_count += 2
+    return {"output": str(out), "figures": figure_count}
