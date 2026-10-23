@@ -40,13 +40,13 @@ def redact(value):
 
 def write_json(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=2, ensure_ascii=False, allow_nan=False)+"\n", encoding="utf-8")
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False, allow_nan=False)+"\n", encoding="utf-8", newline="\n")
 
 
 def write_csv(path, rows):
     if not rows: return
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader(); writer.writerows(rows)
 
 
@@ -223,11 +223,17 @@ Jacobian为I−4gamma d(diag(p)−ppᵀ)。在均匀固定点为I−4gamma(I−1
         f"\n\n测量代码 `{MEASURED}`，父审计基线 `{BASELINE}`。\n\n"+"\n".join(f"- {name}: SHA256 `{digest}`" for name,digest in core.items())+
         f"\n\n短程固定gamma提名：{recommended}；仅FP64有限预算证据。FP32门禁失败不以放宽容差处理。\n\n"
         "可以提交GPT审查本轮证据与待批准协议；这不构成正式实验执行许可。未批准项：验证划分/seed列表、SGD/LR/增强、rho/gamma/warm-up/精度、N:M/scope/tail、恢复预算/优化器、checkpoint选择、probe、日志频率与GPU资源。正式JSON中的null保持阻断。\n",encoding="utf-8")
+    # Git enforces LF. Hash the same bytes that GitHub will publish, including
+    # on Windows where Path.write_text otherwise translates newlines to CRLF.
+    report_names = ("SERVER_ACCEPTANCE.md","GPU_PERFORMANCE.md","GPU_PERFORMANCE.json","GAMMA_CALIBRATION.md","FORMAL_PROTOCOL_DRAFT.md","AUDIT_GATE.md")
+    text_files = [p for p in PUBLIC.rglob("*") if p.is_file() and p.suffix in {".md",".json",".csv",".txt",".py",".sh",".xml"}]
+    for p in text_files + [DOCS/name for name in report_names]:
+        data = p.read_bytes()
+        p.write_bytes(data.replace(b"\r\n", b"\n"))
     write_json(PUBLIC/"evidence_manifest.json", {"measured_source_commit":MEASURED,"public_files_sha256":{
-        str(p.relative_to(DOCS)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(PUBLIC.rglob("*")) if p.is_file() and p.name != "evidence_manifest.json" and "__pycache__" not in p.parts},
+        p.relative_to(DOCS).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(PUBLIC.rglob("*")) if p.is_file() and p.name != "evidence_manifest.json" and "__pycache__" not in p.parts},
         "renderer_sha256":hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-        "reports_sha256":{name:hashlib.sha256((DOCS/name).read_bytes()).hexdigest() for name in
-                         ("SERVER_ACCEPTANCE.md","GPU_PERFORMANCE.md","GPU_PERFORMANCE.json","GAMMA_CALIBRATION.md","FORMAL_PROTOCOL_DRAFT.md","AUDIT_GATE.md")}})
+        "reports_sha256":{name:hashlib.sha256((DOCS/name).read_bytes()).hexdigest() for name in report_names}})
 
 
 if __name__ == "__main__": main()
