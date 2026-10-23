@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "purpose": "formal",
+  "seed": null,
+  "device": "cuda",
+  "threads": 1,
+  "deterministic": true,
+  "output": "runs/formal/positive_SET_SEED",
+  "model": "resnet18",
+  "data": {
+    "kind": "cifar10",
+    "root": "data/cifar10",
+    "download": false,
+    "validation_size": null,
+    "synthetic_train": null,
+    "synthetic_test": null,
+    "augment": null,
+    "cutout": null,
+    "workers": null
+  },
+  "optimizer": {
+    "method": "positive",
+    "lr": null,
+    "momentum": null,
+    "weight_decay": null,
+    "nesterov": null,
+    "rho": null
+  },
+  "geometry": {
+    "gamma": null,
+    "dtype": null,
+    "warmup_steps": null,
+    "volume_atol": null,
+    "volume_rtol": null,
+    "static_std": null
+  },
+  "training": {
+    "epochs": null,
+    "batch_size": null,
+    "scheduler": null,
+    "eta_min": null,
+    "checkpoint_interval_steps": null
+  },
+  "pruning": {
+    "n": null,
+    "m": null,
+    "scope": null,
+    "score": null,
+    "tail": null
+  },
+  "recovery": {
+    "epochs": null,
+    "method": null,
+    "lr": null,
+    "momentum": null,
+    "weight_decay": null,
+    "rho": null,
+    "scheduler": null,
+    "eta_min": null
+  },
+  "evaluation": {
+    "batch_size": null,
+    "probe_rho": null,
+    "probe_batches": null
+  }
+}

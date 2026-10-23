@@ -1,0 +1,58 @@
+{
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "torch": "2.13.0",
+      "torchvision": "0.28.0",
+      "numpy": "2.5.2",
+      "matplotlib": "3.11.1",
+      "Pillow": "12.3.0"
+    },
+    "cuda_runtime": null,
+    "gpu": null,
+    "cuda_capabilities": [],
+    "deterministic": false
+  },
+  "rows": [
+    {
+      "d": 10000,
+      "dtype": "float64",
+      "steps": 10,
+      "seconds_per_update": 0.0013180600013583898,
+      "state_bytes": 80000,
+      "log_volume": -8.066464163292153e-17,
+      "peak_cuda_bytes": null
+    },
+    {
+      "d": 10000,
+      "dtype": "float32",
+      "steps": 10,
+      "seconds_per_update": 0.0009525700006633997,
+      "state_bytes": 40000,
+      "log_volume": 1.368363200526801e-10,
+      "peak_cuda_bytes": null,
+      "max_abs_difference_from_fp64": 1.0386168726277123e-10
+    },
+    {
+      "d": 100000,
+      "dtype": "float64",
+      "steps": 10,
+      "seconds_per_update": 0.006608040002174675,
+      "state_bytes": 800000,
+      "log_volume": -6.002143226879753e-16,
+      "peak_cuda_bytes": null
+    },
+    {
+      "d": 100000,
+      "dtype": "float32",
+      "steps": 10,
+      "seconds_per_update": 0.006619119999231771,
+      "state_bytes": 400000,
+      "log_volume": 3.887971888882902e-09,
+      "peak_cuda_bytes": null,
+      "max_abs_difference_from_fp64": 1.4591141532863117e-10
+    }
+  ],
+  "note": "Microbenchmark only; CPU timings do not predict RTX5090 performance."
+}

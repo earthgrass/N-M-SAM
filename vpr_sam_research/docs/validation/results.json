@@ -1,0 +1,254 @@
+{
+  "date": "2026-10-23",
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "torch": "2.13.0",
+      "torchvision": "0.28.0",
+      "numpy": "2.5.2",
+      "matplotlib": "3.11.1",
+      "Pillow": "12.3.0"
+    },
+    "cuda_runtime": null,
+    "gpu": null,
+    "cuda_capabilities": [],
+    "deterministic": true
+  },
+  "pytest": {
+    "tests": "40",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "time": "38.254"
+  },
+  "test_cases": [
+    "test_fixed_point_and_jacobian",
+    "test_local_contraction[0.1-True]",
+    "test_local_contraction[0.25-True]",
+    "test_local_contraction[0.4-True]",
+    "test_local_contraction[0.51-False]",
+    "test_boundary_not_classified_by_linearization",
+    "test_formula_volume_feedback_and_equivalence",
+    "test_identity_equals_standard_sam",
+    "test_global_not_layerwise",
+    "test_zero_and_missing_gradient",
+    "test_nonfinite_volume_and_dtype_rejected",
+    "test_concentrated_high_d_is_not_protected_by_local_bound",
+    "test_long_sequence_volume[float32]",
+    "test_long_sequence_volume[float64]",
+    "test_resume_exact_mid_epoch",
+    "test_data_order_worker_independence",
+    "test_end_to_end_comparison",
+    "test_guards",
+    "test_real_data_never_falls_back",
+    "test_recovery_resume_exact",
+    "test_summary_refuses_unfair_protocol",
+    "test_provenance_excludes_build_artifacts",
+    "test_step_bn_and_one_base_update[sgd]",
+    "test_step_bn_and_one_base_update[sam]",
+    "test_step_bn_and_one_base_update[vpr]",
+    "test_step_bn_and_one_base_update[static]",
+    "test_step_bn_and_one_base_update[positive]",
+    "test_step_bn_and_one_base_update[fixed_l2]",
+    "test_exception_restores_all_and_prevents_checkpoint",
+    "test_restore_before_base_and_external_probe",
+    "test_nm_legality_ties_and_tails[1-3]",
+    "test_nm_legality_ties_and_tails[3-8]",
+    "test_nm_legality_ties_and_tails[1-2]",
+    "test_masked_recovery_cannot_regrow[sgd]",
+    "test_masked_recovery_cannot_regrow[sam]",
+    "test_resnet_architecture",
+    "test_matches_manual_outer_update[sgd]",
+    "test_matches_manual_outer_update[sam]",
+    "test_matches_manual_outer_update[vpr]",
+    "test_nonfinite_second_gradient_before_outer_update"
+  ],
+  "smoke": [
+    {
+      "method": "sgd",
+      "train_steps": 6,
+      "train_complete": true,
+      "recovery_complete": true,
+      "recovery_steps": 3,
+      "pruning_fixture": {
+        "n": 1,
+        "m": 3,
+        "scope": "all",
+        "score": "magnitude",
+        "tail": "dense"
+      },
+      "evaluation_count": 8,
+      "initialization_hash": "098dc7e4c1cd6dbda0fd2890bcfbd854c2ef811f7e0b028cacba2cdcdaccd558",
+      "order_hash": "208626604b17bc8af5f43d8b27d84c63c17d5a1cb7298497814e5a20d38b7084"
+    },
+    {
+      "method": "sam",
+      "train_steps": 6,
+      "train_complete": true,
+      "recovery_complete": true,
+      "recovery_steps": 3,
+      "pruning_fixture": {
+        "n": 1,
+        "m": 3,
+        "scope": "all",
+        "score": "magnitude",
+        "tail": "dense"
+      },
+      "evaluation_count": 8,
+      "initialization_hash": "098dc7e4c1cd6dbda0fd2890bcfbd854c2ef811f7e0b028cacba2cdcdaccd558",
+      "order_hash": "208626604b17bc8af5f43d8b27d84c63c17d5a1cb7298497814e5a20d38b7084"
+    },
+    {
+      "method": "vpr",
+      "train_steps": 6,
+      "train_complete": true,
+      "recovery_complete": true,
+      "recovery_steps": 3,
+      "pruning_fixture": {
+        "n": 1,
+        "m": 3,
+        "scope": "all",
+        "score": "magnitude",
+        "tail": "dense"
+      },
+      "evaluation_count": 8,
+      "initialization_hash": "098dc7e4c1cd6dbda0fd2890bcfbd854c2ef811f7e0b028cacba2cdcdaccd558",
+      "order_hash": "208626604b17bc8af5f43d8b27d84c63c17d5a1cb7298497814e5a20d38b7084"
+    },
+    {
+      "method": "static",
+      "train_steps": 6,
+      "train_complete": true,
+      "recovery_complete": true,
+      "recovery_steps": 3,
+      "pruning_fixture": {
+        "n": 1,
+        "m": 3,
+        "scope": "all",
+        "score": "magnitude",
+        "tail": "dense"
+      },
+      "evaluation_count": 8,
+      "initialization_hash": "098dc7e4c1cd6dbda0fd2890bcfbd854c2ef811f7e0b028cacba2cdcdaccd558",
+      "order_hash": "208626604b17bc8af5f43d8b27d84c63c17d5a1cb7298497814e5a20d38b7084"
+    },
+    {
+      "method": "positive",
+      "train_steps": 6,
+      "train_complete": true,
+      "recovery_complete": true,
+      "recovery_steps": 3,
+      "pruning_fixture": {
+        "n": 1,
+        "m": 3,
+        "scope": "all",
+        "score": "magnitude",
+        "tail": "dense"
+      },
+      "evaluation_count": 8,
+      "initialization_hash": "098dc7e4c1cd6dbda0fd2890bcfbd854c2ef811f7e0b028cacba2cdcdaccd558",
+      "order_hash": "208626604b17bc8af5f43d8b27d84c63c17d5a1cb7298497814e5a20d38b7084"
+    },
+    {
+      "method": "fixed_l2",
+      "train_steps": 6,
+      "train_complete": true,
+      "recovery_complete": true,
+      "recovery_steps": 3,
+      "pruning_fixture": {
+        "n": 1,
+        "m": 3,
+        "scope": "all",
+        "score": "magnitude",
+        "tail": "dense"
+      },
+      "evaluation_count": 8,
+      "initialization_hash": "098dc7e4c1cd6dbda0fd2890bcfbd854c2ef811f7e0b028cacba2cdcdaccd558",
+      "order_hash": "208626604b17bc8af5f43d8b27d84c63c17d5a1cb7298497814e5a20d38b7084"
+    }
+  ],
+  "resnet18": {
+    "model": "resnet18",
+    "method": "vpr",
+    "complete": true,
+    "steps": 2,
+    "dataset": "synthetic"
+  },
+  "paired_identity_checks": [
+    {
+      "seed": 17,
+      "methods": [
+        "fixed_l2",
+        "positive",
+        "sam",
+        "sgd",
+        "static",
+        "vpr"
+      ],
+      "paired_identity_match": true
+    }
+  ],
+  "historical_runtime_imports": [],
+  "wheel": {
+    "filename": "vpr_sam_research-0.1.0-py3-none-any.whl",
+    "sha256": "d7b5e9780641b01d80131d84561b8791f47beaad28a0d7814ef975945d356c25"
+  },
+  "source_hashes": {
+    "configs/formal/fixed_l2.json": "a08bd8914988308a18b003a14d4610f5aadb8a892af7f319378fe5f2e9d3327c",
+    "configs/formal/positive.json": "c46bb80ec21a12f9fa52fae4e22815426ad8784e5c10df592902dc697d212874",
+    "configs/formal/sam.json": "8fce1d5ac77943632443a6f4a98e22db4c3b384d3a9fb7f7b2482d40a336c736",
+    "configs/formal/sgd.json": "3b0afc8c080181dc0f47e38610adda45b9c408bc00318b8da693e26f1909bc9e",
+    "configs/formal/static.json": "e928e9f7b0ef18bb80d6245f08c6df3b23895a259e1d1d8c30a698ebb4f84804",
+    "configs/formal/vpr.json": "a2b53986a4fb9d7226c0ad431cc476e2d6153fef2411f5dfb5f27588115eaf0a",
+    "configs/pruning/example_1of3_smoke.json": "2a9309264b9511dec1611d032661849020ee9bf77ef7080e8994a750b71dea81",
+    "configs/smoke/fixed_l2.json": "5e0488e7fca7540d32eaed8766fd083336470572f60359af676f4139ca49db0a",
+    "configs/smoke/positive.json": "86395367383a4ce2afc31308d7e841e8a4a9eea99745de4509acfe1d2dcf64f5",
+    "configs/smoke/resnet18.json": "8a80b1ac6a57fd76162e03caae44018f06cf7536124ebee6a85b3aa15fff6e2e",
+    "configs/smoke/sam.json": "fdbbde3dc6e237d54f9912eb3f05eec61adc9adb3a61f7dc854841335db664e6",
+    "configs/smoke/sgd.json": "763c324a50e85b466d702972f4699da4e70d8d25846d1a0ea59b1e45a9ec2a49",
+    "configs/smoke/static.json": "036f22d64f0137a8153dc1215632b25e8b3c1469f1a5da1aae29421307ce50a9",
+    "configs/smoke/vpr.json": "e73aca49e20bf984aece044d92e141f50db30b3e5a1a163f7a62bbb0df1f5957",
+    "pyproject.toml": "7b7718279926c365f606386cb5a8ef8bc6c539e6b9cfb3ee4572e14fdce25f43",
+    "requirements-research.txt": "a1a2e0f86f10f7c81767b139962c246207deb7dd2529228d42e79f9e04c747b7",
+    "scripts/benchmark_geometry.py": "149933c66dee2969fa3a533ac603f56547d8912a675ca1784e70bad97311cadb",
+    "scripts/generate_configs.py": "122ae6724179c26ef5207b7d9e1e22b0a5b67515b64bd2cf49d625b1381429ac",
+    "scripts/materialize_protocol.py": "20e578820d494b81b15848f6f86b5d307c4b1c84ffb01cdd216e67e9e2dc0856",
+    "scripts/preflight.py": "3a9fd577218ced37e3dc1afdd336313aaa307d1de97c33c5f780f8e8a8045f8d",
+    "scripts/run_one.sh": "1a48d33e64f200fdb25bc881086718e0d873ce92adbb953b0f75172d896dfb78",
+    "scripts/setup_5090.sh": "0bdf975732903ce02bf7e7d25623cc3d989aca4b4c4a9143bd307a57613bf14d",
+    "scripts/smoke_suite.py": "14210527132219d1a4c3730af82d563c43ae26c055b741d2c152736f611de709",
+    "src/vpr_sam/__init__.py": "7434eeda4335a2cb85f8be14ffc5a382f2eb5929571fd9b023452a3e6ba3d65a",
+    "src/vpr_sam/__main__.py": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3",
+    "src/vpr_sam/analysis/__init__.py": "49a4273ab406c0cba1c826d2db68a4273ee212fce515e02da04d82ab44b5af65",
+    "src/vpr_sam/analysis/report.py": "a5855faa07d4c16e13990f2fb3af9eab697688b4a1e940bb95fe4d1cf24b5f58",
+    "src/vpr_sam/cli.py": "c36b6a4e345943ffc6a6f248d6bf564cd3aa4921f328967dba2132d880d0f3a3",
+    "src/vpr_sam/config.py": "83ed83bde2675f19da52e8676b0eb3ed187f4f2af193bbbe8023760e16a40ebf",
+    "src/vpr_sam/data/__init__.py": "60fc7b2af5eee9483b6d6e5698772c568648056f5669775e8e82634e01335888",
+    "src/vpr_sam/evaluation/__init__.py": "d14bc5c5f063e2ab783c7ce32ac46e62a513bff6ab8bae2ca41898656b02ffdd",
+    "src/vpr_sam/models/__init__.py": "760a8dd26f1146a6ec175b81f35f25589ac9318f62380e08e2d53c04556bef02",
+    "src/vpr_sam/optim/__init__.py": "ad7231cea392055174eb78d8e70085d4d46db905ce1a3e22a2f0f3b26dedc769",
+    "src/vpr_sam/optim/geometry.py": "8e0e6d42bcf34a7a8c3b79dc4b76081e9d8c0d6313b183ce0f59109bd39058b5",
+    "src/vpr_sam/optim/step.py": "3c022f2815d577ef3d94ffeed40cb93c06e2359a2734c857a06f1a0c1f738ac2",
+    "src/vpr_sam/pruning/__init__.py": "a222eb3537804df9cb5a1cd40a931e9f2179f95e77e557969608718561361692",
+    "src/vpr_sam/repro.py": "f7f3f7ce8ea8692b4ec6aca51dad092b84fac9f8a636af7589f2862162f12b34",
+    "src/vpr_sam/training/__init__.py": "7c20309bae9f47899bbd811fb50392a04c907825f6744516b78d699a9dac60f6",
+    "src/vpr_sam/training/engine.py": "f30495e4b4bac480749cd4e0171e31280bcdf2ae8dab2c330603fda8529d41ba"
+  },
+  "formal_training_started": false,
+  "server_connected": false,
+  "historical_files_modified": false,
+  "cuda_tested": false,
+  "real_cifar10_training_tested": false,
+  "acceptance_run": "runs/audited_20261023",
+  "test_aggregation_verified": true,
+  "source_manifest_excludes_generated_metadata": true,
+  "wheel_independence": {
+    "isolated_python_mode": true,
+    "non_editable_install": true,
+    "import_verified_from": "artifacts/wheel_env/Lib/site-packages/vpr_sam",
+    "independent_project": "artifacts/standalone_delivery",
+    "six_method_end_to_end_smoke_passed": true,
+    "historical_runtime_module_paths_required": false
+  }
+}
