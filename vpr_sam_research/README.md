@@ -88,4 +88,4 @@ python -m vpr_sam plot --summary runs/paired_analysis/summary.json --output runs
 
 ## 当前分支
 
-本分支包含当前独立工程，入口为 [vpr_sam_research](vpr_sam_research/README.md)。正式队列使用冻结提交 `d4c58d66b248b620e0e058b92e79100f173970a6`；后续 README 提交不改变该运行来源，也不推进服务器 checkout。[PR #1](https://github.com/earthgrass/N-M-SAM/pull/1) 保持未合并。
+本分支包含当前独立工程，入口为 [vpr_sam_research](README.md)。正式队列使用冻结提交 `d4c58d66b248b620e0e058b92e79100f173970a6`；后续 README 提交不改变该运行来源，也不推进服务器 checkout。[PR #1](https://github.com/earthgrass/N-M-SAM/pull/1) 保持未合并。
