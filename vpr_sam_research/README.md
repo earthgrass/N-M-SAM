@@ -88,4 +88,4 @@ python -m vpr_sam plot --summary runs/paired_analysis/summary.json --output runs
 
 ## 当前分支
 
-本分支保存独立 VPR-SAM 工程的早期基线，入口为 [vpr_sam_research](vpr_sam_research/README.md)。最新设备、来源校验与正式配置以 `vpr-sam-audit-fixes` 分支为准；更新 README 不会将这些后续代码合并进本分支。
+本分支保存独立 VPR-SAM 工程的早期基线，入口为 [vpr_sam_research](README.md)。最新设备、来源校验与正式配置以 `vpr-sam-audit-fixes` 分支为准；更新 README 不会将这些后续代码合并进本分支。
