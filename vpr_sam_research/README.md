@@ -97,7 +97,7 @@ log-radius RMS、每参数张量 log-volume、加法舍入误差、每步耗时�
 3. 用同一配置展开全部方法。`--seeds` 与 `--methods` 由批准后的协议填写；以下数字仅展示接口，不是正式选择。
 
 ```bash
-python scripts/materialize_protocol.py --common configs/common_approved.json --seeds 0 1 2 --methods sgd sam vpr --output configs/approved
+python scripts/materialize_protocol.py --common configs/common_approved.json --seeds 0 1 2 --methods sam vpr --output configs/approved
 python -m vpr_sam validate --config configs/approved/vpr_seed0.json --allow-formal
 python -m vpr_sam prepare-data --data-root data/cifar10
 python scripts/preflight.py --config configs/approved/vpr_seed0.json --require-5090
@@ -115,6 +115,15 @@ VPR_FORMAL_APPROVED=YES bash scripts/run_one.sh configs/approved/vpr_seed0.json
 - [部署与正式实验执行计划](docs/DEPLOYMENT.md)
 - [工程审计与验证结果](docs/AUDIT.md)
 - [本轮审计整改与验收状态](docs/AUDIT_FIXES.md)
+- [RTX 5090 动态验收](docs/SERVER_ACCEPTANCE.md)
+- [GPU 性能与精度实测](docs/GPU_PERFORMANCE.md)
+- [固定 Gamma 数值校准](docs/GAMMA_CALIBRATION.md)
+- [两方法正式协议草案（待批准）](docs/FORMAL_PROTOCOL_DRAFT.md)
+- [实验审批门禁](docs/AUDIT_GATE.md)
+
+上述正式命令中的seed等只是填写方式示例。当前主实验仅计划SAM/VPR两个方法；
+200 epoch、完整超参数、N:M、恢复预算及资源分配均待批准，尚未执行。
+本轮新增epoch checkpoint发布顺序修复；旧source_hashes产物保留，不跨版本续训。
 
 本轮 schema 2 checkpoint 加入模型/配置/Mask 身份，剪枝、恢复、评估及汇总统一核对源文件身份。
 旧 V1 产物保留，但不会被自动迁移或绕过校验；请用新代码生成新的 smoke 产物。

@@ -1,0 +1,127 @@
+{
+  "baseline": "ee57bc68b9a2f5f71dffb067f67416a9461f8db1",
+  "measured_source_commit": "bf4f123e01a9b0819376a4def7d2e82e5c56975d",
+  "core_sha256": {
+    "geometry.py": "8e0e6d42bcf34a7a8c3b79dc4b76081e9d8c0d6313b183ce0f59109bd39058b5",
+    "step.py": "3c022f2815d577ef3d94ffeed40cb93c06e2359a2734c857a06f1a0c1f738ac2"
+  },
+  "gates": {
+    "source": "PASS",
+    "core": "PASS",
+    "hardware": "PASS",
+    "cuda_smoke": "PASS",
+    "real_data": "PASS",
+    "exact_resume": "PASS",
+    "gamma": "PASS",
+    "protocol": "PENDING",
+    "formal_training": "NOT STARTED"
+  },
+  "gamma": {
+    "estimate": {
+      "d": 11173962,
+      "steps": 300,
+      "independent_seeds": 1,
+      "c_max": {
+        "min": 2624.2943172725345,
+        "mean": 175876.2829846024,
+        "median": 158538.5740812972,
+        "p90": 311910.38819208037,
+        "p95": 373926.0979407964,
+        "p99": 456026.82535666024,
+        "max": 630560.3156518874
+      },
+      "denominator": {
+        "min": 2623.2943172725345,
+        "mean": 175875.2829846024,
+        "median": 158537.5740812972,
+        "p90": 311909.38819208037,
+        "p95": 373925.0979407964,
+        "p99": 456025.82535666024,
+        "max": 630559.3156518874
+      },
+      "nonzero_fraction": {
+        "min": 0.9399853874570184,
+        "mean": 0.9914049299016172,
+        "median": 0.9956602680410046,
+        "p90": 0.9999569355972394,
+        "p95": 0.9999999105062287,
+        "p99": 1.0,
+        "max": 1.0
+      },
+      "gradient_norm": {
+        "min": 0.27720102021067755,
+        "mean": 0.9837760988141675,
+        "median": 0.5162108830982732,
+        "p90": 1.224609817579783,
+        "p95": 3.4424337099714393,
+        "p99": 10.102539690375071,
+        "max": 16.893600217921826
+      },
+      "zero_steps": 0,
+      "target_delta": 0.05,
+      "gamma0": 1.0964291322951882e-07,
+      "candidates": [
+        5.482145661475941e-08,
+        1.0964291322951882e-07,
+        2.1928582645903765e-07
+      ],
+      "not_accuracy_selection": true,
+      "robustness": {
+        "using_max_instead_q99": 7.929468133907243e-08,
+        "using_q95": 1.3371661938540566e-07
+      }
+    },
+    "candidates": [
+      {
+        "tag": "vpr_candidate_0",
+        "status": "PASS",
+        "gamma": 5.482145661475941e-08,
+        "steps": 100,
+        "initialization_hash": "ac140a4d56fe4587e7759281beb5f4c3b3cba553655e0795e5942fe41a25b14e",
+        "max_delta": 0.057190415452901947,
+        "min_s": -0.18783434183345596,
+        "max_s": 5.482064090403499e-06,
+        "final_rms": 0.0003845004599072065,
+        "max_volume": 1.2434497875801753e-14,
+        "max_volume_bound_ratio": 7.220545757358978e-05,
+        "max_ellipse_error": 2.241630839283637e-10,
+        "underflow_coordinates_max": 3
+      },
+      {
+        "tag": "vpr_candidate_1",
+        "status": "PASS",
+        "gamma": 1.0964291322951882e-07,
+        "steps": 100,
+        "initialization_hash": "ac140a4d56fe4587e7759281beb5f4c3b3cba553655e0795e5942fe41a25b14e",
+        "max_delta": 0.07643015152959888,
+        "min_s": -0.33383163656086845,
+        "max_s": 1.0963699457687408e-05,
+        "final_rms": 0.0007684940697383347,
+        "max_volume": 2.220446049250313e-14,
+        "max_volume_bound_ratio": 7.734956370483458e-05,
+        "max_ellipse_error": 1.343711739099085e-10,
+        "underflow_coordinates_max": 1
+      },
+      {
+        "tag": "vpr_candidate_2",
+        "status": "PASS",
+        "gamma": 2.1928582645903765e-07,
+        "steps": 100,
+        "initialization_hash": "ac140a4d56fe4587e7759281beb5f4c3b3cba553655e0795e5942fe41a25b14e",
+        "max_delta": 0.21485122639161466,
+        "min_s": -0.48527396588557864,
+        "max_s": 2.192726470534493e-05,
+        "final_rms": 0.001419112728004672,
+        "max_volume": 4.1744385725905886e-14,
+        "max_volume_bound_ratio": 0.00012371376826677893,
+        "max_ellipse_error": 1.2648539854387408e-10,
+        "underflow_coordinates_max": 2
+      }
+    ],
+    "paired_initialization_and_order": true,
+    "recommended_short_run_candidate": 5.482145661475941e-08,
+    "formal_approval": false,
+    "independent_seeds": 1,
+    "validation_or_test_used_for_selection": false
+  }
+}
