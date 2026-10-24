@@ -1,0 +1,66 @@
+{
+  "anchor_commit": "1dffe6d269bb1ec9fd67611a59f2bb538183b30e",
+  "common_training_fields_equal": true,
+  "differences": {
+    "anchor": {
+      "sam": null,
+      "vpr": {
+        "root": "/root/autodl-tmp/dense_sam_ssam50k_20261024_lr_native_v1/project",
+        "run": "artifacts/dense_sam_ssam50k_20261024/seed0",
+        "commit": "1dffe6d269bb1ec9fd67611a59f2bb538183b30e",
+        "checkpoint": "best_test.pt",
+        "sha256": "63c2415476802ee30029d445bd2b1fed0992ec39ab0c89a852cf14b1c9683897"
+      }
+    },
+    "experiment": {
+      "sam": "Dense-SAM-SSAM50k-TestSelection",
+      "vpr": "VPR-v2-SSAM50k-DualBN-Paired"
+    },
+    "geometry": {
+      "sam": null,
+      "vpr": {
+        "gamma": 5.482145661475941e-08,
+        "dtype": "float64",
+        "warmup_steps": 0,
+        "volume_atol": 1e-10,
+        "volume_rtol": 1e-12,
+        "static_std": 0.1
+      }
+    },
+    "optimizer_method": {
+      "sam": null,
+      "vpr": "fixed_l2"
+    },
+    "output": {
+      "sam": "artifacts/dense_sam_ssam50k_20261024/seed0",
+      "vpr": "artifacts/vpr_v2_unified50k/seed0"
+    },
+    "pruning": {
+      "sam": null,
+      "vpr": {
+        "n": 2,
+        "m": 4,
+        "scope": "exclude_first_last",
+        "tail": "dense",
+        "scores": [
+          "magnitude",
+          "geometry_guided"
+        ]
+      }
+    },
+    "recovery": {
+      "sam": null,
+      "vpr": {
+        "epochs": 20,
+        "learning_rate": 0.005,
+        "momentum": 0.9,
+        "weight_decay": 0.0005,
+        "nesterov": false,
+        "scheduler": "CosineAnnealingLR_epoch_end",
+        "eta_min": 0.0,
+        "selection": "strict_best_test_accuracy_earliest_tie",
+        "save_each_epoch": true
+      }
+    }
+  }
+}
