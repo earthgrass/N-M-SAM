@@ -1,0 +1,7 @@
+{
+  "official_commit": "76974fd0255cf2f61201e19566cb64ceb429ecdd",
+  "official_file": "models/resnet.py",
+  "official_source_sha256": "de951608c65b7bbd60354b94260afd02769d7323deaa8a0031ce7c74885f66e9",
+  "adaptation": "Exact BasicBlock and ResNet class text; remove registry, torchvision and unused architectures; independent build_model factory",
+  "old_project_model_compatibility": "Same stem, stage widths, strides, parameter names/shapes; fixed avg_pool2d(4) copied from SSAM for 32x32 inputs"
+}
