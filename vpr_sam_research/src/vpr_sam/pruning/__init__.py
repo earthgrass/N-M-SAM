@@ -30,6 +30,8 @@ def nm_mask(weight, n, m, tail):
 def make_masks(model, protocol):
     validate_pruning(protocol)
     protocol = canonical_pruning(protocol)
+    if protocol["score"] != "magnitude":
+        raise ValueError("geometry_guided requires the audited frozen mask import; never regenerate as magnitude")
     layers = [(name, mod) for name, mod in model.named_modules() if isinstance(mod, (nn.Linear, nn.Conv2d))]
     first, last = layers[0][0], layers[-1][0]
     masks, report = {}, []

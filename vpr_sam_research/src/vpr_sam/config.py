@@ -114,8 +114,8 @@ def validate_pruning(p):
         raise ValueError("Specify integers 0<N<M; no default N:M")
     if p["scope"] not in {"all", "exclude_first", "exclude_first_last", "exclude_first_and_pointwise", "residual_and_head"}:
         raise ValueError("Explicit pruning scope required")
-    if p["score"] != "magnitude" or p["tail"] not in {"dense", "error"}:
-        raise ValueError("First version uses magnitude; tail must be dense/error")
+    if p["score"] not in {"magnitude", "geometry_guided"} or p["tail"] not in {"dense", "error"}:
+        raise ValueError("Explicit magnitude/imported geometry_guided mask; tail must be dense/error")
 
 
 def canonical_pruning(p):
