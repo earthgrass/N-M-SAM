@@ -1,0 +1,89 @@
+experiment: VPR-v2-SSAM50k-DualBN-Paired
+version: '1.0'
+purpose: formal
+seed: 0
+device: cuda:0
+gpu_uuid: GPU-fc8784a7-85a2-2bcd-d2e2-f36ef021616c
+threads: 4
+model: cifar_resnet18_ssam2022
+data_root: /root/autodl-tmp/vpr_l2_seed0_20261024/workspace/vpr_sam_research/data/cifar10
+data_access: existing_official_files_read_only_no_download_or_upload
+train_size: 50000
+test_size: 10000
+validation_size: 0
+output: artifacts/vpr_v2_unified50k/seed0
+epochs: 200
+batch_size: 128
+evaluation_batch_size: 128
+workers: 2
+pin_memory: true
+drop_last: true
+test_drop_last: false
+learning_rate: 0.05
+momentum: 0.9
+weight_decay: 0.001
+nesterov: false
+rho: 0.1
+numerical_epsilon: 1.0e-07
+adaptive: false
+loss: cross_entropy
+label_smoothing: 0.0
+scheduler: SSAM2022_CosineLRscheduler
+scheduler_interval: after_training_before_test_step_zero_based_epoch
+eta_min: 0.0
+warmup_epoch: 0
+warmup_init_lr: 0.0
+normalize_mean:
+- 0.4913725490196078
+- 0.4823529411764706
+- 0.4466666666666667
+normalize_std:
+- 0.24705882352941178
+- 0.24352941176470588
+- 0.2615686274509804
+crop_padding: 4
+horizontal_flip_probability: 0.5
+cutout_size: 16
+cutout_probability: 0.5
+cutout_position: after_normalize
+sampling: torch_RandomSampler_global_rng_like_ssam2022
+bn_rule: both_train_forwards_update_running_buffers
+checkpoint_selection: strict_best_test_accuracy_earliest_tie
+deterministic: true
+amp: false
+tf32: false
+compile: false
+early_stopping: false
+minimum_free_disk_bytes: 2147483648
+optimizer_method: fixed_l2
+geometry:
+  gamma: 5.482145661475941e-08
+  dtype: float64
+  warmup_steps: 0
+  volume_atol: 1.0e-10
+  volume_rtol: 1.0e-12
+  static_std: 0.1
+anchor:
+  root: /root/autodl-tmp/dense_sam_ssam50k_20261024_lr_native_v1/project
+  run: artifacts/dense_sam_ssam50k_20261024/seed0
+  commit: 1dffe6d269bb1ec9fd67611a59f2bb538183b30e
+  checkpoint: best_test.pt
+  sha256: 63c2415476802ee30029d445bd2b1fed0992ec39ab0c89a852cf14b1c9683897
+pruning:
+  n: 2
+  m: 4
+  scope: exclude_first_last
+  tail: dense
+  scores:
+  - magnitude
+  - geometry_guided
+recovery:
+  epochs: 20
+  learning_rate: 0.005
+  momentum: 0.9
+  weight_decay: 0.0005
+  nesterov: false
+  scheduler: CosineAnnealingLR_epoch_end
+  eta_min: 0.0
+  selection: strict_best_test_accuracy_earliest_tie
+  save_each_epoch: true

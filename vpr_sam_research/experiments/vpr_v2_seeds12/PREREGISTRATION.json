@@ -1,0 +1,114 @@
+{
+  "authorized_seeds": [
+    0,
+    1,
+    2
+  ],
+  "new_seeds": [
+    1,
+    2
+  ],
+  "new_dense_trajectories": 4,
+  "configuration_audit": {
+    "sam_seed1.yaml": {
+      "sha256": "ccac85bdadf078ac2c39df7d30fb67c5713c9981cf0d23e7a5919d02ce2e7530",
+      "differences": {
+        "output": {
+          "seed0": "artifacts/dense_sam_ssam50k_20261024/seed0",
+          "new": "artifacts/sam_seed1"
+        },
+        "experiment": {
+          "seed0": "Dense-SAM-SSAM50k-TestSelection",
+          "new": "Dense-SAM-SSAM50k-DualBN-Seeds012"
+        },
+        "seed": {
+          "seed0": 0,
+          "new": 1
+        }
+      }
+    },
+    "sam_seed2.yaml": {
+      "sha256": "926de816110e30cbb2fb5b61f05fd81dc82ddd81a60e02f61a05e18dd81067ce",
+      "differences": {
+        "output": {
+          "seed0": "artifacts/dense_sam_ssam50k_20261024/seed0",
+          "new": "artifacts/sam_seed2"
+        },
+        "experiment": {
+          "seed0": "Dense-SAM-SSAM50k-TestSelection",
+          "new": "Dense-SAM-SSAM50k-DualBN-Seeds012"
+        },
+        "seed": {
+          "seed0": 0,
+          "new": 2
+        }
+      }
+    },
+    "vpr_seed1.yaml": {
+      "sha256": "5cf69e353256fa73e40fcefd7447d88d4b7af9f2058a121eca7c0438963ed7b3",
+      "differences": {
+        "output": {
+          "seed0": "artifacts/vpr_v2_unified50k/seed0",
+          "new": "artifacts/vpr_seed1"
+        },
+        "experiment": {
+          "seed0": "VPR-v2-SSAM50k-DualBN-Paired",
+          "new": "VPR-L2-SSAM50k-DualBN-Seeds012"
+        },
+        "anchor": {
+          "seed0": {
+            "root": "/root/autodl-tmp/dense_sam_ssam50k_20261024_lr_native_v1/project",
+            "run": "artifacts/dense_sam_ssam50k_20261024/seed0",
+            "commit": "1dffe6d269bb1ec9fd67611a59f2bb538183b30e",
+            "checkpoint": "best_test.pt",
+            "sha256": "63c2415476802ee30029d445bd2b1fed0992ec39ab0c89a852cf14b1c9683897"
+          },
+          "new": {
+            "root": "/root/vpr_v2_seeds12_20261024/runs/sam_seed1/project",
+            "run": "artifacts/sam_seed1",
+            "checkpoint": "best_test.pt",
+            "commit": "same_frozen_bundle",
+            "sha256": "verified_completed_run_publication_manifest"
+          }
+        },
+        "seed": {
+          "seed0": 0,
+          "new": 1
+        }
+      }
+    },
+    "vpr_seed2.yaml": {
+      "sha256": "5883031cb578ab51cc69aea5e71440569fb401dc1ae4332c3840a2c9c65a32ab",
+      "differences": {
+        "output": {
+          "seed0": "artifacts/vpr_v2_unified50k/seed0",
+          "new": "artifacts/vpr_seed2"
+        },
+        "experiment": {
+          "seed0": "VPR-v2-SSAM50k-DualBN-Paired",
+          "new": "VPR-L2-SSAM50k-DualBN-Seeds012"
+        },
+        "anchor": {
+          "seed0": {
+            "root": "/root/autodl-tmp/dense_sam_ssam50k_20261024_lr_native_v1/project",
+            "run": "artifacts/dense_sam_ssam50k_20261024/seed0",
+            "commit": "1dffe6d269bb1ec9fd67611a59f2bb538183b30e",
+            "checkpoint": "best_test.pt",
+            "sha256": "63c2415476802ee30029d445bd2b1fed0992ec39ab0c89a852cf14b1c9683897"
+          },
+          "new": {
+            "root": "/root/vpr_v2_seeds12_20261024/runs/sam_seed2/project",
+            "run": "artifacts/sam_seed2",
+            "checkpoint": "best_test.pt",
+            "commit": "same_frozen_bundle",
+            "sha256": "verified_completed_run_publication_manifest"
+          }
+        },
+        "seed": {
+          "seed0": 0,
+          "new": 2
+        }
+      }
+    }
+  }
+}
