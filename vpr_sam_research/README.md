@@ -7,8 +7,12 @@ PR 1最后一轮设备一致性与绘图checkpoint修复见 [FINAL_AUDIT.md](doc
 本目录可单独复制、安装和部署。运行时仅导入 `vpr_sam` 和声明的第三方依赖，
 不导入父目录历史 N+SAM 代码、不读取历史配置或 checkpoint。
 
-**当前交付的是供审计的实验基础设施。没有启动正式训练、连接服务器或确定正式 N:M/超参数。**
-正式配置中的 null 刻意阻止未批准的实验。所有正式训练必须从随机初始化开始。
+**研究状态（2026-10-24）：V1 三种子 SAM/VPR 主实验已完成；VPR-L2 seed 0、Geometry-guided 2:4 评价和两条 20 epoch 恢复已完成。**
+同预算 seed 0 的探索性 Best Validation Accuracy：Dense-SAM+Magnitude **95.90%**（epoch 20），VPR-L2+Magnitude **96.00%**（epoch 8），VPR-L2+Geometry-guided **96.08%**（epoch 15）。
+预先冻结的 Final 分别为 95.90%、95.84%、95.88%，不被最佳轮次替代。Guided 的 Validation Loss 不优于 Dense-SAM，尚无多 seed VPR-L2/Guided 或独立 Test 泛化支持。
+
+本轮归档与 32 coarse + 32 fine matched-random 无训练机制评价见 [统一交付](results/research_delivery/RESEARCH_STATUS.md)、[基线 CSV](results/research_delivery/BASELINE_COMPARISON.csv)、[机制报告](results/research_delivery/MATCHED_RANDOM_REPORT.md)、[来源说明](docs/SOURCE_PROVENANCE.md)。
+Block-wise VPR 仅为独立候选原型和 CPU smoke，不能描述为已有正式训练结果。旧 formal 模板中的 null 保留历史未批准默认；已批准配置与 producer commit 见协议及 provenance，不据 README 命令自动启动训练。
 
 ## 目录
 

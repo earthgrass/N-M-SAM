@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "tests": 116,
+  "historical_tests": 107,
+  "prototype_tests": 9,
+  "device": "cpu",
+  "torch": "2.13.0+cpu",
+  "formal_training_started": false,
+  "command": "python -m pytest -q tests prototypes/test_blockwise.py",
+  "note": "Initial prototype test fixture filled dense tail and hit earlier ValueError; corrected fixture to isolate block-volume failure; final full suite all passed."
+}
