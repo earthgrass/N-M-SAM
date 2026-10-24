@@ -25,6 +25,12 @@ def test_uncertainty_unit_and_sample_sd():
     with pytest.raises(ValueError):mean_sd_ci([1.,2.])
     with pytest.raises(ValueError):mean_sd_ci([1.,2.,float('nan')])
 
+def test_source_manifest_keeps_official_data_code_and_excludes_artifacts(tmp_path):
+    source=tmp_path/'workers/vpr/reference/ssam2022/data/build.py';source.parent.mkdir(parents=True);source.write_text('pass\n')
+    output=tmp_path/'workers/vpr/artifacts/test.json';output.parent.mkdir(parents=True);output.write_text('{}')
+    dataset=tmp_path/'data/metadata.json';dataset.parent.mkdir();dataset.write_text('{}')
+    assert set(overnight.source_files(tmp_path))=={'workers/vpr/reference/ssam2022/data/build.py'}
+
 def test_deployment_records_byte_identical_config_alias(tmp_path,monkeypatch):
     root=tmp_path/'bundle';root.mkdir();(root/'configs').mkdir()
     for method in ('sam','vpr'):

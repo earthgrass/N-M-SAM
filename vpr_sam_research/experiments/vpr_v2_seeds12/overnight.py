@@ -21,7 +21,8 @@ def save(path,value):
 def source_files(root):
     return {p.relative_to(root).as_posix():sha(p) for p in sorted(root.rglob('*')) if p.is_file()
         and p.suffix in ('.py','.yaml','.yml','.md','.json','.sh','.txt','.toml')
-        and not any(k in p.relative_to(root).parts for k in ('artifacts','data'))
+        and p.relative_to(root).parts[0]!='data'
+        and 'artifacts' not in p.relative_to(root).parts
         and not any(k in p.relative_to(root).parts for k in ('.git','__pycache__','.pytest_cache'))
         and p.name!='SOURCE_FREEZE.json'}
 
