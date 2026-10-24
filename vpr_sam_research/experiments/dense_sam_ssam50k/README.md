@@ -40,3 +40,7 @@ checkpoint包含完整SGD momentum、调度器、Python/NumPy/CPU/CUDA RNG和来
 
 完成后以独立CPU审计程序重算Best Epoch、检查200轮样本/步数、核验best/last来源与所有BN计数，
 复核历史哈希，无额外Test选模或GPU训练。最后自动停止；不依赖聊天持续监督。
+
+LR参考值管理按LR_REFERENCE_POLICY.md：Windows序列保持原样，正式参考由目标服务器
+上的官方调度器独立生成。项目序列在相同环境下逐项严格比较400个字段；不使用容差。
+每个正式epoch再次严格比较实际LR与该服务器官方参考；原跨平台差异及失败记录全部保留。

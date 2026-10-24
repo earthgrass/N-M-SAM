@@ -46,15 +46,8 @@ def main():
     initial=tensor_sha(model.state_dict()); before=bn_snapshot(model); rows=[]
     workers=verify_worker_rng()
     atomic_json(artifacts/'worker_rng_audit.json',workers)
-    expected=[]
-    temp_opt=torch.optim.SGD([torch.nn.Parameter(torch.zeros(()))],lr=c['learning_rate'])
-    from scheduler import CosineLRscheduler
-    schedule=CosineLRscheduler(temp_opt,T_max=200,eta_min=0.,warmup_epoch=0,warmup_init_lr=0.)
-    for epoch in range(200):
-        used=temp_opt.param_groups[0]['lr']; schedule.step(epoch)
-        expected.append({'epoch':epoch+1,'used':used,'after_epoch':temp_opt.param_groups[0]['lr']})
-    if expected!=json.loads((ROOT/'reference/LR_EXPECTED.json').read_text()):
-        raise ValueError('200-epoch LR freeze mismatch')
+    from lr_reference import generate
+    lr_reference=generate(ROOT,c,source)
     started=time.monotonic()
     for batch,(x,y,ids) in enumerate(make_loader(train,c,training=True)):
         if batch>=2: break
@@ -77,7 +70,8 @@ def main():
                 'train_steps_per_epoch':390,'train_samples_per_epoch':49920,'formal_total_steps':78000,
                 'real_data_train_batches':rows,'training_subset_eval_smoke':evaluation,
                 'bn_counter_increment_two_steps':4,'elapsed_seconds':time.monotonic()-started,
-                'worker_rng_audit':workers,'lr_sequence_sha256':sha_file(ROOT/'reference/LR_EXPECTED.json'),
+                'worker_rng_audit':workers,'lr_sequence_sha256':lr_reference['official_reference_sha256'],
+                'lr_reference':lr_reference,
                 'test_evaluated_in_precheck':False,'smoke_weights_discarded':True})
     report=(f"# Final prelaunch audit: PASS\n\nCommit: {source['commit']}\n\n"
             f"Seed0; config SHA256 {object_sha(c)}; initialization {initial}.\n\n"

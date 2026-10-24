@@ -13,6 +13,7 @@ HISTORICAL_ROOTS=[
     '/root/autodl-tmp/vpr_l2_seed0_20261024/workspace/vpr_sam_research',
     '/root/autodl-tmp/vpr_l2_guided_recovery_seed0_20261024/vpr_sam_research',
     '/root/autodl-tmp/dense_sam_anchor_20261024/project',
+    '/root/autodl-tmp/dense_sam_ssam50k_20261024/project',
 ]
 
 

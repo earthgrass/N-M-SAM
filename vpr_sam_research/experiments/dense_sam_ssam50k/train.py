@@ -64,13 +64,20 @@ def run(c):
         raise ValueError('Precheck/run identity mismatch')
     if not torch.cuda.is_available() or any(p.dtype!=torch.float32 for p in model.parameters()):
         raise ValueError('CUDA / FP32 required')
+    from lr_reference import verify
+    lr_meta,lr_expected=verify(ROOT,c,frozen)
+    if lr_meta!=acceptance['lr_reference']:
+        raise ValueError('Precheck/native LR reference receipt mismatch')
     identity={'schema':2,'commit':frozen['commit'],'source_sha256':frozen['source_sha256'],
               'config':c,'config_sha256':object_sha(c),'config_file_sha256':sha_file(ROOT/'config.yaml'),
               'data_manifest_sha256':object_sha(dataset_manifest),'initialization_hash':initialization,
               'environment':environment(),'gpu_uuid':gpu['uuid'],'seed':c['seed'],
-              'random_initialization':True,'warm_start_checkpoint':None}
+              'random_initialization':True,'warm_start_checkpoint':None,
+              'lr_reference_sha256':lr_meta['official_reference_sha256']}
     atomic_json(out/'resolved_config.json',c); atomic_json(out/'environment.json',identity['environment'])
-    atomic_json(out/'learning_rates_expected.json',json.loads((ROOT/'reference/LR_EXPECTED.json').read_text()))
+    atomic_json(out/'learning_rates_expected.json',lr_expected)
+    atomic_json(out/'learning_rates_windows.json',json.loads((ROOT/'reference/LR_EXPECTED.json').read_text()))
+    atomic_json(out/'lr_reference_metadata.json',lr_meta)
     atomic_json(out/'worker_rng_audit.json',acceptance['worker_rng_audit'])
     atomic_json(out/'data_manifest.json',dataset_manifest)
     atomic_json(out/'source_manifest.json',{'identity':identity,
@@ -108,6 +115,8 @@ def run(c):
         omitted=sorted(set(range(50000))-set(seen))
         if len(omitted)!=80: raise ValueError('Expected exactly80 omitted samples')
         scheduler.step(epoch)  # EXACT official call: zero-based epoch, AFTER training, BEFORE Test.
+        if lr!=lr_expected[epoch]['used'] or opt.param_groups[0]['lr']!=lr_expected[epoch]['after_epoch']:
+            raise ValueError('Actual training LR differs from environment-native official reference')
         measured=evaluate(model,make_loader(test,c),c['device'])
         if measured['count']!=10000: raise ValueError('Test must include all10000 examples')
         torch.cuda.synchronize()
