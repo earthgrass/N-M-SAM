@@ -26,7 +26,7 @@ def test_nonunit_l2_direction_feedback(config, device):
     assert torch.allclose(el[0].double(), reference, rtol=2e-6, atol=1e-10)
     assert stats["eps_norm"] == pytest.approx(.05, rel=2e-5, abs=1e-12)
     assert stats["ellipsoid_norm"] != pytest.approx(.05, rel=1e-3)
-    assert torch.nn.functional.cosine_similarity(ed[0].double(),el[0].double(),dim=0) == pytest.approx(1.,abs=2e-14)
+    assert float(torch.nn.functional.cosine_similarity(ed[0].double(),el[0].double(),dim=0)) == pytest.approx(1.,abs=2e-14)
     pd = ed[0].double().square()/ed[0].double().square().sum()
     pl = el[0].double().square()/el[0].double().square().sum()
     assert torch.allclose(pd, pl, rtol=5e-7, atol=2e-15)
