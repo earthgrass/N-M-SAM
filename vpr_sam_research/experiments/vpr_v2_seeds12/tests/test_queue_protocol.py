@@ -8,6 +8,10 @@ from aggregate import mean_sd_ci
 import overnight
 
 def test_all_four_configs_pair_and_keep_frozen_protocol():
+    import json
+    registration=json.loads((ROOT/'PREREGISTRATION.json').read_text())
+    for name,record in registration['configuration_audit'].items():
+        assert overnight.sha(ROOT/'configs'/name)==record['sha256']
     for seed in (1,2):
         sam=yaml.safe_load((ROOT/'configs'/f'sam_seed{seed}.yaml').read_text())
         vpr=yaml.safe_load((ROOT/'configs'/f'vpr_seed{seed}.yaml').read_text())

@@ -29,6 +29,9 @@ def source_files(root):
 def verify_bundle():
     freeze=json.loads((ROOT/'SOURCE_FREEZE.json').read_text())
     if source_files(ROOT)!=freeze['source_sha256']:raise ValueError('Frozen overnight bundle changed')
+    registration=json.loads((ROOT/'PREREGISTRATION.json').read_text())
+    for name,record in registration['configuration_audit'].items():
+        if sha(ROOT/'configs'/name)!=record['sha256']:raise ValueError('Config bytes differ from preregistered Git source')
     return freeze
 
 def deploy(freeze):
