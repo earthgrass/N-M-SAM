@@ -1,0 +1,20 @@
+{
+  "pid": 8199,
+  "command": [
+    "/root/miniconda3/bin/python",
+    "scripts/run_cifar100_50k_postprocess.py",
+    "--dataset-root",
+    "data/cifar100_official_20261026",
+    "--config",
+    "configs/cifar100_50k10k_final_v1_blackwell_handoff.yaml",
+    "--parent",
+    "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed1/dense_sam/final_epoch_200.pt",
+    "--output-dir",
+    "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed1/methods/magnitude",
+    "--method",
+    "magnitude",
+    "--seed",
+    "1"
+  ],
+  "started_at_unix": 1793086763.7127867
+}

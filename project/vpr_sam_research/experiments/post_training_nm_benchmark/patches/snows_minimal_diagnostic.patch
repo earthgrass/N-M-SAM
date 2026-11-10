@@ -1,0 +1,134 @@
+--- a/CNN_pruning/prune/SNOWS.py
++++ b/CNN_pruning/prune/SNOWS.py
+@@ -328,43 +328,24 @@
+ 
+     
+ def conjugate_gradient_sparse(hvp_fn, b, tol=1e-3, max_iter=5000, lambda_reg=1e-4):
+-    # Initialize x to be zero everywhere
+-    x = torch.zeros_like(b)
+-
+-    # Restrict r, p to non-zero elements of b
+-    r = b.clone()
+-    p = r.clone()
+-
+-    rs_old = torch.sum(r * r)
+-
++    if not torch.isfinite(b).all():raise FloatingPointError('CG nonfinite RHS')
++    if tol<0 or max_iter<1 or lambda_reg<0:raise ValueError('Invalid CG arguments')
++    x=torch.zeros_like(b);r=b.clone();p=r.clone();rs_old=torch.sum(r*r)
++    if rs_old==0 or torch.sqrt(rs_old)<tol:return x,0
+     for i in range(max_iter):
+-        # Only compute Hessian-vector product on the sparse p
+-        Ap = hvp_fn(p) + lambda_reg * p  # Add Tikhonov regularization term
+-
+-        alpha = rs_old / torch.sum(p * Ap)
+-
+-        # Update x only at the masked locations
+-        x = x + alpha * p
+-
+-        # Update residual
+-        r = r - alpha * Ap
+-        rs_new = torch.sum(r * r)
+-
+-        
+-
+-        if torch.sqrt(rs_new) < tol:
+-            break
+-
+-        # Update p
+-        p = r + (rs_new / rs_old) * p
+-        rs_old = rs_new
+-
+-    return x, i + 1  # Return the solution x and the number of iterations
+-
+-
+-
+-
+-    
++        Ap=hvp_fn(p)+lambda_reg*p
++        if not torch.isfinite(Ap).all():raise FloatingPointError('CG nonfinite HVP')
++        denominator=torch.sum(p*Ap)
++        if not torch.isfinite(denominator) or denominator<=0:
++            raise FloatingPointError('CG nonpositive/nonfinite curvature; no unapproved damping/fallback')
++        alpha=rs_old/denominator
++        x=x+alpha*p;r=r-alpha*Ap;rs_new=torch.sum(r*r)
++        if not torch.isfinite(x).all() or not torch.isfinite(rs_new):raise FloatingPointError('CG nonfinite iterate')
++        if rs_new==0 or torch.sqrt(rs_new)<tol:break
++        p=r+(rs_new/rs_old)*p;rs_old=rs_new
++    return x,i+1
++
++
+ def hessian_vector_product(grad_W, W, vector, mask):
+     # Create a zero tensor of the same shape as W
+ 
+@@ -381,48 +362,22 @@
+     return hvp[mask]
+ 
+ def hessian_vector_product_chunks(grad_W, W, vector, mask, max_chunk_size=1e5):
+-    
+-    # gets the HVP in chunks to avoid peak memory usage being too high
+-    
+-    device = W.device  
+-    
+-    vector = Variable(vector).to(device)
+-    full_vector = torch.zeros_like(W, device=device)
+-    full_vector[mask] = vector
+-
+-    # Initialize an empty tensor to accumulate the results
+-    hvp = torch.zeros_like(W, device=device)
+-
+-    # Calculate the total number of elements
+-    num_elements = mask.sum().item()
+-
+-    # Determine the number of chunks based on max_chunk_size
+-    num_chunks = int(max(1, (num_elements + max_chunk_size - 1) // max_chunk_size))  # Number of chunks
+-    
+-    chunk_size = (num_elements + num_chunks - 1) // num_chunks  # Calculate chunk size
+-
+-    for i in range(num_chunks):  # Loop over each chunk
+-       
+-        # Determine the range for the current chunk
+-        start = i * chunk_size
+-        end = min(start + chunk_size, num_elements)
+-
+-        # Create a chunk mask on the same device as W
+-        chunk_mask = mask.clone().to(device)
+-        chunk_mask[mask] = torch.arange(num_elements, device=device) >= start
+-        chunk_mask[mask] = torch.arange(num_elements, device=device) < end
+-
+-        # Compute the Hessian-vector product for this chunk
+-        chunk_hvp = torch.autograd.grad(
+-            torch.sum(grad_W * full_vector * chunk_mask), W, retain_graph=True
+-        )[0]
+-
+-        # Accumulate the result in the corresponding positions
+-        hvp[chunk_mask] += chunk_hvp[chunk_mask]
+-
+-        del chunk_hvp
+-
+-    # Return only the elements corresponding to the mask
++    if mask.dtype!=torch.bool or mask.shape!=W.shape:raise ValueError('HVP Mask mapping')
++    if vector.numel()!=int(mask.sum()) or max_chunk_size<1:raise ValueError('HVP vector/chunk shape')
++    if not torch.isfinite(vector).all() or not torch.isfinite(grad_W).all():raise FloatingPointError('HVP nonfinite input')
++    vector=vector.to(W.device);full_vector=torch.zeros_like(W);full_vector[mask]=vector
++    hvp=torch.zeros_like(W);num_elements=int(mask.sum())
++    if num_elements==0:return vector.clone()
++    num_chunks=max(1,(num_elements+int(max_chunk_size)-1)//int(max_chunk_size))
++    chunk_size=(num_elements+num_chunks-1)//num_chunks
++    coordinates=torch.arange(num_elements,device=W.device)
++    for i in range(num_chunks):
++        start=i*chunk_size;end=min(start+chunk_size,num_elements)
++        chunk_mask=torch.zeros_like(mask);chunk_mask[mask]=(coordinates>=start)&(coordinates<end)
++        chunk_hvp=torch.autograd.grad(torch.sum(grad_W*full_vector*chunk_mask),W,retain_graph=True)[0]
++        if not torch.isfinite(chunk_hvp).all():raise FloatingPointError('HVP nonfinite output')
++        # H(sum v_k)=sum H v_k: retain ALL output rows, including cross-chunk terms.
++        hvp+=chunk_hvp
+     return hvp[mask]
+ 
+ 
+@@ -962,4 +917,5 @@
+ #         # Remove the pruned pair from the set of remaining pairs
+ #         pairs.discard((output_channel, group_idx))
+ 
+-#     return w_var, pairs, mask+#     return w_var, pairs, mask
++    raise NotImplementedError("Unfinished upstream prune_and_update; not used/approved")

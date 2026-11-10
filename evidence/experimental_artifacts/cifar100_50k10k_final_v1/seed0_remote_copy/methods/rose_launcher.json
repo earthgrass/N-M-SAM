@@ -1,0 +1,20 @@
+{
+  "pid": 28154,
+  "command": [
+    "/root/miniconda3/bin/python",
+    "scripts/run_cifar100_50k_postprocess.py",
+    "--dataset-root",
+    "/root/autodl-tmp/cifar100_gate_transfer/data/cifar100_official_20261026",
+    "--config",
+    "configs/cifar100_50k10k_final_v1.yaml",
+    "--parent",
+    "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/cifar100_50k10k_final_v1/seed0/dense_sam/final_epoch_200.pt",
+    "--output-dir",
+    "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/cifar100_50k10k_final_v1/seed0/methods/rose",
+    "--method",
+    "rose",
+    "--seed",
+    "0"
+  ],
+  "started_at_unix": 1793063723.5396826
+}

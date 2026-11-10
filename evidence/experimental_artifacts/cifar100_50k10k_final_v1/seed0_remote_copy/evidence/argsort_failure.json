@@ -1,0 +1,8 @@
+{
+  "status": "FAILED",
+  "type": "RuntimeError",
+  "message": "postprocess seed0 apbr_sam failed: {'status': 'failed', 'message': 'argsort() takes from 1 to 0 positional arguments but 1 were given'}",
+  "traceback": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_50k_full_queue.py\", line 95, in <module>\n    try:main()\n        ^^^^^^\n  File \"/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_50k_full_queue.py\", line 80, in main\n    method_status=wait_run(pid,output,'postprocess',seed,method);wait_exit(pid);completed.append({'seed':seed,'stage':method,**method_status})\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_50k_full_queue.py\", line 15, in wait_run\n    if status and status.get('status')=='failed':raise RuntimeError(f'{kind} seed{seed} {method or \"\"} failed: {status}')\n                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: postprocess seed0 apbr_sam failed: {'status': 'failed', 'message': 'argsort() takes from 1 to 0 positional arguments but 1 were given'}\n",
+  "automatic_retry": false,
+  "failed_at_unix": 1793061473.3849344
+}

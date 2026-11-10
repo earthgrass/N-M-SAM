@@ -1,0 +1,126 @@
+{
+  "status": "RUNNING",
+  "phase": "seed2_dense",
+  "pid": 10360,
+  "completed": [
+    {
+      "seed": 1,
+      "stage": "dense",
+      "status": "PASS_EXTERNAL",
+      "final_checkpoint": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed1/dense_sam/final_epoch_200.pt",
+      "final_checkpoint_sha256": "e1909b70c0574a17c0ba1e5558a738848e943a67eed2c2bc2bb150bd3c96da7b",
+      "completed_epochs": 200,
+      "steps": 78200,
+      "source_gpu": {
+        "name": "NVIDIA GeForce RTX 4080 SUPER",
+        "uuid": "GPU-15f4db77-e52f-c08d-e296-eb814b27dcef",
+        "memory_total_mib": 32760,
+        "memory_free_mib": 32227,
+        "driver": "595.71.05",
+        "compute_capability": [
+          8,
+          9
+        ]
+      }
+    },
+    {
+      "seed": 1,
+      "stage": "apbr",
+      "status": "PASS",
+      "final_checkpoint": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed1/apbr_sam/final_epoch_200.pt",
+      "final_checkpoint_sha256": "6571e30ed783508f28bc378aa3b22a739bf1ddbbb790db3d98c08858e126e10b",
+      "completed_epochs": 200,
+      "steps": 78200
+    },
+    {
+      "seed": 1,
+      "stage": "magnitude",
+      "status": "completed",
+      "protocol_id": "cifar100_50k10k_final_v1",
+      "method": "magnitude",
+      "raw_hard_sha256": "857f9c214f7d4ecef17d619d9ebdac3bea80b1d2ac1eff09267a9dad24bd2a9f",
+      "bn_only_sha256": "dbd64d4bc093085b10850b4343b1cf2a06a7ee7c77604c1e5f562ab8099a736e",
+      "recovery_final_sha256": "7e8261bea30fb0bb2380a3f5e9834d2dfa3e3108072639de44cf03df996122d4",
+      "mask_sha256": "6b1a96ae455520e801309745f06e5b80d2ba00b78bd4255b45958e54e28c422e",
+      "recovery_epochs": 20,
+      "recovery_steps": 7820,
+      "test_accessed": false,
+      "peak_allocated_bytes": 834942976,
+      "peak_reserved_bytes": 1084227584,
+      "elapsed_seconds": 164.1924946270883
+    },
+    {
+      "seed": 1,
+      "stage": "wanda",
+      "status": "completed",
+      "protocol_id": "cifar100_50k10k_final_v1",
+      "method": "wanda",
+      "raw_hard_sha256": "a9e4e90a1f70f9b41dc93cabfa6542c49ab3abc3cba2df4fee25987b79d3f23e",
+      "bn_only_sha256": "929b81e5c2ebc59d5ff84d9949e794341645750896b5c3c6f7d11fa6c61b4778",
+      "recovery_final_sha256": "e30db4a57fc689482c90e1425c022bb92e572d8ef69b05bb8592a1e043e299c3",
+      "mask_sha256": "7c256f069911ec557045661e470d670ee9449d53a5ecd8d23d1f0f5f7f4f869f",
+      "recovery_epochs": 20,
+      "recovery_steps": 7820,
+      "test_accessed": false,
+      "peak_allocated_bytes": 1691446784,
+      "peak_reserved_bytes": 2562719744,
+      "elapsed_seconds": 163.78170093148947
+    },
+    {
+      "seed": 1,
+      "stage": "sparsegpt",
+      "status": "completed",
+      "protocol_id": "cifar100_50k10k_final_v1",
+      "method": "sparsegpt",
+      "raw_hard_sha256": "a00ef6d60f41aef56733d3e1d88d850d18e7eb51c1c8d816f618b322dd28ce59",
+      "bn_only_sha256": "07cf4c83b42ea7dd3b123380c64b16755cff2bfd1422d3a691c55a98e7b433fa",
+      "recovery_final_sha256": "932713663e5794bd6a74cd86ba54b9edd4cdd1c0bb6745afb0d03f4da05e3b71",
+      "mask_sha256": "badfef6175b0cfa6cc4a7a083c46aacd7430c2ee1a09a2e10ea5bc72b0322e65",
+      "recovery_epochs": 20,
+      "recovery_steps": 7820,
+      "test_accessed": false,
+      "peak_allocated_bytes": 1157752320,
+      "peak_reserved_bytes": 1423966208,
+      "elapsed_seconds": 165.29131259024143
+    },
+    {
+      "seed": 1,
+      "stage": "rose",
+      "status": "completed",
+      "protocol_id": "cifar100_50k10k_final_v1",
+      "method": "rose",
+      "raw_hard_sha256": "15585fe38487892fe0179ae65ae2284a8c4de34a80d80ba73038f7a570ba1fc4",
+      "bn_only_sha256": "61d9166cb31747f5257c070fb5622ae68d20c9accbdb60bb89320884cc1535e6",
+      "recovery_final_sha256": "5f4fb88b0c2a8d3d520e4d6d2630c2c1c75b864588feffeeeba2e869cbb42356",
+      "mask_sha256": "65830b5867ab709526f550b96b8e9a2b236b842a5d78a113d3c0edf33f170f42",
+      "recovery_epochs": 20,
+      "recovery_steps": 7820,
+      "test_accessed": false,
+      "peak_allocated_bytes": 1157752320,
+      "peak_reserved_bytes": 1423966208,
+      "elapsed_seconds": 163.33247123658657
+    },
+    {
+      "seed": 1,
+      "stage": "apbr_sam",
+      "status": "completed",
+      "protocol_id": "cifar100_50k10k_final_v1",
+      "method": "apbr_sam",
+      "raw_hard_sha256": "63acc8db1965834ddef547ac2a82a616608ef03a0c4c4ef7109741170a4f2113",
+      "bn_only_sha256": "6f617ace3d89f185ae651be2df633f6d540a351f6bc88549bb16457162061697",
+      "recovery_final_sha256": "cba7d91132136eb64ae8739b4a4b7627a2558907d9f83f087369f6c4d55c6367",
+      "mask_sha256": "54eedcd0449582a0afb1d240e41bb8223e36536e62e90539bab8cfce421fd6ac",
+      "recovery_epochs": 20,
+      "recovery_steps": 7820,
+      "test_accessed": false,
+      "peak_allocated_bytes": 850950144,
+      "peak_reserved_bytes": 1077936128,
+      "elapsed_seconds": 142.1988594867289
+    },
+    {
+      "seed": 1,
+      "stage": "final_test",
+      "targets": 12
+    }
+  ]
+}

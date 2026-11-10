@@ -1,0 +1,80 @@
+schema_version: 1
+comparison_protocol_id: cifar100_method_specific_endpoint_v1
+status: FROZEN
+base_training_protocol_id: cifar100_50k10k_final_v1
+base_training_config: configs/cifar100_50k10k_final_v1.yaml
+base_training_config_sha256: e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6
+seeds: [0, 1, 2]
+
+fixed_conditions:
+  train_size: 50000
+  test_size: 10000
+  validation_size: 0
+  model_id: ssam2022_cifar_resnet18_c100_v1
+  n: 2
+  m: 4
+  layout: oihw_output_row_contiguous_v1
+  test_used_for_training_selection_or_tuning: false
+
+methods:
+  magnitude:
+    parent: dense_sam_final_epoch_200
+    native_flow: magnitude_score_mask_zero
+    primary_endpoint: raw_hard
+    executed_recovery_epochs: 20
+    recovery_role: supplemental
+  wanda:
+    parent: dense_sam_final_epoch_200
+    native_flow: activation_aware_score_mask_zero
+    primary_endpoint: raw_hard
+    executed_recovery_epochs: 20
+    recovery_role: supplemental
+  sparsegpt:
+    parent: dense_sam_final_epoch_200
+    native_flow: dynamic_nm_mask_with_obs_compensation
+    primary_endpoint: raw_hard
+    executed_recovery_epochs: 20
+    recovery_role: supplemental
+    blocksize: 128
+    percdamp: 0.01
+  rose:
+    parent: dense_sam_final_epoch_200
+    native_flow: rose_reorder_then_sparsegpt_compensation_then_inverse_map
+    primary_endpoint: raw_hard
+    executed_recovery_epochs: 20
+    recovery_role: supplemental
+    blocksize: 128
+    percdamp: 0.01
+    reorder_threshold: 0.5
+  apbr_sam:
+    parent: apbr_sam_final_epoch_200
+    native_flow: geometry_score_mask_zero_then_fixed_mask_recovery
+    raw_endpoint_retained: true
+    primary_endpoint: recovery_final_epoch_20
+    executed_recovery_epochs: 20
+    recovery_role: primary
+
+bn_only:
+  retained_for_audit: true
+  primary_endpoint: false
+  update: batch_norm_running_buffers_only
+
+reporting:
+  main_table: method_specific_endpoint
+  supplemental_table: actually_completed_recovery_20_only
+  sample_standard_deviation_ddof: 1
+  paired_by_seed: true
+  missing_supplemental_values: null
+
+execution:
+  mode: reporting_overlay_on_existing_full_recovery_queue
+  single_gpu_serial: true
+  no_automatic_retry: true
+  preserve_existing_seed0: true
+  preserve_existing_artifacts: true
+  existing_full_queue_continues: true
+  baseline_recovery_seed1_seed2: true
+  apbr_recovery_seed1_seed2: true
+  alternate_endpoint_controller_started: false
+  active_queue_status: full_queue_status.json
+

@@ -1,0 +1,60 @@
+{
+  "protocol_id": "cifar100_50k10k_final_v1",
+  "seed": 3,
+  "targets": [
+    {
+      "name": "apbr_final",
+      "role": "dense_final",
+      "path": "/root/autodl-tmp/apbr_seed3_matrix_20261030/artifacts/apbr_seed3_apbr_ablation_20261030_retry1/seed3/apbr_sam/final_epoch_200.pt",
+      "sha256": "b5289b0bb6be67cef28d675c4d1dc6a4703ab615c60d707296f12c6bbd00b5e3"
+    },
+    {
+      "name": "apbr_geometry_raw",
+      "role": "raw_hard",
+      "path": "/root/autodl-tmp/apbr_seed3_matrix_20261030/artifacts/apbr_seed3_apbr_ablation_20261030_retry1/seed3/methods/apbr_geometry/raw_hard.pt",
+      "sha256": "18f5c7fa0127e52c6ebce96092d47e6c65c1ebf5dfbbe41e750e47887d1c7076"
+    },
+    {
+      "name": "apbr_geometry_recovery_final",
+      "role": "recovery_final",
+      "path": "/root/autodl-tmp/apbr_seed3_matrix_20261030/artifacts/apbr_seed3_apbr_ablation_20261030_retry1/seed3/methods/apbr_geometry/recovery/final_epoch_020.pt",
+      "sha256": "cb127b6290b3ff060ad7258666a0a3b0d2d537a229431965503110294879efa6"
+    },
+    {
+      "name": "apbr_magnitude_raw",
+      "role": "raw_hard",
+      "path": "/root/autodl-tmp/apbr_seed3_matrix_20261030/artifacts/apbr_seed3_apbr_ablation_20261030_retry1/seed3/methods/apbr_magnitude/raw_hard.pt",
+      "sha256": "0cae74c16de89e0d2db54de18ec6159cefa9b4d28f9bded7d23c8b3325acc7b9"
+    },
+    {
+      "name": "apbr_magnitude_recovery_final",
+      "role": "recovery_final",
+      "path": "/root/autodl-tmp/apbr_seed3_matrix_20261030/artifacts/apbr_seed3_apbr_ablation_20261030_retry1/seed3/methods/apbr_magnitude/recovery/final_epoch_020.pt",
+      "sha256": "72ac22ddb8c347cffedcc1f8a5d11487c095e482ebd37d06052121cc9272280f"
+    }
+  ],
+  "source_snapshot": {
+    "config": {
+      "path": "/root/autodl-tmp/apbr_seed3_matrix_20261030/project/workspace/experiments/post_training_nm_benchmark/configs/cifar100_50k10k_final_v1_seed3_vgpu32_20261030.yaml",
+      "sha256": "f9559e0fdf1ac2ef0b3469d32024398e8b840c9544944cfe772ad58a3fe0d0bc"
+    },
+    "training": {
+      "path": "/root/autodl-tmp/apbr_seed3_matrix_20261030/project/workspace/experiments/post_training_nm_benchmark/scripts/run_cifar100_50k_formal_training_seed345.py",
+      "sha256": "c28a71f723615859a1cb2413f3c42f23d0ada0b14cf369a9e477912bfbdc57b6"
+    },
+    "evaluation": {
+      "path": "/root/autodl-tmp/apbr_seed3_matrix_20261030/project/workspace/experiments/post_training_nm_benchmark/scripts/evaluate_cifar100_50k_final.py",
+      "sha256": "b4fb238a6a28cf4c6c943e8f125de88430bbcead6e08c40425f2d5a896ec6fd7"
+    },
+    "magnitude": {
+      "path": "/root/autodl-tmp/apbr_seed3_matrix_20261030/project/workspace/experiments/post_training_nm_benchmark/scripts/run_apbr_parent_magnitude_seed3.py",
+      "sha256": "5bd32df6f09cbbb6ecd86b9d0ef801875dfd3f2e29f6925b2b5027eac792e27f"
+    },
+    "controller": {
+      "path": "/root/autodl-tmp/apbr_seed3_matrix_20261030/project/workspace/experiments/post_training_nm_benchmark/scripts/run_apbr_seed3_continue_magnitude_20261030.py",
+      "sha256": "bd6a394d3476c429c2dd035eb22bb6be55edd339a5daeb8c7aa376ed1d303062"
+    }
+  },
+  "test_accessed": false,
+  "frozen_at_unix": 1793328835.6288571
+}

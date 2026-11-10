@@ -1,0 +1,41 @@
+{
+  "protocol_id": "cifar100_50k10k_final_v1",
+  "method": "apbr_sam",
+  "seed": 1,
+  "model_id": "ssam2022_cifar_resnet18_c100_v1",
+  "architecture_sha256": "95367b739c42cca14cb51d1a776e5dbdbe71f9ed4a1afbd2c5c0b1bb994827ea",
+  "random_initialization": true,
+  "external_pretraining": false,
+  "initial_model_sha256": "97b16eba0da71abef9027a69419f32344e2b1587b7bd8e616cc1d523cc512781",
+  "config_sha256": "8c8e6b6eb419d1b2f2685c67b435fc5e50e545618ddf4c01c1058d71ec7d8746",
+  "source_sha256": {
+    "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/scripts/run_cifar100_50k_formal_training.py": "993e800776db5bcff401c2f81690cb66e646b9fa325a1b8b5260343f9d3d0cf6",
+    "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/configs/cifar100_50k10k_final_v1_blackwell_handoff.yaml": "8c8e6b6eb419d1b2f2685c67b435fc5e50e545618ddf4c01c1058d71ec7d8746",
+    "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/baseline_adapters/cifar100_model.py": "9dfd402b4aac66d8ed18062089a07f3779ba119c909859e031b15abd94ade889",
+    "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/benchmark/model.py": "befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71",
+    "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/src/vpr_sam/optim/step.py": "3c022f2815d577ef3d94ffeed40cb93c06e2359a2734c857a06f1a0c1f738ac2",
+    "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/src/vpr_sam/optim/geometry.py": "8e0e6d42bcf34a7a8c3b79dc4b76081e9d8c0d6313b183ce0f59109bd39058b5",
+    "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/src/vpr_sam/repro.py": "4ddb0609a19314c34db7a2ec7ea0925e4e011696d4d7bd28eac4defe14148c13"
+  },
+  "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+  "train_pickle_sha256": "735e79b04f092ca3d2e6d07f368c0a7d70d48c48d28865950cc24454cf45129b",
+  "train_size": 50000,
+  "validation_size": 0,
+  "test_loader_constructed": false,
+  "test_accessed": false,
+  "gpu": {
+    "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "uuid": "GPU-65be6845-be69-8ba1-72f8-e34688ce53c5",
+    "memory_total_mib": 97887,
+    "memory_free_mib": 97248,
+    "driver": "580.82.09",
+    "compute_capability": [
+      12,
+      0
+    ]
+  },
+  "python": "3.12.3",
+  "torch": "2.8.0+cu128",
+  "torch_cuda_build": "12.8",
+  "started_at_unix": 1793078066.2872727
+}

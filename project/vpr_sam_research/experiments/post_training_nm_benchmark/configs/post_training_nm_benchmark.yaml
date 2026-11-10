@@ -1,0 +1,142 @@
+name: APBR-post-training-NM-controlled-benchmark
+version: preexecution-acceptance-20261025
+purpose: formal
+device: cuda:0
+gpu_uuid: GPU-fc8784a7-85a2-2bcd-d2e2-f36ef021616c
+threads: 4
+seeds:
+- 0
+- 1
+- 2
+execution:
+  approved: false
+  cuda_smoke_receipt: null
+  pilot_seed: 0
+  full_queue_requires_reviewed_pilot: true
+dense_training: prohibited; load existing Dense-SAM only for new competitors
+apbr_alias: Full VPR-L2 + Geometry-guided; fixed_l2/vpr_guided unchanged
+calibration:
+  approved: false
+  dataset: official_cifar10_train_50000
+  samples: null
+  index_file: null
+  index_sha256: null
+  batch_size: null
+  rounds: null
+  forward_passes_per_layer: null
+  optimization_epochs: null
+  random_seed: null
+  augmentation: null
+  preprocessing: null
+  status: PENDING_APPROVAL
+  common_budget:
+    approved: false
+    status: PENDING_APPROVAL
+  method_native:
+    OBC:
+      samples: 1024
+      default_rounds: 10
+      noaug_rounds: 1
+      approved_for_local_run: false
+    SNOWS:
+      nm_parser_ngrads: 128
+      readme_example_ngrads: 3000
+      approved_for_local_run: false
+nm_acceptance:
+  OBC: CPU_ADAPTER_PASS_CUDA_PENDING
+  SNOWS: BLOCKED
+  CAP: CONDITIONAL_BLOCKED
+pruning:
+  n: 2
+  m: 4
+  layout: oihw_output_row_contiguous_v1
+  scope: exclude_first_last
+  tail: dense
+  bn_affine: excluded
+  tie_break: native OBC argmin first index; existing magnitude stable lower index
+data:
+  train_size: 50000
+  test_size: 10000
+  validation_size: 0
+  batch_size: 128
+  evaluation_batch_size: 128
+  workers: 2
+  pin_memory: true
+  drop_last: true
+  normalize_mean:
+  - 0.4913725490196078
+  - 0.4823529411764706
+  - 0.4466666666666667
+  normalize_std:
+  - 0.24705882352941178
+  - 0.24352941176470588
+  - 0.2615686274509804
+  crop_padding: 4
+  horizontal_flip_probability: 0.5
+  cutout_size: 16
+  cutout_probability: 0.5
+recovery:
+  epochs: 20
+  learning_rate: 0.005
+  momentum: 0.9
+  weight_decay: 0.0005
+  nesterov: false
+  scheduler: CosineAnnealingLR_epoch_end
+  eta_min: 0.0
+  selection: strict_best_test_accuracy_earliest_tie
+  save_each_epoch: true
+common_bn:
+  samples: 4096
+  index_file: configs/bn_train_ids.json
+  index_sha256: 8a4758969d1a4ad9a56e0bb13de4042f6f55a976594e8dbeee577198640b02a3
+  augmentation: none
+  batch_size: 128
+  rounds: 1
+  momentum: null
+  separate_copy: true
+OBC:
+  status: CPU_ADAPTER_TESTED_GPU_PENDING
+  gpu_smoke_config: configs/obc_cuda_smoke.yaml
+  gpu_smoke_config_approved: true
+  gpu_smoke_readiness: computed_by_benchmark.smoke_readiness_after_clean_commit
+  parallel: 32
+  relative_damping: 0.0
+  native_bn:
+    default_enabled: false
+    optional_postproc_bnt_batches: 100
+    momentum: 0.1
+  output: native compensated post-pruning; not Raw Hard
+SNOWS:
+  status: BLOCKED_PINNED_SOURCE
+  gpu_smoke_status: BLOCKED_SOURCE
+  isolated_patch: patches/snows_minimal_diagnostic.patch
+  approved_step_patch: patches/snows_step_acceptance.patch
+  patch_scope: diagnostic math kernels and explicit unused placeholder only; not accepted full optimizer
+  unresolved:
+  - full CIFAR-ResNet18 representation-hook bridge
+  - Armijo last-batch objective vs current-batch gradient; unchanged pending review
+  - explicit Mask for retained zero-valued weights
+  - calibration and optimization configuration review
+  reasons:
+  - module syntax error
+  - chunked HVP error
+  - zero-RHS CG nonfinite
+CAP:
+  status: BLOCKED_PINNED_NM_CONSTRUCTORS
+MOONSHOT:
+  status: LITERATURE_ONLY_CODE_NOT_RELEASED_AT_PIN
+UniPTS:
+  status: LITERATURE_ONLY_NO_EQUIVALENT_NM_PATH
+minimum_free_disk_bytes: 23622320128
+precision:
+  model: float32
+  amp: false
+  tf32: false
+  compile: false
+  deterministic: true
+selection: maximum Test Accuracy earliest tie; Test reused for selection; biased endpoint
+  disclosed
+recovery_parent: native_complete before any BN recalibration
+provenance:
+  historical_protocol_sha256: 6986af80a36e600c82b4bc90d9779aff8753813f7d4aa20479a0ea262dece44a
+  base_commit: d0025b48664091444cc1ad363253010c336b23e6

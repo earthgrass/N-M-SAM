@@ -1,0 +1,589 @@
+{
+  "schema": 1,
+  "protocol_id": "cifar100_50k10k_final_v1",
+  "seeds": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "endpoint": "APBR parent; 2:4 Raw-Hard and fixed-mask Recovery-20",
+  "rows": [
+    {
+      "seed": 0,
+      "dense_accuracy": 0.7868,
+      "magnitude_raw_accuracy": 0.5894,
+      "geometry_raw_accuracy": 0.5922,
+      "magnitude_recovery20_accuracy": 0.7867,
+      "geometry_recovery20_accuracy": 0.7872,
+      "geometry_minus_magnitude_raw_pp": 0.27999999999999137,
+      "geometry_minus_magnitude_recovery20_pp": 0.050000000000005596
+    },
+    {
+      "seed": 1,
+      "dense_accuracy": 0.7908,
+      "magnitude_raw_accuracy": 0.5012,
+      "geometry_raw_accuracy": 0.5187,
+      "magnitude_recovery20_accuracy": 0.7921,
+      "geometry_recovery20_accuracy": 0.7915,
+      "geometry_minus_magnitude_raw_pp": 1.750000000000007,
+      "geometry_minus_magnitude_recovery20_pp": -0.060000000000004494
+    },
+    {
+      "seed": 2,
+      "dense_accuracy": 0.7903,
+      "magnitude_raw_accuracy": 0.5472,
+      "geometry_raw_accuracy": 0.5614,
+      "magnitude_recovery20_accuracy": 0.787,
+      "geometry_recovery20_accuracy": 0.7871,
+      "geometry_minus_magnitude_raw_pp": 1.419999999999999,
+      "geometry_minus_magnitude_recovery20_pp": 0.009999999999998899
+    },
+    {
+      "seed": 3,
+      "dense_accuracy": 0.7861,
+      "dense_ce": 0.809016086769104,
+      "magnitude_raw_accuracy": 0.6255,
+      "magnitude_raw_ce": 1.4649728130340576,
+      "geometry_raw_accuracy": 0.6304,
+      "geometry_raw_ce": 1.4545104782104492,
+      "magnitude_recovery20_accuracy": 0.7887,
+      "magnitude_recovery20_ce": 0.824543778514862,
+      "geometry_recovery20_accuracy": 0.7878,
+      "geometry_recovery20_ce": 0.8243624773979187,
+      "magnitude_raw_drop_pp": -16.06000000000001,
+      "geometry_raw_drop_pp": -15.570000000000006,
+      "magnitude_recovery20_drop_pp": 0.25999999999999357,
+      "geometry_recovery20_drop_pp": 0.16999999999999238,
+      "geometry_minus_magnitude_raw_pp": 0.49000000000000155,
+      "geometry_minus_magnitude_recovery20_pp": -0.09000000000000119,
+      "geometry_minus_magnitude_raw_ce": -0.010462334823608366,
+      "geometry_minus_magnitude_recovery20_ce": -0.00018130111694336648
+    }
+  ],
+  "summary": {
+    "dense_accuracy": {
+      "mean": 0.7885,
+      "sample_std": 0.0023930454794396394,
+      "values": [
+        0.7868,
+        0.7908,
+        0.7903,
+        0.7861
+      ]
+    },
+    "magnitude_raw_accuracy": {
+      "mean": 0.565825,
+      "sample_std": 0.05366615165384353,
+      "values": [
+        0.5894,
+        0.5012,
+        0.5472,
+        0.6255
+      ]
+    },
+    "geometry_raw_accuracy": {
+      "mean": 0.5756749999999999,
+      "sample_std": 0.0473209872396311,
+      "values": [
+        0.5922,
+        0.5187,
+        0.5614,
+        0.6304
+      ]
+    },
+    "magnitude_recovery20_accuracy": {
+      "mean": 0.788625,
+      "sample_std": 0.002478406746278762,
+      "values": [
+        0.7867,
+        0.7921,
+        0.787,
+        0.7887
+      ]
+    },
+    "geometry_recovery20_accuracy": {
+      "mean": 0.7884,
+      "sample_std": 0.00208965706915432,
+      "values": [
+        0.7872,
+        0.7915,
+        0.7871,
+        0.7878
+      ]
+    },
+    "geometry_minus_magnitude_raw_pp": {
+      "mean": 0.9849999999999998,
+      "sample_std": 0.7109852319141424,
+      "values": [
+        0.27999999999999137,
+        1.750000000000007,
+        1.419999999999999,
+        0.49000000000000155
+      ]
+    },
+    "geometry_minus_magnitude_recovery20_pp": {
+      "mean": -0.022500000000000298,
+      "sample_std": 0.06396613687465486,
+      "values": [
+        0.050000000000005596,
+        -0.060000000000004494,
+        0.009999999999998899,
+        -0.09000000000000119
+      ]
+    }
+  },
+  "seed3_mask_audit": {
+    "apbr_geometry": {
+      "layers": 19,
+      "eligible": 11157504,
+      "removed": 5578752,
+      "strict_2_of_4": true,
+      "bool_keep_mask": true,
+      "deleted_weights_zero": true,
+      "per_layer": [
+        {
+          "name": "layer1.0.conv1.weight",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "full_positions": 36864,
+          "removed": 18432
+        },
+        {
+          "name": "layer1.0.conv2.weight",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "full_positions": 36864,
+          "removed": 18432
+        },
+        {
+          "name": "layer1.1.conv1.weight",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "full_positions": 36864,
+          "removed": 18432
+        },
+        {
+          "name": "layer1.1.conv2.weight",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "full_positions": 36864,
+          "removed": 18432
+        },
+        {
+          "name": "layer2.0.conv1.weight",
+          "shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "full_positions": 73728,
+          "removed": 36864
+        },
+        {
+          "name": "layer2.0.conv2.weight",
+          "shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "full_positions": 147456,
+          "removed": 73728
+        },
+        {
+          "name": "layer2.0.shortcut.0.weight",
+          "shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "full_positions": 8192,
+          "removed": 4096
+        },
+        {
+          "name": "layer2.1.conv1.weight",
+          "shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "full_positions": 147456,
+          "removed": 73728
+        },
+        {
+          "name": "layer2.1.conv2.weight",
+          "shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "full_positions": 147456,
+          "removed": 73728
+        },
+        {
+          "name": "layer3.0.conv1.weight",
+          "shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "full_positions": 294912,
+          "removed": 147456
+        },
+        {
+          "name": "layer3.0.conv2.weight",
+          "shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "full_positions": 589824,
+          "removed": 294912
+        },
+        {
+          "name": "layer3.0.shortcut.0.weight",
+          "shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "full_positions": 32768,
+          "removed": 16384
+        },
+        {
+          "name": "layer3.1.conv1.weight",
+          "shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "full_positions": 589824,
+          "removed": 294912
+        },
+        {
+          "name": "layer3.1.conv2.weight",
+          "shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "full_positions": 589824,
+          "removed": 294912
+        },
+        {
+          "name": "layer4.0.conv1.weight",
+          "shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "full_positions": 1179648,
+          "removed": 589824
+        },
+        {
+          "name": "layer4.0.conv2.weight",
+          "shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "full_positions": 2359296,
+          "removed": 1179648
+        },
+        {
+          "name": "layer4.0.shortcut.0.weight",
+          "shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "full_positions": 131072,
+          "removed": 65536
+        },
+        {
+          "name": "layer4.1.conv1.weight",
+          "shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "full_positions": 2359296,
+          "removed": 1179648
+        },
+        {
+          "name": "layer4.1.conv2.weight",
+          "shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "full_positions": 2359296,
+          "removed": 1179648
+        }
+      ],
+      "mask_sha256": "7ef731e6b11e6acc6b5e59cd0f83e2df14edd988a382c9c49b4db746ae0c9d85"
+    },
+    "apbr_magnitude": {
+      "layers": 19,
+      "eligible": 11157504,
+      "removed": 5578752,
+      "strict_2_of_4": true,
+      "bool_keep_mask": true,
+      "deleted_weights_zero": true,
+      "per_layer": [
+        {
+          "name": "layer1.0.conv1.weight",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "full_positions": 36864,
+          "removed": 18432
+        },
+        {
+          "name": "layer1.0.conv2.weight",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "full_positions": 36864,
+          "removed": 18432
+        },
+        {
+          "name": "layer1.1.conv1.weight",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "full_positions": 36864,
+          "removed": 18432
+        },
+        {
+          "name": "layer1.1.conv2.weight",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "full_positions": 36864,
+          "removed": 18432
+        },
+        {
+          "name": "layer2.0.conv1.weight",
+          "shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "full_positions": 73728,
+          "removed": 36864
+        },
+        {
+          "name": "layer2.0.conv2.weight",
+          "shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "full_positions": 147456,
+          "removed": 73728
+        },
+        {
+          "name": "layer2.0.shortcut.0.weight",
+          "shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "full_positions": 8192,
+          "removed": 4096
+        },
+        {
+          "name": "layer2.1.conv1.weight",
+          "shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "full_positions": 147456,
+          "removed": 73728
+        },
+        {
+          "name": "layer2.1.conv2.weight",
+          "shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "full_positions": 147456,
+          "removed": 73728
+        },
+        {
+          "name": "layer3.0.conv1.weight",
+          "shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "full_positions": 294912,
+          "removed": 147456
+        },
+        {
+          "name": "layer3.0.conv2.weight",
+          "shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "full_positions": 589824,
+          "removed": 294912
+        },
+        {
+          "name": "layer3.0.shortcut.0.weight",
+          "shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "full_positions": 32768,
+          "removed": 16384
+        },
+        {
+          "name": "layer3.1.conv1.weight",
+          "shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "full_positions": 589824,
+          "removed": 294912
+        },
+        {
+          "name": "layer3.1.conv2.weight",
+          "shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "full_positions": 589824,
+          "removed": 294912
+        },
+        {
+          "name": "layer4.0.conv1.weight",
+          "shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "full_positions": 1179648,
+          "removed": 589824
+        },
+        {
+          "name": "layer4.0.conv2.weight",
+          "shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "full_positions": 2359296,
+          "removed": 1179648
+        },
+        {
+          "name": "layer4.0.shortcut.0.weight",
+          "shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "full_positions": 131072,
+          "removed": 65536
+        },
+        {
+          "name": "layer4.1.conv1.weight",
+          "shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "full_positions": 2359296,
+          "removed": 1179648
+        },
+        {
+          "name": "layer4.1.conv2.weight",
+          "shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "full_positions": 2359296,
+          "removed": 1179648
+        }
+      ],
+      "mask_sha256": "c850916b65dbeaab09e1878de99a0b872fd1f836e3de7e0c3030331932db0f6f"
+    },
+    "comparison": {
+      "different_positions": 5858,
+      "total_positions": 11157504,
+      "flip_rate": 0.0005250278198421439,
+      "same_keys": true
+    }
+  },
+  "notes": [
+    "Sample standard deviation uses ddof=1.",
+    "Geometry and Magnitude use the same APBR-SAM dense parent within each seed.",
+    "Seed 3 was executed on a separate 32GB vGPU; endpoint semantics are unchanged."
+  ]
+}

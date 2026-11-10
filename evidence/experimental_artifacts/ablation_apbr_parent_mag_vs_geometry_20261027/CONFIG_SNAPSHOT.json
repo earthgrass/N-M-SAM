@@ -1,0 +1,93 @@
+{
+  "ablation_id": "ablation_apbr_parent_mag_vs_geometry_20261027",
+  "dataset_root": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/data/cifar100_official_20261026",
+  "config": {
+    "path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/configs/cifar100_50k10k_final_v1_blackwell_handoff.yaml",
+    "sha256": "8c8e6b6eb419d1b2f2685c67b435fc5e50e545618ddf4c01c1058d71ec7d8746"
+  },
+  "runner": {
+    "path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/scripts/run_apbr_parent_magnitude_ablation.py",
+    "sha256": "2e830b91a903e5bbcad76cd8f555bfde87fe3f957dc014b39e3cf51745a3e394"
+  },
+  "evaluator": {
+    "path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/scripts/evaluate_cifar100_50k_final.py",
+    "sha256": "b4fb238a6a28cf4c6c943e8f125de88430bbcead6e08c40425f2d5a896ec6fd7"
+  },
+  "seeds": [
+    {
+      "seed": 0,
+      "formal_root": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/legacy_4080_migration_20261027/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/cifar100_50k10k_final_v1/seed0",
+      "parent": {
+        "path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/legacy_4080_migration_20261027/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/cifar100_50k10k_final_v1/seed0/apbr_sam/final_epoch_200.pt",
+        "sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+        "model_sha256": "1d95bfbef1d1590da1fc6e854c9b84986d06e271d405a4e26db95c63a8bee31c",
+        "epoch": 200,
+        "steps": 78200
+      },
+      "geometry": {
+        "state_method": "vpr",
+        "mapping_count": 62,
+        "raw_path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/legacy_4080_migration_20261027/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/cifar100_50k10k_final_v1/seed0/methods/apbr_sam/raw_hard.pt",
+        "raw_sha256": "74ea702356b6cb3f10ad34985ca8de6757ccb80702cced3debe4ec5936b9b9b3",
+        "mask_sha256": "79d9c410c67e931101cf46112e732c68133a9935e4f99a41503a0de8ee7b40f4",
+        "recovery_path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/legacy_4080_migration_20261027/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/cifar100_50k10k_final_v1/seed0/methods/apbr_sam/recovery/final_epoch_020.pt",
+        "recovery_sha256": "97337268a33d451db9e404ffc63440a7f9de0708527ddf077bfda7a02af75ebd",
+        "raw_accuracy": 0.5922,
+        "raw_loss": 1.6403955055236816,
+        "recovery_accuracy": 0.7872,
+        "recovery_loss": 0.8237813804626465
+      }
+    },
+    {
+      "seed": 1,
+      "formal_root": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed1",
+      "parent": {
+        "path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed1/apbr_sam/final_epoch_200.pt",
+        "sha256": "6571e30ed783508f28bc378aa3b22a739bf1ddbbb790db3d98c08858e126e10b",
+        "model_sha256": "bea5258da2caafa56d1ff30556af709223ebf48b431e3b331f8ec28ede532408",
+        "epoch": 200,
+        "steps": 78200
+      },
+      "geometry": {
+        "state_method": "vpr",
+        "mapping_count": 62,
+        "raw_path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed1/methods/apbr_sam/raw_hard.pt",
+        "raw_sha256": "63acc8db1965834ddef547ac2a82a616608ef03a0c4c4ef7109741170a4f2113",
+        "mask_sha256": "54eedcd0449582a0afb1d240e41bb8223e36536e62e90539bab8cfce421fd6ac",
+        "recovery_path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed1/methods/apbr_sam/recovery/final_epoch_020.pt",
+        "recovery_sha256": "cba7d91132136eb64ae8739b4a4b7627a2558907d9f83f087369f6c4d55c6367",
+        "raw_accuracy": 0.5187,
+        "raw_loss": 1.886005569076538,
+        "recovery_accuracy": 0.7915,
+        "recovery_loss": 0.8144774422645569
+      }
+    },
+    {
+      "seed": 2,
+      "formal_root": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed2",
+      "parent": {
+        "path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed2/apbr_sam/final_epoch_200.pt",
+        "sha256": "6b55caf932d846e16a13f7c2510e216db790bcd6738941288491c2e1d4b24a22",
+        "model_sha256": "82da0c1ee6e3bff6a898d7f960e4397f71e47e2d1324ead4671a50f3059d8732",
+        "epoch": 200,
+        "steps": 78200
+      },
+      "geometry": {
+        "state_method": "vpr",
+        "mapping_count": 62,
+        "raw_path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed2/methods/apbr_sam/raw_hard.pt",
+        "raw_sha256": "1ad74b0bdea57525e80212881d3c4df8c67f1225e60fb389420d27a9682ba6ce",
+        "mask_sha256": "53129860937225952922d6f79169e4e138f2667744bb12314085303cb741620b",
+        "recovery_path": "/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed2/methods/apbr_sam/recovery/final_epoch_020.pt",
+        "recovery_sha256": "51406f25fbbc26c75716020548eb71bbfeee866707eccf555040ab1cfad6be6d",
+        "raw_accuracy": 0.5614,
+        "raw_loss": 1.7248817455291747,
+        "recovery_accuracy": 0.7871,
+        "recovery_loss": 0.8109812691688537
+      }
+    }
+  ],
+  "created_at_unix": 1793104837.9199107,
+  "automatic_retry": false,
+  "test_selection": false
+}

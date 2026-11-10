@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "comparison_protocol_id": "cifar100_method_specific_endpoint_v1",
+  "mode": "reporting_overlay_on_existing_full_recovery_queue",
+  "base_training_protocol_id": "cifar100_50k10k_final_v1",
+  "local_branch": "research/post-training-nm-benchmark",
+  "implementation_commits": [
+    "d3ed5a448cf677a6105ee1b883d55d2927f56fe3",
+    "0044ced71a67d230bedf7150492e10a07c9f166c",
+    "39e197cb4db97800625c3f0796767a39ee7cca99"
+  ],
+  "active_execution": {
+    "controller": "scripts/run_cifar100_50k_full_queue.py",
+    "controller_sha256": "111ea710a7d3b269060b86f5b6449edd5b190157da49b5693aef23f0d78d117c",
+    "postprocess": "scripts/run_cifar100_50k_postprocess.py",
+    "postprocess_sha256": "b530ddf6c44e4e7468e3c5cd446b849651114b5c00707025d8d064c57a1592db",
+    "training": "scripts/run_cifar100_50k_formal_training.py",
+    "training_sha256": "993e800776db5bcff401c2f81690cb66e646b9fa325a1b8b5260343f9d3d0cf6",
+    "evaluation": "scripts/evaluate_cifar100_50k_final.py",
+    "evaluation_sha256": "b4fb238a6a28cf4c6c943e8f125de88430bbcead6e08c40425f2d5a896ec6fd7",
+    "base_config": "configs/cifar100_50k10k_final_v1.yaml",
+    "base_config_sha256": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6",
+    "all_methods_execute_recovery_20": true,
+    "controller_restarted": false,
+    "training_restarted": false
+  },
+  "reporting_overlay": {
+    "config": "configs/cifar100_method_specific_endpoint_v1.yaml",
+    "config_sha256": "76d439a1c3b6a1463cf90ff80d5307e19036d2b6be93d79626dd7b8dcf993836",
+    "summarizer": "scripts/summarize_cifar100_method_endpoints.py",
+    "summarizer_sha256": "1ebf2522bf790e3657ddfc9b6d0f2ee9788e99adecffc0bb39c2128da7963a59",
+    "alternate_controller_started": false,
+    "main_endpoints": {
+      "magnitude": "raw_hard",
+      "wanda": "raw_hard",
+      "sparsegpt": "native_compensated_raw_hard",
+      "rose": "native_compensated_raw_hard",
+      "apbr_sam": "recovery_final_epoch_20"
+    },
+    "baseline_recovery_20_role": "supplemental"
+  },
+  "protected_files": {
+    "benchmark/model.py": "befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71",
+    "benchmark/nm.py": "92433dbfd3b768b28922b89954d76fde7c3a6fdd23e661622ac248526b44678f",
+    "benchmark/obc.py": "0681675db4e8d14e2d3b2205c2090e4b9f838db4eb8bfd9e0b70092fe073665c"
+  },
+  "tests": {
+    "result": "PASS",
+    "passed": 10,
+    "warnings": 1,
+    "junit": "docs/research/cifar100_method_specific_endpoint_v1/pytest_method_endpoint.xml",
+    "environment": "docs/research/cifar100_method_specific_endpoint_v1/pytest_method_endpoint.environment.json",
+    "remote_pytest_available": false,
+    "remote_py_compile": "PASS"
+  },
+  "remote_snapshot": {
+    "observed_at": "2026-10-27T10:38:00+08:00",
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "gpu_uuid": "GPU-15f4db77-e52f-c08d-e296-eb814b27dcef",
+    "active_controller_pid": 26844,
+    "active_phase": "seed1_dense",
+    "seed1_dense_pid": 29401,
+    "seed1_completed_epochs": 81,
+    "seed1_steps": 31671,
+    "seed1_test_accessed": false,
+    "seed2_started": false,
+    "new_controller_pid_file_exists": false
+  }
+}

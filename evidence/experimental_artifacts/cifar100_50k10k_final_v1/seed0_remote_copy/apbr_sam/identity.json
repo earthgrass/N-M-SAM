@@ -1,0 +1,41 @@
+{
+  "protocol_id": "cifar100_50k10k_final_v1",
+  "method": "apbr_sam",
+  "seed": 0,
+  "model_id": "ssam2022_cifar_resnet18_c100_v1",
+  "architecture_sha256": "95367b739c42cca14cb51d1a776e5dbdbe71f9ed4a1afbd2c5c0b1bb994827ea",
+  "random_initialization": true,
+  "external_pretraining": false,
+  "initial_model_sha256": "87aa9dd7492a89adf9e3ab78ca4a3227f30bc8de53b18a3bd73cd61ab0bd759d",
+  "config_sha256": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6",
+  "source_sha256": {
+    "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_50k_formal_training.py": "993e800776db5bcff401c2f81690cb66e646b9fa325a1b8b5260343f9d3d0cf6",
+    "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/configs/cifar100_50k10k_final_v1.yaml": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6",
+    "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/cifar100_model.py": "9dfd402b4aac66d8ed18062089a07f3779ba119c909859e031b15abd94ade889",
+    "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/benchmark/model.py": "befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71",
+    "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/src/vpr_sam/optim/step.py": "3c022f2815d577ef3d94ffeed40cb93c06e2359a2734c857a06f1a0c1f738ac2",
+    "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/src/vpr_sam/optim/geometry.py": "8e0e6d42bcf34a7a8c3b79dc4b76081e9d8c0d6313b183ce0f59109bd39058b5",
+    "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/src/vpr_sam/repro.py": "4ddb0609a19314c34db7a2ec7ea0925e4e011696d4d7bd28eac4defe14148c13"
+  },
+  "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+  "train_pickle_sha256": "735e79b04f092ca3d2e6d07f368c0a7d70d48c48d28865950cc24454cf45129b",
+  "train_size": 50000,
+  "validation_size": 0,
+  "test_loader_constructed": false,
+  "test_accessed": false,
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 4080 SUPER",
+    "uuid": "GPU-15f4db77-e52f-c08d-e296-eb814b27dcef",
+    "memory_total_mib": 32760,
+    "memory_free_mib": 32227,
+    "driver": "595.71.05",
+    "compute_capability": [
+      8,
+      9
+    ]
+  },
+  "python": "3.12.3",
+  "torch": "2.8.0+cu128",
+  "torch_cuda_build": "12.8",
+  "started_at_unix": 1793036095.1721318
+}

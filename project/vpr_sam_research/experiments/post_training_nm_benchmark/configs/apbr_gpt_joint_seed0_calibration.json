@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "experiment_id": "apbr_gpt_joint_seed0",
+  "phase": "local_cpu_calibration",
+  "seed": 20261031,
+  "dataset_access": "none_in_synthetic_interface_calibration",
+  "final_test_access": false,
+  "lambda_p": {
+    "target_gradient_ratio": 0.05,
+    "ratio_absolute_tolerance": 0.00005,
+    "lower_bound": 1e-6,
+    "upper_bound": 1000000.0,
+    "accumulation_dtype": "float64",
+    "calibrate_once": true
+  },
+  "eta_s": {
+    "target_projected_update_ratio": 0.05,
+    "relative_tolerance": 0.001,
+    "projection": "global_affine_zero_volume",
+    "calibrate_once": true
+  },
+  "joint_objective": {
+    "temperature": 0.1,
+    "hessian_stop_gradient": true,
+    "first_gradient_stop_gradient": true,
+    "epsilon_scale_gradient": true
+  },
+  "formal_training": {
+    "epochs": 200,
+    "warmup_epochs": 5,
+    "hessian_refresh_epochs": 10,
+    "max_patches_per_layer": 8192,
+    "rho": 0.05,
+    "percdamp": 0.01,
+    "blocksize": 128,
+    "compute_dtype": "float32",
+    "eligible_layers": 19,
+    "nm": "2:4",
+    "validation_size": 0,
+    "selection": "fixed_epoch_200"
+  }
+}

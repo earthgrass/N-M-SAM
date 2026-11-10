@@ -1,0 +1,251 @@
+{
+  "schema": 1,
+  "protocol_id": "cifar100_50k10k_final_v1",
+  "seed": 0,
+  "overall_pass": true,
+  "transfer": {
+    "data": {
+      "entries": 87,
+      "failures": [],
+      "manifest_sha256": "b2797875200ddf962fabdfcfd3fdbc0ad49cb80444c992735f49fd7bb85c71d1"
+    },
+    "evidence": {
+      "entries": 9,
+      "failures": [],
+      "manifest_sha256": "89592c9cdb09f08913818b0be57dd575d4e09db3cc870d3511f63e9938f901b1"
+    }
+  },
+  "identity": {
+    "pass": true,
+    "model_id": "ssam2022_cifar_resnet18_c100_v1",
+    "architecture_sha256": "95367b739c42cca14cb51d1a776e5dbdbe71f9ed4a1afbd2c5c0b1bb994827ea",
+    "config_sha256": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6",
+    "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+    "train_pickle_sha256": "735e79b04f092ca3d2e6d07f368c0a7d70d48c48d28865950cc24454cf45129b",
+    "train_size": 50000,
+    "test_size": 10000,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 4080 SUPER",
+      "uuid": "GPU-15f4db77-e52f-c08d-e296-eb814b27dcef",
+      "memory_total_mib": 32760,
+      "memory_free_mib": 32227,
+      "driver": "595.71.05",
+      "compute_capability": [
+        8,
+        9
+      ]
+    },
+    "torch": "2.8.0+cu128",
+    "torch_cuda_build": "12.8"
+  },
+  "training_contract_pass": true,
+  "test_contract_pass": true,
+  "test_targets": 12,
+  "dense_accuracy": 0.7884,
+  "apbr_dense_accuracy": 0.7868,
+  "apbr_dense_delta_pp": -0.15999999999999348,
+  "methods": [
+    {
+      "method": "magnitude",
+      "label": "Magnitude",
+      "parent": "dense_final",
+      "status_contract_pass": true,
+      "checkpoint_hashes_pass": true,
+      "parent_hash_pass": true,
+      "recovery_parent_hash_pass": true,
+      "mask_audit": {
+        "pass": true,
+        "failures": [],
+        "dtype": "bool",
+        "eligible_layers": 19,
+        "complete_groups": 2789376,
+        "tail_positions": 0,
+        "pruned_positions": 5578752,
+        "excluded_first_last_bn_bias": true,
+        "raw_and_recovery_pruned_coordinates_zero": true,
+        "mask_sha256": "5370699416a9b6e2aae70054bf5639b0da9715029ed738e44820ed35a8cbdb1d"
+      },
+      "finite": true,
+      "accuracy": {
+        "parent": 0.7884,
+        "raw": 0.5705,
+        "recovery": 0.7883,
+        "raw_delta_pp": -21.79,
+        "recovery_delta_pp": -0.009999999999998899,
+        "recovery_gain_pp": 21.78
+      },
+      "resource": {
+        "calibration_seconds": 9.6810981631279e-07,
+        "pruning_seconds": 0.13634241139516234,
+        "recovery_seconds": 391.65090858517215,
+        "estimated_total_seconds": 391.7872519646771,
+        "peak_allocated_bytes": 1161459712,
+        "peak_reserved_bytes": 1669332992
+      }
+    },
+    {
+      "method": "wanda",
+      "label": "Wanda",
+      "parent": "dense_final",
+      "status_contract_pass": true,
+      "checkpoint_hashes_pass": true,
+      "parent_hash_pass": true,
+      "recovery_parent_hash_pass": true,
+      "mask_audit": {
+        "pass": true,
+        "failures": [],
+        "dtype": "bool",
+        "eligible_layers": 19,
+        "complete_groups": 2789376,
+        "tail_positions": 0,
+        "pruned_positions": 5578752,
+        "excluded_first_last_bn_bias": true,
+        "raw_and_recovery_pruned_coordinates_zero": true,
+        "mask_sha256": "fbc2444b7ec5e458dfcf76c990257516a98da136382e7c6a208e7b0349bf8e84"
+      },
+      "finite": true,
+      "accuracy": {
+        "parent": 0.7884,
+        "raw": 0.5854,
+        "recovery": 0.7893,
+        "raw_delta_pp": -20.299999999999997,
+        "recovery_delta_pp": 0.09000000000000119,
+        "recovery_gain_pp": 20.389999999999997
+      },
+      "resource": {
+        "calibration_seconds": 0.9751067762263119,
+        "pruning_seconds": 0.18418534426018596,
+        "recovery_seconds": 398.18684662878513,
+        "estimated_total_seconds": 399.34613874927163,
+        "peak_allocated_bytes": 1691446784,
+        "peak_reserved_bytes": 2562719744
+      }
+    },
+    {
+      "method": "sparsegpt",
+      "label": "SparseGPT",
+      "parent": "dense_final",
+      "status_contract_pass": true,
+      "checkpoint_hashes_pass": true,
+      "parent_hash_pass": true,
+      "recovery_parent_hash_pass": true,
+      "mask_audit": {
+        "pass": true,
+        "failures": [],
+        "dtype": "bool",
+        "eligible_layers": 19,
+        "complete_groups": 2789376,
+        "tail_positions": 0,
+        "pruned_positions": 5578752,
+        "excluded_first_last_bn_bias": true,
+        "raw_and_recovery_pruned_coordinates_zero": true,
+        "mask_sha256": "66f3b3cf830040ae8a96e1d4432f770dee48a11ee0cb1c41dbe2fb231b7f0f83"
+      },
+      "finite": true,
+      "accuracy": {
+        "parent": 0.7884,
+        "raw": 0.7747,
+        "recovery": 0.7862,
+        "raw_delta_pp": -1.3699999999999934,
+        "recovery_delta_pp": -0.21999999999999797,
+        "recovery_gain_pp": 1.1499999999999955
+      },
+      "resource": {
+        "calibration_seconds": 1.0068491399288177,
+        "pruning_seconds": 8.266101549845189,
+        "recovery_seconds": 400.67918818211183,
+        "estimated_total_seconds": 409.95213887188584,
+        "peak_allocated_bytes": 1161852928,
+        "peak_reserved_bytes": 2011168768
+      }
+    },
+    {
+      "method": "rose",
+      "label": "ROSE",
+      "parent": "dense_final",
+      "status_contract_pass": true,
+      "checkpoint_hashes_pass": true,
+      "parent_hash_pass": true,
+      "recovery_parent_hash_pass": true,
+      "mask_audit": {
+        "pass": true,
+        "failures": [],
+        "dtype": "bool",
+        "eligible_layers": 19,
+        "complete_groups": 2789376,
+        "tail_positions": 0,
+        "pruned_positions": 5578752,
+        "excluded_first_last_bn_bias": true,
+        "raw_and_recovery_pruned_coordinates_zero": true,
+        "mask_sha256": "e80ee7728081b3e299cf2e27f7c7c2395150f67768e21975877702e0bc6fd3cb"
+      },
+      "finite": true,
+      "accuracy": {
+        "parent": 0.7884,
+        "raw": 0.7803,
+        "recovery": 0.7874,
+        "raw_delta_pp": -0.8099999999999996,
+        "recovery_delta_pp": -0.10000000000000009,
+        "recovery_gain_pp": 0.7099999999999995
+      },
+      "resource": {
+        "calibration_seconds": 0.9088808088563383,
+        "pruning_seconds": 8.980366523843259,
+        "recovery_seconds": 398.3720655757934,
+        "estimated_total_seconds": 408.261312908493,
+        "peak_allocated_bytes": 1161852928,
+        "peak_reserved_bytes": 2011168768
+      }
+    },
+    {
+      "method": "apbr_sam",
+      "label": "APBR-SAM",
+      "parent": "apbr_final",
+      "status_contract_pass": true,
+      "checkpoint_hashes_pass": true,
+      "parent_hash_pass": true,
+      "recovery_parent_hash_pass": true,
+      "mask_audit": {
+        "pass": true,
+        "failures": [],
+        "dtype": "bool",
+        "eligible_layers": 19,
+        "complete_groups": 2789376,
+        "tail_positions": 0,
+        "pruned_positions": 5578752,
+        "excluded_first_last_bn_bias": true,
+        "raw_and_recovery_pruned_coordinates_zero": true,
+        "mask_sha256": "79d9c410c67e931101cf46112e732c68133a9935e4f99a41503a0de8ee7b40f4"
+      },
+      "finite": true,
+      "accuracy": {
+        "parent": 0.7868,
+        "raw": 0.5922,
+        "recovery": 0.7872,
+        "raw_delta_pp": -19.46000000000001,
+        "recovery_delta_pp": 0.039999999999995595,
+        "recovery_gain_pp": 19.500000000000007
+      },
+      "resource": {
+        "calibration_seconds": 1.1981464922428131e-06,
+        "pruning_seconds": 0.20435456279665232,
+        "recovery_seconds": 356.3472728212364,
+        "estimated_total_seconds": 356.55162858217955,
+        "peak_allocated_bytes": 1175631872,
+        "peak_reserved_bytes": 1684013056
+      }
+    }
+  ],
+  "compatibility_fix": {
+    "resolved": true,
+    "reason": "torch argsort dim keyword compatibility",
+    "commit": "d4a6adb9856ff0327b0aeabeec56d5b36fb4f7d7",
+    "postprocess_sha256": "b530ddf6c44e4e7468e3c5cd446b849651114b5c00707025d8d064c57a1592db",
+    "failed_attempt_preserved_remotely": true
+  },
+  "limitations": [
+    "Seed 0 is one stochastic run; method ranking and SOTA claims require Seeds 1 and 2.",
+    "Recovery results use the fixed epoch-20 endpoint; no validation or Test-based selection was performed.",
+    "The compatibility incident was an argsort API invocation error, not a numerical pruning failure."
+  ]
+}
