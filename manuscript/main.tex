@@ -1,0 +1,134 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,microtype,algorithm,algpseudocode,float}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{titlesec}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+\titleformat{\section}{\Large\bfseries}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection.}{0.6em}{}
+\setlength{\emergencystretch}{2em}
+\title{Curvature-Guided Dense Training for Post-Training N:M Pruning}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We introduce Joint, a dense-training objective designed for a later structured pruning operation. Joint estimates the second-order reconstruction cost of deleting two weights together in each N:M group. It uses a training-side activation Gram matrix to evaluate admissible deletion pairs, then forms a differentiable soft minimum of their weight-deletion and perturbation costs. Adding this signal to sharpness-aware minimization encourages a dense model to admit a low-cost structured deletion without fixing a mask during training. After the final checkpoint is frozen, an independent SparseGPT implementation performs dynamic mask selection and native OBS-style error compensation. This separates preparation of the dense weights from the subsequent one-shot pruner. Initial results suggest that the training signal is worth investigating, while a matched-initialization comparison remains necessary to establish its contribution.
+\end{abstract}
+
+\section{Introduction}
+N:M pruning retains a fixed number of weights in each small group and thereby imposes a discrete support decision on a trained network. A dense model can be accurate before pruning but fragile to this decision. SparseGPT addresses the problem after training by selecting a mask and compensating the removed weights with an activation-based second-order approximation~\cite{sparsegpt}. Its ability to act on an already trained model is valuable. We ask a complementary question: what if dense training itself made the future deletion less costly, while the final pruner remained unchanged?
+
+Sharpness-aware minimization (SAM) trains with a local adversarial weight perturbation~\cite{sam}. This promotes a form of robustness to continuous nearby changes, but the later N:M deletion is finite and restricted to a particular support. The SAM direction does not explicitly score which two coordinates in a group could be jointly removed. Moreover, a pairwise deletion need not have the sum of two independent single-weight costs: its effect depends on the interaction between those input coordinates. This distinction motivates a training signal aligned with the structured decision made after training.
+
+We construct a differentiable proxy for the minimum two-coordinate deletion cost in each 2:4 group. It uses a damped layer-input Gram matrix, evaluates the six possible deletion pairs, and smoothly favors a low-cost pair. The proxy is added to the adversarial SAM objective. The network is never masked during dense training. After the final epoch, we apply the same frozen, audited SparseGPT adapter used for the reference endpoint, including its dynamic mask selection and OBS-style error compensation. The training proxy does not prescribe SparseGPT's final mask.
+
+Our preliminary results show a positive accuracy pattern for this pipeline, but their interpretation requires restraint. The historical reference and the new training cohort have different, unverified initial weight identities. Consequently, the present comparison tests feasibility and motivates a matched study; it does not isolate a causal gain or establish a new method ranking. The scientific contribution at this stage is the training-to-pruning objective, its exact implementation path, and a clearly bounded initial evaluation.
+
+\section{Related Work}
+\subsection{Sharpness-aware and compression-aware training}
+SAM constructs a local weight perturbation from the current gradient and updates using the loss at the perturbed weights~\cite{sam}. ASAM changes the neighborhood geometry to account for parameter rescaling~\cite{asam}, and SSAM sparsifies the perturbation~\cite{ssam}. CrAM brings a compression operator into the training problem~\cite{cram}. Our approach retains dense SAM optimization and adds an activation-derived structured deletion proxy. The discrete N:M mask is still selected only after training.
+
+\subsection{One-shot selection and compensation}
+Magnitude pruning removes small weights, while Wanda incorporates input activation norms into its score~\cite{han_pruning,wanda}. SparseGPT selects weights with calibration statistics and propagates pruning error to surviving weights~\cite{sparsegpt}; OBC develops related second-order compression tools~\cite{obc}. ROSE modifies SparseGPT's processing order~\cite{rose}. These methods clarify why an immediate post-pruning endpoint must specify whether weight compensation has already occurred. Our training objective is separate from these final pruning algorithms and is evaluated primarily with SparseGPT's native compensated endpoint.
+
+\section{Method}
+\subsection{Reconstruction geometry and a joint deletion}
+For an eligible convolutional layer $\ell$, unfold training-side input activations into columns $X_\ell$ and form
+\begin{equation}
+H_\ell=\frac{2}{P}X_\ell X_\ell^{\top},\qquad
+\widetilde H_\ell=H_\ell+\delta_\ell I,\qquad
+Q_\ell=\widetilde H_\ell^{-1}.
+\label{eq:gram}
+\end{equation}
+This is the reconstruction Gram matrix used by the training surrogate, not the exact Hessian of classification cross-entropy. The damping rule is fixed in advance, and the resulting factors are held constant between scheduled refreshes.
+
+Within one output row, a 2:4 group $g$ has six admissible deletion pairs $D$. For a pair, let $w_D$ denote the two original dense weights and $Q_{\ell,DD}$ the corresponding $2\times2$ principal submatrix. The local quadratic cost is
+\begin{equation}
+C^{w}_{\ell,g,D}=\tfrac12w_D^{\top}(Q_{\ell,DD})^{-1}w_D.
+\label{eq:weightcost}
+\end{equation}
+The off-diagonal terms account for the interaction between the two deleted coordinates. We also score deletion of the current SAM perturbation $\epsilon_D$ with the same quadratic form,
+\begin{equation}
+C^{\epsilon}_{\ell,g,D}=\tfrac12\epsilon_D^{\top}(Q_{\ell,DD})^{-1}\epsilon_D.
+\label{eq:probecost}
+\end{equation}
+The perturbation term is a training probe, not an executed pruning displacement. It connects the continuous neighborhood explored by SAM to the later support decision without asserting that they are identical.
+
+\subsection{Differentiable training signal}
+Let $r_\ell>0$ be a frozen train-side reference cost for layer $\ell$ and $T>0$ a fixed temperature. The implemented smooth minimum is
+\begin{equation}
+R_{\ell,g}=-T\log\left[\frac{1}{6}\sum_{D\in\mathcal D_g}
+\exp\left(-\frac{C^{w}_{\ell,g,D}+C^{\epsilon}_{\ell,g,D}}{Tr_\ell}\right)\right].
+\label{eq:softmin}
+\end{equation}
+We average this quantity over eligible groups. The $1/6$ factor fixes the baseline of the soft minimum; it does not change which candidate is cheapest. With first-pass gradient $g_1=\nabla_wL_B(w)$ and SAM perturbation $\epsilon=\rho g_1/\|g_1\|_2$, the parameter update uses
+\begin{equation}
+L_{\mathrm{train}}=L_B(w+\epsilon)+\lambda_p R(w,\epsilon;Q).
+\label{eq:loss}
+\end{equation}
+The first-pass gradient is detached when constructing $\epsilon$ for this regularizer. The optimizer combines the adversarial cross-entropy gradient with $\lambda_p\nabla_wR$. The perturbed weights are restored before the optimizer step, and the adversarial forward does not update batch-normalization running buffers. No mask, recovery training, or final-test feedback enters this dense-training objective.
+
+\subsection{Schedule and frozen readout}
+Training runs for a fixed 200 epochs. The first five epochs follow the underlying SAM objective; the pairwise signal is enabled afterward and its training-side factors are periodically refreshed. At the final checkpoint, a separate audited SparseGPT adapter constructs its own activation statistics, dynamically chooses the 2:4 mask, and applies sequential OBS-style compensation. Thus an improvement at this readout would concern the trained dense parent under the same final algorithm, rather than a change to SparseGPT's mask formula. The currently running sparse-in-time guidance schedule is not included in the completed results of this draft.
+
+\begin{algorithm}[H]
+\caption{Dense training with a pairwise pruning proxy}
+\begin{algorithmic}[1]
+\Require Training data, SAM model, fixed training and refresh schedule
+\For{each dense-training epoch}
+  \If{a training-side Gram refresh is scheduled}
+    \State Cache layer matrices and the six pair factors in Eq.~\eqref{eq:weightcost}
+  \EndIf
+  \For{each mini-batch}
+    \State Construct the SAM probe and adversarial cross-entropy
+    \If{pairwise guidance is active}
+      \State Add the differentiable cost in Eq.~\eqref{eq:softmin}
+    \EndIf
+    \State Restore dense weights and update the model
+  \EndFor
+\EndFor
+\State Freeze the final dense checkpoint
+\State Apply the independent native SparseGPT selection and compensation
+\State Evaluate the fixed sparse checkpoint once
+\end{algorithmic}
+\end{algorithm}
+
+\section{Experiments}
+\subsection{Evaluation protocol}
+We use the official CIFAR-100 training set for dense optimization and calibration, a 100-class ResNet-18, and 2:4 sparsity on the frozen set of eligible internal convolutions. The test set is accessed only for a fixed final evaluation after each checkpoint is frozen. Table~\ref{tab:main} reports immediate post-pruning accuracy, before any additional recovery epochs. It combines the completed historical three-run reference with the available two-run Joint study. Different run counts and initialization cohorts are shown explicitly; the table is not a matched causal ablation.
+
+\begin{table}[H]
+\centering\small
+\caption{CIFAR-100 immediate post-pruning accuracy (mean $\pm$ sample SD, \%). Historical methods use three runs; Joint uses two and consists of Joint dense training followed by native SparseGPT. SparseGPT and ROSE already include second-order compensation; Magnitude and Wanda are mask-only. No row includes recovery.}
+\label{tab:main}
+\begin{tabular}{lc}
+\toprule
+Method & Accuracy \\
+\midrule
+Magnitude & $55.54\pm 1.36$ \\
+Wanda & $56.48\pm 3.83$ \\
+SparseGPT & $77.26\pm 0.42$ \\
+ROSE & $77.82\pm 0.19$ \\
+Joint & $78.53\pm 0.13$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Reading the result}
+The Joint-to-SparseGPT endpoint has a higher mean than the historical SAM-to-SparseGPT endpoint. This pattern is compatible with the hypothesis that a dense model can be prepared for later second-order deletion. It is not yet proof of that hypothesis: the cohorts do not share verified identical initial weights, the number of runs differs, and a within-cohort SAM control has not been trained under the new initialization. Comparisons against Wanda and ROSE describe complete pipelines rather than isolating the training objective, because their immediate pruning mechanisms differ. In particular, the high immediate accuracy of SparseGPT and ROSE includes native compensation; it must not be interpreted as mask-only support quality.
+
+\section{Discussion}
+The method exposes a training-to-pruning connection: instead of predicting a hard mask during training, it encourages the dense model to admit a low-cost structured deletion under a frozen reconstruction proxy. The current evaluation is deliberately preliminary. A matched-initialization SAM control is the decisive next experiment for accuracy attribution. The ongoing sparse-in-time guidance experiment is not included in the completed results.
+
+\section{Conclusion}
+We introduced a differentiable pairwise second-order deletion cost into dense SAM training and evaluated the resulting model with an unchanged, audited SparseGPT-style final pruner. Initial CIFAR-100 results are encouraging but cross-cohort. A matched comparison is required to establish whether the training signal, rather than initialization or another cohort difference, explains the observed accuracy pattern.
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+\end{document}

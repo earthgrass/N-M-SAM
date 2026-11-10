@@ -1,0 +1,20 @@
+{
+  "status": "REBASED_COHORT_READY",
+  "historical_asset_recovered": false,
+  "historical_target_tensor_sha256": "87aa9dd7492a89adf9e3ab78ca4a3227f30bc8de53b18a3bd73cd61ab0bd759d",
+  "scanned_model_state_records": 66,
+  "exact_matches": 0,
+  "reason": "Historical runs retain the initial hash as metadata but no epoch-0 tensor payload; current deterministic reconstruction does not match the historical runtime.",
+  "cohort": "apbr_gpt_joint_seed0_rebased",
+  "seed": 0,
+  "initial_checkpoint": "assets/initial_common_seed0.pt",
+  "initial_checkpoint_sha256": "4317514e003556c58c780c67bd2fb2e07509495224a343c2d10c47206e00c03c",
+  "initial_model_tensor_sha256": "6c16e81a787fc7df291afabdc749a19670a780d5d54ada6a5260ea2815bf2ddc",
+  "initial_geometry_tensor_sha256": "20771c3a2e75dd1ecd1edbd3e03552429e7e5d573f6cee3c33e787e3c927ae09",
+  "branches": ["dense_sam", "apbr_sam", "joint_apbr_gpt"],
+  "branches_share_exact_initial_model": true,
+  "historical_results_allowed_in_rebased_paired_statistics": false,
+  "formal_training_started": false,
+  "cuda_used": false,
+  "final_test_accessed": false
+}

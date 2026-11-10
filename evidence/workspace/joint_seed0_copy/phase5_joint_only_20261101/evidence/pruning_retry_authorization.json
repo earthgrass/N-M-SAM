@@ -1,0 +1,14 @@
+{
+  "status": "USER_AUTHORIZED_DEPLOYMENT_FIX_AND_RETRY",
+  "authorized_after_failure": true,
+  "previous_failure_sha256": "cf7f7e71b7937cf7bd84f7ef751cc75d5125c8c7de425593b7fd3decdaf6ef97",
+  "fix": "remove_legacy_postprocess_dependency_and_deploy_audited_sparsegpt_adapter",
+  "source_sha256": {
+    "scripts/run_apbr_gpt_joint_matrix_prune.py": "df577bd676a789a6327185cbf481a415bb828e18535c37b6758d89833d8d8243",
+    "baseline_adapters/sparsegpt/__init__.py": "ca62f2dd57e9d53a4fc61bef42f42636195467d04d4c444a4d92556d50b072e7",
+    "baseline_adapters/sparsegpt/adapter.py": "4b1462b1f09e6e3789406cb506fc4c47b47cfd159fa3d0e4fc013f45927a3f36"
+  },
+  "dense_parent_sha256": "49ad612ead3937212fce2619053879ac4aba03a835f74ae35c8a7e17bdde065b",
+  "test_accessed": false,
+  "recorded_at_unix": 1793528589.5320697
+}

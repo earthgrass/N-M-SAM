@@ -1,0 +1,21 @@
+{
+  "status": "training_prepared",
+  "experiment_id": "sam_gpt_joint_seed1_full_20261101_v2",
+  "protocol_id": "cifar100_50k10k_final_v1",
+  "seed": 1,
+  "schedule": {
+    "epochs": 200,
+    "warmup_epochs": 5,
+    "hessian_refresh_epochs": 10
+  },
+  "initial_checkpoint_sha256": "ef323310057fdbbbd1a489dc857eb75b5ef4f8af4df51e9be280d4435a0324c2",
+  "initial_model_sha256": "97b16eba0da71abef9027a69419f32344e2b1587b7bd8e616cc1d523cc512781",
+  "lambda_p": 1.3526042410542212,
+  "eta_s": null,
+  "reference_source": "seed0_train_side_calibration_frozen",
+  "perturbation": "standard_global_l2_sam",
+  "pruning_probe": "detached_standard_sam_epsilon",
+  "test_loader_constructed": false,
+  "test_accessed": false,
+  "final_test_accessed": false
+}

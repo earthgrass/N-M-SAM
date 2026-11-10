@@ -1,0 +1,355 @@
+{
+  "approval": "explicit user authorization;32train/seed0/batch8/noaug/1round",
+  "parent_checkpoint_sha256": "63c2415476802ee30029d445bd2b1fed0992ec39ab0c89a852cf14b1c9683897",
+  "parent_commit": "1dffe6d269bb1ec9fd67611a59f2bb538183b30e",
+  "parent_config_sha256": "3ebc1d4f80213dac8e8f0334848918cecb237fc25c5171481adc6a09af2a2986",
+  "parent_config_file_sha256": "51c38616cfb65a12e5de97341676049c2d6894a6cce569c9dbc087065aec5eac",
+  "parent_data_source_sha256": "704a057ac2c7c4f2af70987f537b21ffe6d5f281e0a48cf6d79c527ed38c153c",
+  "runtime_data_source_sha256": "d3c7ea43872ecc8d6334b3d994035e80708892dbcbd567c8622fbb59f94302e8",
+  "images_class_AST_matches_parent": true,
+  "parent_normalization": {
+    "normalize_mean": [
+      0.4913725490196078,
+      0.4823529411764706,
+      0.4466666666666667
+    ],
+    "normalize_std": [
+      0.24705882352941178,
+      0.24352941176470588,
+      0.2615686274509804
+    ]
+  },
+  "preprocessing": "Images(training=False): ToTensor -> Normalize; no crop/flip/Cutout/TTA",
+  "sampling": {
+    "algorithm": "numpy.random.default_rng(0).choice(50000,32,replace=False)",
+    "bit_generator": "PCG64",
+    "numpy_at_generation": "2.5.2",
+    "output_order": "draw order retained; SequentialSampler over frozen subset"
+  },
+  "index_file_sha256": "ef5df4e0b96367926d2d4608eed154b401b070239b404b4b77eaa266d8e5ad5e",
+  "index_canonical_int64le_sha256": "74a176121486328ddaf2716b86e90f2ce23a67bfa5df1393dafa3280685a3fb1",
+  "ids": [
+    46742,
+    31828,
+    13864,
+    3760,
+    825,
+    31604,
+    27988,
+    13481,
+    48520,
+    42327,
+    30320,
+    2047,
+    38242,
+    19704,
+    27173,
+    15383,
+    45619,
+    136,
+    42865,
+    40784,
+    1679,
+    33537,
+    36481,
+    40645,
+    32457,
+    25171,
+    8759,
+    8782,
+    36463,
+    42504,
+    27712,
+    25542
+  ],
+  "dataset_manifest_sha256": "8cf7d9fe3fb38c390718a7fa52ee4977519388287cc1cc61d5ddb20c5fd57011",
+  "dataset_manifest_file_sha256": "331cb40e78d3c5488dfb388b29b8051f76c2d44b689fd61737c6e5e522dd1669",
+  "dataset_files_sha256": {
+    "batches.meta": "f962466ef690d46b226450fb9aadc74ba4bc64a76aa526b5827fe4bc5c7125cb",
+    "data_batch_1": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+    "data_batch_2": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+    "data_batch_3": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+    "data_batch_4": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+    "data_batch_5": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154",
+    "readme.html": "4d1c3fb199d6a183ae03f5162b469d7bc04edf2fad9547bd5f224271d52f98e5",
+    "test_batch": "f53d8d457504f7cff4ea9e021afcf0e0ad8e24a91f3fc42091b8adef61157831"
+  },
+  "training_file_order": [
+    "data_batch_1",
+    "data_batch_2",
+    "data_batch_3",
+    "data_batch_4",
+    "data_batch_5"
+  ],
+  "sample_identity": [
+    {
+      "dataset_index": 46742,
+      "file": "data_batch_5",
+      "row_zero_based": 6742,
+      "file_sha256": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 31828,
+      "file": "data_batch_4",
+      "row_zero_based": 1828,
+      "file_sha256": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 13864,
+      "file": "data_batch_2",
+      "row_zero_based": 3864,
+      "file_sha256": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 3760,
+      "file": "data_batch_1",
+      "row_zero_based": 3760,
+      "file_sha256": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 825,
+      "file": "data_batch_1",
+      "row_zero_based": 825,
+      "file_sha256": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 31604,
+      "file": "data_batch_4",
+      "row_zero_based": 1604,
+      "file_sha256": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 27988,
+      "file": "data_batch_3",
+      "row_zero_based": 7988,
+      "file_sha256": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 13481,
+      "file": "data_batch_2",
+      "row_zero_based": 3481,
+      "file_sha256": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 48520,
+      "file": "data_batch_5",
+      "row_zero_based": 8520,
+      "file_sha256": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 42327,
+      "file": "data_batch_5",
+      "row_zero_based": 2327,
+      "file_sha256": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 30320,
+      "file": "data_batch_4",
+      "row_zero_based": 320,
+      "file_sha256": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 2047,
+      "file": "data_batch_1",
+      "row_zero_based": 2047,
+      "file_sha256": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 38242,
+      "file": "data_batch_4",
+      "row_zero_based": 8242,
+      "file_sha256": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 19704,
+      "file": "data_batch_2",
+      "row_zero_based": 9704,
+      "file_sha256": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 27173,
+      "file": "data_batch_3",
+      "row_zero_based": 7173,
+      "file_sha256": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 15383,
+      "file": "data_batch_2",
+      "row_zero_based": 5383,
+      "file_sha256": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 45619,
+      "file": "data_batch_5",
+      "row_zero_based": 5619,
+      "file_sha256": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 136,
+      "file": "data_batch_1",
+      "row_zero_based": 136,
+      "file_sha256": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 42865,
+      "file": "data_batch_5",
+      "row_zero_based": 2865,
+      "file_sha256": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 40784,
+      "file": "data_batch_5",
+      "row_zero_based": 784,
+      "file_sha256": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 1679,
+      "file": "data_batch_1",
+      "row_zero_based": 1679,
+      "file_sha256": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 33537,
+      "file": "data_batch_4",
+      "row_zero_based": 3537,
+      "file_sha256": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 36481,
+      "file": "data_batch_4",
+      "row_zero_based": 6481,
+      "file_sha256": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 40645,
+      "file": "data_batch_5",
+      "row_zero_based": 645,
+      "file_sha256": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 32457,
+      "file": "data_batch_4",
+      "row_zero_based": 2457,
+      "file_sha256": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 25171,
+      "file": "data_batch_3",
+      "row_zero_based": 5171,
+      "file_sha256": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 8759,
+      "file": "data_batch_1",
+      "row_zero_based": 8759,
+      "file_sha256": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 8782,
+      "file": "data_batch_1",
+      "row_zero_based": 8782,
+      "file_sha256": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 36463,
+      "file": "data_batch_4",
+      "row_zero_based": 6463,
+      "file_sha256": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 42504,
+      "file": "data_batch_5",
+      "row_zero_based": 2504,
+      "file_sha256": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 27712,
+      "file": "data_batch_3",
+      "row_zero_based": 7712,
+      "file_sha256": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    },
+    {
+      "dataset_index": 25542,
+      "file": "data_batch_3",
+      "row_zero_based": 5542,
+      "file_sha256": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+      "pixel_layout": "serialized row CHW(3,32,32)"
+    }
+  ],
+  "dataset_manifest_compact": {
+    "identity": "official-cifar10-md5-verified",
+    "train_size": 50000,
+    "test_size": 10000,
+    "validation_size": 0,
+    "train_classes": [
+      5000,
+      5000,
+      5000,
+      5000,
+      5000,
+      5000,
+      5000,
+      5000,
+      5000,
+      5000
+    ],
+    "test_classes": [
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000
+    ],
+    "files_sha256": {
+      "batches.meta": "f962466ef690d46b226450fb9aadc74ba4bc64a76aa526b5827fe4bc5c7125cb",
+      "data_batch_1": "54636561a3ce25bd3e19253c6b0d8538147b0ae398331ac4a2d86c6d987368cd",
+      "data_batch_2": "766b2cef9fbc745cf056b3152224f7cf77163b330ea9a15f9392beb8b89bc5a8",
+      "data_batch_3": "0f00d98ebfb30b3ec0ad19f9756dc2630b89003e10525f5e148445e82aa6a1f9",
+      "data_batch_4": "3f7bb240661948b8f4d53e36ec720d8306f5668bd0071dcb4e6c947f78e9682b",
+      "data_batch_5": "d91802434d8376bbaeeadf58a737e3a1b12ac839077e931237e0dcd43adcb154",
+      "readme.html": "4d1c3fb199d6a183ae03f5162b469d7bc04edf2fad9547bd5f224271d52f98e5",
+      "test_batch": "f53d8d457504f7cff4ea9e021afcf0e0ad8e24a91f3fc42091b8adef61157831"
+    },
+    "train_drop_last": true,
+    "test_drop_last": false,
+    "test_used_for_epoch_selection": true
+  },
+  "dataset_manifest_expand": "add train_indices=range(50000),test_indices=range(10000)",
+  "data_availability": "file hashes attested by original checkpoint-bound manifest; server raw files rechecked at future smoke, not read here"
+}

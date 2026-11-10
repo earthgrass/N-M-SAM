@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="9" time="1.316" timestamp="2026-10-25T19:27:09.471090+08:00" hostname="北京凌晨四点的雾霾"><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_step_acceptance" name="test_normal_accepted_paths_preserve_native_candidate_sequence[0]" time="0.130"><failure message="NameError: name 'device' is not defined">rejections = 0
+
+    @pytest.mark.parametrize('rejections',[0,2,49])
+    def test_normal_accepted_paths_preserve_native_candidate_sequence(rejections):
+&gt;       holder,original,result,attempted=execute_search([2.]*rejections+[.5])
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_snows_step_acceptance.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_snows_step_acceptance.py:30: in execute_search
+    exec(compile(ast.Module(body=batch.body[start:end],type_ignores=[]),'actual_patched_armijo','exec'),ns)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   ???
+E   NameError: name 'device' is not defined
+
+actual_patched_armijo:272: NameError</failure></testcase><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_step_acceptance" name="test_normal_accepted_paths_preserve_native_candidate_sequence[2]" time="0.118"><failure message="NameError: name 'device' is not defined">rejections = 2
+
+    @pytest.mark.parametrize('rejections',[0,2,49])
+    def test_normal_accepted_paths_preserve_native_candidate_sequence(rejections):
+&gt;       holder,original,result,attempted=execute_search([2.]*rejections+[.5])
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_snows_step_acceptance.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_snows_step_acceptance.py:30: in execute_search
+    exec(compile(ast.Module(body=batch.body[start:end],type_ignores=[]),'actual_patched_armijo','exec'),ns)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   ???
+E   NameError: name 'device' is not defined
+
+actual_patched_armijo:272: NameError</failure></testcase><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_step_acceptance" name="test_normal_accepted_paths_preserve_native_candidate_sequence[49]" time="0.131"><failure message="NameError: name 'device' is not defined">rejections = 49
+
+    @pytest.mark.parametrize('rejections',[0,2,49])
+    def test_normal_accepted_paths_preserve_native_candidate_sequence(rejections):
+&gt;       holder,original,result,attempted=execute_search([2.]*rejections+[.5])
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_snows_step_acceptance.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_snows_step_acceptance.py:30: in execute_search
+    exec(compile(ast.Module(body=batch.body[start:end],type_ignores=[]),'actual_patched_armijo','exec'),ns)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   ???
+E   NameError: name 'device' is not defined
+
+actual_patched_armijo:272: NameError</failure></testcase><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_step_acceptance" name="test_all_rejected_weights_bitwise_original_and_subsequent_result_cannot_reapply_update" time="0.109"><failure message="NameError: name 'device' is not defined">def test_all_rejected_weights_bitwise_original_and_subsequent_result_cannot_reapply_update():
+&gt;       holder,original,result,attempted=execute_search([2.]*50)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_snows_step_acceptance.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_snows_step_acceptance.py:30: in execute_search
+    exec(compile(ast.Module(body=batch.body[start:end],type_ignores=[]),'actual_patched_armijo','exec'),ns)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   ???
+E   NameError: name 'device' is not defined
+
+actual_patched_armijo:272: NameError</failure></testcase><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_step_acceptance" name="test_nonfinite_step_fails_with_evidence_and_restores_weight[gradient]" time="0.128"><failure message="RuntimeError: dot : expected both vectors to have same dtype, but found Float and Double">kind = 'gradient'
+
+    @pytest.mark.parametrize('kind',['gradient','loss'])
+    def test_nonfinite_step_fails_with_evidence_and_restores_weight(kind):
+        if kind=='gradient':
+&gt;           with pytest.raises(SNOWSStepFailure) as exc:execute_search([.5],torch.tensor([float('inf'),1.]))
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_snows_step_acceptance.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_snows_step_acceptance.py:30: in execute_search
+    exec(compile(ast.Module(body=batch.body[start:end],type_ignores=[]),'actual_patched_armijo','exec'),ns)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   ???
+E   RuntimeError: dot : expected both vectors to have same dtype, but found Float and Double
+
+actual_patched_armijo:260: RuntimeError</failure></testcase><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_step_acceptance" name="test_nonfinite_step_fails_with_evidence_and_restores_weight[loss]" time="0.109"><failure message="NameError: name 'device' is not defined">kind = 'loss'
+
+    @pytest.mark.parametrize('kind',['gradient','loss'])
+    def test_nonfinite_step_fails_with_evidence_and_restores_weight(kind):
+        if kind=='gradient':
+            with pytest.raises(SNOWSStepFailure) as exc:execute_search([.5],torch.tensor([float('inf'),1.]))
+        else:
+&gt;           with pytest.raises(SNOWSStepFailure) as exc:execute_search([float('nan')])
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_snows_step_acceptance.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_snows_step_acceptance.py:30: in execute_search
+    exec(compile(ast.Module(body=batch.body[start:end],type_ignores=[]),'actual_patched_armijo','exec'),ns)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   ???
+E   NameError: name 'device' is not defined
+
+actual_patched_armijo:272: NameError</failure></testcase><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_step_acceptance" name="test_original_objective_condition_batches_gradient_and_math_kernels_unchanged" time="0.181" /><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_step_acceptance" name="test_both_actual_call_sites_preserve_pair_unpack_and_record_status" time="0.095"><failure message="AttributeError: 'types.SimpleNamespace' object has no attribute 'layerparams'">def test_both_actual_call_sites_preserve_pair_unpack_and_record_status():
+        _,caller,_=sources();tree=ast.parse(caller)
+        for call_assignment in [n for n in ast.walk(tree) if isinstance(n,ast.Assign) and isinstance(n.value,ast.Call)
+            and isinstance(n.value.func,ast.Name) and n.value.func.id=='solve_for_W_given_Z']:
+            # Execute the native argument expression and the3new caller statements unchanged.
+            lines=caller.splitlines();segment='\n'.join(lines[call_assignment.lineno-1:call_assignment.end_lineno+3])
+            import textwrap
+            for state in ('accepted','rejected'):
+                returned=SNOWSSolverResult(torch.tensor([1.]),.2,[{'status':state}])
+                ns={n.id:None for n in ast.walk(call_assignment.value) if isinstance(n,ast.Name)}
+                owner=SimpleNamespace(model=None,device='cpu')
+                ns.update(self=owner,solve_for_W_given_Z=lambda *a,**kw:returned)
+&gt;               exec(textwrap.dedent(segment),ns)
+
+tests\test_snows_step_acceptance.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   ???
+E   AttributeError: 'types.SimpleNamespace' object has no attribute 'layerparams'
+
+&lt;string&gt;:6: AttributeError</failure></testcase><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_step_acceptance" name="test_full_controlled_module_import_keeps_old_math_and_new_result_type" time="0.200" /></testsuite></testsuites>

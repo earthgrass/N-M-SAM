@@ -1,0 +1,33 @@
+{
+  "schema_version": "ai-research-writing/paper-state-v1",
+  "mode": "full-paper",
+  "stage": "drafting",
+  "target_venue": "unassigned",
+  "main_tex": "main.tex",
+  "bibliography": "references.bib",
+  "required_artifacts": [
+    "experiment_inventory.md",
+    "claim_evidence_map.md",
+    "numeric_evidence.json"
+  ],
+  "blockers": [
+    "Historical and Joint accuracy cohorts do not share a verified identical initialization",
+    "No same-hardware 200-epoch Dense-SAM run for a strict cost ratio",
+    "Sparse-time-guidance Seed 0/1 results are still in progress",
+    "No synchronized per-op profiler trace for six-candidate regularizer; computation section deliberately deferred"
+  ],
+  "build": {
+    "status": "passed",
+    "command": "xelatex -interaction=nonstopmode -halt-on-error main.tex",
+    "pdf": "main.pdf",
+    "external_inputs": [],
+    "input_sha256": "26af709734ba1b9537543432a8093a8a9566ecf21252e6bcb2b2a1c89d06d683",
+    "pdf_sha256": "358f290f69636ffbdecc64f8e6c0d91da4dec715ab24cd55e5012857ed4f56ce",
+    "log": "build-attestation.log",
+    "log_sha256": "27d066f94b944cf6d5a06159dc365bcfae6643ad85c75a459e55d0d76b572dc0",
+    "exit_code": 0,
+    "tool_version": "MiKTeX-XeTeX 4.16 (MiKTeX 25.12)",
+    "attestation": "executed",
+    "ran_at": "2026-11-02T01:25:55.875685+00:00"
+  }
+}

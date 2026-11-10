@@ -1,0 +1,56 @@
+{
+  "status": "GPU_SMOKE_PASS",
+  "joint_over_apbr_ratio": 2.313918025867926,
+  "threshold": 3.0,
+  "rows": [
+    {
+      "method": "dense_sam",
+      "batches": 391,
+      "mean_seconds": 0.06558325982002346,
+      "median_seconds": 0.06451445072889328,
+      "p95_seconds": 0.07055111788213253,
+      "total_seconds": 25.643054589629173,
+      "peak_allocated_bytes": 2554619904,
+      "peak_reserved_bytes": 2814377984,
+      "parameter_update_l2": 225.68931570846334,
+      "geometry_update_l2": 0.0,
+      "train_samples": 50000,
+      "test_accessed": false,
+      "gpu_utilization_mean_percent": 57.71951219512195,
+      "gpu_utilization_max_percent": 66.0
+    },
+    {
+      "method": "apbr_sam",
+      "batches": 391,
+      "mean_seconds": 0.1104239912994225,
+      "median_seconds": 0.10971438512206078,
+      "p95_seconds": 0.11443301104009151,
+      "total_seconds": 43.1757805980742,
+      "peak_allocated_bytes": 2831243776,
+      "peak_reserved_bytes": 3179282432,
+      "parameter_update_l2": 201.97783732643867,
+      "geometry_update_l2": 0.9079277449184956,
+      "train_samples": 50000,
+      "test_accessed": false,
+      "gpu_utilization_mean_percent": 2.0,
+      "gpu_utilization_max_percent": 2.0
+    },
+    {
+      "method": "joint",
+      "batches": 391,
+      "mean_seconds": 0.2555120639560168,
+      "median_seconds": 0.2538806367665529,
+      "p95_seconds": 0.2780230436474085,
+      "total_seconds": 99.90521700680256,
+      "peak_allocated_bytes": 3447582208,
+      "peak_reserved_bytes": 3560964096,
+      "parameter_update_l2": 196.67702576214162,
+      "geometry_update_l2": 0.8643732221161482,
+      "train_samples": 50000,
+      "test_accessed": false,
+      "gpu_utilization_mean_percent": 8.0,
+      "gpu_utilization_max_percent": 8.0
+    }
+  ],
+  "test_accessed": false
+}

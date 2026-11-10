@@ -1,0 +1,126 @@
+{
+  "status": "CPU_PREPARATION_ACCEPTED_FORMAL_EXECUTION_BLOCKED",
+  "snapshot_before_commit": true,
+  "branch": "research/post-training-nm-benchmark",
+  "parent_HEAD": "d0025b48664091444cc1ad363253010c336b23e6",
+  "source": {
+    "files": {
+      "benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "benchmark/artifacts.py": "2e948b57c8b912462589ac9582df1f9737e71d304f06076537c7c467b7a9f232",
+      "benchmark/audit_inputs.py": "b8c8adccf621263edbd924eb3ac74335119aaa3eb3d4356c415ad7143643ad81",
+      "benchmark/calibration.py": "5c8d378d8abd588622bcb11d55d7d7729ed68e1805ae542eab575166b3f65f68",
+      "benchmark/common.py": "1a393b8b5f165bc356202732f771f0086155fadb8aeef8111135f1dbe6d7319a",
+      "benchmark/data.py": "d3c7ea43872ecc8d6334b3d994035e80708892dbcbd567c8622fbb59f94302e8",
+      "benchmark/evaluation.py": "4e92e30bfada721fa45a7661a65d8bd03f90c7dfe140b47c75348da38df0f43c",
+      "benchmark/model.py": "befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71",
+      "benchmark/nm.py": "92433dbfd3b768b28922b89954d76fde7c3a6fdd23e661622ac248526b44678f",
+      "benchmark/obc.py": "0681675db4e8d14e2d3b2205c2090e4b9f838db4eb8bfd9e0b70092fe073665c",
+      "benchmark/pipeline.py": "ea23c0d5d1f361dca84b5bf9c00b44ed759af3eb273312c93443a017a529f2fa",
+      "benchmark/preflight.py": "a84927ea040a8f0e39892a26050670844cf86d11743006fd75f71f79135d841b",
+      "benchmark/probes.py": "c466e38883c654848961976007c5b2b2a015c498e26e88bca1f7c7be8fa4f78b",
+      "benchmark/recovery.py": "9ebd32b246fd55e60d53bf8a1f371d0567f2148cdec1d83fb6bbeb7c0998bb42",
+      "benchmark/run_obc.py": "c9cc1007f14981098b25098eef14421c31c85feaa1d983582467ebcc7fc4c699",
+      "benchmark/upstream.py": "de9f2bb09a1f1e7459e628ef1ac1fb0a8790135073d800fc182a43391469dab8",
+      "configs/bn_train_ids.json": "c115a2560e164bd48f8e1f1ef2dda0ec28748fcbb58eb0155931696b1945cb56",
+      "configs/existing_inputs.json": "081039dea2349cd0ffd6045190fb8737465d351664767b79b24bfdf8ced25fe4",
+      "configs/gpu_execution_manifest.json": "1226fa2c8beec6e7ef87cecb656f8179586229d3c1bce5012984e3863aaf1f82",
+      "configs/historical_protocol.yaml": "6986af80a36e600c82b4bc90d9779aff8753813f7d4aa20479a0ea262dece44a",
+      "configs/post_training_nm_benchmark.yaml": "0bd425ceba5dcf6f16a2a92ce426f925bfe10221ecbd7759345d68ff1e347d31",
+      "configs/upstream_lock.json": "029568c3f4823b6405960f5cb7e54bda5e477e4f5068016a4b820f7a803a5b77",
+      "scripts/acceptance_tracebacks.py": "3bee83bc7b9ddf43f55db08c9da5ccb3d0497d6d49abafb94cdeffbb2ad8d20b",
+      "scripts/fetch_upstream.py": "7139f4d047088a325e7cefb89de9ab6beea3f4a34fb40943e6b40bbdee5a2616",
+      "scripts/package_acceptance.py": "a3fe1250fb77aa12dd346808ab0e816ee9333af83dde6b2c69c6aae30639c801",
+      "scripts/package_evidence.py": "48dba235e9a248f954ea7cb070516e6e5ce422b3dfea097dbc827248dac9fe37",
+      "scripts/prepare_configuration.py": "7e780fd555ec36fc72da9632525bb19014f6ecfda46c4a1e2de233b94df74114"
+    },
+    "sha256": "c23862e723106f4147bd7cf637a6f2060a010081735fd6cea63fd19def573975"
+  },
+  "config_sha256": "0bd425ceba5dcf6f16a2a92ce426f925bfe10221ecbd7759345d68ff1e347d31",
+  "test_batches": {
+    "cpu_tests": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "acceptance_tests": {
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "final_gate_tests": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "cuda_closed_gate_tests": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "distinct_test_cases": 29,
+  "initial_suite_not_repeated_for_new_request": true,
+  "tests": {
+    "conftest.py": "c546bd895f05e5f064c8b5911bacefd7369542204eb3811c7d2248d506997487",
+    "test_acceptance_gaps.py": "e3df47a618d15c22289ebc47b7ea82c8ee93a2ddda4a5e527b88b9fee249d7e4",
+    "test_nm_obc.py": "9b32d74013533bc7dfdc5af6b91324ab30e1aac0982f5b1d060f52d8bcb28000",
+    "test_obc_pipeline.py": "4524cbe3a3de959026b0b173db7e34bed3535c1894fbdea875fbf878f9abe3ae",
+    "test_pipeline.py": "8f2ebabf4fccbbb393a18efd6f23568e5bff64544de3695a6da590008767708c",
+    "test_preflight.py": "8de394019916d92763dda5a35aa5ecc62b9f399891f3d0691df0f573f0390f53",
+    "test_upstream_blockers.py": "9c3100dc2f87637cecf8c9cf68e05c64ef83acaaca70c8999a959906c03f420e"
+  },
+  "calibration": {
+    "approved": false,
+    "dataset": "official_cifar10_train_50000",
+    "samples": null,
+    "index_file": null,
+    "index_sha256": null,
+    "batch_size": null,
+    "rounds": null,
+    "forward_passes_per_layer": null,
+    "optimization_epochs": null,
+    "random_seed": null,
+    "augmentation": null,
+    "preprocessing": null,
+    "status": "PENDING_APPROVAL",
+    "common_budget": {
+      "approved": false,
+      "status": "PENDING_APPROVAL"
+    },
+    "method_native": {
+      "OBC": {
+        "samples": 1024,
+        "default_rounds": 10,
+        "noaug_rounds": 1,
+        "approved_for_local_run": false
+      },
+      "SNOWS": {
+        "nm_parser_ngrads": 128,
+        "readme_example_ngrads": 3000,
+        "approved_for_local_run": false
+      }
+    }
+  },
+  "startup_failures": [
+    "Calibration budget/indices/rounds are pending user decision",
+    "GPU execution is not yet authorized"
+  ],
+  "gpu_environment_checked": false,
+  "cuda_smoke": "PENDING",
+  "formal_pruning": "NOT_RUN",
+  "recovery_queue": "NOT_RUN",
+  "historical_artifacts_modified": false,
+  "original_checkpoint_audit": "15 files previously verified; no redundant re-load requested",
+  "SNOWS": "BLOCKED_AT_PIN; whole import not operational; numeric witness preserved",
+  "CAP": "CONDITIONAL_BLOCKED; full SparseML stack not validated",
+  "resume_boundary": "epoch end only; no mid-batch sampler state; next epoch order derived from restored RNG and same loader",
+  "limits": [
+    "CPU synthetic determinism only, not all real-data worker/CUDA behavior",
+    "GPU resource monitor integration and full-size acceptance pending",
+    "No official source patch applied; no claim of general paper algorithm defect"
+  ]
+}

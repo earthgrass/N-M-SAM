@@ -1,0 +1,79 @@
+{
+  "captured_utc": "2026-10-26T12:32:34.989497+00:00",
+  "repository": {
+    "requested_path": "/root/autodl-tmp/cifar100_gate_transfer/project",
+    "root": {
+      "command": [
+        "git",
+        "rev-parse",
+        "--show-toplevel"
+      ],
+      "returncode": 0,
+      "stdout": "/root/autodl-tmp/cifar100_gate_transfer/project",
+      "stderr": ""
+    },
+    "branch": {
+      "command": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "returncode": 0,
+      "stdout": "research/post-training-nm-benchmark",
+      "stderr": ""
+    },
+    "head": {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "stdout": "9ff061a009e19e619a8a8ae3f5b08b494c83b8d0",
+      "stderr": ""
+    },
+    "status_porcelain_v1_untracked_all": {
+      "command": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all"
+      ],
+      "returncode": 0,
+      "stdout": "?? vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/__init__.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/cifar100_model.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/common/__init__.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/common/conv2d.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/common/nm.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/rose/__init__.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/rose/adapter.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/sparsegpt/__init__.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/sparsegpt/adapter.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/wanda/__init__.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/wanda/adapter.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/CIFAR100_DATA_IDENTITY.md\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/CIFAR100_MODEL_IDENTITY.md\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_RESULTS.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/SHA256SUMS_before_data_pass.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity_before_cross_label_set_fix.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity_before_duplicate_label_check.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity_pending.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/environment.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/environment_decode_failed.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/gpu_gate_before_model_audit_link.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/gpu_gate_data_pending.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/gpu_gate_precondition_corrected.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_before_dataset_hash_link.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_data_pending.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_precondition_corrected.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_superseded.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests.environment.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests.xml\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests_final.environment.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests_final.xml\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests_rerun.environment.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests_rerun.xml\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/audit_cifar100_identity_help.txt\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/nvidia_smi_full.txt\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/nvidia_smi_query.csv\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/run_sparsegpt_gate_help.txt\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/SHA256SUMS.json\n?? vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/SPARSEGPT_GPU_GATE_REPORT.md\n?? vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_cifar100_identity.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_cifar100_model_identity.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/scripts/capture_cifar100_gate_environment.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_sparsegpt_single_layer_gpu_gate.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/scripts/write_cifar100_gate_sha256_manifest.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/tests/test_cifar100_baseline_adapters.py\n?? vpr_sam_research/experiments/post_training_nm_benchmark/tests/test_cifar100_identity_gpu_gate.py",
+      "stderr": ""
+    }
+  },
+  "runtime": {
+    "python": "3.12.3 | packaged by Anaconda, Inc. | (main, May  6 2024, 19:46:43) [GCC 11.2.0]",
+    "python_executable": "/root/miniconda3/bin/python",
+    "platform": "Linux-5.15.0-78-generic-x86_64-with-glibc2.35",
+    "torch": "2.8.0+cu128",
+    "torch_cuda_build": "12.8",
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "cuda_devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 4080 SUPER",
+        "properties_total_memory_bytes": 33796456448,
+        "free_memory_bytes": 33526841344,
+        "total_memory_bytes": 33796456448,
+        "compute_capability": [
+          8,
+          9
+        ]
+      }
+    ],
+    "nvidia_smi": {
+      "command": [
+        "nvidia-smi",
+        "--query-gpu=name,memory.total,memory.free,driver_version",
+        "--format=csv,noheader,nounits"
+      ],
+      "returncode": 0,
+      "stdout": "NVIDIA GeForce RTX 4080 SUPER, 32760, 31974, 595.71.05",
+      "stderr": ""
+    }
+  }
+}

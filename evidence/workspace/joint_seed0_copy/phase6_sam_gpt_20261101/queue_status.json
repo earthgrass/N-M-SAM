@@ -1,0 +1,33 @@
+{
+  "status": "COMPLETE",
+  "phase": "final_test_complete",
+  "completed": [
+    {
+      "stage": "sam_gpt_dense",
+      "checkpoint_sha256": "6a5a3fcb73b44ebcd7f18723f45daaad88101245294013971e08b05df442e03d"
+    },
+    {
+      "stage": "original_sparsegpt",
+      "checkpoint_sha256": "d16989c8d2d52aae981861480f91dfe4c5cf84844efd531e84e89e1ef2b54799",
+      "mask_sha256": "668a5f0d2415160075d7d183d4f133bcae6a993159ec7a835d42f84beeb0af69"
+    },
+    {
+      "stage": "dynamic_groupwise_obs_no_probe",
+      "checkpoint_sha256": "6b76d9a6312e2f9e2355a92d09b3075051bb779baded45edeba08285c6547c52",
+      "mask_sha256": "4caa27e7781cc266fc8c03c813febe36e23ce987b0b66c218db4ba9db98eab7a"
+    },
+    {
+      "stage": "dynamic_sam_gpt_true_probe",
+      "checkpoint_sha256": "3474c3ca9cf5eea420bff6f1a13de74801f141e583b5019dfec67f9f84539c9c",
+      "mask_sha256": "7ce666ef404be69693bea7e33251348f9d4518d34ca24c70cc826ec4dcd9fb3d"
+    },
+    {
+      "stage": "dynamic_sam_gpt_shuffled_probe",
+      "checkpoint_sha256": "f32bf1b84d3e7136b002eb5a3baacd73e0fb0b3480ae05df70f539de22ed3647",
+      "mask_sha256": "941f06895f43865394b6e1a72ee373b5d9e8d5d2f8f9ca5c017eea79276f3dc5"
+    }
+  ],
+  "final_test_evaluations": 5,
+  "recovery_started": false,
+  "test_accessed": true
+}

@@ -1,0 +1,429 @@
+{
+  "schema": 1,
+  "inventory_date": "2026-11-10",
+  "scope": "read-only Joint research archive inventory",
+  "artifact_top_level_under_experimental_root": [
+    "apbr_gpt_joint_seed0",
+    "apbr_gpt_joint_seed0_rebased",
+    "apbr_gpt_joint_seed1_sparse_v2"
+  ],
+  "additional_workspace_evidence_root": "joint_seed0_copy",
+  "exclude_subtrees": [
+    "torch28_cpu_env",
+    "__pycache__",
+    "bundle-pytest-temp2",
+    "bundle_cache_quarantine",
+    "bundle_extract_verification",
+    "server_bundle",
+    "server_bundle_v3",
+    "bundle_v3_extract_verification"
+  ],
+  "notes": [
+    "Joint training is joint_optimization plus baseline_adapters/apbr_gpt_joint. baseline_adapters/apbr_gpt and group_joint_obs are separate post-training experiments.",
+    "Original Joint phase4 GPU smoke was BLOCKED by missing gradient handoff. phase4_1 fixes the interface and records APBR_PARITY_PASS, JOINT_CPU_GATE_PASS, GPU_SMOKE_PASS; retain both histories.",
+    "The top-level rtx5090 YAML describes an earlier three-branch/recovery plan. Actual executed cohort is narrowed by queue source and per-run manifests; do not label those historical planned recoveries as completed.",
+    "Full Joint guidance epochs are 6 through 200. Epoch10 guidance runs at one-based epochs 10,20,...,200. The generic schedule list in epoch10 manifest is stale; the guidance_epochs_one_based field and runner guidance_due/actual hessian_refresh.csv determine execution.",
+    "APBR Joint uses original VPR/ellipsoid APBR, not APBR-L2. SAM Joint uses SAMJointStepper and does not learn APBR geometry.",
+    "All five listed cohorts have 200 epochs/78200 steps and five final endpoints. APBR Seed1 epoch10 was cancelled and must remain incomplete.",
+    "Current local source snapshots are not automatically bitwise identical to executed historical versions. Preserve source hash manifests and source copies per run; do not claim commit55fe3e contains the later untracked Joint implementation.",
+    "No experiments, Test evaluations, remote connections or large-checkpoint hash scans were performed by this inventory."
+  ],
+  "runs": [
+    {
+      "run": "apbr_joint_seed0_full",
+      "root": "joint_seed0_copy/phase5_joint_only_20261101",
+      "final_evaluation": "joint_seed0_copy/phase5_joint_only_20261101/final_test/FINAL_TEST_RESULTS.json",
+      "final_evaluation_sha256": "66b7236bc5d0a6aaeb9b24e78c8d5f361d726ca09968975db94b3df6ff15aa87",
+      "status": "FINAL_TEST_COMPLETE",
+      "endpoints": [
+        {
+          "name": "joint_dense",
+          "accuracy_percent": 78.64999999999999,
+          "ce": 0.807144868850708,
+          "checkpoint_sha256": "49ad612ead3937212fce2619053879ac4aba03a835f74ae35c8a7e17bdde065b"
+        },
+        {
+          "name": "original_sparsegpt",
+          "accuracy_percent": 78.36,
+          "ce": 0.8036415567398071,
+          "checkpoint_sha256": "ef2ca680aaded8b5177b551177226f77023aa8b3c58c733b51e7f970616e7cbc"
+        },
+        {
+          "name": "dynamic_groupwise_obs_no_geometry",
+          "accuracy_percent": 78.55,
+          "ce": 0.7975882690429688,
+          "checkpoint_sha256": "0cae255bcb720901921ba5623cf72bab89133639f12cb55568c48860c453d6b7"
+        },
+        {
+          "name": "dynamic_apbr_gpt_true_geometry",
+          "accuracy_percent": 78.10000000000001,
+          "ce": 0.8204757787704468,
+          "checkpoint_sha256": "727c0f7022aab2b809d8fd667c0af39eb653465f0b5e97cbda3c6dad6f3d90c4"
+        },
+        {
+          "name": "dynamic_apbr_gpt_shuffled_geometry",
+          "accuracy_percent": 78.10000000000001,
+          "ce": 0.8204076169967651,
+          "checkpoint_sha256": "5727b7fc5d0539687d8236dc967d009914aa70bb0e34b1e914a2d0343c46551e"
+        }
+      ],
+      "training_status": {
+        "path": "joint_seed0_copy/phase5_joint_only_20261101/joint_apbr_gpt/status.json",
+        "sha256": "514a2359fb17e3d6fe481761a9f52ac5601e038ac290f5a1ee7c0bdc8d9687b3",
+        "status": "completed",
+        "completed_epochs": 200,
+        "steps": 78200,
+        "test_accessed": false
+      }
+    },
+    {
+      "run": "sam_joint_seed0_full",
+      "root": "joint_seed0_copy/phase6_sam_gpt_20261101",
+      "final_evaluation": "joint_seed0_copy/phase6_sam_gpt_20261101/final_test/FINAL_TEST_RESULTS.json",
+      "final_evaluation_sha256": "cf4fb168ef34807d6ef2a41be4a7249ff79967fd474351435b1878c92c35b17e",
+      "status": "FINAL_TEST_COMPLETE",
+      "endpoints": [
+        {
+          "name": "sam_gpt_dense",
+          "accuracy_percent": 78.45,
+          "ce": 0.8154441686630249,
+          "checkpoint_sha256": "6a5a3fcb73b44ebcd7f18723f45daaad88101245294013971e08b05df442e03d"
+        },
+        {
+          "name": "original_sparsegpt",
+          "accuracy_percent": 78.43,
+          "ce": 0.8126630429267884,
+          "checkpoint_sha256": "d16989c8d2d52aae981861480f91dfe4c5cf84844efd531e84e89e1ef2b54799"
+        },
+        {
+          "name": "dynamic_groupwise_obs_no_probe",
+          "accuracy_percent": 78.53,
+          "ce": 0.80421547498703,
+          "checkpoint_sha256": "6b76d9a6312e2f9e2355a92d09b3075051bb779baded45edeba08285c6547c52"
+        },
+        {
+          "name": "dynamic_sam_gpt_true_probe",
+          "accuracy_percent": 77.73,
+          "ce": 0.8288986875534058,
+          "checkpoint_sha256": "3474c3ca9cf5eea420bff6f1a13de74801f141e583b5019dfec67f9f84539c9c"
+        },
+        {
+          "name": "dynamic_sam_gpt_shuffled_probe",
+          "accuracy_percent": 77.72,
+          "ce": 0.8289243709564209,
+          "checkpoint_sha256": "f32bf1b84d3e7136b002eb5a3baacd73e0fb0b3480ae05df70f539de22ed3647"
+        }
+      ],
+      "training_status": {
+        "path": "joint_seed0_copy/phase6_sam_gpt_20261101/sam_gpt_joint/status.json",
+        "sha256": "9f10c07df9255ecbb57680ed18e5537ca53e4e124afc8f9e1e61832ddf925887",
+        "status": "completed",
+        "completed_epochs": 200,
+        "steps": 78200,
+        "test_accessed": false
+      }
+    },
+    {
+      "run": "sam_joint_seed1_full",
+      "root": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed1_sparse_v2/completed_seed1_remote_copy/sam_seed1_full",
+      "final_evaluation": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed1_sparse_v2/completed_seed1_remote_copy/sam_seed1_full/final_test/FINAL_TEST_RESULTS.json",
+      "final_evaluation_sha256": "dbe9d2e6f657a92330bfbef5726a19cf061380aa853edec8ccccbf8ed4ddf109",
+      "status": "FINAL_TEST_COMPLETE",
+      "endpoints": [
+        {
+          "name": "dense",
+          "accuracy_percent": 78.75,
+          "ce": 0.81024935131073,
+          "checkpoint_sha256": "f9108aa00ae283b818abb98e7889513a30a1b5c4f06b49edb88d6462cb98d74b"
+        },
+        {
+          "name": "original_sparsegpt",
+          "accuracy_percent": 78.62,
+          "ce": 0.8132769622802735,
+          "checkpoint_sha256": "6df1f169a116610f812894c5cd212097b6de5adc54a0c1153e667b4f6318ce3c"
+        },
+        {
+          "name": "dynamic_groupwise_obs",
+          "accuracy_percent": 78.58000000000001,
+          "ce": 0.803158768939972,
+          "checkpoint_sha256": "31dae926af53bb81e78181f600366d84e9b19e687a9388e3e9c2b8e10d36c118"
+        },
+        {
+          "name": "dynamic_true_probe",
+          "accuracy_percent": 78.05,
+          "ce": 0.8313212126731873,
+          "checkpoint_sha256": "637d1e87b8dff15d5268bcc64f8763e12cc47db582c19b095ea43376d63e899a"
+        },
+        {
+          "name": "dynamic_shuffled_probe",
+          "accuracy_percent": 78.05,
+          "ce": 0.8312885510444641,
+          "checkpoint_sha256": "776d13e4441ea36caf1330dc9821acd2718b969d4358b0eadc4bf941dd77931a"
+        }
+      ],
+      "training_status": {
+        "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed1_sparse_v2/completed_seed1_remote_copy/sam_seed1_full/training/status.json",
+        "sha256": "65cc7182416dc59962692aa93877b125eedce8e9c93ed4843d379ad56954fe6e",
+        "status": "completed",
+        "completed_epochs": 200,
+        "steps": 78200,
+        "test_accessed": false
+      }
+    },
+    {
+      "run": "apbr_joint_seed1_full",
+      "root": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed1_sparse_v2/completed_seed1_remote_copy/apbr_seed1_full",
+      "final_evaluation": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed1_sparse_v2/completed_seed1_remote_copy/apbr_seed1_full/final_test/FINAL_TEST_RESULTS.json",
+      "final_evaluation_sha256": "b2b1cf8770d2fe420ea3ab07dd3cfd0bb34dcf37da1a0f03aaf3307f002e5303",
+      "status": "FINAL_TEST_COMPLETE",
+      "endpoints": [
+        {
+          "name": "dense",
+          "accuracy_percent": 78.34,
+          "ce": 0.8184982438087464,
+          "checkpoint_sha256": "b8f03424c738c19e1c11cdc614c771680803ce908a54f281b71a0262437ad518"
+        },
+        {
+          "name": "original_sparsegpt",
+          "accuracy_percent": 78.29,
+          "ce": 0.8166720335960388,
+          "checkpoint_sha256": "40ad47263a0ac2c8f8c7a6c3806be3198fc0ba2f483cffa89ac259abe6375717"
+        },
+        {
+          "name": "dynamic_groupwise_obs",
+          "accuracy_percent": 78.33,
+          "ce": 0.806621844959259,
+          "checkpoint_sha256": "71776507bfc8c96541b2ac9000ec27fe02a2bd20e867f26ba9c866295c614334"
+        },
+        {
+          "name": "dynamic_true_probe",
+          "accuracy_percent": 77.94,
+          "ce": 0.8368177706718445,
+          "checkpoint_sha256": "eec6ecf28d08104ca14804c0c2f8c9ce0f2241f2b324377b72e524c54f559027"
+        },
+        {
+          "name": "dynamic_shuffled_probe",
+          "accuracy_percent": 77.95,
+          "ce": 0.8367813740730285,
+          "checkpoint_sha256": "2564b05457016cdcbcb7d2ba63917698f6eb01b2bb4770a0fe3835ecfef0ab4f"
+        }
+      ],
+      "training_status": {
+        "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed1_sparse_v2/completed_seed1_remote_copy/apbr_seed1_full/training/status.json",
+        "sha256": "9265f4d155db176c8637d23513eec6f9d059922f234149ee2c13d90fbbfb2131",
+        "status": "completed",
+        "completed_epochs": 200,
+        "steps": 78200,
+        "test_accessed": false
+      }
+    },
+    {
+      "run": "apbr_joint_seed0_epoch10",
+      "root": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed1_sparse_v2/seed0_epoch10_remote_copy/apbr_seed0_epoch10",
+      "final_evaluation": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed1_sparse_v2/seed0_epoch10_remote_copy/apbr_seed0_epoch10/final_test/FINAL_TEST_RESULTS.json",
+      "final_evaluation_sha256": "beff426d230099a32e6a484cec436d0ab5ea8f0d852410603e2e4ead96470008",
+      "status": "FINAL_TEST_COMPLETE",
+      "endpoints": [
+        {
+          "name": "dense",
+          "accuracy_percent": 78.58000000000001,
+          "ce": 0.7925132966041565,
+          "checkpoint_sha256": "f8f861bd3909b62757d23177865ee413aca11f66ff0529f3fda0ac5e3f2c2e42"
+        },
+        {
+          "name": "original_sparsegpt",
+          "accuracy_percent": 77.74,
+          "ce": 0.8190205263137817,
+          "checkpoint_sha256": "4edf9411dfcebdde48152addc9cbda868925b74e53891aedaac95a18651e80cb"
+        },
+        {
+          "name": "dynamic_groupwise_obs",
+          "accuracy_percent": 77.86999999999999,
+          "ce": 0.8020466336250305,
+          "checkpoint_sha256": "c76ff925f48ce280fcbbca0a19a15b5d619cc61d912acacaf9100f7238776131"
+        },
+        {
+          "name": "dynamic_true_probe",
+          "accuracy_percent": 77.81,
+          "ce": 0.821110654258728,
+          "checkpoint_sha256": "8d4494e34587747295f5c9f20d7b7b32c3f71c34cd4342eb5b153c974e807ae0"
+        },
+        {
+          "name": "dynamic_shuffled_probe",
+          "accuracy_percent": 77.8,
+          "ce": 0.8211488302230835,
+          "checkpoint_sha256": "55c096a9361260f1447d89bd289d3af679fa2a4847a2e373fd0dd3a2b83a3f97"
+        }
+      ],
+      "training_status": {
+        "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed1_sparse_v2/seed0_epoch10_remote_copy/apbr_seed0_epoch10/training/status.json",
+        "sha256": "798e3205fb1ed1852b1dc5cc7af5c9d88b7be005b5446b6194cf3afe5f43e43b",
+        "status": "completed",
+        "completed_epochs": 200,
+        "steps": 78200,
+        "test_accessed": false
+      }
+    }
+  ],
+  "source_files": [
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/gradient_handoff.py",
+      "sha256": "c0cdb26841240fa05714a609b9af78659c68590194b5b54d34f06178c722b12d",
+      "bytes": 2837
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/hessian_cache.py",
+      "sha256": "f6b22d0bbeaf10ecf4ff92c4de5e06025565c994e5b40a8f4f1832e5f463fd83",
+      "bytes": 2810
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/joint_stepper.py",
+      "sha256": "9e826916165be7c5e5f0f9dbd7049901141d50d0d42da7b0d438991644e5d604",
+      "bytes": 13554
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/orchestration.py",
+      "sha256": "4da50e682894f048251c6893ce037bc20b3af80fcd728228a55ba30675d7caa9",
+      "bytes": 5743
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/sam_joint_stepper.py",
+      "sha256": "aea10095eaeb9f296e48dc275eaa0f331c3326665598444add6112dabbe7920d",
+      "bytes": 8988
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/training_objective.py",
+      "sha256": "933001b7da873e51c3a72a5813f2441966ab5e27e14bf77a3d15fde7560ce91f",
+      "bytes": 2252
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/__init__.py",
+      "sha256": "d7d853684f7ffde8c626547bf4a8e24ae498e424941083740c3f9a5c0cf3c11f",
+      "bytes": 58
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/calibration/calibration_report.py",
+      "sha256": "bd62a45ed7b3127d92925ce1d1b7d02621c580155779ab05f26e4ea7b7f3686a",
+      "bytes": 1579
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/calibration/calibration_runner.py",
+      "sha256": "1f2f109c3b79b61a4b3b181939e4d912f783c129cb61a9d00d8e215df98563f6",
+      "bytes": 5129
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/calibration/eta_scale_calibrator.py",
+      "sha256": "1c9a088c7538dea0bba749b471d235db8e4b9c9a17a92d3d61f260c59bf9b080",
+      "bytes": 6666
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/calibration/lambda_calibrator.py",
+      "sha256": "6c326cd09304228164315f5911cd035015ec03f4b1976636e96253907ef9f892",
+      "bytes": 3380
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/joint_optimization/calibration/__init__.py",
+      "sha256": "258c38de53c92f06980e1d91fb1f26a044e9dbf27af3fe272aea4563662ce2a9",
+      "bytes": 387
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/apbr_gpt_joint/adapter.py",
+      "sha256": "7186d8845638dfb8edee0829db8dd2ce75f45b75384d4fb9cb6016ef0be20ec6",
+      "bytes": 12114
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/apbr_gpt_joint/__init__.py",
+      "sha256": "77dbf3627fb8d99981d3ec5a53d35defcb8ad61e055ef80e34c0577db405a5fb",
+      "bytes": 446
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/configs/apbr_gpt_joint_seed0_calibration.json",
+      "sha256": "6f3fe7ca2cc4ab0fa2b5c24723115848a92f610e59f146dcb3a5ea3176b6f54c",
+      "bytes": 1096
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/configs/apbr_gpt_joint_seed0_rtx5090_20261101.yaml",
+      "sha256": "7fadfc5d08496d3410315ffece76f036a80479f645bcd99f82c8712ea4bd8290",
+      "bytes": 3445
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_joint_seed0_only_queue.py",
+      "sha256": "680f8593f7c939956ad812c5004005770097a6eb61ba2a5695258118a2ca53d7",
+      "bytes": 5578
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_joint_seed1_sparse_queue_v2.py",
+      "sha256": "f09747aa9874188a7402a7cf4308b3ca25670b610c3f12991d78eb94a05200a1",
+      "bytes": 9756
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_gpt_joint_training_seed0.py",
+      "sha256": "555b14ade22cb1bed86e0f28e8fc355e42d8b19735d33b7e60061407d7ff237d",
+      "bytes": 11466
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_gpt_joint_training_seed01_v2.py",
+      "sha256": "76b65fbe4ae21a626a178e32dd28c8f651318792e4080e453b87fa8dcf204f2b",
+      "bytes": 12906
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_sam_gpt_joint_training_seed0.py",
+      "sha256": "2c684d54fbab092bd0fb99e1692efc10a07ac2fafef999b863f4b43c2dd1ed44",
+      "bytes": 9080
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_sam_gpt_joint_training_seed01_v2.py",
+      "sha256": "1a4c479cc753c811fa126cf1ba32d5cec76e000043335b1762f7ab2c71a3e982",
+      "bytes": 9737
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_gpt_joint_matrix_prune.py",
+      "sha256": "a85e824da2b639d393637b10f5d811bb76b316380ee2e0e3c799ddf4d32d1b2a",
+      "bytes": 10443
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_gpt_joint_matrix_prune_seed01_v2.py",
+      "sha256": "50937edb83755e3418ee37dc50eefde6337e4cb9f352cdb80832c5eccd4253eb",
+      "bytes": 10722
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_handoff_cpu_parity.py",
+      "sha256": "021151bfacc74516b387f024ebdc01a54b83dd1b82230c5ec1e871952b3ce7c3",
+      "bytes": 7735
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_handoff_joint_cpu_gate.py",
+      "sha256": "c99043645bd3b75277fb2ed3049198010bdec250d77ba1e3a9350dc85583a47f",
+      "bytes": 4264
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_gpt_joint_phase4_gpu_smoke.py",
+      "sha256": "88ac7f6e06729ffea3c355000b5c750dba40e6dfc980a343585aff9b6481fff0",
+      "bytes": 16725
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/evaluate_cifar100_50k_final.py",
+      "sha256": "b4fb238a6a28cf4c6c943e8f125de88430bbcead6e08c40425f2d5a896ec6fd7",
+      "bytes": 5872
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/create_apbr_gpt_joint_rebase_assets.py",
+      "sha256": "32124edb9c4f9f441eac4accd7182b0399b13f8593b5125152ff34312d657f9d",
+      "bytes": 5197
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/create_apbr_gpt_joint_seed1_asset_v2.py",
+      "sha256": "0f43c163db64cbfaa169b519ef4aeba6d26df7c63f2918c5d31e4112f30c1ed3",
+      "bytes": 5284
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/launch_joint_seed1_sparse_v2.sh",
+      "sha256": "fe616df508ce2c0078bbd9ad524eb47930a172a7b743829322f4d01ab91ced0c",
+      "bytes": 1112
+    }
+  ],
+  "calibration_evidence_root": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed0_rebased/real_cpu_calibration_attempt4",
+  "gpu_gate_root": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed0_rebased/phase4_1_handoff_20261101",
+  "cancelled_queue_status": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed1_sparse_v2/seed0_epoch10_remote_copy/queue/queue_status.json",
+  "cancelled_run_root": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_gpt_joint_seed1_sparse_v2/completed_seed1_remote_copy/apbr_seed1_epoch10_cancelled"
+}

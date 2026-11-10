@@ -1,0 +1,142 @@
+{
+  "status": "CPU_ORCHESTRATION_PASS",
+  "cpu_only": true,
+  "real_train_batch_ids": [
+    39328,
+    14404,
+    39830,
+    46380
+  ],
+  "real_forward_backward": true,
+  "one_optimizer_iteration": true,
+  "loss": 5.102654457092285,
+  "training_iteration_seconds": 0.5262847999110818,
+  "small_real_hessian_layer": "layer1.0.conv1",
+  "small_real_hessian_sampled_patches": 64,
+  "small_real_hessian_condition_max": 1.4735733270645142,
+  "groupwise_small_network_layers": [
+    {
+      "layer": "layer1.0.conv1",
+      "rows": 2,
+      "columns": 8,
+      "deleted": 8
+    },
+    {
+      "layer": "layer1.0.conv2",
+      "rows": 3,
+      "columns": 12,
+      "deleted": 18
+    },
+    {
+      "layer": "layer1.1.conv1",
+      "rows": 2,
+      "columns": 16,
+      "deleted": 16
+    },
+    {
+      "layer": "layer1.1.conv2",
+      "rows": 3,
+      "columns": 8,
+      "deleted": 12
+    },
+    {
+      "layer": "layer2.0.conv1",
+      "rows": 2,
+      "columns": 12,
+      "deleted": 12
+    },
+    {
+      "layer": "layer2.0.conv2",
+      "rows": 3,
+      "columns": 16,
+      "deleted": 24
+    },
+    {
+      "layer": "layer2.0.shortcut.0",
+      "rows": 2,
+      "columns": 8,
+      "deleted": 8
+    },
+    {
+      "layer": "layer2.1.conv1",
+      "rows": 3,
+      "columns": 12,
+      "deleted": 18
+    },
+    {
+      "layer": "layer2.1.conv2",
+      "rows": 2,
+      "columns": 16,
+      "deleted": 16
+    },
+    {
+      "layer": "layer3.0.conv1",
+      "rows": 3,
+      "columns": 8,
+      "deleted": 12
+    },
+    {
+      "layer": "layer3.0.conv2",
+      "rows": 2,
+      "columns": 12,
+      "deleted": 12
+    },
+    {
+      "layer": "layer3.0.shortcut.0",
+      "rows": 3,
+      "columns": 16,
+      "deleted": 24
+    },
+    {
+      "layer": "layer3.1.conv1",
+      "rows": 2,
+      "columns": 8,
+      "deleted": 8
+    },
+    {
+      "layer": "layer3.1.conv2",
+      "rows": 3,
+      "columns": 12,
+      "deleted": 18
+    },
+    {
+      "layer": "layer4.0.conv1",
+      "rows": 2,
+      "columns": 16,
+      "deleted": 16
+    },
+    {
+      "layer": "layer4.0.conv2",
+      "rows": 3,
+      "columns": 8,
+      "deleted": 12
+    },
+    {
+      "layer": "layer4.0.shortcut.0",
+      "rows": 2,
+      "columns": 12,
+      "deleted": 12
+    },
+    {
+      "layer": "layer4.1.conv1",
+      "rows": 3,
+      "columns": 16,
+      "deleted": 24
+    },
+    {
+      "layer": "layer4.1.conv2",
+      "rows": 2,
+      "columns": 8,
+      "deleted": 8
+    }
+  ],
+  "mask_audit": {
+    "eligible_coordinates": 11157504,
+    "deleted_coordinates": 5578752,
+    "eligible_layers": 19,
+    "strict_2_4": true
+  },
+  "checkpoint_sha256": "59bdee87955a7eac085c676878152c9b8bef1e6efbab5468d0f5132cb797c1e7",
+  "checkpoint_roundtrip": true,
+  "final_test_accessed": false
+}

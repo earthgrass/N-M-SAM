@@ -1,0 +1,42 @@
+{
+  "experiment_id": "apbr_gpt_joint_seed0_rebased",
+  "schedule": {
+    "epochs": 200,
+    "warmup_epochs": 5,
+    "hessian_refresh_epochs": 10
+  },
+  "hessian_refresh_epochs_zero_based": [
+    5,
+    15,
+    25,
+    35,
+    45,
+    55,
+    65,
+    75,
+    85,
+    95,
+    105,
+    115,
+    125,
+    135,
+    145,
+    155,
+    165,
+    175,
+    185,
+    195
+  ],
+  "fixed_lambda_eta": true,
+  "training_test_access": false,
+  "final_test_policy": "one evaluation after checkpoint hash freeze",
+  "automatic_retry": false,
+  "status": "training_prepared",
+  "seed": 0,
+  "initial_checkpoint_sha256": "4317514e003556c58c780c67bd2fb2e07509495224a343c2d10c47206e00c03c",
+  "lambda_p": 1.3526042410542212,
+  "eta_s": 7036.300421582199,
+  "train_pickle_sha256": "735e79b04f092ca3d2e6d07f368c0a7d70d48c48d28865950cc24454cf45129b",
+  "test_loader_constructed": false,
+  "final_test_accessed": false
+}

@@ -1,0 +1,50 @@
+{
+  "status": "JOINT_CPU_GATE_PASS",
+  "real_model": true,
+  "real_cifar100_train_batch_ids": [
+    39328,
+    14404,
+    39830,
+    46380,
+    29132,
+    30158,
+    8556,
+    45709
+  ],
+  "lambda_p": 1.3526042410542212,
+  "eta_s": 7036.300421582199,
+  "result": {
+    "center_loss": 4.934336185455322,
+    "adversarial_loss": 5.787974834442139,
+    "pruning_regularizer": 0.31281784176826477,
+    "joint_loss": 6.211093425750732,
+    "pruning_active": true,
+    "eps_norm": 0.04999999999766675,
+    "ellipsoid_norm": 0.04999999999766675,
+    "first_grad_norm": 27.3108317522789,
+    "adversarial_grad_norm": 27.136282556564126,
+    "pruning_weight_grad_norm": 0.1551039548538814,
+    "final_optimizer_grad_norm": 27.137210404817775,
+    "energy_update_norm": 0.0018198399438627986,
+    "pruning_scale_update_norm": 0.003797919857404247,
+    "combined_scale_update_norm": 0.004666739268591854,
+    "restoration_max_abs": 0.0,
+    "correct": 0,
+    "count": 8
+  },
+  "geometry_log_volume": -4.017782200688158e-16,
+  "checks": {
+    "eps_nonzero": true,
+    "ellipsoid_rho": true,
+    "two_forward_losses_differ": true,
+    "energy_feedback_executed": true,
+    "pruning_scale_update_executed": true,
+    "combined_update_finite": true,
+    "restoration_exact": true,
+    "volume_constraint": true,
+    "optimizer_grads_cleared": true,
+    "geometry_committed_once": true,
+    "zero_skip_absent": true
+  },
+  "final_test_accessed": false
+}

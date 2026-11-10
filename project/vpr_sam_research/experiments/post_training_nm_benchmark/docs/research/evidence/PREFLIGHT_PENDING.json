@@ -1,0 +1,50 @@
+{
+  "status": "BLOCKED",
+  "failures": [
+    "Calibration budget/indices/rounds are pending user decision",
+    "GPU execution is not yet authorized"
+  ],
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.13.0+cpu",
+    "torchvision": "0.28.0+cpu",
+    "numpy": "2.5.2",
+    "cuda_build": null,
+    "cuda_available": false,
+    "threads": 16,
+    "deterministic": false
+  },
+  "source": {
+    "files": {
+      "benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "benchmark/artifacts.py": "2e948b57c8b912462589ac9582df1f9737e71d304f06076537c7c467b7a9f232",
+      "benchmark/audit_inputs.py": "b8c8adccf621263edbd924eb3ac74335119aaa3eb3d4356c415ad7143643ad81",
+      "benchmark/calibration.py": "3c91e33cf30d714b13b1a53bc8669dcc939549df378d158caa0b2dcf49776b49",
+      "benchmark/common.py": "1a393b8b5f165bc356202732f771f0086155fadb8aeef8111135f1dbe6d7319a",
+      "benchmark/data.py": "d3c7ea43872ecc8d6334b3d994035e80708892dbcbd567c8622fbb59f94302e8",
+      "benchmark/evaluation.py": "4e92e30bfada721fa45a7661a65d8bd03f90c7dfe140b47c75348da38df0f43c",
+      "benchmark/model.py": "befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71",
+      "benchmark/nm.py": "92433dbfd3b768b28922b89954d76fde7c3a6fdd23e661622ac248526b44678f",
+      "benchmark/obc.py": "0681675db4e8d14e2d3b2205c2090e4b9f838db4eb8bfd9e0b70092fe073665c",
+      "benchmark/pipeline.py": "ea23c0d5d1f361dca84b5bf9c00b44ed759af3eb273312c93443a017a529f2fa",
+      "benchmark/preflight.py": "09fb0d5dcd2c071fe7a1c00884b1cc4db701e33c95f893d2575dc2860952c957",
+      "benchmark/probes.py": "d03bbeda756de5bb9cfd66775376e3e7207c4526b07c47daeb8e5bbfcb1c880c",
+      "benchmark/recovery.py": "9ebd32b246fd55e60d53bf8a1f371d0567f2148cdec1d83fb6bbeb7c0998bb42",
+      "benchmark/run_obc.py": "cf48d1737b9b7b8a0a31a0e82ff34b8eecb22263eb1125abfdf7cce2e76d2f34",
+      "benchmark/upstream.py": "de9f2bb09a1f1e7459e628ef1ac1fb0a8790135073d800fc182a43391469dab8",
+      "configs/bn_train_ids.json": "c115a2560e164bd48f8e1f1ef2dda0ec28748fcbb58eb0155931696b1945cb56",
+      "configs/existing_inputs.json": "081039dea2349cd0ffd6045190fb8737465d351664767b79b24bfdf8ced25fe4",
+      "configs/gpu_execution_manifest.json": "1226fa2c8beec6e7ef87cecb656f8179586229d3c1bce5012984e3863aaf1f82",
+      "configs/historical_protocol.yaml": "6986af80a36e600c82b4bc90d9779aff8753813f7d4aa20479a0ea262dece44a",
+      "configs/post_training_nm_benchmark.yaml": "f5746168e44fde36bd4c01423224d37dd0bfff0236545c2598c1ee612fd050cf",
+      "configs/upstream_lock.json": "029568c3f4823b6405960f5cb7e54bda5e477e4f5068016a4b820f7a803a5b77",
+      "scripts/fetch_upstream.py": "7139f4d047088a325e7cefb89de9ab6beea3f4a34fb40943e6b40bbdee5a2616",
+      "scripts/package_evidence.py": "427b40bc942fffd1f7dfdcddccbf6b30117fd58235ebebdbd2f202d18dfda831",
+      "scripts/prepare_configuration.py": "5fde72c66c0c3da3cedfa428f82520b75b7a22755e9b575fdbd3aa593b7a6a5f"
+    },
+    "sha256": "1a8e5430bbc91bf89c0a39a69f4a6b7877d960e582559a4e13263e0c687fe3ff"
+  },
+  "config_sha256": "f5746168e44fde36bd4c01423224d37dd0bfff0236545c2598c1ee612fd050cf",
+  "gpu_checked": false,
+  "commit": "d0025b48664091444cc1ad363253010c336b23e6"
+}

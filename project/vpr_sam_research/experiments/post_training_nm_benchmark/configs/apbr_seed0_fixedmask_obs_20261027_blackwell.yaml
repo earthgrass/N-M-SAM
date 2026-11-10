@@ -1,0 +1,74 @@
+schema_version: 1
+experiment_id: apbr_seed0_fixedmask_obs_20261027
+status: EXPLORATORY_FROZEN_HARDWARE_REBIND
+source_protocol_id: cifar100_50k10k_final_v1
+reporting_role: exploratory_not_preregistered_main_table
+
+seed: 0
+model_id: ssam2022_cifar_resnet18_c100_v1
+gpu_uuid: GPU-65be6845-be69-8ba1-72f8-e34688ce53c5
+hardware_rebind:
+  from_gpu_uuid: GPU-15f4db77-e52f-c08d-e296-eb814b27dcef
+  reason: dedicated_noninterfering_gpu_for_fixedmask_obs
+  algorithm_fields_changed: false
+  identity_correction:
+    reason: initial transcription contained one extra hexadecimal digit
+    first_attempt_reached_gpu_compute: false
+
+parent:
+  role: apbr_sam_dense_final_epoch_200
+  sha256: 4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82
+  geometry_required: true
+
+historical_raw:
+  role: apbr_sam_geometry_mask_only
+  checkpoint_sha256: 74ea702356b6cb3f10ad34985ca8de6757ccb80702cced3debe4ec5936b9b9b3
+  mask_sha256: 79d9c410c67e931101cf46112e732c68133a9935e4f99a41503a0de8ee7b40f4
+  eligible_parameters: 11157504
+  removed_parameters: 5578752
+
+mask:
+  formula: abs_w_times_exp_minus_s
+  n: 2
+  m: 4
+  layout: oihw_output_row_contiguous_v1
+  stable_tie: true
+  tail: dense
+  source: apbr_geometry
+  immutable_during_compensation: true
+
+calibration:
+  samples: 1024
+  source: official_train_only
+  selection_seed: 20261027
+  selection_rule: numpy_pcg64_permutation_of_0_to_49999_first_n
+  augmentation: none
+  batch_size: 128
+  passes: 1
+
+obs:
+  algorithm: sparsegpt_ordered_fixed_external_mask
+  compute_dtype: float32
+  percdamp: 0.01
+  blocksize: 128
+  dynamic_mask_selection: false
+  recovery_epochs: 0
+
+bn:
+  calibration: false
+  running_buffers_must_remain_parent_identical: true
+
+evaluation:
+  test_once_after_fixed_output: true
+  checkpoint_selection: false
+  hyperparameter_tuning: false
+  batch_size: 128
+  augmentation: none
+
+safety:
+  require_formal_queue_complete: false
+  dedicated_gpu_no_formal_queue_present: true
+  require_gpu_idle: true
+  automatic_retry: false
+  overwrite: false
+  expand_to_other_seeds: false

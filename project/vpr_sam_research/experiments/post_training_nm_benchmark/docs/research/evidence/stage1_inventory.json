@@ -1,0 +1,746 @@
+{
+  "status": "PASS",
+  "stage1_complete": true,
+  "apbr_alias_confirmed_by_user": true,
+  "alias": "APBR-SAM = existing Full VPR-L2+Geometry-guided; historical labels and formulas untouched",
+  "checkpoint_records": [
+    {
+      "seed": 0,
+      "role": "standard_dense_sam",
+      "historical_label": "dense_sam",
+      "stage": "dense",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_0\\dense_sam\\best_test.pt",
+      "sha256": "63c2415476802ee30029d445bd2b1fed0992ec39ab0c89a852cf14b1c9683897",
+      "epoch": 193,
+      "steps": 75270,
+      "model_sha256": "f6555ac0646fb4981c31a851c4d3dc4ea50be20b76e8118274cf95850cc6d3cb",
+      "producer_commit": "1dffe6d269bb1ec9fd67611a59f2bb538183b30e",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": null,
+      "geometry_reference": null
+    },
+    {
+      "seed": 0,
+      "role": "apbr_dense_with_geometry",
+      "historical_label": "vpr_l2",
+      "stage": "dense",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_0\\vpr_l2\\best_test.pt",
+      "sha256": "fbe4e3ef1856874e096e11b181169c55bb5491fe8b358ab979795789f87ca583",
+      "epoch": 194,
+      "steps": 75660,
+      "model_sha256": "90783a7e26e50058a24986ccc56c6ad0ac9d24fb6da37effc141dc7052c01472",
+      "producer_commit": "cea8f8c051221929e6572f431adb4fd15f727551",
+      "geometry_sha256": "2075c26e0fb64ef02ffc1fa298cf23c00b0ca623741f7b6fbe84454a1dd8a832",
+      "geometry_state": "embedded_in_same_dense_checkpoint",
+      "mask_sha256": null,
+      "geometry_reference": null
+    },
+    {
+      "seed": 0,
+      "role": "sam_weight_only_mask_recovery",
+      "historical_label": "sam_magnitude",
+      "stage": "recovery",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_0\\recovery_sam_magnitude\\best_test.pt",
+      "sha256": "1ae51fcb46e3c7e003e73e376f3a722c064c86b8e9c17a7b53ca7d42267a2fe9",
+      "epoch": 19,
+      "steps": 7410,
+      "model_sha256": "f0f56fe719e3b69a3a737f681df0d7c918b5e27e5f290c0736768d5a67c1c5f9",
+      "producer_commit": "cea8f8c051221929e6572f431adb4fd15f727551",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": "3230c78ffbac0c42ec920c1bff76eb74c0c2f6cdf27017b330a0b410672b725f",
+      "geometry_reference": null
+    },
+    {
+      "seed": 0,
+      "role": "apbr_weight_only_mask_recovery",
+      "historical_label": "vpr_magnitude",
+      "stage": "recovery",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_0\\recovery_vpr_magnitude\\best_test.pt",
+      "sha256": "a566dbfb59d624a1edde31ce5cdb30dbd8d864d57d8b99d4b2061a418ccee651",
+      "epoch": 19,
+      "steps": 7410,
+      "model_sha256": "29c57814e72512cab5b0c1c5ac91a80164e27ab7f71bd2230ad87c944e2591f0",
+      "producer_commit": "cea8f8c051221929e6572f431adb4fd15f727551",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": "29d1e1be075f6ffa8562a1f45d7f7cf6f6b631283f9103265f1cd8366a7fda28",
+      "geometry_reference": {
+        "parent_checkpoint_sha256": "fbe4e3ef1856874e096e11b181169c55bb5491fe8b358ab979795789f87ca583",
+        "geometry_sha256": "2075c26e0fb64ef02ffc1fa298cf23c00b0ca623741f7b6fbe84454a1dd8a832",
+        "epoch": 194,
+        "method": "fixed_l2"
+      }
+    },
+    {
+      "seed": 0,
+      "role": "full_apbr_mask_recovery",
+      "historical_label": "vpr_guided",
+      "stage": "recovery",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_0\\recovery_vpr_guided\\best_test.pt",
+      "sha256": "319d6b5092bc1e46e2265f28eb396cec94c57a47586749f4ab44726ed2a9fe40",
+      "epoch": 18,
+      "steps": 7020,
+      "model_sha256": "87384caac20c06e76605c25a1a11ca9e989a786bfc1ea4f3dba345bec5bf8138",
+      "producer_commit": "cea8f8c051221929e6572f431adb4fd15f727551",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": "f10a67fc2ddb9dc633ab7545325e3a4f25ef5882a1c5ff42013014633bde90c5",
+      "geometry_reference": {
+        "parent_checkpoint_sha256": "fbe4e3ef1856874e096e11b181169c55bb5491fe8b358ab979795789f87ca583",
+        "geometry_sha256": "2075c26e0fb64ef02ffc1fa298cf23c00b0ca623741f7b6fbe84454a1dd8a832",
+        "epoch": 194,
+        "method": "fixed_l2"
+      }
+    },
+    {
+      "seed": 1,
+      "role": "standard_dense_sam",
+      "historical_label": "dense_sam",
+      "stage": "dense",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_1\\dense_sam\\best_test.pt",
+      "sha256": "1bcc4f48de1952d7e075ad58c396f50d86d0e9c99f0c37d56b809d0136c9e1a7",
+      "epoch": 196,
+      "steps": 76440,
+      "model_sha256": "ecfb70ed294c65fca0b8d2402da93ca66c7484b26f9e8f0dcd7dfdecb832dc92",
+      "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": null,
+      "geometry_reference": null
+    },
+    {
+      "seed": 1,
+      "role": "apbr_dense_with_geometry",
+      "historical_label": "vpr_l2",
+      "stage": "dense",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_1\\vpr_l2\\best_test.pt",
+      "sha256": "3d744d6cfd201ac7983d1f52b93b3140ddfe3527636e657d09993b6f4791b6c3",
+      "epoch": 196,
+      "steps": 76440,
+      "model_sha256": "9be9acf460ea1d254a4be3ee4bedcb112c9732d63c6722764b3d92246ad313df",
+      "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+      "geometry_sha256": "8a9a75a71b470d7847059b0ab297a09ab73138ca5aded4823505edde9850df6c",
+      "geometry_state": "embedded_in_same_dense_checkpoint",
+      "mask_sha256": null,
+      "geometry_reference": null
+    },
+    {
+      "seed": 1,
+      "role": "sam_weight_only_mask_recovery",
+      "historical_label": "sam_magnitude",
+      "stage": "recovery",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_1\\recovery_sam_magnitude\\best_test.pt",
+      "sha256": "70fbf5d33f305a39f4baa7c81105bf33f4b52181288f5f316e3480f5a386932b",
+      "epoch": 19,
+      "steps": 7410,
+      "model_sha256": "cc1b972005027fc79e10bb225293c790857e2ed7b385442c93037e29ec78568b",
+      "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": "92ff302d20aba3ec515acea49dbde12b616a363ee5e90130f184fcd59e63b24a",
+      "geometry_reference": null
+    },
+    {
+      "seed": 1,
+      "role": "apbr_weight_only_mask_recovery",
+      "historical_label": "vpr_magnitude",
+      "stage": "recovery",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_1\\recovery_vpr_magnitude\\best_test.pt",
+      "sha256": "735143b38811d8174f73582fdba58f875a4dac7bbee025d867216093c5ea4715",
+      "epoch": 20,
+      "steps": 7800,
+      "model_sha256": "acffac79f01f7133d204022ac5bd002ed2f9be2df9be232f1111569760f697bc",
+      "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": "c037e3d74ff198a414d8429f9db269f12f64738c5a5bac251022db643b6fc9c1",
+      "geometry_reference": {
+        "parent_checkpoint_sha256": "3d744d6cfd201ac7983d1f52b93b3140ddfe3527636e657d09993b6f4791b6c3",
+        "geometry_sha256": "8a9a75a71b470d7847059b0ab297a09ab73138ca5aded4823505edde9850df6c",
+        "epoch": 196,
+        "method": "fixed_l2"
+      }
+    },
+    {
+      "seed": 1,
+      "role": "full_apbr_mask_recovery",
+      "historical_label": "vpr_guided",
+      "stage": "recovery",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_1\\recovery_vpr_guided\\best_test.pt",
+      "sha256": "d185eb76429e781d3008192e2ea1aac240d868403cbadee84ac08d92d3aa76f8",
+      "epoch": 20,
+      "steps": 7800,
+      "model_sha256": "6cb0cda058acbc91b0a69b254a601dc7ff62bc471357821a926fd36815ce6fc8",
+      "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": "573178016c5cedc8fa10f3719c3497eb5f29ad5a6bdb9cb980b7978648f04773",
+      "geometry_reference": {
+        "parent_checkpoint_sha256": "3d744d6cfd201ac7983d1f52b93b3140ddfe3527636e657d09993b6f4791b6c3",
+        "geometry_sha256": "8a9a75a71b470d7847059b0ab297a09ab73138ca5aded4823505edde9850df6c",
+        "epoch": 196,
+        "method": "fixed_l2"
+      }
+    },
+    {
+      "seed": 2,
+      "role": "standard_dense_sam",
+      "historical_label": "dense_sam",
+      "stage": "dense",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_2\\dense_sam\\best_test.pt",
+      "sha256": "3444394121f6f7b6f12660a42169918e226a2d6b133ac21bb74c095429207536",
+      "epoch": 185,
+      "steps": 72150,
+      "model_sha256": "673a0a488a397ab5fb9cdfbb1c2b1d30d0e9e358b575c07698bc49b17a0270d4",
+      "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": null,
+      "geometry_reference": null
+    },
+    {
+      "seed": 2,
+      "role": "apbr_dense_with_geometry",
+      "historical_label": "vpr_l2",
+      "stage": "dense",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_2\\vpr_l2\\best_test.pt",
+      "sha256": "03be99a4e969a5eee6bf3dc8d744e13f64d3f35888c33fbbf747cfff673c7c96",
+      "epoch": 198,
+      "steps": 77220,
+      "model_sha256": "b7664ff23e18533dc0eb9f1e7945a39204db16f2aa8b9917d478167fa9ba1029",
+      "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+      "geometry_sha256": "d97b6bec57811f3f2e83672b7d31c1e62b32d9ea0b1f0f972002b191c7877a92",
+      "geometry_state": "embedded_in_same_dense_checkpoint",
+      "mask_sha256": null,
+      "geometry_reference": null
+    },
+    {
+      "seed": 2,
+      "role": "sam_weight_only_mask_recovery",
+      "historical_label": "sam_magnitude",
+      "stage": "recovery",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_2\\recovery_sam_magnitude\\best_test.pt",
+      "sha256": "12bf7df5c0bc4c97326946a8f8cfa659167bc7b673521424a610d3ee763a3163",
+      "epoch": 19,
+      "steps": 7410,
+      "model_sha256": "5e549e7b1ca5dc7f5f01ace6ecde010961287bbafe97877d5f400ff1d8deb62e",
+      "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": "97efa70a572cde305c13af5dbf58ba1442ed107a5c7da14ef3801fbd6e4f42dc",
+      "geometry_reference": null
+    },
+    {
+      "seed": 2,
+      "role": "apbr_weight_only_mask_recovery",
+      "historical_label": "vpr_magnitude",
+      "stage": "recovery",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_2\\recovery_vpr_magnitude\\best_test.pt",
+      "sha256": "dc9a09a50b070b245d68df13a3be405c1da3fe3a0bcf62cf0e17f3dacfa402f4",
+      "epoch": 17,
+      "steps": 6630,
+      "model_sha256": "61a3c7620c57a43e5dfb5052576d6c54d3cbd9d4e4f7d9e37d5a754782448dfc",
+      "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": "42e3b49c735cad983f0e4e64dea8c47861ace0b083531bd35a464491f1d58afb",
+      "geometry_reference": {
+        "parent_checkpoint_sha256": "03be99a4e969a5eee6bf3dc8d744e13f64d3f35888c33fbbf747cfff673c7c96",
+        "geometry_sha256": "d97b6bec57811f3f2e83672b7d31c1e62b32d9ea0b1f0f972002b191c7877a92",
+        "epoch": 198,
+        "method": "fixed_l2"
+      }
+    },
+    {
+      "seed": 2,
+      "role": "full_apbr_mask_recovery",
+      "historical_label": "vpr_guided",
+      "stage": "recovery",
+      "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_2\\recovery_vpr_guided\\best_test.pt",
+      "sha256": "18a8a6f9940044e2c33f8ee4a04f382016f43c87b1b354681c18aef00e6b6433",
+      "epoch": 19,
+      "steps": 7410,
+      "model_sha256": "6d4aca4b2b002f5fe7c6b7b62484b3d6dcc3ca82525f0284c9085cb0f4247759",
+      "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+      "geometry_sha256": null,
+      "geometry_state": null,
+      "mask_sha256": "cf41ae9cb4b6f3f4728ab01ea1c077d213c98d5d99b1fd9e542384f3c3c77f3d",
+      "geometry_reference": {
+        "parent_checkpoint_sha256": "03be99a4e969a5eee6bf3dc8d744e13f64d3f35888c33fbbf747cfff673c7c96",
+        "geometry_sha256": "d97b6bec57811f3f2e83672b7d31c1e62b32d9ea0b1f0f972002b191c7877a92",
+        "epoch": 198,
+        "method": "fixed_l2"
+      }
+    }
+  ],
+  "roles": {
+    "standard_dense_sam": [
+      {
+        "seed": 0,
+        "role": "standard_dense_sam",
+        "historical_label": "dense_sam",
+        "stage": "dense",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_0\\dense_sam\\best_test.pt",
+        "sha256": "63c2415476802ee30029d445bd2b1fed0992ec39ab0c89a852cf14b1c9683897",
+        "epoch": 193,
+        "steps": 75270,
+        "model_sha256": "f6555ac0646fb4981c31a851c4d3dc4ea50be20b76e8118274cf95850cc6d3cb",
+        "producer_commit": "1dffe6d269bb1ec9fd67611a59f2bb538183b30e",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": null,
+        "geometry_reference": null
+      },
+      {
+        "seed": 1,
+        "role": "standard_dense_sam",
+        "historical_label": "dense_sam",
+        "stage": "dense",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_1\\dense_sam\\best_test.pt",
+        "sha256": "1bcc4f48de1952d7e075ad58c396f50d86d0e9c99f0c37d56b809d0136c9e1a7",
+        "epoch": 196,
+        "steps": 76440,
+        "model_sha256": "ecfb70ed294c65fca0b8d2402da93ca66c7484b26f9e8f0dcd7dfdecb832dc92",
+        "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": null,
+        "geometry_reference": null
+      },
+      {
+        "seed": 2,
+        "role": "standard_dense_sam",
+        "historical_label": "dense_sam",
+        "stage": "dense",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_2\\dense_sam\\best_test.pt",
+        "sha256": "3444394121f6f7b6f12660a42169918e226a2d6b133ac21bb74c095429207536",
+        "epoch": 185,
+        "steps": 72150,
+        "model_sha256": "673a0a488a397ab5fb9cdfbb1c2b1d30d0e9e358b575c07698bc49b17a0270d4",
+        "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": null,
+        "geometry_reference": null
+      }
+    ],
+    "apbr_dense_with_geometry": [
+      {
+        "seed": 0,
+        "role": "apbr_dense_with_geometry",
+        "historical_label": "vpr_l2",
+        "stage": "dense",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_0\\vpr_l2\\best_test.pt",
+        "sha256": "fbe4e3ef1856874e096e11b181169c55bb5491fe8b358ab979795789f87ca583",
+        "epoch": 194,
+        "steps": 75660,
+        "model_sha256": "90783a7e26e50058a24986ccc56c6ad0ac9d24fb6da37effc141dc7052c01472",
+        "producer_commit": "cea8f8c051221929e6572f431adb4fd15f727551",
+        "geometry_sha256": "2075c26e0fb64ef02ffc1fa298cf23c00b0ca623741f7b6fbe84454a1dd8a832",
+        "geometry_state": "embedded_in_same_dense_checkpoint",
+        "mask_sha256": null,
+        "geometry_reference": null
+      },
+      {
+        "seed": 1,
+        "role": "apbr_dense_with_geometry",
+        "historical_label": "vpr_l2",
+        "stage": "dense",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_1\\vpr_l2\\best_test.pt",
+        "sha256": "3d744d6cfd201ac7983d1f52b93b3140ddfe3527636e657d09993b6f4791b6c3",
+        "epoch": 196,
+        "steps": 76440,
+        "model_sha256": "9be9acf460ea1d254a4be3ee4bedcb112c9732d63c6722764b3d92246ad313df",
+        "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+        "geometry_sha256": "8a9a75a71b470d7847059b0ab297a09ab73138ca5aded4823505edde9850df6c",
+        "geometry_state": "embedded_in_same_dense_checkpoint",
+        "mask_sha256": null,
+        "geometry_reference": null
+      },
+      {
+        "seed": 2,
+        "role": "apbr_dense_with_geometry",
+        "historical_label": "vpr_l2",
+        "stage": "dense",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_2\\vpr_l2\\best_test.pt",
+        "sha256": "03be99a4e969a5eee6bf3dc8d744e13f64d3f35888c33fbbf747cfff673c7c96",
+        "epoch": 198,
+        "steps": 77220,
+        "model_sha256": "b7664ff23e18533dc0eb9f1e7945a39204db16f2aa8b9917d478167fa9ba1029",
+        "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+        "geometry_sha256": "d97b6bec57811f3f2e83672b7d31c1e62b32d9ea0b1f0f972002b191c7877a92",
+        "geometry_state": "embedded_in_same_dense_checkpoint",
+        "mask_sha256": null,
+        "geometry_reference": null
+      }
+    ],
+    "sam_weight_only_mask_recovery": [
+      {
+        "seed": 0,
+        "role": "sam_weight_only_mask_recovery",
+        "historical_label": "sam_magnitude",
+        "stage": "recovery",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_0\\recovery_sam_magnitude\\best_test.pt",
+        "sha256": "1ae51fcb46e3c7e003e73e376f3a722c064c86b8e9c17a7b53ca7d42267a2fe9",
+        "epoch": 19,
+        "steps": 7410,
+        "model_sha256": "f0f56fe719e3b69a3a737f681df0d7c918b5e27e5f290c0736768d5a67c1c5f9",
+        "producer_commit": "cea8f8c051221929e6572f431adb4fd15f727551",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": "3230c78ffbac0c42ec920c1bff76eb74c0c2f6cdf27017b330a0b410672b725f",
+        "geometry_reference": null
+      },
+      {
+        "seed": 1,
+        "role": "sam_weight_only_mask_recovery",
+        "historical_label": "sam_magnitude",
+        "stage": "recovery",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_1\\recovery_sam_magnitude\\best_test.pt",
+        "sha256": "70fbf5d33f305a39f4baa7c81105bf33f4b52181288f5f316e3480f5a386932b",
+        "epoch": 19,
+        "steps": 7410,
+        "model_sha256": "cc1b972005027fc79e10bb225293c790857e2ed7b385442c93037e29ec78568b",
+        "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": "92ff302d20aba3ec515acea49dbde12b616a363ee5e90130f184fcd59e63b24a",
+        "geometry_reference": null
+      },
+      {
+        "seed": 2,
+        "role": "sam_weight_only_mask_recovery",
+        "historical_label": "sam_magnitude",
+        "stage": "recovery",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_2\\recovery_sam_magnitude\\best_test.pt",
+        "sha256": "12bf7df5c0bc4c97326946a8f8cfa659167bc7b673521424a610d3ee763a3163",
+        "epoch": 19,
+        "steps": 7410,
+        "model_sha256": "5e549e7b1ca5dc7f5f01ace6ecde010961287bbafe97877d5f400ff1d8deb62e",
+        "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": "97efa70a572cde305c13af5dbf58ba1442ed107a5c7da14ef3801fbd6e4f42dc",
+        "geometry_reference": null
+      }
+    ],
+    "apbr_weight_only_mask_recovery": [
+      {
+        "seed": 0,
+        "role": "apbr_weight_only_mask_recovery",
+        "historical_label": "vpr_magnitude",
+        "stage": "recovery",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_0\\recovery_vpr_magnitude\\best_test.pt",
+        "sha256": "a566dbfb59d624a1edde31ce5cdb30dbd8d864d57d8b99d4b2061a418ccee651",
+        "epoch": 19,
+        "steps": 7410,
+        "model_sha256": "29c57814e72512cab5b0c1c5ac91a80164e27ab7f71bd2230ad87c944e2591f0",
+        "producer_commit": "cea8f8c051221929e6572f431adb4fd15f727551",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": "29d1e1be075f6ffa8562a1f45d7f7cf6f6b631283f9103265f1cd8366a7fda28",
+        "geometry_reference": {
+          "parent_checkpoint_sha256": "fbe4e3ef1856874e096e11b181169c55bb5491fe8b358ab979795789f87ca583",
+          "geometry_sha256": "2075c26e0fb64ef02ffc1fa298cf23c00b0ca623741f7b6fbe84454a1dd8a832",
+          "epoch": 194,
+          "method": "fixed_l2"
+        }
+      },
+      {
+        "seed": 1,
+        "role": "apbr_weight_only_mask_recovery",
+        "historical_label": "vpr_magnitude",
+        "stage": "recovery",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_1\\recovery_vpr_magnitude\\best_test.pt",
+        "sha256": "735143b38811d8174f73582fdba58f875a4dac7bbee025d867216093c5ea4715",
+        "epoch": 20,
+        "steps": 7800,
+        "model_sha256": "acffac79f01f7133d204022ac5bd002ed2f9be2df9be232f1111569760f697bc",
+        "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": "c037e3d74ff198a414d8429f9db269f12f64738c5a5bac251022db643b6fc9c1",
+        "geometry_reference": {
+          "parent_checkpoint_sha256": "3d744d6cfd201ac7983d1f52b93b3140ddfe3527636e657d09993b6f4791b6c3",
+          "geometry_sha256": "8a9a75a71b470d7847059b0ab297a09ab73138ca5aded4823505edde9850df6c",
+          "epoch": 196,
+          "method": "fixed_l2"
+        }
+      },
+      {
+        "seed": 2,
+        "role": "apbr_weight_only_mask_recovery",
+        "historical_label": "vpr_magnitude",
+        "stage": "recovery",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_2\\recovery_vpr_magnitude\\best_test.pt",
+        "sha256": "dc9a09a50b070b245d68df13a3be405c1da3fe3a0bcf62cf0e17f3dacfa402f4",
+        "epoch": 17,
+        "steps": 6630,
+        "model_sha256": "61a3c7620c57a43e5dfb5052576d6c54d3cbd9d4e4f7d9e37d5a754782448dfc",
+        "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": "42e3b49c735cad983f0e4e64dea8c47861ace0b083531bd35a464491f1d58afb",
+        "geometry_reference": {
+          "parent_checkpoint_sha256": "03be99a4e969a5eee6bf3dc8d744e13f64d3f35888c33fbbf747cfff673c7c96",
+          "geometry_sha256": "d97b6bec57811f3f2e83672b7d31c1e62b32d9ea0b1f0f972002b191c7877a92",
+          "epoch": 198,
+          "method": "fixed_l2"
+        }
+      }
+    ],
+    "full_apbr_mask_recovery": [
+      {
+        "seed": 0,
+        "role": "full_apbr_mask_recovery",
+        "historical_label": "vpr_guided",
+        "stage": "recovery",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_0\\recovery_vpr_guided\\best_test.pt",
+        "sha256": "319d6b5092bc1e46e2265f28eb396cec94c57a47586749f4ab44726ed2a9fe40",
+        "epoch": 18,
+        "steps": 7020,
+        "model_sha256": "87384caac20c06e76605c25a1a11ca9e989a786bfc1ea4f3dba345bec5bf8138",
+        "producer_commit": "cea8f8c051221929e6572f431adb4fd15f727551",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": "f10a67fc2ddb9dc633ab7545325e3a4f25ef5882a1c5ff42013014633bde90c5",
+        "geometry_reference": {
+          "parent_checkpoint_sha256": "fbe4e3ef1856874e096e11b181169c55bb5491fe8b358ab979795789f87ca583",
+          "geometry_sha256": "2075c26e0fb64ef02ffc1fa298cf23c00b0ca623741f7b6fbe84454a1dd8a832",
+          "epoch": 194,
+          "method": "fixed_l2"
+        }
+      },
+      {
+        "seed": 1,
+        "role": "full_apbr_mask_recovery",
+        "historical_label": "vpr_guided",
+        "stage": "recovery",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_1\\recovery_vpr_guided\\best_test.pt",
+        "sha256": "d185eb76429e781d3008192e2ea1aac240d868403cbadee84ac08d92d3aa76f8",
+        "epoch": 20,
+        "steps": 7800,
+        "model_sha256": "6cb0cda058acbc91b0a69b254a601dc7ff62bc471357821a926fd36815ce6fc8",
+        "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": "573178016c5cedc8fa10f3719c3497eb5f29ad5a6bdb9cb980b7978648f04773",
+        "geometry_reference": {
+          "parent_checkpoint_sha256": "3d744d6cfd201ac7983d1f52b93b3140ddfe3527636e657d09993b6f4791b6c3",
+          "geometry_sha256": "8a9a75a71b470d7847059b0ab297a09ab73138ca5aded4823505edde9850df6c",
+          "epoch": 196,
+          "method": "fixed_l2"
+        }
+      },
+      {
+        "seed": 2,
+        "role": "full_apbr_mask_recovery",
+        "historical_label": "vpr_guided",
+        "stage": "recovery",
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\VPR-v2-unified50k\\vpr_sam_research\\experiments\\vpr_v2_seeds12\\artifacts\\delivery_20261025_1021\\best_checkpoints\\seed_2\\recovery_vpr_guided\\best_test.pt",
+        "sha256": "18a8a6f9940044e2c33f8ee4a04f382016f43c87b1b354681c18aef00e6b6433",
+        "epoch": 19,
+        "steps": 7410,
+        "model_sha256": "6d4aca4b2b002f5fe7c6b7b62484b3d6dcc3ca82525f0284c9085cb0f4247759",
+        "producer_commit": "d0025b48664091444cc1ad363253010c336b23e6",
+        "geometry_sha256": null,
+        "geometry_state": null,
+        "mask_sha256": "cf41ae9cb4b6f3f4728ab01ea1c077d213c98d5d99b1fd9e542384f3c3c77f3d",
+        "geometry_reference": {
+          "parent_checkpoint_sha256": "03be99a4e969a5eee6bf3dc8d744e13f64d3f35888c33fbbf747cfff673c7c96",
+          "geometry_sha256": "d97b6bec57811f3f2e83672b7d31c1e62b32d9ea0b1f0f972002b191c7877a92",
+          "epoch": 198,
+          "method": "fixed_l2"
+        }
+      }
+    ]
+  },
+  "cpu_forwards": [
+    {
+      "seed": 0,
+      "method": "dense_sam",
+      "synthetic_cpu_forward": "PASS",
+      "not_dataset_accuracy": true
+    },
+    {
+      "seed": 0,
+      "method": "vpr_l2",
+      "synthetic_cpu_forward": "PASS",
+      "not_dataset_accuracy": true
+    },
+    {
+      "seed": 1,
+      "method": "dense_sam",
+      "synthetic_cpu_forward": "PASS",
+      "not_dataset_accuracy": true
+    },
+    {
+      "seed": 1,
+      "method": "vpr_l2",
+      "synthetic_cpu_forward": "PASS",
+      "not_dataset_accuracy": true
+    },
+    {
+      "seed": 2,
+      "method": "dense_sam",
+      "synthetic_cpu_forward": "PASS",
+      "not_dataset_accuracy": true
+    },
+    {
+      "seed": 2,
+      "method": "vpr_l2",
+      "synthetic_cpu_forward": "PASS",
+      "not_dataset_accuracy": true
+    }
+  ],
+  "layout": {
+    "architecture": "SSAM2022 CIFAR-ResNet18; not torchvision ImageNet ResNet18",
+    "parameters": 11173962,
+    "geometry_d": 11173962,
+    "geometry_parameter_tensors": 62,
+    "eligible_layers": {
+      "layer1.0.conv1": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "layer1.0.conv2": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "layer1.1.conv1": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "layer1.1.conv2": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "layer2.0.conv1": [
+        128,
+        64,
+        3,
+        3
+      ],
+      "layer2.0.conv2": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "layer2.0.shortcut.0": [
+        128,
+        64,
+        1,
+        1
+      ],
+      "layer2.1.conv1": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "layer2.1.conv2": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "layer3.0.conv1": [
+        256,
+        128,
+        3,
+        3
+      ],
+      "layer3.0.conv2": [
+        256,
+        256,
+        3,
+        3
+      ],
+      "layer3.0.shortcut.0": [
+        256,
+        128,
+        1,
+        1
+      ],
+      "layer3.1.conv1": [
+        256,
+        256,
+        3,
+        3
+      ],
+      "layer3.1.conv2": [
+        256,
+        256,
+        3,
+        3
+      ],
+      "layer4.0.conv1": [
+        512,
+        256,
+        3,
+        3
+      ],
+      "layer4.0.conv2": [
+        512,
+        512,
+        3,
+        3
+      ],
+      "layer4.0.shortcut.0": [
+        512,
+        256,
+        1,
+        1
+      ],
+      "layer4.1.conv1": [
+        512,
+        512,
+        3,
+        3
+      ],
+      "layer4.1.conv2": [
+        512,
+        512,
+        3,
+        3
+      ]
+    },
+    "eligible_coordinates": 11157504,
+    "all_eligible_rows_divisible_by4": true,
+    "snows_masked_parameters_above100k": [
+      "layer3.0.conv1",
+      "layer3.0.conv2",
+      "layer3.1.conv1",
+      "layer3.1.conv2",
+      "layer4.0.conv1",
+      "layer4.0.conv2",
+      "layer4.1.conv1",
+      "layer4.1.conv2"
+    ]
+  },
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.13.0+cpu",
+    "torchvision": "0.28.0+cpu",
+    "numpy": "2.5.2",
+    "cuda_build": null,
+    "cuda_available": false,
+    "threads": 4,
+    "deterministic": false
+  },
+  "limitations": [
+    "Raw/BN/Last/all-epoch large checkpoints remain on shutdown server; existing metrics/logs/Mask states and all15Best are local",
+    "No formal dataset evaluation, pruning or new training performed by this audit"
+  ]
+}

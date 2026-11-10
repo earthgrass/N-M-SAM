@@ -1,0 +1,684 @@
+{
+  "status": "CIFAR100_MODEL_IDENTITY_PASS",
+  "structure_status": "PASS",
+  "data_identity_prerequisite_pass": true,
+  "dataset_identity_link": {
+    "audit_path": "C:\\Users\\earthgrass73\\Desktop\\NM\u7a00\u758f\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\docs\\research\\cifar100_50k10k_final_v1\\CIFAR100_DATA_IDENTITY_50K10K.json",
+    "audit_sha256": "cbed513d43d8a85a6a5a2eaa599b325fbb31eeed534dd3a2cb162503a0aa3a98",
+    "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7"
+  },
+  "model_id": "ssam2022_cifar_resnet18_c100_v1",
+  "model_initialization_seed": 20261026,
+  "randomly_initialized_not_trained": true,
+  "factory": "baseline_adapters.cifar100_model.build_cifar100_model",
+  "legacy_cifar10_factory_unchanged": "benchmark.model.build_model",
+  "blocks": [
+    2,
+    2,
+    2,
+    2
+  ],
+  "stem": {
+    "conv": [
+      3,
+      64,
+      3,
+      3
+    ],
+    "stride": 1,
+    "padding": 1,
+    "bias": false,
+    "maxpool": false
+  },
+  "basic_block": "two 3x3 convolutions with BN; projection shortcut is 1x1 Conv2d+BN on stride/channel change",
+  "stage_channels": [
+    64,
+    128,
+    256,
+    512
+  ],
+  "stage_strides": [
+    1,
+    2,
+    2,
+    2
+  ],
+  "pooling": "F.avg_pool2d(kernel_size=4)",
+  "classifier": {
+    "in_features": 512,
+    "out_features": 100,
+    "bias": true
+  },
+  "initialization": "unmodified torch.nn module reset_parameters defaults; no project custom initializer",
+  "torch_version": "2.13.0+cpu",
+  "parameter_count": 11220132,
+  "trainable_parameter_count": 11220132,
+  "state_dict_shapes": {
+    "conv1.weight": [
+      64,
+      3,
+      3,
+      3
+    ],
+    "bn1.weight": [
+      64
+    ],
+    "bn1.bias": [
+      64
+    ],
+    "bn1.running_mean": [
+      64
+    ],
+    "bn1.running_var": [
+      64
+    ],
+    "bn1.num_batches_tracked": [],
+    "layer1.0.conv1.weight": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "layer1.0.bn1.weight": [
+      64
+    ],
+    "layer1.0.bn1.bias": [
+      64
+    ],
+    "layer1.0.bn1.running_mean": [
+      64
+    ],
+    "layer1.0.bn1.running_var": [
+      64
+    ],
+    "layer1.0.bn1.num_batches_tracked": [],
+    "layer1.0.conv2.weight": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "layer1.0.bn2.weight": [
+      64
+    ],
+    "layer1.0.bn2.bias": [
+      64
+    ],
+    "layer1.0.bn2.running_mean": [
+      64
+    ],
+    "layer1.0.bn2.running_var": [
+      64
+    ],
+    "layer1.0.bn2.num_batches_tracked": [],
+    "layer1.1.conv1.weight": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "layer1.1.bn1.weight": [
+      64
+    ],
+    "layer1.1.bn1.bias": [
+      64
+    ],
+    "layer1.1.bn1.running_mean": [
+      64
+    ],
+    "layer1.1.bn1.running_var": [
+      64
+    ],
+    "layer1.1.bn1.num_batches_tracked": [],
+    "layer1.1.conv2.weight": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "layer1.1.bn2.weight": [
+      64
+    ],
+    "layer1.1.bn2.bias": [
+      64
+    ],
+    "layer1.1.bn2.running_mean": [
+      64
+    ],
+    "layer1.1.bn2.running_var": [
+      64
+    ],
+    "layer1.1.bn2.num_batches_tracked": [],
+    "layer2.0.conv1.weight": [
+      128,
+      64,
+      3,
+      3
+    ],
+    "layer2.0.bn1.weight": [
+      128
+    ],
+    "layer2.0.bn1.bias": [
+      128
+    ],
+    "layer2.0.bn1.running_mean": [
+      128
+    ],
+    "layer2.0.bn1.running_var": [
+      128
+    ],
+    "layer2.0.bn1.num_batches_tracked": [],
+    "layer2.0.conv2.weight": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "layer2.0.bn2.weight": [
+      128
+    ],
+    "layer2.0.bn2.bias": [
+      128
+    ],
+    "layer2.0.bn2.running_mean": [
+      128
+    ],
+    "layer2.0.bn2.running_var": [
+      128
+    ],
+    "layer2.0.bn2.num_batches_tracked": [],
+    "layer2.0.shortcut.0.weight": [
+      128,
+      64,
+      1,
+      1
+    ],
+    "layer2.0.shortcut.1.weight": [
+      128
+    ],
+    "layer2.0.shortcut.1.bias": [
+      128
+    ],
+    "layer2.0.shortcut.1.running_mean": [
+      128
+    ],
+    "layer2.0.shortcut.1.running_var": [
+      128
+    ],
+    "layer2.0.shortcut.1.num_batches_tracked": [],
+    "layer2.1.conv1.weight": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "layer2.1.bn1.weight": [
+      128
+    ],
+    "layer2.1.bn1.bias": [
+      128
+    ],
+    "layer2.1.bn1.running_mean": [
+      128
+    ],
+    "layer2.1.bn1.running_var": [
+      128
+    ],
+    "layer2.1.bn1.num_batches_tracked": [],
+    "layer2.1.conv2.weight": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "layer2.1.bn2.weight": [
+      128
+    ],
+    "layer2.1.bn2.bias": [
+      128
+    ],
+    "layer2.1.bn2.running_mean": [
+      128
+    ],
+    "layer2.1.bn2.running_var": [
+      128
+    ],
+    "layer2.1.bn2.num_batches_tracked": [],
+    "layer3.0.conv1.weight": [
+      256,
+      128,
+      3,
+      3
+    ],
+    "layer3.0.bn1.weight": [
+      256
+    ],
+    "layer3.0.bn1.bias": [
+      256
+    ],
+    "layer3.0.bn1.running_mean": [
+      256
+    ],
+    "layer3.0.bn1.running_var": [
+      256
+    ],
+    "layer3.0.bn1.num_batches_tracked": [],
+    "layer3.0.conv2.weight": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "layer3.0.bn2.weight": [
+      256
+    ],
+    "layer3.0.bn2.bias": [
+      256
+    ],
+    "layer3.0.bn2.running_mean": [
+      256
+    ],
+    "layer3.0.bn2.running_var": [
+      256
+    ],
+    "layer3.0.bn2.num_batches_tracked": [],
+    "layer3.0.shortcut.0.weight": [
+      256,
+      128,
+      1,
+      1
+    ],
+    "layer3.0.shortcut.1.weight": [
+      256
+    ],
+    "layer3.0.shortcut.1.bias": [
+      256
+    ],
+    "layer3.0.shortcut.1.running_mean": [
+      256
+    ],
+    "layer3.0.shortcut.1.running_var": [
+      256
+    ],
+    "layer3.0.shortcut.1.num_batches_tracked": [],
+    "layer3.1.conv1.weight": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "layer3.1.bn1.weight": [
+      256
+    ],
+    "layer3.1.bn1.bias": [
+      256
+    ],
+    "layer3.1.bn1.running_mean": [
+      256
+    ],
+    "layer3.1.bn1.running_var": [
+      256
+    ],
+    "layer3.1.bn1.num_batches_tracked": [],
+    "layer3.1.conv2.weight": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "layer3.1.bn2.weight": [
+      256
+    ],
+    "layer3.1.bn2.bias": [
+      256
+    ],
+    "layer3.1.bn2.running_mean": [
+      256
+    ],
+    "layer3.1.bn2.running_var": [
+      256
+    ],
+    "layer3.1.bn2.num_batches_tracked": [],
+    "layer4.0.conv1.weight": [
+      512,
+      256,
+      3,
+      3
+    ],
+    "layer4.0.bn1.weight": [
+      512
+    ],
+    "layer4.0.bn1.bias": [
+      512
+    ],
+    "layer4.0.bn1.running_mean": [
+      512
+    ],
+    "layer4.0.bn1.running_var": [
+      512
+    ],
+    "layer4.0.bn1.num_batches_tracked": [],
+    "layer4.0.conv2.weight": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "layer4.0.bn2.weight": [
+      512
+    ],
+    "layer4.0.bn2.bias": [
+      512
+    ],
+    "layer4.0.bn2.running_mean": [
+      512
+    ],
+    "layer4.0.bn2.running_var": [
+      512
+    ],
+    "layer4.0.bn2.num_batches_tracked": [],
+    "layer4.0.shortcut.0.weight": [
+      512,
+      256,
+      1,
+      1
+    ],
+    "layer4.0.shortcut.1.weight": [
+      512
+    ],
+    "layer4.0.shortcut.1.bias": [
+      512
+    ],
+    "layer4.0.shortcut.1.running_mean": [
+      512
+    ],
+    "layer4.0.shortcut.1.running_var": [
+      512
+    ],
+    "layer4.0.shortcut.1.num_batches_tracked": [],
+    "layer4.1.conv1.weight": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "layer4.1.bn1.weight": [
+      512
+    ],
+    "layer4.1.bn1.bias": [
+      512
+    ],
+    "layer4.1.bn1.running_mean": [
+      512
+    ],
+    "layer4.1.bn1.running_var": [
+      512
+    ],
+    "layer4.1.bn1.num_batches_tracked": [],
+    "layer4.1.conv2.weight": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "layer4.1.bn2.weight": [
+      512
+    ],
+    "layer4.1.bn2.bias": [
+      512
+    ],
+    "layer4.1.bn2.running_mean": [
+      512
+    ],
+    "layer4.1.bn2.running_var": [
+      512
+    ],
+    "layer4.1.bn2.num_batches_tracked": [],
+    "linear.weight": [
+      100,
+      512
+    ],
+    "linear.bias": [
+      100
+    ]
+  },
+  "state_dict_key_order": [
+    "conv1.weight",
+    "bn1.weight",
+    "bn1.bias",
+    "bn1.running_mean",
+    "bn1.running_var",
+    "bn1.num_batches_tracked",
+    "layer1.0.conv1.weight",
+    "layer1.0.bn1.weight",
+    "layer1.0.bn1.bias",
+    "layer1.0.bn1.running_mean",
+    "layer1.0.bn1.running_var",
+    "layer1.0.bn1.num_batches_tracked",
+    "layer1.0.conv2.weight",
+    "layer1.0.bn2.weight",
+    "layer1.0.bn2.bias",
+    "layer1.0.bn2.running_mean",
+    "layer1.0.bn2.running_var",
+    "layer1.0.bn2.num_batches_tracked",
+    "layer1.1.conv1.weight",
+    "layer1.1.bn1.weight",
+    "layer1.1.bn1.bias",
+    "layer1.1.bn1.running_mean",
+    "layer1.1.bn1.running_var",
+    "layer1.1.bn1.num_batches_tracked",
+    "layer1.1.conv2.weight",
+    "layer1.1.bn2.weight",
+    "layer1.1.bn2.bias",
+    "layer1.1.bn2.running_mean",
+    "layer1.1.bn2.running_var",
+    "layer1.1.bn2.num_batches_tracked",
+    "layer2.0.conv1.weight",
+    "layer2.0.bn1.weight",
+    "layer2.0.bn1.bias",
+    "layer2.0.bn1.running_mean",
+    "layer2.0.bn1.running_var",
+    "layer2.0.bn1.num_batches_tracked",
+    "layer2.0.conv2.weight",
+    "layer2.0.bn2.weight",
+    "layer2.0.bn2.bias",
+    "layer2.0.bn2.running_mean",
+    "layer2.0.bn2.running_var",
+    "layer2.0.bn2.num_batches_tracked",
+    "layer2.0.shortcut.0.weight",
+    "layer2.0.shortcut.1.weight",
+    "layer2.0.shortcut.1.bias",
+    "layer2.0.shortcut.1.running_mean",
+    "layer2.0.shortcut.1.running_var",
+    "layer2.0.shortcut.1.num_batches_tracked",
+    "layer2.1.conv1.weight",
+    "layer2.1.bn1.weight",
+    "layer2.1.bn1.bias",
+    "layer2.1.bn1.running_mean",
+    "layer2.1.bn1.running_var",
+    "layer2.1.bn1.num_batches_tracked",
+    "layer2.1.conv2.weight",
+    "layer2.1.bn2.weight",
+    "layer2.1.bn2.bias",
+    "layer2.1.bn2.running_mean",
+    "layer2.1.bn2.running_var",
+    "layer2.1.bn2.num_batches_tracked",
+    "layer3.0.conv1.weight",
+    "layer3.0.bn1.weight",
+    "layer3.0.bn1.bias",
+    "layer3.0.bn1.running_mean",
+    "layer3.0.bn1.running_var",
+    "layer3.0.bn1.num_batches_tracked",
+    "layer3.0.conv2.weight",
+    "layer3.0.bn2.weight",
+    "layer3.0.bn2.bias",
+    "layer3.0.bn2.running_mean",
+    "layer3.0.bn2.running_var",
+    "layer3.0.bn2.num_batches_tracked",
+    "layer3.0.shortcut.0.weight",
+    "layer3.0.shortcut.1.weight",
+    "layer3.0.shortcut.1.bias",
+    "layer3.0.shortcut.1.running_mean",
+    "layer3.0.shortcut.1.running_var",
+    "layer3.0.shortcut.1.num_batches_tracked",
+    "layer3.1.conv1.weight",
+    "layer3.1.bn1.weight",
+    "layer3.1.bn1.bias",
+    "layer3.1.bn1.running_mean",
+    "layer3.1.bn1.running_var",
+    "layer3.1.bn1.num_batches_tracked",
+    "layer3.1.conv2.weight",
+    "layer3.1.bn2.weight",
+    "layer3.1.bn2.bias",
+    "layer3.1.bn2.running_mean",
+    "layer3.1.bn2.running_var",
+    "layer3.1.bn2.num_batches_tracked",
+    "layer4.0.conv1.weight",
+    "layer4.0.bn1.weight",
+    "layer4.0.bn1.bias",
+    "layer4.0.bn1.running_mean",
+    "layer4.0.bn1.running_var",
+    "layer4.0.bn1.num_batches_tracked",
+    "layer4.0.conv2.weight",
+    "layer4.0.bn2.weight",
+    "layer4.0.bn2.bias",
+    "layer4.0.bn2.running_mean",
+    "layer4.0.bn2.running_var",
+    "layer4.0.bn2.num_batches_tracked",
+    "layer4.0.shortcut.0.weight",
+    "layer4.0.shortcut.1.weight",
+    "layer4.0.shortcut.1.bias",
+    "layer4.0.shortcut.1.running_mean",
+    "layer4.0.shortcut.1.running_var",
+    "layer4.0.shortcut.1.num_batches_tracked",
+    "layer4.1.conv1.weight",
+    "layer4.1.bn1.weight",
+    "layer4.1.bn1.bias",
+    "layer4.1.bn1.running_mean",
+    "layer4.1.bn1.running_var",
+    "layer4.1.bn1.num_batches_tracked",
+    "layer4.1.conv2.weight",
+    "layer4.1.bn2.weight",
+    "layer4.1.bn2.bias",
+    "layer4.1.bn2.running_mean",
+    "layer4.1.bn2.running_var",
+    "layer4.1.bn2.num_batches_tracked",
+    "linear.weight",
+    "linear.bias"
+  ],
+  "architecture_sha256": "95367b739c42cca14cb51d1a776e5dbdbe71f9ed4a1afbd2c5c0b1bb994827ea",
+  "initialized_state_sha256": "3b05fd6f017e5d33dcde5c517c34d14457cf7311a5339683c5d281f0a321f874",
+  "cifar10_to_cifar100_shape_differences": {
+    "linear.weight": {
+      "cifar10": [
+        10,
+        512
+      ],
+      "cifar100": [
+        100,
+        512
+      ]
+    },
+    "linear.bias": {
+      "cifar10": [
+        10
+      ],
+      "cifar100": [
+        100
+      ]
+    }
+  },
+  "pruning": {
+    "convention": "oihw_output_row_contiguous_v1",
+    "eligible_module_names": [
+      "layer1.0.conv1",
+      "layer1.0.conv2",
+      "layer1.1.conv1",
+      "layer1.1.conv2",
+      "layer2.0.conv1",
+      "layer2.0.conv2",
+      "layer2.0.shortcut.0",
+      "layer2.1.conv1",
+      "layer2.1.conv2",
+      "layer3.0.conv1",
+      "layer3.0.conv2",
+      "layer3.0.shortcut.0",
+      "layer3.1.conv1",
+      "layer3.1.conv2",
+      "layer4.0.conv1",
+      "layer4.0.conv2",
+      "layer4.0.shortcut.0",
+      "layer4.1.conv1",
+      "layer4.1.conv2"
+    ],
+    "excluded": {
+      "first_conv": "conv1",
+      "last_linear": "linear",
+      "batch_norm_affine": [
+        "bn1",
+        "layer1.0.bn1",
+        "layer1.0.bn2",
+        "layer1.1.bn1",
+        "layer1.1.bn2",
+        "layer2.0.bn1",
+        "layer2.0.bn2",
+        "layer2.0.shortcut.1",
+        "layer2.1.bn1",
+        "layer2.1.bn2",
+        "layer3.0.bn1",
+        "layer3.0.bn2",
+        "layer3.0.shortcut.1",
+        "layer3.1.bn1",
+        "layer3.1.bn2",
+        "layer4.0.bn1",
+        "layer4.0.bn2",
+        "layer4.0.shortcut.1",
+        "layer4.1.bn1",
+        "layer4.1.bn2"
+      ],
+      "all_bias_parameters": [
+        "bn1.bias",
+        "layer1.0.bn1.bias",
+        "layer1.0.bn2.bias",
+        "layer1.1.bn1.bias",
+        "layer1.1.bn2.bias",
+        "layer2.0.bn1.bias",
+        "layer2.0.bn2.bias",
+        "layer2.0.shortcut.1.bias",
+        "layer2.1.bn1.bias",
+        "layer2.1.bn2.bias",
+        "layer3.0.bn1.bias",
+        "layer3.0.bn2.bias",
+        "layer3.0.shortcut.1.bias",
+        "layer3.1.bn1.bias",
+        "layer3.1.bn2.bias",
+        "layer4.0.bn1.bias",
+        "layer4.0.bn2.bias",
+        "layer4.0.shortcut.1.bias",
+        "layer4.1.bn1.bias",
+        "layer4.1.bn2.bias",
+        "linear.bias"
+      ]
+    },
+    "n": 2,
+    "m": 4,
+    "complete_group_rule": "keep exactly 2",
+    "tail_rule": "dense",
+    "mask_semantics": "bool keep-mask (True means retained)",
+    "magnitude_tie_rule": "stable descending argsort; lower contiguous index is retained first on exact ties",
+    "sparsegpt_tie_rule": "stable ascending pruning metric; lower contiguous index is removed first on exact ties"
+  },
+  "checks": {
+    "output_shape_batch2_100": true,
+    "forward_finite": true,
+    "loss_finite": true,
+    "all_parameter_gradients_present_and_finite": true,
+    "only_cifar10_shape_differences_are_classifier": true,
+    "first_and_last_excluded": true,
+    "bn_and_bias_excluded": true,
+    "nm_mask_bool": true,
+    "nm_complete_group_2_of_4": true,
+    "nm_dense_tail": true,
+    "nm_magnitude_tie_stable_lower_indices_kept": true
+  }
+}

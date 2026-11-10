@@ -1,0 +1,145 @@
+{
+  "status": "OFFLINE_PREPARATION_ONLY_GPU_NOT_READY",
+  "baseline_commit": "551c891a69dcd9631ec6a6ba16c8562ab54f82e4",
+  "baseline_source_matched_before_edit": true,
+  "prior_core_unchanged": [
+    "benchmark/obc.py",
+    "benchmark/pipeline.py",
+    "benchmark/nm.py",
+    "benchmark/model.py",
+    "benchmark/data.py",
+    "benchmark/evaluation.py",
+    "benchmark/recovery.py"
+  ],
+  "changed_prior_source_files": [
+    "benchmark/preflight.py",
+    "configs/gpu_execution_manifest.json",
+    "configs/post_training_nm_benchmark.yaml"
+  ],
+  "added_source_files": [
+    "benchmark/obc_smoke.py",
+    "benchmark/resource_monitor.py",
+    "benchmark/smoke_readiness.py",
+    "benchmark/snows_patch.py",
+    "benchmark/snows_repair_kernels.py",
+    "configs/obc_cuda_smoke.yaml",
+    "patches/snows_minimal_diagnostic.patch",
+    "scripts/package_smoke_readiness.py",
+    "scripts/prepare_snows_patch.py",
+    "scripts/snows_solver_blockers.py"
+  ],
+  "source": {
+    "files": {
+      "benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "benchmark/artifacts.py": "2e948b57c8b912462589ac9582df1f9737e71d304f06076537c7c467b7a9f232",
+      "benchmark/audit_inputs.py": "b8c8adccf621263edbd924eb3ac74335119aaa3eb3d4356c415ad7143643ad81",
+      "benchmark/calibration.py": "5c8d378d8abd588622bcb11d55d7d7729ed68e1805ae542eab575166b3f65f68",
+      "benchmark/common.py": "1a393b8b5f165bc356202732f771f0086155fadb8aeef8111135f1dbe6d7319a",
+      "benchmark/data.py": "d3c7ea43872ecc8d6334b3d994035e80708892dbcbd567c8622fbb59f94302e8",
+      "benchmark/evaluation.py": "4e92e30bfada721fa45a7661a65d8bd03f90c7dfe140b47c75348da38df0f43c",
+      "benchmark/model.py": "befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71",
+      "benchmark/nm.py": "92433dbfd3b768b28922b89954d76fde7c3a6fdd23e661622ac248526b44678f",
+      "benchmark/obc.py": "0681675db4e8d14e2d3b2205c2090e4b9f838db4eb8bfd9e0b70092fe073665c",
+      "benchmark/obc_smoke.py": "be08d754634d914e293ac4b4ee35db231c48e54ced6589908bba8c8f705e37f8",
+      "benchmark/pipeline.py": "ea23c0d5d1f361dca84b5bf9c00b44ed759af3eb273312c93443a017a529f2fa",
+      "benchmark/preflight.py": "3e37a50824c3e07ae2337ddd1e1ae138af46cd56f5451cf892918f669048fe4a",
+      "benchmark/probes.py": "c466e38883c654848961976007c5b2b2a015c498e26e88bca1f7c7be8fa4f78b",
+      "benchmark/recovery.py": "9ebd32b246fd55e60d53bf8a1f371d0567f2148cdec1d83fb6bbeb7c0998bb42",
+      "benchmark/resource_monitor.py": "3105b53f546e569392f0c1f7740700dc84faa11d8f1b84790d7cfec3e39f206d",
+      "benchmark/run_obc.py": "c9cc1007f14981098b25098eef14421c31c85feaa1d983582467ebcc7fc4c699",
+      "benchmark/smoke_readiness.py": "184af70a78d1eb646ff9c11a702d978d11b54d0e3b50884e67441faa71cf9bfc",
+      "benchmark/snows_patch.py": "ae98a0be247724345ffed672d6478ad07b5bfe8eaff1749c2f66dd9773ac45f7",
+      "benchmark/snows_repair_kernels.py": "ac54484c44296d790418d2c6c7ff8d1093de300e2f4ee825548f7816be69f503",
+      "benchmark/upstream.py": "de9f2bb09a1f1e7459e628ef1ac1fb0a8790135073d800fc182a43391469dab8",
+      "configs/bn_train_ids.json": "c115a2560e164bd48f8e1f1ef2dda0ec28748fcbb58eb0155931696b1945cb56",
+      "configs/existing_inputs.json": "081039dea2349cd0ffd6045190fb8737465d351664767b79b24bfdf8ced25fe4",
+      "configs/gpu_execution_manifest.json": "8ec0dd04694e31bab852269ab6c1abdd777b441d7dd0e7faef6c0502c3cdc21c",
+      "configs/historical_protocol.yaml": "6986af80a36e600c82b4bc90d9779aff8753813f7d4aa20479a0ea262dece44a",
+      "configs/obc_cuda_smoke.yaml": "5f626ae1de317e7ecdb37f992dfbde66065de487a991fce1556a4a14cb0bdec0",
+      "configs/post_training_nm_benchmark.yaml": "e0d323d4ef74de55ead1cad328655026cf2d244b6038d5ca01e758433fe17c96",
+      "configs/upstream_lock.json": "029568c3f4823b6405960f5cb7e54bda5e477e4f5068016a4b820f7a803a5b77",
+      "scripts/acceptance_tracebacks.py": "3bee83bc7b9ddf43f55db08c9da5ccb3d0497d6d49abafb94cdeffbb2ad8d20b",
+      "scripts/fetch_upstream.py": "7139f4d047088a325e7cefb89de9ab6beea3f4a34fb40943e6b40bbdee5a2616",
+      "scripts/package_acceptance.py": "a3fe1250fb77aa12dd346808ab0e816ee9333af83dde6b2c69c6aae30639c801",
+      "scripts/package_evidence.py": "48dba235e9a248f954ea7cb070516e6e5ce422b3dfea097dbc827248dac9fe37",
+      "scripts/package_smoke_readiness.py": "887afc8c489293c9dd0b7acd643dc2ea1b20af88055393958a65b282a73e735a",
+      "scripts/prepare_configuration.py": "7e780fd555ec36fc72da9632525bb19014f6ecfda46c4a1e2de233b94df74114",
+      "scripts/prepare_snows_patch.py": "24366ab29f42992e1c9c615dab7e71bad56c88c70fe92fea4d088def8cc9e938",
+      "scripts/snows_solver_blockers.py": "77f371712a02684b736b074cbfe2ebe06b68e188780f2bb9ea201ec20cd49941",
+      "patches/snows_minimal_diagnostic.patch": "8283c92ff818f574ac4bae0b074d182c6b62adf853ca35595a127ef23a09d4d3"
+    },
+    "sha256": "fc7a42ac7c921de50901eaae4a8633126d7bf460036d0fd92405289f9ad62788"
+  },
+  "test_batches": {
+    "snows_repair_tests": {
+      "tests": 12,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0
+    },
+    "snows_repair_retry_tests": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "obc_smoke_cpu_tests": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "smoke_positive_gate_tests": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "latest_distinct_new_test_cases": {
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_full_patched_module_import_and_unused_placeholder_fails_explicitly": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_hvp_dense_offdiagonal_analytic_and_chunk_vs_unchunked[1]": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_hvp_dense_offdiagonal_analytic_and_chunk_vs_unchunked[2]": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_hvp_dense_offdiagonal_analytic_and_chunk_vs_unchunked[3]": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_hvp_dense_offdiagonal_analytic_and_chunk_vs_unchunked[100000]": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_hvp_permutation_gradient_and_step_coordinates": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_cg_zero_nearzero_and_regularized_spd[0.0]": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_cg_zero_nearzero_and_regularized_spd[1e-12]": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_cg_zero_nearzero_and_regularized_spd[1.0]": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_cg_unsafe_inputs_fail_without_choosing_new_damping_or_step": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_native_mask_routine_accepts_canonical_groups_and_preserves_transpose_mapping": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_snows_repair::test_real_cifar_model_bridge_requires_functional_relu_and_projection_scope": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_smoke_preparation::test_unapproved_smoke_exits_before_cuda_or_output_creation": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_smoke_preparation::test_methods_have_independent_status_and_patch_is_in_source_identity": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_smoke_preparation::test_new_micro_recovery_is_bounded_and_reloads_without_touching_native": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_smoke_preparation::test_monitor_records_resources_without_gpu_in_cpu_unit_test": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_smoke_preparation::test_monitor_failure_remains_explicit": "PASS",
+    "experiments.post_training_nm_benchmark.tests.test_smoke_preparation::test_complete_approved_candidate_budget_is_required_and_batches_must_cover_steps": "PASS"
+  },
+  "distinct_new_cases": 18,
+  "initial_failures_preserved": 3,
+  "failure_resolution": [
+    "joblib absent for2tests; installed locally into ignored artifacts/python_deps",
+    "FX optional label argument specialized to None for1test; model unchanged"
+  ],
+  "joblib_isolated_version": [
+    "1.5.2"
+  ],
+  "formal_calibration": "PENDING_APPROVAL",
+  "smoke_calibration": "PENDING_APPROVAL",
+  "OBC": "BLOCKED_CALIBRATION_APPROVAL; config review also pending",
+  "SNOWS": "BLOCKED_SOURCE",
+  "patch_sha256": "8283c92ff818f574ac4bae0b074d182c6b62adf853ca35595a127ef23a09d4d3",
+  "formal_config_sha256": "e0d323d4ef74de55ead1cad328655026cf2d244b6038d5ca01e758433fe17c96",
+  "smoke_config_sha256": "5f626ae1de317e7ecdb37f992dfbde66065de487a991fce1556a4a14cb0bdec0",
+  "GPU_tests_run": false,
+  "server_contacted": false,
+  "historical_experiments_repeated": false,
+  "original_official_checkout_modified": false,
+  "full_SN0WS_solver_accepted": false,
+  "review_required": [
+    "separate smoke calibration indices/batch/rounds/augmentation/preprocessing",
+    "smoke config and source freeze",
+    "SNOWS solver step acceptance and actual CIFAR18 representation bridge"
+  ]
+}

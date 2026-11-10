@@ -1,0 +1,9 @@
+# Compute-cost and deployment readiness audit
+
+The frozen ResNet-18 scope contains 19 convolution layers, 11,157,504 eligible coordinates, 2,789,376 output-row 2:4 groups, and 16,736,256 candidate pair evaluations per training batch. Two FP32 candidate-cost tensors alone occupy about 127.7 MiB; autograd intermediates increase this, but the static inverse 2x2 candidate factors occupy only about 0.71 MiB. This does not indicate an obvious 32 GiB memory failure, but GPU smoke must measure the true peak.
+
+A conservative arithmetic model assigns roughly 18 scalar multiply/add operations to the weight and probe 2x2 quadratic forms, or about 0.30 GFLOP for candidate forward evaluation per batch before soft-min and backward. Even with a 3x backward multiplier this remains below the cost of the two ResNet-18 forward passes and model backward already required by APBR. The projected total is therefore below the mandatory 3x stop boundary, but this is an engineering estimate rather than a wall-clock claim.
+
+The real CPU refresh processed 124,928 sampled activation patches across all 19 layers. In deterministic single-thread mode, attempt 3 required 12.94 s for Gram construction and 14.06 s for factor construction; repeat attempt 4 required 10.98 s and 12.92 s. All non-timing fields were identical. The largest observed 2x2 candidate condition number was 13,881.84 and all factors were finite. Twenty scheduled refreshes are expected at zero-based epochs 5,15,...,195.
+
+For context only, historical APBR Seed 0 required 15,714.77 s over 200 epochs (78.57 s/epoch) on its prior GPU. Hardware differs, so this is not used as a precise runtime prediction. The prepared runner records actual epoch, refresh, allocation, and reservation metrics; the GPU smoke must stop if measured extrapolation exceeds 3x APBR or memory is unsafe.
