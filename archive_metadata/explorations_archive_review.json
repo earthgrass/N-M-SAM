@@ -1,0 +1,270 @@
+{
+  "review_date": "2026-11-10",
+  "scope": "Read-only review of packages_v2 obs-explorations/blockwise/hc-sam; no package modifications and no experiments",
+  "status": "PASS_WITH_DISCLOSED_HISTORICAL_GAPS",
+  "checks": [
+    {
+      "check": "obs-explorations_source_map_files_and_hashes",
+      "pass": true,
+      "evidence": [
+        "obs-explorations/archive_metadata/SOURCE_FILE_MAP.json"
+      ],
+      "detail": {
+        "mapped_files": 987,
+        "mismatches": [],
+        "long_paths_checked_with_windows_extended_prefix": 80
+      }
+    },
+    {
+      "check": "obs-explorations_readme_local_links",
+      "pass": true,
+      "evidence": [
+        "obs-explorations/README.md"
+      ],
+      "detail": {
+        "broken_links": []
+      }
+    },
+    {
+      "check": "obs-explorations_exists_inventory/explorations.json",
+      "pass": true,
+      "evidence": [
+        "obs-explorations/inventory/explorations.json"
+      ]
+    },
+    {
+      "check": "obs-explorations_exists_RESUME.md",
+      "pass": true,
+      "evidence": [
+        "obs-explorations/RESUME.md"
+      ]
+    },
+    {
+      "check": "obs-explorations_exists_SHA256SUMS.txt",
+      "pass": true,
+      "evidence": [
+        "obs-explorations/SHA256SUMS.txt"
+      ]
+    },
+    {
+      "check": "obs-explorations_exists_archive_metadata/EXTERNAL_ASSETS_SHA256.json",
+      "pass": true,
+      "evidence": [
+        "obs-explorations/archive_metadata/EXTERNAL_ASSETS_SHA256.json"
+      ]
+    },
+    {
+      "check": "blockwise_source_map_files_and_hashes",
+      "pass": true,
+      "evidence": [
+        "blockwise/archive_metadata/SOURCE_FILE_MAP.json"
+      ],
+      "detail": {
+        "mapped_files": 688,
+        "mismatches": [],
+        "long_paths_checked_with_windows_extended_prefix": 55
+      }
+    },
+    {
+      "check": "blockwise_readme_local_links",
+      "pass": true,
+      "evidence": [
+        "blockwise/README.md"
+      ],
+      "detail": {
+        "broken_links": []
+      }
+    },
+    {
+      "check": "blockwise_exists_inventory/explorations.json",
+      "pass": true,
+      "evidence": [
+        "blockwise/inventory/explorations.json"
+      ]
+    },
+    {
+      "check": "blockwise_exists_RESUME.md",
+      "pass": true,
+      "evidence": [
+        "blockwise/RESUME.md"
+      ]
+    },
+    {
+      "check": "blockwise_exists_SHA256SUMS.txt",
+      "pass": true,
+      "evidence": [
+        "blockwise/SHA256SUMS.txt"
+      ]
+    },
+    {
+      "check": "blockwise_exists_archive_metadata/EXTERNAL_ASSETS_SHA256.json",
+      "pass": true,
+      "evidence": [
+        "blockwise/archive_metadata/EXTERNAL_ASSETS_SHA256.json"
+      ]
+    },
+    {
+      "check": "hc-sam_source_map_files_and_hashes",
+      "pass": true,
+      "evidence": [
+        "hc-sam/archive_metadata/SOURCE_FILE_MAP.json"
+      ],
+      "detail": {
+        "mapped_files": 551,
+        "mismatches": [],
+        "long_paths_checked_with_windows_extended_prefix": 0
+      }
+    },
+    {
+      "check": "hc-sam_readme_local_links",
+      "pass": true,
+      "evidence": [
+        "hc-sam/README.md"
+      ],
+      "detail": {
+        "broken_links": []
+      }
+    },
+    {
+      "check": "hc-sam_exists_inventory/explorations.json",
+      "pass": true,
+      "evidence": [
+        "hc-sam/inventory/explorations.json"
+      ]
+    },
+    {
+      "check": "hc-sam_exists_RESUME.md",
+      "pass": true,
+      "evidence": [
+        "hc-sam/RESUME.md"
+      ]
+    },
+    {
+      "check": "hc-sam_exists_SHA256SUMS.txt",
+      "pass": true,
+      "evidence": [
+        "hc-sam/SHA256SUMS.txt"
+      ]
+    },
+    {
+      "check": "hc-sam_exists_archive_metadata/EXTERNAL_ASSETS_SHA256.json",
+      "pass": true,
+      "evidence": [
+        "hc-sam/archive_metadata/EXTERNAL_ASSETS_SHA256.json"
+      ]
+    },
+    {
+      "check": "hc_completed_epoch_budget",
+      "pass": true,
+      "evidence": [
+        "hc-sam\\evidence\\hq_artifacts\\hq_apbr_seed0_full_20261105_remote_copy\\seed0_full_override_v1\\status.json"
+      ],
+      "detail": {
+        "stage": "complete",
+        "time_utc": "2026-11-05T11:58:41Z",
+        "pid": 4411,
+        "automatic_retry": false,
+        "completed_epochs": 200,
+        "steps": 78200,
+        "test_accessed": true,
+        "performance_gate": "FAIL",
+        "execution_authorization": "EXPLICIT RESEARCH OVERRIDE APPROVED"
+      }
+    },
+    {
+      "check": "hc_performance_failure_and_override_preserved",
+      "pass": true,
+      "evidence": [
+        "hc-sam\\evidence\\hq_artifacts\\hq_apbr_seed0_full_20261105_remote_copy\\seed0_full_override_v1\\status.json",
+        "hc-sam\\evidence\\hq_artifacts\\hq_apbr_seed0_full_20261105_remote_copy\\seed0_full_override_v1\\RESEARCH_OVERRIDE_APPROVAL.json"
+      ],
+      "detail": {
+        "overhead": 0.30552562057541494,
+        "threshold": 0.3
+      }
+    },
+    {
+      "check": "hc_four_endpoints_match_readme",
+      "pass": true,
+      "evidence": [
+        "hc-sam\\evidence\\hq_artifacts\\hq_apbr_seed0_full_20261105_remote_copy\\seed0_full_override_v1\\evaluation\\evaluation_summary.json"
+      ],
+      "detail": {
+        "dense": 78.51,
+        "final_q_mask_only": 48.06,
+        "final_q_fixed_obs": 74.72,
+        "sparsegpt_native": 76.59
+      }
+    },
+    {
+      "check": "hc_masks_distinguished",
+      "pass": true,
+      "evidence": [
+        "hc-sam\\evidence\\hq_artifacts\\hq_apbr_seed0_full_20261105_remote_copy\\seed0_full_override_v1\\evaluation\\evaluation_summary.json"
+      ]
+    },
+    {
+      "check": "hc_negative_root_cause_audit_included",
+      "pass": true,
+      "evidence": [
+        "hc-sam\\project\\HQ-APBR-V1\\reports\\seed0_negative_root_cause_audit_20261105\\ROOT_CAUSE_AUDIT_REPORT.md"
+      ]
+    },
+    {
+      "check": "hc_200_calibration_logs_and_history",
+      "pass": true,
+      "evidence": [
+        "hc-sam\\evidence\\hq_artifacts\\hq_apbr_seed0_full_20261105_remote_copy\\seed0_full_override_v1\\training"
+      ],
+      "detail": {
+        "calibration_logs": 200
+      }
+    },
+    {
+      "check": "shared_q_completed_negative_gate_preserved",
+      "pass": true,
+      "evidence": [
+        "obs-explorations\\evidence\\experimental_artifacts\\apbr_unified_gpt_full_experiment\\shared_q_gate_summary.json"
+      ]
+    },
+    {
+      "check": "exact_pilot_historical_summary_separate",
+      "pass": true,
+      "evidence": [
+        "obs-explorations\\evidence\\experimental_artifacts\\apbr_unified_gpt_full_experiment\\summary.json",
+        "obs-explorations\\evidence\\experimental_artifacts\\apbr_unified_gpt_full_experiment\\shared_q_gate_summary.json"
+      ]
+    },
+    {
+      "check": "blockwise_partial_transfer_only_external",
+      "pass": true,
+      "evidence": [
+        "blockwise\\archive_metadata\\EXTERNAL_ASSETS_SHA256.json"
+      ]
+    },
+    {
+      "check": "blockwise_gap_explicit",
+      "pass": true,
+      "evidence": [
+        "blockwise\\README.md"
+      ]
+    },
+    {
+      "check": "blockwise_only_source_protocols_no_fabricated_result",
+      "pass": true,
+      "evidence": [
+        "blockwise\\evidence"
+      ],
+      "detail": {
+        "small_protocol_and_manifest_files": 5
+      }
+    }
+  ],
+  "limitations": [
+    "The incomplete Blockwise archive is intentionally not a complete checkpoint/result backup.",
+    "Group-Joint historical complete eight-group experiment remains unverified from locally inspected artifacts.",
+    "Current verification hashes packaged source-map files; external checkpoint hashes are not recomputed in this review.",
+    "Inventory is a classification/copy recommendation and retains original workspace paths; archive locations are resolved via SOURCE_FILE_MAP.json.",
+    "Windows paths exceeding 259 characters require extended-prefix access; all source-map files were verified using the extended prefix. Configure git core.longpaths=true and restore at a short root."
+  ]
+}
