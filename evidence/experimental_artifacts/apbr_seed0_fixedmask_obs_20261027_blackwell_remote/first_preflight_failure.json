@@ -1,0 +1,7 @@
+{
+  "status": "FAILED",
+  "type": "RuntimeError",
+  "message": "Frozen GPU identity mismatch",
+  "traceback": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/scripts/run_apbr_seed0_fixedmask_obs.py\", line 396, in <module>\n    main()\n  File \"/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/scripts/run_apbr_seed0_fixedmask_obs.py\", line 161, in main\n    gpu = require_safe_gpu(experiment_config, args.formal_queue_status)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/apbr_fixedmask_obs_transfer/project/scripts/run_apbr_seed0_fixedmask_obs.py\", line 84, in require_safe_gpu\n    raise RuntimeError(\"Frozen GPU identity mismatch\")\nRuntimeError: Frozen GPU identity mismatch\n",
+  "automatic_retry": false
+}

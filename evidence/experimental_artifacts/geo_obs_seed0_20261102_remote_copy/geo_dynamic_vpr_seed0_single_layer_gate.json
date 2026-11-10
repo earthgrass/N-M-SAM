@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "parent_kind": "vpr",
+  "layer": "layer2.0.conv1",
+  "K": 576,
+  "calibration_ids_sha256": "3b7da27d79762235c87f18571bc73224d6e6f2b3ba663b7d9a4a3de312f23157",
+  "parent_sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+  "source_sha256": "f6314fbd80d586f7774acb29ecbff324e0e81418012bb1199575803e24777371",
+  "test_accessed": false,
+  "results": [
+    {
+      "mode": "std_group_obs",
+      "wall_seconds": 0.34736278280615807,
+      "decomposition_seconds": 0.09947719424962997,
+      "selection_compensation_seconds": 0.10899564437568188,
+      "physical_quadratic_cost": 0.00020287900406401604,
+      "physical_relative_reconstruction_error": 0.00796936603403814,
+      "geometry_quadratic_cost": 0.00020859623327851295,
+      "deleted": 36864,
+      "survivor_change_rms": 0.00952501967549324,
+      "finite": true,
+      "strict_2of4": true
+    },
+    {
+      "mode": "geo_select_std_comp",
+      "wall_seconds": 0.07823629677295685,
+      "decomposition_seconds": 0.005636679008603096,
+      "selection_compensation_seconds": 0.0714221689850092,
+      "physical_quadratic_cost": 0.0002041480620391667,
+      "physical_relative_reconstruction_error": 0.008019216374979285,
+      "geometry_quadratic_cost": 0.00020989413314964622,
+      "deleted": 36864,
+      "survivor_change_rms": 0.009528704918920994,
+      "finite": true,
+      "strict_2of4": true
+    },
+    {
+      "mode": "geo_full",
+      "wall_seconds": 0.07632861100137234,
+      "decomposition_seconds": 0.005655402317643166,
+      "selection_compensation_seconds": 0.06983157619833946,
+      "physical_quadratic_cost": 0.00020452379249036312,
+      "physical_relative_reconstruction_error": 0.008033975583353423,
+      "geometry_quadratic_cost": 0.00021024035231675953,
+      "deleted": 36864,
+      "survivor_change_rms": 0.009535957127809525,
+      "finite": true,
+      "strict_2of4": true
+    }
+  ],
+  "peak_allocated_bytes": 73871872,
+  "peak_reserved_bytes": 509607936
+}

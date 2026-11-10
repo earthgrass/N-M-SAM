@@ -1,0 +1,24 @@
+{"event": "layer_complete", "index": 1, "layer": "layer1.0.conv1", "peak_allocated_bytes": 523902464, "test_accessed": false}
+{"event": "layer_complete", "index": 2, "layer": "layer1.0.conv2", "peak_allocated_bytes": 523902464, "test_accessed": false}
+{"event": "layer_complete", "index": 3, "layer": "layer1.1.conv1", "peak_allocated_bytes": 523902464, "test_accessed": false}
+{"event": "layer_complete", "index": 4, "layer": "layer1.1.conv2", "peak_allocated_bytes": 523902464, "test_accessed": false}
+{"event": "layer_complete", "index": 5, "layer": "layer2.0.conv1", "peak_allocated_bytes": 527217152, "test_accessed": false}
+{"event": "layer_complete", "index": 6, "layer": "layer2.0.conv2", "peak_allocated_bytes": 567784960, "test_accessed": false}
+{"event": "layer_complete", "index": 7, "layer": "layer2.0.shortcut.0", "peak_allocated_bytes": 567784960, "test_accessed": false}
+{"event": "layer_complete", "index": 8, "layer": "layer2.1.conv1", "peak_allocated_bytes": 567784960, "test_accessed": false}
+{"event": "layer_complete", "index": 9, "layer": "layer2.1.conv2", "peak_allocated_bytes": 567784960, "test_accessed": false}
+{"event": "layer_complete", "index": 10, "layer": "layer3.0.conv1", "peak_allocated_bytes": 582110720, "test_accessed": false}
+{"event": "layer_complete", "index": 11, "layer": "layer3.0.conv2", "peak_allocated_bytes": 734008832, "test_accessed": false}
+{"event": "layer_complete", "index": 12, "layer": "layer3.0.shortcut.0", "peak_allocated_bytes": 734008832, "test_accessed": false}
+{"event": "layer_complete", "index": 13, "layer": "layer3.1.conv1", "peak_allocated_bytes": 734017024, "test_accessed": false}
+{"event": "layer_complete", "index": 14, "layer": "layer3.1.conv2", "peak_allocated_bytes": 734017024, "test_accessed": false}
+{"event": "layer_complete", "index": 15, "layer": "layer4.0.conv1", "peak_allocated_bytes": 787555840, "test_accessed": false}
+{"event": "layer_complete", "index": 16, "layer": "layer4.0.conv2", "peak_allocated_bytes": 1397126656, "test_accessed": false}
+{"event": "layer_complete", "index": 17, "layer": "layer4.0.shortcut.0", "peak_allocated_bytes": 1397126656, "test_accessed": false}
+{"event": "layer_complete", "index": 18, "layer": "layer4.1.conv1", "peak_allocated_bytes": 1397126656, "test_accessed": false}
+{"event": "layer_complete", "index": 19, "layer": "layer4.1.conv2", "peak_allocated_bytes": 1397126656, "test_accessed": false}
+{"event": "final_test", "method": "dynamic_group_obs", "accuracy_percent": 77.61, "ce": 0.8362920593261719, "test_samples": 10000, "test_evaluations": 1, "checkpoint_sha256": "33cdc76e6f6b8cf580576bda4d882bc6125ce441ea063ab253e1caeb0ee46da4", "mask_sha256": "06b733626c5d474d1c0590d1e251e0579ce001da8c3fe480c4e34ff4b78a6257", "pruning_compensation_seconds": 5.167114516720176, "test_seconds": 0.4864292200654745}
+{"event": "final_test", "method": "geo_select_std_comp", "accuracy_percent": 77.72, "ce": 0.8354762056350707, "test_samples": 10000, "test_evaluations": 1, "checkpoint_sha256": "cbb7aef4f025a43e4778eaf1696db8434ed54ae0fced53011aa49215af958b29", "mask_sha256": "1ccb7fc318772f5276628c5fba9b3393c409964ca256969500ca05574fbcfd7c", "pruning_compensation_seconds": 4.961736287921667, "test_seconds": 0.4427031073719263}
+{"event": "final_test", "method": "geo_full", "accuracy_percent": 77.68, "ce": 0.8358988278865814, "test_samples": 10000, "test_evaluations": 1, "checkpoint_sha256": "cc215bc93f66123a33057676842898c1f36c5911cec366350d870864643e9f38", "mask_sha256": "07846e52d0417bb6af83990c1fc168daa7d98096fc3ca096aa5d3dbf2579d6cf", "pruning_compensation_seconds": 4.913805488497019, "test_seconds": 0.4564039446413517}
+{"event": "final_test", "method": "shuffled_geo_select", "accuracy_percent": 77.58, "ce": 0.8363970432281495, "test_samples": 10000, "test_evaluations": 1, "checkpoint_sha256": "9aced9f0d6be5678441f8c9af5466fa5f94b4eb53f769ecc680dd26e9ed3bbda", "mask_sha256": "7e5afdcd5e470e5357034be6f6cd0a407c1cb44814ba2e3e71b8909b620e0935", "pruning_compensation_seconds": 4.9323170986026525, "test_seconds": 0.45472154952585697}
+{"event": "final_test", "method": "shuffled_geo_full", "accuracy_percent": 77.69, "ce": 0.8370765768051147, "test_samples": 10000, "test_evaluations": 1, "checkpoint_sha256": "4e25c13c6b7d50eef71130e1373c8fd061844f6e3d25780c17c8af211aa3991b", "mask_sha256": "0dd29389fccd4cb358edabd28a14ff473a6185936176693d2bbfa63b6c4da9e1", "pruning_compensation_seconds": 4.885184047743678, "test_seconds": 0.418151943013072}

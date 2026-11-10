@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "parent_kind": "fixed_l2",
+  "layer": "layer2.0.conv1",
+  "K": 576,
+  "calibration_ids_sha256": "3b7da27d79762235c87f18571bc73224d6e6f2b3ba663b7d9a4a3de312f23157",
+  "parent_sha256": "d68fbffc5f862be07656c5b45b8dcde2a5411865c0e5e03f2f45c2f97926b742",
+  "source_sha256": "f6314fbd80d586f7774acb29ecbff324e0e81418012bb1199575803e24777371",
+  "test_accessed": false,
+  "results": [
+    {
+      "mode": "std_group_obs",
+      "wall_seconds": 0.396034300327301,
+      "decomposition_seconds": 0.1285346131771803,
+      "selection_compensation_seconds": 0.12273611314594746,
+      "physical_quadratic_cost": 0.00025183570687659085,
+      "physical_relative_reconstruction_error": 0.007776042592877179,
+      "geometry_quadratic_cost": 0.0002641104510985315,
+      "deleted": 36864,
+      "survivor_change_rms": 0.010290451347827911,
+      "finite": true,
+      "strict_2of4": true
+    },
+    {
+      "mode": "geo_select_std_comp",
+      "wall_seconds": 0.07860410399734974,
+      "decomposition_seconds": 0.0056425780057907104,
+      "selection_compensation_seconds": 0.0713201742619276,
+      "physical_quadratic_cost": 0.00025280049885623157,
+      "physical_relative_reconstruction_error": 0.0078058329018845865,
+      "geometry_quadratic_cost": 0.0002650802780408412,
+      "deleted": 36864,
+      "survivor_change_rms": 0.010202771984040737,
+      "finite": true,
+      "strict_2of4": true
+    },
+    {
+      "mode": "geo_full",
+      "wall_seconds": 0.07508772052824497,
+      "decomposition_seconds": 0.005608946084976196,
+      "selection_compensation_seconds": 0.06868182867765427,
+      "physical_quadratic_cost": 0.00025335565442219377,
+      "physical_relative_reconstruction_error": 0.007822974686026858,
+      "geometry_quadratic_cost": 0.0002651809190865606,
+      "deleted": 36864,
+      "survivor_change_rms": 0.0102958083152771,
+      "finite": true,
+      "strict_2of4": true
+    }
+  ],
+  "peak_allocated_bytes": 73871872,
+  "peak_reserved_bytes": 509607936
+}

@@ -1,0 +1,206 @@
+{
+  "audit_date": "2026-11-10",
+  "mode": "READ_ONLY_INVENTORY_NO_EXPERIMENTS_NO_REMOTE",
+  "workspace": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏",
+  "experimental_root": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark",
+  "archive_recommendation": [
+    {
+      "branch": "archive/obs-explorations-20261110",
+      "identity": "Post-training experiments only; not Joint dense training",
+      "source_directories": [
+        "baseline_adapters/common",
+        "baseline_adapters/sparsegpt",
+        "baseline_adapters/fixedmask_obs",
+        "baseline_adapters/geo_dynamic_obs",
+        "baseline_adapters/geo_rank_sparsegpt",
+        "baseline_adapters/radius_guided_sparsegpt",
+        "baseline_adapters/group_joint_obs",
+        "baseline_adapters/apbr_gpt",
+        "baseline_adapters/conditional_greedy_obs",
+        "baseline_adapters/apbr_nearoptimal_conditional_obs",
+        "baseline_adapters/gpt_score_conditional"
+      ],
+      "source_files": [
+        "baseline_adapters/__init__.py",
+        "baseline_adapters/cifar100_model.py",
+        "baseline_adapters/exactobs_reference.py"
+      ],
+      "dependency_note": "Preserve project src/vpr_sam, benchmark model code, common dataloading/audit scripts and frozen original baseline adapter unchanged; preserve directory layout. apbr_gpt_joint adapter is shared by actual Joint training and later dynamic postprocessing and must retain identical source hash if included in both branches.",
+      "runner_patterns": [
+        "run_geo_*",
+        "evaluate_geo_obs_calibration.py",
+        "finalize_geo_obs_seed0.py",
+        "analyze_geo_obs_seed0_local.py",
+        "run_apbr_radius_guided_sparsegpt_one.py",
+        "run_apbr_shared_q_seed0_screen.py",
+        "run_apbr_unified_gpt_layer_pilot.py",
+        "run_apbr_geometry_regularized_layer_pilot.py",
+        "analyze_apbr_shared_q_*",
+        "run_group_joint_obs_*",
+        "run_apbr_seed0_fixedmask_obs.py",
+        "run_apbr_gpt_fixedmask_*",
+        "audit_apbr_gpt_mask_match_local.py",
+        "*conditional*.py"
+      ],
+      "tests_patterns": [
+        "test_apbr_gpt_adapter.py",
+        "test_radius_guided_sparsegpt.py",
+        "test_group_joint_obs*.py",
+        "test_geo*.py",
+        "test_fixedmask_obs.py",
+        "test_conditional_greedy_obs.py",
+        "test_gpt_score_conditional.py",
+        "test_apbr_nearoptimal_conditional_obs.py"
+      ],
+      "config_files": [
+        "configs/cifar100_50k10k_final_v1.yaml",
+        "configs/cifar100_50k10k_apbr_fixed_l2_seed0_20261102.yaml",
+        "configs/apbr_seed0_fixedmask_obs_20261027.yaml",
+        "configs/apbr_seed0_fixedmask_obs_20261027_blackwell.yaml",
+        "configs/upstream_lock.json"
+      ],
+      "evidence_directories": [
+        "docs/research/geo_obs_seed0_20261102",
+        "docs/research/geo_rank_sparsegpt_20261103",
+        "docs/research/apbr_gpt_group_joint_obs_20261031",
+        "docs/research/apbr_gpt_mask_compensation_match_20261103",
+        "docs/research/conditional_greedy_obs_seed0_20261103",
+        "docs/research/gpt_score_conditional_seed0_20261103",
+        "artifacts/geo_obs_seed0_20261102_remote_copy",
+        "artifacts/sam_geo_dynamic_rtx5090_20261102_remote_copy",
+        "artifacts/geo_rank_sparsegpt_seed0_20261103",
+        "artifacts/apbr_radius_guided_sparsegpt_seed012",
+        "artifacts/apbr_unified_gpt_full_experiment",
+        "artifacts/apbr_sparsegpt_compensation_attribution_geometry_20261031",
+        "artifacts/group_joint_obs_seed0_full_20261031",
+        "artifacts/apbr_seed0_fixedmask_obs_20261027_blackwell_remote",
+        "artifacts/fixed_mask_second_order_repair_cifar100_20261028"
+      ],
+      "evidence_copy_rule": "Small text evidence only: .md .json .csv .yaml .yml .txt .xml and needed .py source snapshots; exclude credential scripts, datasets, pt/pth/bin, archives and caches. Retain original run-relative hierarchy; do not flatten same named status.json/config.json."
+    },
+    {
+      "branch": "archive/blockwise-apbr-20261110",
+      "identity": "20261028 blockwise perturbation v2; not original per-coordinate APBR or fixed-L2",
+      "source_directories": [
+        "blockwise_apbr"
+      ],
+      "source_patterns": [
+        "scripts/*blockwise*.py",
+        "configs/apbr_blockwise_perturbation_cifar100_20261028*.yaml",
+        "tests/test_blockwise_apbr_geometry.py"
+      ],
+      "evidence_directories": [
+        "artifacts/apbr_blockwise_perturbation_cifar100_20261028"
+      ],
+      "status": "LOCAL_RESULT_BUNDLE_INCOMPLETE; preserve partial transfer manifest but do not claim full result recovery",
+      "distinct_legacy_repo": {
+        "path": "VPR-blockwise-prototype",
+        "branch": "research/blockwise-prototype-20261024",
+        "head": "1f854c975bf25e39cb2cc119c6bd4d9c4b0da1bf",
+        "note": "Earlier clean prototype; do not substitute for 20261028 v2 experiment code."
+      }
+    },
+    {
+      "branch": "archive/hc-sam-hq-apbr-v1-20261110",
+      "repository_path": "HQ-APBR-V1",
+      "identity": "Independent historical-Q geometry training; not APBR VPR, APBR-L2, or Joint APBR",
+      "head": "468f16158b46472f38f4d1fb6a074cff5d65c1e3",
+      "branch_at_audit": "research/hq-apbr-v1",
+      "source_directories": [
+        "hq_apbr_v1",
+        "configs",
+        "scripts",
+        "tests",
+        "docs",
+        "approvals"
+      ],
+      "root_files": [
+        "README.md",
+        "pyproject.toml",
+        "SHA256SUMS.txt",
+        ".gitignore",
+        ".gitattributes"
+      ],
+      "evidence_directories": [
+        "reports",
+        "artifacts/hq_apbr_seed0_full_20261105_remote_copy",
+        "artifacts/gpu_deploy_20261105/SOURCE_IDENTITY.json",
+        "artifacts/gpu_deploy_20261105/SOURCE_IDENTITY_override.json"
+      ],
+      "authoritative_report": "reports/seed0_negative_root_cause_audit_20261105/ROOT_CAUSE_AUDIT_REPORT.md",
+      "status": "Seed0 completed, local audit pass; negative result retained; no automatic seed expansion",
+      "metrics_percent": {
+        "Dense": 78.51,
+        "FinalQ_MaskOnly": 48.06,
+        "FinalQ_FixedMaskOBS": 74.72,
+        "NativeSparseGPT": 76.59
+      },
+      "performance_gate": "GPU numerical PASS, original 30% overhead performance gate FAIL at 30.55%, explicit user override; do not relabel FAIL as PASS",
+      "artifact_dependency": "Full 2.15 GB checkpoint transfer remains local; reports include original run and transfer SHA evidence. Git snapshot should include exact code, configs and machine-readable result evidence; large assets need separate storage referenced by manifest."
+    }
+  ],
+  "non_interchangeable_versions": [
+    {
+      "name": "Radius-Guided SparseGPT",
+      "score": "native singleton score times exp(-s)",
+      "source": "baseline_adapters/radius_guided_sparsegpt/adapter.py",
+      "warning": "Distinct from exp(-2s) geo-rank and six-pair Geo-Select."
+    },
+    {
+      "name": "Geo-rank SparseGPT",
+      "score": "native singleton score times exp(-2s)",
+      "source": "baseline_adapters/geo_rank_sparsegpt/adapter.py",
+      "warning": "Select two of four, no six-pair enumeration; physical native sequential OBS preserved. VPR and L2 parents separate."
+    },
+    {
+      "name": "Dynamic Geo-Select",
+      "score": "six joint pairs using v=w exp(-s)",
+      "source": "baseline_adapters/geo_dynamic_obs/adapter.py",
+      "warning": "Physical-weight group compensation, not native singleton SparseGPT."
+    },
+    {
+      "name": "Dynamic Geo-Full",
+      "score": "six pairs and compensation in v coordinates; map back to w",
+      "source": "baseline_adapters/geo_dynamic_obs/adapter.py",
+      "warning": "Different geometric reconstruction objective; not standard physical output OBS."
+    },
+    {
+      "name": "Group Joint OBS",
+      "source": "baseline_adapters/group_joint_obs/adapter.py",
+      "warning": "Early static/nearoptimal group experiments separate from Dynamic Joint training and later Geo dynamic operator."
+    },
+    {
+      "name": "Shared-Q / Exact-Q",
+      "source": "baseline_adapters/apbr_gpt/adapter.py",
+      "warning": "Geometry-regularized posttraining Hessian; not 200-epoch Joint training. Exact cost stop; later Shared-Q full network train-side diagnostic completed negative gate."
+    },
+    {
+      "name": "Conditional greedy versus tau nearoptimal",
+      "source": "baseline_adapters/conditional_greedy_obs vs apbr_nearoptimal_conditional_obs",
+      "warning": "Do not relabel nearoptimal tau=0.01 artifacts as latest no-tau paper proposal. APBR agent supplies detailed mapping."
+    }
+  ],
+  "evidence_caveats": [
+    {
+      "path": "HQ-APBR-V1/README.md",
+      "finding": "Stale CPU-stage text says training/Test not run. Preserve it verbatim as history; archive landing page must point to completed negative-result audit."
+    },
+    {
+      "path": "artifacts/apbr_unified_gpt_full_experiment/summary.json",
+      "finding": "Historical exact row-wise Pilot stop summary; later shared_q_gate_summary.json and UNIFIED_APBR_GPT_REPORT.md supersede scope with completed 33 full-model train-side endpoints, no Final Test."
+    },
+    {
+      "path": "artifacts/apbr_sparsegpt_compensation_attribution_geometry_20261031/AUDIT_REPORT.md",
+      "finding": "Early blocked-on-GPU state. Later attribution and Pilot material under apbr_unified_gpt_full_experiment must remain phase-distinguished, not overwrite earlier report."
+    },
+    {
+      "path": "artifacts/apbr_blockwise_perturbation_cifar100_20261028/seed0_v2_transfer_parts/seed0_v2_bundle.tar.part.000",
+      "finding": "Only one 21102592-byte part found. Read-only tarfile.open/getnames raises ReadError unexpected end of data. Cannot establish complete local Seed0 outputs from this folder."
+    },
+    {
+      "path": "artifacts/group_joint_obs_seed0_full_20261031",
+      "finding": "Only three small JSON files in inspected directory, primarily attempt1_replay_failure. No successful full eight-method output found in this local folder. Preserve failure; completion UNKNOWN from inspected evidence."
+    }
+  ],
+  "verification_limits": "No training, pruning, evaluation, server connection or checkpoint loading performed. Existing report statements are attributed to saved reports; new inventory does not claim to rerun full SHA verification."
+}

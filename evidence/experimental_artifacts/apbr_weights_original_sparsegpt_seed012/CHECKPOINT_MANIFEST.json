@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "experiment_id": "apbr_weights_original_sparsegpt_seed012",
+  "generated_at": "2026-10-30T23:45:00+08:00",
+  "preflight_status": "BLOCKED_MISSING_APBR_SEED2_DENSE_FINAL",
+  "formal_gpu_runs_started": false,
+  "required_checkpoint_count": 6,
+  "verified_checkpoint_count": 5,
+  "architecture_audit": {
+    "model_id": "ssam2022_cifar_resnet18_c100_v1",
+    "state_tensor_count": 122,
+    "bn_running_buffer_count": 60,
+    "all_available_state_shapes_equal": true,
+    "apbr_geometry_separation": "PASS: only checkpoint['model'] is supplied to SparseGPT; checkpoint['stepper'] is excluded"
+  },
+  "checkpoints": [
+    {
+      "seed": 0,
+      "training_method": "dense_sam",
+      "status": "PASS",
+      "path": "artifacts/cifar100_50k10k_final_v1/seed0_remote_copy/dense_sam/final_epoch_200.pt",
+      "bytes": 89933515,
+      "sha256": "3a0716555d33ec92efe8362e24abec9be27625d24ffb6dfb1d51fddb5b91bd13",
+      "epoch": 200,
+      "steps": 78200,
+      "test_accessed": false
+    },
+    {
+      "seed": 0,
+      "training_method": "apbr_sam",
+      "status": "PASS",
+      "path": "artifacts/cifar100_50k10k_final_v1/seed0_remote_copy/apbr_sam/final_epoch_200.pt",
+      "bytes": 179712079,
+      "sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+      "epoch": 200,
+      "steps": 78200,
+      "test_accessed": false
+    },
+    {
+      "seed": 1,
+      "training_method": "dense_sam",
+      "status": "PASS",
+      "path": "artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed1_remote_copy/dense_sam/final_epoch_200.pt",
+      "bytes": 89933579,
+      "sha256": "e1909b70c0574a17c0ba1e5558a738848e943a67eed2c2bc2bb150bd3c96da7b",
+      "epoch": 200,
+      "steps": 78200,
+      "test_accessed": false
+    },
+    {
+      "seed": 1,
+      "training_method": "apbr_sam",
+      "status": "PASS",
+      "path": "artifacts/cifar100_50k10k_final_v1_blackwell_handoff/seed1_remote_copy/apbr_sam/final_epoch_200.pt",
+      "bytes": 179711503,
+      "sha256": "6571e30ed783508f28bc378aa3b22a739bf1ddbbb790db3d98c08858e126e10b",
+      "epoch": 200,
+      "steps": 78200,
+      "test_accessed": false
+    },
+    {
+      "seed": 2,
+      "training_method": "dense_sam",
+      "status": "PASS_IDENTICAL_ROLLING_FINAL",
+      "path": "C:/Users/earthgrass73/Desktop/NM稀疏/1027副本/seed2_blackwell_transfer/seed2/dense_sam/last.pt",
+      "bytes": 89933387,
+      "sha256": "558ffa8da0a886a1291746fb6b5d979a2e83938b1150136568edea5e116fb977",
+      "published_final_sha256": "558ffa8da0a886a1291746fb6b5d979a2e83938b1150136568edea5e116fb977",
+      "note": "The separately copied final_epoch_200.pt is truncated; last.pt exactly matches checkpoint_publication.json and status.json for the fixed Epoch-200 Final.",
+      "epoch": 200,
+      "steps": 78200,
+      "test_accessed": false
+    },
+    {
+      "seed": 2,
+      "training_method": "apbr_sam",
+      "status": "MISSING_BLOCKING",
+      "path": null,
+      "bytes": null,
+      "sha256": null,
+      "expected_sha256_from_formal_audit": "6b55caf932d846e16a13f7c2510e216db790bcd6738941288491c2e1d4b24a22",
+      "note": "No original APBR-SAM Seed 2 Epoch-200 Dense checkpoint was found locally or on an available server. Sparse Raw/Recovery artifacts cannot reconstruct deleted dense coordinates and are forbidden substitutes."
+    }
+  ]
+}

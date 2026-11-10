@@ -1,0 +1,47 @@
+{
+  "status": "COMPLETE_CPU_EXPLORATORY_SEED0",
+  "parent_sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+  "historical_apbr_raw_sha256": "74ea702356b6cb3f10ad34985ca8de6757ccb80702cced3debe4ec5936b9b9b3",
+  "checkpoint_sha256": {
+    "native_sparsegpt": "b2e3a33f3073dac3289125e5153f8f79dfe0d542e8f23c3485b0430a4e19aa03",
+    "gpt_score_conditional": "7bf9eba0ddf857866b2c095f26713ed7fe3f3feac2ffbd80a7cedfef6d37c1fb"
+  },
+  "mask_sha256": {
+    "native_sparsegpt": "e1fa120724670c498d3285af58d5e1ed090a754b023d64d27602156f498a9284",
+    "gpt_score_conditional": "a80c374a693250c38eff0da8f267057f982464408f9f20569316826754baadef"
+  },
+  "calibration_ids_sha256": "3b7da27d79762235c87f18571bc73224d6e6f2b3ba663b7d9a4a3de312f23157",
+  "source_sha256": {
+    "runner": "f44e3129d9adb9749327c7ae7061f193dd88d0ba3079e77bb19039390597fd41",
+    "conditional_selector": "e5813c9fb1d9fb49ba4d071c053a125df8c4280cf24a7b7735bbb4b7c129da09",
+    "native_sparsegpt": "4b1462b1f09e6e3789406cb506fc4c47b47cfd159fa3d0e4fc013f45927a3f36",
+    "calibration_and_evaluation": "df80b5e8424a709e6487a323236b13d87fe9371786eb103ca1c0a52603d8e135",
+    "model": "9dfd402b4aac66d8ed18062089a07f3779ba119c909859e031b15abd94ade889",
+    "formal_config": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6"
+  },
+  "test_pickle_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+  "calibration_seconds": 68.44726459984668,
+  "layer_count": 19,
+  "position_flips": 1765190,
+  "conditional_second_changed_same_state": 310878,
+  "quadratic_error_sum": {
+    "native_sparsegpt": 1.0472919237507743,
+    "gpt_score_conditional": 0.9894293750215764
+  },
+  "pruning_wall_sum": {
+    "native_sparsegpt": 5.234589600469917,
+    "gpt_score_conditional": 9.20791559992358
+  },
+  "test": {
+    "native_sparsegpt": {
+      "test_count": 10000,
+      "test_accuracy": 0.77,
+      "test_ce": 0.8581893124580383
+    },
+    "gpt_score_conditional": {
+      "test_count": 10000,
+      "test_accuracy": 0.7701,
+      "test_ce": 0.8556250173568726
+    }
+  }
+}

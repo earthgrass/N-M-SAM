@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "experiment_id": "apbr_seed0_fixedmask_obs_20261027",
+  "protocol_scope": "independent_exploratory_not_formal_three_seed_matrix",
+  "parent_checkpoint_sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+  "historical_raw_checkpoint_sha256": "74ea702356b6cb3f10ad34985ca8de6757ccb80702cced3debe4ec5936b9b9b3",
+  "mask_sha256": "79d9c410c67e931101cf46112e732c68133a9935e4f99a41503a0de8ee7b40f4",
+  "output_checkpoint_sha256": "4907a607f7a45ff3a9cc9a5c0bf66b2cfdc26260e2f019b3967a7095e22ae86f",
+  "mask": {
+    "eligible_layers": 19,
+    "total_parameters": 11157504,
+    "removed_parameters": 5578752,
+    "matches_historical_all_layers": true,
+    "mask_only_reconstruction_matches_historical": true,
+    "strict_2_of_4": true,
+    "bool_keep_mask": true
+  },
+  "compensation": {
+    "dynamic_mask_selection": false,
+    "gradient_training": false,
+    "test_accessed": false,
+    "survivor_changed_count": 5575732,
+    "all_deleted_zero": true,
+    "all_finite": true,
+    "excluded_state_parent_identical": true,
+    "bn_buffers_parent_identical": true,
+    "all_19_layer_checks_pass": true,
+    "all_19_local_error_ratios_below_one": true,
+    "local_error_ratio_min": 0.06426875155368225,
+    "local_error_ratio_max": 0.5190200213509473,
+    "full_per_layer_evidence": "artifacts/apbr_seed0_fixedmask_obs_20261027_blackwell_remote/apbr_seed0_fixedmask_obs_20261027_blackwell_attempt2/compensation_evidence.json"
+  },
+  "test": {
+    "count": 10000,
+    "accuracy": 0.7637,
+    "cross_entropy": 0.9039795517921447,
+    "selection_performed": false,
+    "hyperparameter_change_performed": false,
+    "elapsed_seconds": 0.6579823233187199
+  },
+  "deltas": {
+    "accuracy_pp_vs_apbr_raw": 17.15,
+    "cross_entropy_vs_apbr_raw": -0.7364159537078553,
+    "accuracy_pp_vs_apbr_recovery20": -2.35,
+    "accuracy_pp_vs_sparsegpt_native": -1.10,
+    "accuracy_pp_vs_rose_native": -1.66
+  },
+  "timing_seconds": {
+    "checkpoint_load": 0.345223993062973,
+    "geometry_mask_build_and_identity": 0.1442980319261551,
+    "calibration_wall_including_hessian": 0.6646802946925163,
+    "hessian_gpu_event": 0.19493772751651706,
+    "decomposition": 0.1332847736775875,
+    "obs_compensation": 3.481584869325161,
+    "pruning_wall": 4.021347999572754,
+    "post_compensation_validation": 0.20934054255485535,
+    "calibration_plus_pruning_excluding_validation": 4.4766877517100415,
+    "total_mask_calibration_pruning_validation": 4.854872774332762
+  },
+  "cuda_memory_bytes": {
+    "peak_allocated": 1157752320,
+    "peak_reserved": 1516240896
+  },
+  "gpu": {
+    "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "uuid": "GPU-65be6845-be69-8ba1-72f8-e34688ce53c5",
+    "driver": "580.82.09",
+    "torch": "2.8.0+cu128"
+  },
+  "tests": {
+    "fixedmask_targeted": "6 passed",
+    "related": "25 passed",
+    "project": "126 passed, 1 warning"
+  },
+  "first_preflight_failure": {
+    "reason": "transcription error in preregistered GPU UUID",
+    "gpu_compute_started": false,
+    "test_accessed": false,
+    "failure_sha256": "24f220308947e7cbc132be7d6ff47ee58d1209dbbe9e1351fb2fec1f8b456c5a"
+  },
+  "remote_manifest_sha256": "a0c64cb6fb97087d7cc185982a937a2427fe76695afc114a50403766448ffb80"
+}

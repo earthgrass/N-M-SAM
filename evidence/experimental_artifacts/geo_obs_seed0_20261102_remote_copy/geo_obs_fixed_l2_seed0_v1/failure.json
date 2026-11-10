@@ -1,0 +1,5 @@
+{
+  "status": "FAILED",
+  "traceback": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/apbr_l2_seed0_20261102/project/experiments/post_training_nm_benchmark/scripts/run_geo_obs_seed0.py\", line 387, in <module>\n    run(args)\n  File \"/root/autodl-tmp/apbr_l2_seed0_20261102/project/experiments/post_training_nm_benchmark/scripts/run_geo_obs_seed0.py\", line 333, in run\n    atomic_csv(out / \"per_layer.csv\", rows)\n  File \"/root/autodl-tmp/apbr_l2_seed0_20261102/project/experiments/post_training_nm_benchmark/scripts/run_geo_obs_seed0.py\", line 80, in atomic_csv\n    writer.writerows(rows)\n  File \"/root/miniconda3/lib/python3.12/csv.py\", line 167, in writerows\n    return self.writer.writerows(map(self._dict_to_list, rowdicts))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/miniconda3/lib/python3.12/csv.py\", line 159, in _dict_to_list\n    raise ValueError(\"dict contains fields not in fieldnames: \"\nValueError: dict contains fields not in fieldnames: 'mask_flip_count_vs_group_obs', 'mask_flip_rate_vs_group_obs'\n",
+  "test_accessed": false
+}

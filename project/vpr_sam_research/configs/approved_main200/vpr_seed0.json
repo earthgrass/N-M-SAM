@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "purpose": "formal",
+  "seed": 0,
+  "device": "cuda:0",
+  "threads": 4,
+  "deterministic": true,
+  "output": "runs/main200_seeds012_v1/vpr_seed0",
+  "model": "resnet18",
+  "data": {
+    "kind": "cifar10",
+    "root": "data/cifar10",
+    "download": false,
+    "validation_size": 5000,
+    "synthetic_train": null,
+    "synthetic_test": null,
+    "augment": true,
+    "cutout": 0,
+    "workers": 2
+  },
+  "optimizer": {
+    "method": "vpr",
+    "lr": 0.1,
+    "momentum": 0.9,
+    "weight_decay": 0.0005,
+    "nesterov": false,
+    "rho": 0.05
+  },
+  "geometry": {
+    "gamma": 5.482145661475941e-08,
+    "dtype": "float64",
+    "warmup_steps": 0,
+    "volume_atol": 1e-10,
+    "volume_rtol": 1e-12,
+    "static_std": 0.1
+  },
+  "training": {
+    "epochs": 200,
+    "batch_size": 128,
+    "scheduler": "cosine",
+    "eta_min": 0.0,
+    "checkpoint_interval_steps": 0
+  },
+  "pruning": {
+    "n": 2,
+    "m": 4,
+    "scope": "exclude_first_last",
+    "score": "magnitude",
+    "tail": "dense"
+  },
+  "recovery": {
+    "epochs": 20,
+    "method": "sgd",
+    "lr": 0.005,
+    "momentum": 0.9,
+    "weight_decay": 0.0005,
+    "rho": 0.05,
+    "scheduler": "cosine",
+    "eta_min": 0.0
+  },
+  "evaluation": {
+    "batch_size": 256,
+    "probe_rho": 0.02,
+    "probe_batches": 10
+  }
+}

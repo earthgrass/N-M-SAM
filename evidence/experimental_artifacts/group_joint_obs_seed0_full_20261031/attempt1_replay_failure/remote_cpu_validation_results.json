@@ -1,0 +1,108 @@
+{
+  "status": "CPU_NUMERICAL_GATE_PASS",
+  "seed": 20261031,
+  "synthetic_only": true,
+  "device": "cpu",
+  "cuda_used": false,
+  "dataset_loaded": false,
+  "test_accessed": false,
+  "server_contacted": false,
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "platform": "Linux-5.15.0-78-generic-x86_64-with-glibc2.35"
+  },
+  "configuration": {
+    "percdamp": 0.01,
+    "blocksize": 8,
+    "keep_n": 2,
+    "m": 4,
+    "condition_limit": 100000000.0,
+    "pair_order": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "shuffle_seeds": [
+      20261031,
+      20261032,
+      20261033
+    ]
+  },
+  "errors": {
+    "inverse_max_absolute": 1.4432899320127035e-15,
+    "inverse_relative_l2": 8.849281975625194e-16,
+    "factor_reconstruction_max_absolute": 1.5543122344752192e-15,
+    "factor_reconstruction_relative_l2": 9.108361458463508e-16,
+    "qdd_max_absolute": 1.4432899320127035e-15,
+    "joint_cost_max_absolute": 3.552713678800501e-15,
+    "constraint_max_absolute": 2.220446049250313e-16,
+    "apbr_cost_max_absolute": 0.0,
+    "shuffle_pair_sum_max_absolute": 1.7763568394002505e-15
+  },
+  "native_mask_replay": {
+    "float32": {
+      "mask_equal": true,
+      "weight_bitwise_equal": true,
+      "max_absolute_error": 0.0,
+      "relative_l2_error": 0.0,
+      "deleted_exact_zero": true,
+      "survivor_changed_count": 10
+    },
+    "float64": {
+      "mask_equal": true,
+      "weight_bitwise_equal": true,
+      "max_absolute_error": 0.0,
+      "relative_l2_error": 0.0,
+      "deleted_exact_zero": true,
+      "survivor_changed_count": 10
+    }
+  },
+  "checks": {
+    "six_candidates": true,
+    "inverse_matches_direct": true,
+    "upper_factor_reconstructs_q": true,
+    "qdd_matches_direct_inverse": true,
+    "joint_cost_matches_explicit_optimum": true,
+    "constraints_satisfied": true,
+    "apbr_cost_matches_scalar_reference": true,
+    "tau_zero_degenerates": true,
+    "near_optimal_set_correct": true,
+    "zero_minimum_not_artificially_expanded": true,
+    "shuffle_deterministic": true,
+    "shuffle_seed_changes_mapping": true,
+    "shuffle_preserves_block_multiset": true,
+    "strict_2of4": true,
+    "all_finite": true,
+    "native_replay_fp32_bitwise": true,
+    "native_replay_fp64_bitwise": true,
+    "ill_conditioned_qdd_hard_failure": true
+  },
+  "source_sha256": {
+    "adapter": "1915e7802f37b3b8f7c00cb33e85829adb77c1e40a4908c1cd7165ef4571dc18",
+    "runner": "0b31e0161e85a4fa6e53392dbcdfa80a01727541c8176089199649498d4b47c7",
+    "sparsegpt_adapter": "4b1462b1f09e6e3789406cb506fc4c47b47cfd159fa3d0e4fc013f45927a3f36",
+    "fixedmask_adapter": "d7cff3b33665811bad242ed8139b03dbbff493a665f63074b87aec266d3b88c3"
+  }
+}

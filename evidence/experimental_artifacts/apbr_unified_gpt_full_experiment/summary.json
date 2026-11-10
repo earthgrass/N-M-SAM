@@ -1,0 +1,21 @@
+{
+  "experiment_id": "apbr_unified_gpt_full_experiment",
+  "status": "STOPPED_AFTER_PILOT_NEGATIVE_SIGNAL_AND_EXACT_COST_GATE",
+  "available_seeds": [0, 1],
+  "excluded_seeds": {"2": "missing authentic APBR Dense Epoch-200 checkpoint"},
+  "radius_definition": "a=exp(s)",
+  "q_definition": "exp(-2s)/global_mean_over_eligible_coordinates",
+  "pilot_layer": "layer1.0.conv1",
+  "lambda_candidates": [0.0, 0.0001, 0.001, 0.01, 0.1, 1.0],
+  "full_model_started": false,
+  "attribution_final_test_accessed": true,
+  "apbr_gpt_final_test_accessed": false,
+  "pilot": {
+    "status": "PASS_NUMERICAL_STOP_RESOURCE_AND_EFFECT",
+    "exact_seconds_positive_lambda_mean": 4.9757,
+    "shared_seconds_positive_lambda_mean": 0.0791,
+    "exact_shared_runtime_ratio": 62.9,
+    "positive_lambda_improved_reconstruction": false
+  },
+  "conclusion": "B: geometry changes the second-order problem but shows no reconstruction benefit; full-network APBR-GPT was not launched"
+}

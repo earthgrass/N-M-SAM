@@ -1,0 +1,67 @@
+{
+  "status": "COMPLETE",
+  "parent_kind": "vpr",
+  "protocol_id": "cifar100_50k10k_final_v1",
+  "test_accessed_only_after_freeze": true,
+  "calibration_seconds": 0.6494969297200441,
+  "recovery_epochs": 0,
+  "results": [
+    {
+      "method": "dynamic_group_obs",
+      "accuracy_percent": 77.86,
+      "ce": 0.8298147562980652,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "60b09d9d824ebe70cf8d9c94fa27cb21217da3c85f7fbdec70d378f4fc22af51",
+      "mask_sha256": "601676a71a676e0d20847fb2c0fd42d9336ad4c87d3f093fcfa1ea049de54058",
+      "pruning_compensation_seconds": 5.170233407989144,
+      "test_seconds": 0.44038775749504566
+    },
+    {
+      "method": "geo_select_std_comp",
+      "accuracy_percent": 77.83,
+      "ce": 0.8281950122833251,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "da72f3875dcf43af170b59975ba1edc1a1a99b8e0e86b6a893e2ca58063afc16",
+      "mask_sha256": "50b4ef33579277355078283e9263bc479cdfbb892fdeb430e8b04e208338958a",
+      "pruning_compensation_seconds": 4.929753810167313,
+      "test_seconds": 0.43649936094880104
+    },
+    {
+      "method": "geo_full",
+      "accuracy_percent": 77.86,
+      "ce": 0.8267444700241089,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "265ef367b152d70a71b1c40b8d06c772bb6f78932cadd29c303b77df677203cf",
+      "mask_sha256": "c953d436bba8addb93a28e5fda7c43013e47e5d84c56fa4a402400179817799a",
+      "pruning_compensation_seconds": 4.884168805554509,
+      "test_seconds": 0.396152526140213
+    },
+    {
+      "method": "shuffled_geo_select",
+      "accuracy_percent": 77.8,
+      "ce": 0.830283266544342,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "9512d58fc92196ad784482e6357d09a1447d53366631d0237c8447eb13384848",
+      "mask_sha256": "40c63b92fcf12ac10334906c6f4e53c17a6c703ef515dd485187a0f0b3b20539",
+      "pruning_compensation_seconds": 4.939748959615827,
+      "test_seconds": 0.4197467602789402
+    },
+    {
+      "method": "shuffled_geo_full",
+      "accuracy_percent": 77.76,
+      "ce": 0.8304737457275391,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "044fe0f12393c0036541700c7d570f2649d33fbddf885330095c0e23dc5d0b70",
+      "mask_sha256": "77a37a0f6eff36953e667d2653f7fd9d031fc94113de28d03d5dfd224136e2c5",
+      "pruning_compensation_seconds": 4.845114396885037,
+      "test_seconds": 0.39866480231285095
+    }
+  ],
+  "peak_allocated_bytes": 1397126656,
+  "peak_reserved_bytes": 1453326336
+}

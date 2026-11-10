@@ -1,0 +1,77 @@
+{
+  "schema": "apbr-cnn-baseline-smoke-v1",
+  "seed": 20261026,
+  "scope": "synthetic CPU implementation validation; not CIFAR-100 accuracy",
+  "status": "NUMERICAL_SMOKE_PASS",
+  "full_experiment": "FULL_EXPERIMENT_NOT_RUN",
+  "environment": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "torch": "2.13.0+cpu",
+    "cuda_available": false,
+    "default_dtype": "torch.float32"
+  },
+  "source_sha256": {
+    "wanda_layerwrapper": "02144a1ba7e6c80b44d8c7451b182dae2c2280733236434e174a3715b2b04ed0",
+    "wanda_prune": "023b13bc346eb4ea3ec08a2dc3f42ccb5e7cc2a550922de5b1b3bdf59ed7a7e8",
+    "sparsegpt_core": "6264a55f72c58e69ecb88918320e981425b6996df7f34799fcbc17107a039108",
+    "rose_core": "601a4912422dfd2b737485ffce19f1b744ce744199a835d082829e48b25f429c"
+  },
+  "records": [
+    {
+      "name": "conv2d_mapping_standard",
+      "status": "MATHEMATICAL_MAPPING_PASS",
+      "forward_max_abs_error": 0.0,
+      "input_grad_max_abs_error": 0.0,
+      "weight_grad_max_abs_error": 1.0658141036401503e-14,
+      "noncontiguous_input": true
+    },
+    {
+      "name": "conv2d_mapping_grouped",
+      "status": "MATHEMATICAL_MAPPING_PASS",
+      "forward_max_abs_error": 0.0,
+      "input_grad_max_abs_error": 1.1102230246251565e-16,
+      "weight_grad_max_abs_error": 1.7763568394002505e-15,
+      "noncontiguous_input": true
+    },
+    {
+      "name": "conv2d_mapping_depthwise",
+      "status": "MATHEMATICAL_MAPPING_PASS",
+      "forward_max_abs_error": 0.0,
+      "input_grad_max_abs_error": 0.0,
+      "weight_grad_max_abs_error": 1.7763568394002505e-15,
+      "noncontiguous_input": true
+    },
+    {
+      "name": "wanda_official_linear_vs_adapter",
+      "status": "NUMERICAL_SMOKE_PASS",
+      "score_max_abs_error": 1.082903979821026e-07,
+      "mask_equal": true,
+      "retained_weight_update": 0.0
+    },
+    {
+      "name": "sparsegpt_official_linear_vs_adapter",
+      "status": "NUMERICAL_SMOKE_PASS",
+      "mask_equal": true,
+      "weight_max_abs_error": 1.2516975402832031e-06,
+      "official_cpu_timing_fence_neutralized": true
+    },
+    {
+      "name": "rose_official_nm_reorder_path",
+      "status": "OBSERVED_PINNED_SOURCE_FAILURE",
+      "failure": {
+        "type": "UnboundLocalError",
+        "message": "cannot access local variable 'reorder_column' where it is not associated with a value"
+      }
+    },
+    {
+      "name": "rose_controlled_paper_faithful_repair",
+      "status": "NUMERICAL_SMOKE_PASS",
+      "all_reordered": true,
+      "permutation_roundtrip": true,
+      "zeros": 8,
+      "finite": true
+    }
+  ],
+  "elapsed_seconds": 0.14602208137512207
+}

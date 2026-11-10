@@ -1,0 +1,67 @@
+{
+  "status": "COMPLETE",
+  "parent_kind": "fixed_l2",
+  "protocol_id": "cifar100_50k10k_apbr_fixed_l2_seed0_20261102",
+  "test_accessed_only_after_freeze": true,
+  "calibration_seconds": 0.6825553774833679,
+  "recovery_epochs": 0,
+  "results": [
+    {
+      "method": "dynamic_group_obs",
+      "accuracy_percent": 77.61,
+      "ce": 0.8362920593261719,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "33cdc76e6f6b8cf580576bda4d882bc6125ce441ea063ab253e1caeb0ee46da4",
+      "mask_sha256": "06b733626c5d474d1c0590d1e251e0579ce001da8c3fe480c4e34ff4b78a6257",
+      "pruning_compensation_seconds": 5.167114516720176,
+      "test_seconds": 0.4864292200654745
+    },
+    {
+      "method": "geo_select_std_comp",
+      "accuracy_percent": 77.72,
+      "ce": 0.8354762056350707,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "cbb7aef4f025a43e4778eaf1696db8434ed54ae0fced53011aa49215af958b29",
+      "mask_sha256": "1ccb7fc318772f5276628c5fba9b3393c409964ca256969500ca05574fbcfd7c",
+      "pruning_compensation_seconds": 4.961736287921667,
+      "test_seconds": 0.4427031073719263
+    },
+    {
+      "method": "geo_full",
+      "accuracy_percent": 77.68,
+      "ce": 0.8358988278865814,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "cc215bc93f66123a33057676842898c1f36c5911cec366350d870864643e9f38",
+      "mask_sha256": "07846e52d0417bb6af83990c1fc168daa7d98096fc3ca096aa5d3dbf2579d6cf",
+      "pruning_compensation_seconds": 4.913805488497019,
+      "test_seconds": 0.4564039446413517
+    },
+    {
+      "method": "shuffled_geo_select",
+      "accuracy_percent": 77.58,
+      "ce": 0.8363970432281495,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "9aced9f0d6be5678441f8c9af5466fa5f94b4eb53f769ecc680dd26e9ed3bbda",
+      "mask_sha256": "7e5afdcd5e470e5357034be6f6cd0a407c1cb44814ba2e3e71b8909b620e0935",
+      "pruning_compensation_seconds": 4.9323170986026525,
+      "test_seconds": 0.45472154952585697
+    },
+    {
+      "method": "shuffled_geo_full",
+      "accuracy_percent": 77.69,
+      "ce": 0.8370765768051147,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "4e25c13c6b7d50eef71130e1373c8fd061844f6e3d25780c17c8af211aa3991b",
+      "mask_sha256": "0dd29389fccd4cb358edabd28a14ff473a6185936176693d2bbfa63b6c4da9e1",
+      "pruning_compensation_seconds": 4.885184047743678,
+      "test_seconds": 0.418151943013072
+    }
+  ],
+  "peak_allocated_bytes": 1397126656,
+  "peak_reserved_bytes": 1453326336
+}

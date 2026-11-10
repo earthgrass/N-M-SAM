@@ -1,0 +1,56 @@
+{
+  "experiment": "apbr_gpt_shared_q_seed0_screen",
+  "status": "completed_negative_gate",
+  "seed": 0,
+  "test_accessed": false,
+  "recovery_epochs": 0,
+  "bn_only": false,
+  "gradient_training": false,
+  "eligible_layers": 19,
+  "endpoints": 33,
+  "identity": {
+    "parent_checkpoint_sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+    "original_mask_sha256": "aea9e43dfe90f0e5cfa137769648e13a72d5971362a8291e81e3d7d565a217e1",
+    "apbr_gpt_adapter_sha256": "f74c106b1e822af162d095503a19a916e59edd4eeedf3c36681d1e2b84c2ca4d",
+    "screen_runner_sha256": "80e32c60f67b029736484e2a4c80ae05073d5e7785c552037024e21366e5151b",
+    "geometry_audit_sha256": "6f4e0fea47160de6e333de9be85af1591fc442f73a3cb47295a2873126ffe6a5",
+    "mask_audit_sha256": "bc6e1270cd422dfee8b78a20b38088a1e622e426429c900c12ddf05188809712",
+    "config_sha256": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6"
+  },
+  "lambda_grid": [0.0, 0.0001, 0.001, 0.01, 0.1, 1.0],
+  "diagnostic": {
+    "source": "official_train_disjoint_from_calibration",
+    "samples": 1024,
+    "accuracy_saturated": true,
+    "final_test_used_for_selection": false
+  },
+  "fixed_mask_gate": {
+    "shared_apbr_q_positive_lambdas_beating_isotropic_accuracy": 0,
+    "shared_apbr_q_positive_lambdas_beating_isotropic_ce": 0,
+    "passed": false
+  },
+  "geometry": {
+    "q_shared_cv_mean": 0.009154601315116685,
+    "q_shared_cv_min": 0.0007315392476910635,
+    "q_shared_cv_max": 0.03919225374944689,
+    "q_shared_isotropic_relative_l2_mean": 0.01729177790651528,
+    "exact_to_shared_relative_rms_mean": 0.015040683921370685,
+    "q_hdiag_spearman_mean": 0.6953532705137843,
+    "q_hdiag_spearman_min": 0.42932078836711257,
+    "q_hdiag_spearman_max": 0.9348852119700333
+  },
+  "runtime": {
+    "total_pruning_seconds_all_endpoints": 143.05917689064518,
+    "max_peak_allocated_gib": 1.3161301612854004,
+    "max_peak_reserved_gib": 1.484375
+  },
+  "exploratory_signal": {
+    "method": "Q_selection_plus_H_compensation",
+    "lambda_values": [0.01, 0.1],
+    "diagnostic_ce": [0.04233054956421256, 0.04236271185800433],
+    "hh_reference_ce": 0.04281982313841581,
+    "sufficient_for_seed_expansion": false,
+    "reason": "saturated train-side diagnostic and no matched isotropic-selection control"
+  },
+  "decision": "pause_seed_1_and_seed_2; do_not_run_final_test"
+}

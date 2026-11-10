@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "source_sha256": "54415462eb3f480ce3b5a5d7270a3bd98b8604e62e9dfab7185ff4e0ba37268f",
+  "test_accessed_by_this_script": false,
+  "calibration_ids_sha256": "3b7da27d79762235c87f18571bc73224d6e6f2b3ba663b7d9a4a3de312f23157",
+  "results": [
+    {
+      "method": "dynamic_group_obs",
+      "train_calibration_accuracy_percent": 100.0,
+      "train_calibration_ce": 0.015136737725697458,
+      "samples": 1024,
+      "checkpoint_sha256": "33cdc76e6f6b8cf580576bda4d882bc6125ce441ea063ab253e1caeb0ee46da4"
+    },
+    {
+      "method": "geo_select_std_comp",
+      "train_calibration_accuracy_percent": 100.0,
+      "train_calibration_ce": 0.01518355286680162,
+      "samples": 1024,
+      "checkpoint_sha256": "cbb7aef4f025a43e4778eaf1696db8434ed54ae0fced53011aa49215af958b29"
+    },
+    {
+      "method": "geo_full",
+      "train_calibration_accuracy_percent": 100.0,
+      "train_calibration_ce": 0.015251703094691038,
+      "samples": 1024,
+      "checkpoint_sha256": "cc215bc93f66123a33057676842898c1f36c5911cec366350d870864643e9f38"
+    },
+    {
+      "method": "shuffled_geo_select",
+      "train_calibration_accuracy_percent": 100.0,
+      "train_calibration_ce": 0.015253770514391363,
+      "samples": 1024,
+      "checkpoint_sha256": "9aced9f0d6be5678441f8c9af5466fa5f94b4eb53f769ecc680dd26e9ed3bbda"
+    },
+    {
+      "method": "shuffled_geo_full",
+      "train_calibration_accuracy_percent": 100.0,
+      "train_calibration_ce": 0.015280624967999756,
+      "samples": 1024,
+      "checkpoint_sha256": "4e25c13c6b7d50eef71130e1373c8fd061844f6e3d25780c17c8af211aa3991b"
+    }
+  ]
+}

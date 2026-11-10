@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/root/autodl-tmp/apbr_unified_gpt_20261031/project/scripts/run_apbr_shared_q_seed0_screen.py", line 81, in <module>
+    try:main()
+        ^^^^^^
+  File "/root/autodl-tmp/apbr_unified_gpt_20261031/project/scripts/run_apbr_shared_q_seed0_screen.py", line 75, in main
+    row,lr=build(method,alpha);metrics.append(row);details+=lr;print(json.dumps(row),flush=True)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/apbr_unified_gpt_20261031/project/scripts/run_apbr_shared_q_seed0_screen.py", line 71, in build
+    mat.copy_(rweight);ms[n+'.weight']=mask.reshape_as(l.weight).detach().cpu();delta=rweight-before;layerrows.append(dict(method=method,alpha=alpha,layer=n,reconstruction_energy=float(.5*torch.einsum('ri,ij,rj->',delta,h,delta)/delta.shape[0]),compensation_rms=float(delta[mask].square().mean().sqrt()),q_shared_mean=float(qshared.mean()),q_shared_std=float(qshared.std(unbiased=False)),q_shared_min=float(qshared.min()),q_shared_max=float(qshared.max()),q_hdiag_spearman=''))
+    ^^^^^^^^^^^^^^^^^^
+RuntimeError: a view of a leaf Variable that requires grad is being used in an in-place operation.

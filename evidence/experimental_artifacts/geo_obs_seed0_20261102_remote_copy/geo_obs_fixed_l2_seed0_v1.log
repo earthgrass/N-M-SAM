@@ -1,0 +1,32 @@
+{"event": "layer_complete", "layer": "layer1.0.conv1", "index": 1, "mask_flip_rate": 0.0009223090277777778, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer1.0.conv2", "index": 2, "mask_flip_rate": 0.0010308159722222222, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer1.1.conv1", "index": 3, "mask_flip_rate": 0.0008138020833333334, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer1.1.conv2", "index": 4, "mask_flip_rate": 0.0010308159722222222, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer2.0.conv1", "index": 5, "mask_flip_rate": 0.0008409288194444445, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer2.0.conv2", "index": 6, "mask_flip_rate": 0.0008002387152777778, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer2.0.shortcut.0", "index": 7, "mask_flip_rate": 0.00927734375, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer2.1.conv1", "index": 8, "mask_flip_rate": 0.0006646050347222222, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer2.1.conv2", "index": 9, "mask_flip_rate": 0.0006239149305555555, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer3.0.conv1", "index": 10, "mask_flip_rate": 0.0006985134548611111, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer3.0.conv2", "index": 11, "mask_flip_rate": 0.0005967881944444445, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer3.0.shortcut.0", "index": 12, "mask_flip_rate": 0.0030517578125, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer3.1.conv1", "index": 13, "mask_flip_rate": 0.0004475911458333333, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer3.1.conv2", "index": 14, "mask_flip_rate": 0.00038994683159722225, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer4.0.conv1", "index": 15, "mask_flip_rate": 0.000396728515625, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer4.0.conv2", "index": 16, "mask_flip_rate": 0.0004891289605034722, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer4.0.shortcut.0", "index": 17, "mask_flip_rate": 0.001373291015625, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer4.1.conv1", "index": 18, "mask_flip_rate": 0.0006230672200520834, "test_accessed": false}
+{"event": "layer_complete", "layer": "layer4.1.conv2", "index": 19, "mask_flip_rate": 0.00039757622612847225, "test_accessed": false}
+Traceback (most recent call last):
+  File "/root/autodl-tmp/apbr_l2_seed0_20261102/project/experiments/post_training_nm_benchmark/scripts/run_geo_obs_seed0.py", line 387, in <module>
+    run(args)
+  File "/root/autodl-tmp/apbr_l2_seed0_20261102/project/experiments/post_training_nm_benchmark/scripts/run_geo_obs_seed0.py", line 333, in run
+    atomic_csv(out / "per_layer.csv", rows)
+  File "/root/autodl-tmp/apbr_l2_seed0_20261102/project/experiments/post_training_nm_benchmark/scripts/run_geo_obs_seed0.py", line 80, in atomic_csv
+    writer.writerows(rows)
+  File "/root/miniconda3/lib/python3.12/csv.py", line 167, in writerows
+    return self.writer.writerows(map(self._dict_to_list, rowdicts))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/csv.py", line 159, in _dict_to_list
+    raise ValueError("dict contains fields not in fieldnames: "
+ValueError: dict contains fields not in fieldnames: 'mask_flip_count_vs_group_obs', 'mask_flip_rate_vs_group_obs'

@@ -1,0 +1,54 @@
+name: obc_seed0_partial_layer_cuda_smoke
+purpose: cuda_technical_smoke_only
+seed: 0
+review:
+  approved: true
+  status: APPROVED_OFFLINE_PREPARATION_ONLY_NO_GPU_EXECUTION_THIS_TURN
+device: cuda:0
+gpu_uuid: GPU-fc8784a7-85a2-2bcd-d2e2-f36ef021616c
+threads: 4
+method: OBC
+layer_name: layer1.0.conv1
+parallel: 2
+recovery_steps: 2
+sample_resource_cap: 64
+minimum_free_disk_bytes: 4294967296
+minimum_free_cuda_bytes: 8589934592
+monitor_interval_seconds: 2
+calibration:
+  approved: true
+  status: APPROVED_FROZEN
+  dataset: official_cifar10_train_50000
+  samples: 32
+  index_file: configs/obc_smoke_train_ids.json
+  index_sha256: 74a176121486328ddaf2716b86e90f2ce23a67bfa5df1393dafa3280685a3fb1
+  batch_size: 8
+  rounds: 1
+  forward_passes_per_layer: 4
+  optimization_epochs: 0
+  random_seed: 0
+  augmentation: none
+  preprocessing:
+    to_tensor: true
+    normalize_mean:
+    - 0.4913725490196078
+    - 0.4823529411764706
+    - 0.4466666666666667
+    normalize_std:
+    - 0.24705882352941178
+    - 0.24352941176470588
+    - 0.2615686274509804
+  index_file_sha256: ef5df4e0b96367926d2d4608eed154b401b070239b404b4b77eaa266d8e5ad5e
+model: cifar_resnet18_ssam2022
+input:
+  role: standard_dense_sam
+  seed: 0
+  relative_path: best_checkpoints/seed_0/dense_sam/best_test.pt
+  sha256: 63c2415476802ee30029d445bd2b1fed0992ec39ab0c89a852cf14b1c9683897
+precision:
+  model: float32
+  amp: false
+  tf32: false
+  compile: false
+freeze_record: configs/obc_smoke_freeze.json
+freeze_record_sha256: d8042b355c5095c790e3d3b68638a08a72a709dfcbdd2c0b6512dd64df856159

@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "type": "ValueError",
+  "message": "Pruned coordinate regrowth",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\scripts\\build_gpt_mask_only_counterfactual.py\", line 103, in <module>\n    main()\n  File \"C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\scripts\\build_gpt_mask_only_counterfactual.py\", line 55, in main\n    validate_masks(model, masks, n=2, m=4, complete=False)\n  File \"C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\benchmark\\nm.py\", line 37, in validate_masks\n    for name,mask in masks.items():validate_layer_mask(params[name],mask,n,m)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\benchmark\\nm.py\", line 30, in validate_layer_mask\n    if check_zeros and torch.count_nonzero(weight.detach()[~mask.to(weight.device)]):raise ValueError('Pruned coordinate regrowth')\n                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Pruned coordinate regrowth\n",
+  "automatic_retry": false
+}

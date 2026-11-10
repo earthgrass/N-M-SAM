@@ -1,0 +1,56 @@
+{
+  "status": "GPU_PREFLIGHT_PASS",
+  "experiment_id": "apbr_gpt_group_joint_obs_seed0_full_20261031",
+  "gpu": {
+    "name": "NVIDIA RTX 6000D",
+    "uuid": "GPU-9b509ef3-2f58-715c-f8fb-686e994d4495",
+    "memory_total_mib": 85651,
+    "memory_free_mib": 85040,
+    "driver": "595.91.07",
+    "compute_capability": [
+      12,
+      0
+    ],
+    "torch": "2.8.0+cu128",
+    "torch_cuda": "12.8"
+  },
+  "disk_free_bytes": 53094809600,
+  "parent_sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+  "historical_native_sha256": "0ff0eb2f8a9371ab47f39a8a8d0ea8b237e4f0ed89eb6ff583f05a4d4d1d6e04",
+  "geometry_sha256": "f1034c39cdc9525526b8110d538792b339d285fc1f5ade4eadfd6792328a6be6",
+  "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+  "calibration_ids_sha256": "3b7da27d79762235c87f18571bc73224d6e6f2b3ba663b7d9a4a3de312f23157",
+  "eligible_layers": [
+    "layer1.0.conv1",
+    "layer1.0.conv2",
+    "layer1.1.conv1",
+    "layer1.1.conv2",
+    "layer2.0.conv1",
+    "layer2.0.conv2",
+    "layer2.0.shortcut.0",
+    "layer2.1.conv1",
+    "layer2.1.conv2",
+    "layer3.0.conv1",
+    "layer3.0.conv2",
+    "layer3.0.shortcut.0",
+    "layer3.1.conv1",
+    "layer3.1.conv2",
+    "layer4.0.conv1",
+    "layer4.0.conv2",
+    "layer4.0.shortcut.0",
+    "layer4.1.conv1",
+    "layer4.1.conv2"
+  ],
+  "eligible_positions": 11157504,
+  "deletions": 5578752,
+  "source_hashes": {
+    "runner": "1a992925634d60e812836213d3e4324fde805cc5b6b3cfdded1f0573ddbf14b1",
+    "group_adapter": "1915e7802f37b3b8f7c00cb33e85829adb77c1e40a4908c1cd7165ef4571dc18",
+    "sparsegpt_adapter": "4b1462b1f09e6e3789406cb506fc4c47b47cfd159fa3d0e4fc013f45927a3f36",
+    "fixedmask_adapter": "d7cff3b33665811bad242ed8139b03dbbff493a665f63074b87aec266d3b88c3",
+    "conv2d_adapter": "e6a45097853a8613fabb013e320011f2c2d48d70f9e83a56c2552c94b9129c63",
+    "nm_contract": "92433dbfd3b768b28922b89954d76fde7c3a6fdd23e661622ac248526b44678f",
+    "config": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6"
+  },
+  "test_accessed": false
+}

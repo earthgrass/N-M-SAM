@@ -1,0 +1,34 @@
+{
+  "status": "COMPLETE",
+  "parent_kind": "fixed_l2",
+  "test_accessed_only_after_freeze": true,
+  "recovery_epochs": 0,
+  "results": [
+    {
+      "method": "group_obs",
+      "accuracy_percent": 76.36,
+      "ce": 0.8972332360744476,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "6eceebc1e3f2bda665ee251e3d5b94e71ca9f878051ccc0c68ab987a9352ab78",
+      "mask_sha256": "27dcce9d75f9c3a2ca1ef6fa955389bf2da09a9888c61fbad0cd54dc6caf56b9",
+      "pruning_compensation_seconds": 2.779077176004648,
+      "test_seconds": 1.034794582054019
+    },
+    {
+      "method": "geo_obs",
+      "accuracy_percent": 76.45,
+      "ce": 0.8958220355033875,
+      "test_samples": 10000,
+      "test_evaluations": 1,
+      "checkpoint_sha256": "3788d48fa6df28c26712dafaf7e815292eb7be5352c7f311dfb9200be37e4293",
+      "mask_sha256": "8e1b576171b00ac94734cc2220fe4c895a8e056dd58446137d3bb993762d08d0",
+      "pruning_compensation_seconds": 5.76083829253912,
+      "test_seconds": 0.4273397047072649
+    }
+  ],
+  "completed_layers": 19,
+  "peak_allocated_bytes": null,
+  "peak_reserved_bytes": null,
+  "initial_csv_failure_preserved": true
+}

@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "status": "FAIL",
+  "environment": {
+    "timestamp_utc": "2026-10-30T15:57:46.529293+00:00",
+    "platform": "Linux-5.15.0-78-generic-x86_64-with-glibc2.35",
+    "python": "3.12.3 | packaged by Anaconda, Inc. | (main, May  6 2024, 19:46:43) [GCC 11.2.0]",
+    "torch": "2.8.0+cu128",
+    "torch_cuda_build": "12.8",
+    "cuda_available": true,
+    "cuda_device_count": 1,
+    "nvidia_smi": {
+      "available": true,
+      "returncode": 0,
+      "stdout": "NVIDIA GeForce RTX 5090, 32607, 32107, 580.105.08",
+      "stderr": ""
+    }
+  },
+  "statuses": {
+    "DATA_IDENTITY_PASS": true,
+    "CIFAR100_MODEL_IDENTITY_PASS": true,
+    "SPARSEGPT_GPU_NUMERICAL_PASS": true,
+    "SPARSEGPT_GPU_RESOURCE_PASS": false,
+    "FULL_EXPERIMENT_NOT_RUN": true
+  },
+  "scope": "one internal 3x3 Conv2d only; no training, full-model pruning, recovery, or seed queue",
+  "fixed_algorithm": {
+    "keep_n": 2,
+    "m": 4,
+    "blocksize": 128,
+    "percdamp": 0.01,
+    "compute_dtype": "torch.float32",
+    "retry_or_auto_tuning": false
+  },
+  "dataset_identity": {
+    "audit_path": "/root/autodl-tmp/apbr_original_sparsegpt_20261030/artifacts/preflight/dataset_identity.json",
+    "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+    "fixed_gpu_smoke_train_sample_ids": [
+      578,
+      995,
+      4938,
+      5017,
+      13134,
+      13507,
+      15801,
+      17174,
+      17804,
+      17871,
+      18490,
+      19027,
+      23387,
+      26614,
+      27491,
+      28495,
+      29392,
+      30266,
+      31460,
+      31595,
+      33164,
+      34103,
+      34463,
+      38132,
+      38877,
+      39322,
+      44262,
+      45400,
+      48413,
+      49010,
+      49258,
+      49701
+    ]
+  },
+  "model_identity": {
+    "audit_path": "/root/autodl-tmp/apbr_original_sparsegpt_20261030/artifacts/preflight/model_identity.json",
+    "model_id": "ssam2022_cifar_resnet18_c100_v1",
+    "architecture_sha256": "95367b739c42cca14cb51d1a776e5dbdbe71f9ed4a1afbd2c5c0b1bb994827ea",
+    "initialized_state_sha256": "b93ca52940b59a84b1a3e1cf2bcc3131b22e99230e9888315d7d1850b556ad31"
+  },
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 5090",
+    "compute_capability": [
+      12,
+      0
+    ],
+    "total_memory_bytes_properties": 33668988928,
+    "total_memory_bytes_mem_get_info": 33668988928,
+    "free_memory_before_bytes": 33138212864,
+    "free_memory_after_release_bytes": 32894943232
+  },
+  "calibration": {
+    "split": "train",
+    "sample_ids": [
+      578,
+      995,
+      4938,
+      5017,
+      13134,
+      13507,
+      15801,
+      17174,
+      17804,
+      17871,
+      18490,
+      19027,
+      23387,
+      26614,
+      27491,
+      28495,
+      29392,
+      30266,
+      31460,
+      31595,
+      33164,
+      34103,
+      34463,
+      38132,
+      38877,
+      39322,
+      44262,
+      45400,
+      48413,
+      49010,
+      49258,
+      49701
+    ],
+    "sample_count": 32,
+    "augmentation": "none",
+    "input_shape": [
+      32,
+      3,
+      32,
+      32
+    ],
+    "activation_shape": [
+      32,
+      512,
+      4,
+      4
+    ],
+    "patch_matrix_shape": [
+      4608,
+      512
+    ],
+    "patch_order_direct_reference_exact": true
+  },
+  "model": {
+    "model_id": "ssam2022_cifar_resnet18_c100_v1",
+    "randomly_initialized_not_trained": true,
+    "initialization_seed": 20261026,
+    "layer_name": "layer4.0.conv2",
+    "layer_weight_shape": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "k": 4608,
+    "weight_sha256_before": "a12bbe599a7195c9cb5fa81a52c19644edfbc8069c65a9312c5d5d03b862acb3",
+    "weight_sha256_after": "187d56092bccb97944cc7fc2ccd31328d804c27e8fbefd2d21d8db4785e520c9"
+  },
+  "numerical": {
+    "hessian_shape": [
+      4608,
+      4608
+    ],
+    "hessian_dtype": "torch.float32",
+    "hessian_reference_dimension": 64,
+    "hessian_reference_cpu_dtype": "torch.float64",
+    "hessian_reference_max_abs_error": 7.442168525537141e-09,
+    "hessian_reference_relative_fro_error": 3.467876997754097e-07,
+    "relative_damping_fraction": 0.01,
+    "applied_damping": 9.905127808451653e-05,
+    "factorization": "Cholesky -> cholesky_inverse -> upper Cholesky compensation factor",
+    "dynamic_sequential_mask": true,
+    "compensated_weight_written_to_original_oihw_coordinates": true,
+    "all_complete_groups_exactly_2_of_4": true,
+    "dense_tail_probe": true,
+    "keep_mask_dtype": "torch.bool",
+    "finite_outputs": true,
+    "oom": false,
+    "cholesky_failure": false
+  },
+  "timing_seconds": {
+    "hessian_build": 0.015233591198921204,
+    "decomposition": 0.07288620993494987,
+    "compensation": 0.6597868725657463,
+    "decomposition_and_compensation_observed_total": 0.8188033178448677,
+    "total_hessian_plus_prune": 0.8340369090437889
+  },
+  "memory": {
+    "peak_allocated_bytes": 519058944,
+    "peak_reserved_bytes": 627048448,
+    "memory_released_check": false
+  }
+}
