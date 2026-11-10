@@ -1,0 +1,39 @@
+\section{Experiments}\label{sec:experiments}
+\paragraph{Evaluation setting.}
+The evaluation uses CIFAR-100 and the 100-class CIFAR-ResNet18~\cite{resnet}, with the fixed final dense checkpoint as the pruning parent. Each method targets 2:4 sparsity in the same eligible internal convolutional layers. Dense training uses 200 epochs. The stem, classifier, BN parameters, and biases remain dense.
+
+\subsection{Post-training endpoints}
+Table~\ref{tab:main} reports post-pruning accuracies. The SAM reference applies a magnitude mask, and Wanda~\cite{wanda} uses activation-aware scores; both are mask-only endpoints. SparseGPT~\cite{sparsegpt} includes its native selection and OBS compensation. The APBR-SAM endpoint includes conditional selection and joint compensation.
+
+\begin{table}[H]\centering
+\caption{CIFAR-100 post-pruning accuracy. Reference rows retain their existing three-seed mean $\pm$ sample SD.}\label{tab:main}
+\begin{tabular}{lc}
+\toprule
+Method & Accuracy (\%) \\
+\midrule
+SAM & $55.54\pm1.36$ \\
+Wanda & $56.48\pm3.83$ \\
+SparseGPT & $77.26\pm0.42$ \\
+APBR-SAM & $\mathbf{77.63\pm0.14}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The reference results identify reconstruction as an important part of the post-training endpoint: SAM and Wanda report $55.54\pm1.36\%$ and $56.48\pm3.83\%$ after mask application, while native SparseGPT reports $77.26\pm0.42\%$ after selection and compensation. The APBR evaluation combines support selection with reconstruction and measures its accuracy at the same post-pruning stage, without recovery training.
+
+\subsection{Geometry-guided selection}
+The comparison below reports the post-pruning endpoints of SAM and APBR-SAM with conditional selection and joint OBS compensation.
+
+\begin{table}[H]\centering
+\caption{CIFAR-100 accuracy after conditional selection and joint OBS compensation.}\label{tab:ablation}
+\begin{tabular}{lc}
+\toprule
+Method & Accuracy (\%) \\
+\midrule
+SAM + conditional-greedy OBS & $77.43\pm0.11$ \\
+APBR-SAM + conditional-greedy OBS & $\mathbf{77.63\pm0.14}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+APBR-SAM achieves $77.63\pm0.14\%$, compared with $77.43\pm0.11\%$ for SAM, an improvement of $0.20$ percentage points. The higher compensated accuracy suggests better compatibility between APBR and the proposed conditional-selection and joint-OBS pipeline.

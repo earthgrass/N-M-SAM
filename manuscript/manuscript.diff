@@ -1,0 +1,479 @@
+--- before/main.tex
++++ revised/expanded_manuscript.tex
+@@ -22,115 +22,194 @@
+ \begin{document}
+ \maketitle
+ \begin{abstract}
+-Sharpness-Aware Minimization (SAM) improves generalization through local parameter perturbations, but its gradient-driven budget allocation is not tailored to the structured deletions imposed by N:M pruning. Standard SAM also retains no persistent coordinate geometry to guide which weights should be removed together. We propose Adaptive Perturbation Budget Reallocation for SAM (APBR-SAM), which learns coordinate scales through global perturbation-energy feedback. The feedback increases the relative scales of coordinates receiving below-average perturbation energy and decreases those receiving above-average energy, encouraging more balanced exploration while preserving SAM's two-gradient training procedure. At pruning time, the learned geometry guides conditional-greedy Optimal Brain Surgeon (OBS) selection: each virtual deletion updates the remaining weights and conditional curvature before the next choice, while geometry-normalized weight magnitudes distinguish candidates with near-minimal second-order cost. The selected set then receives joint OBS compensation from the unmodified current weights. APBR-SAM thereby connects historical perturbation allocation to interaction-aware support selection, without training-time Hessian estimation, exhaustive mask enumeration, or post-pruning fine-tuning.
++N:M structured pruning removes weights through discrete support decisions, whereas Sharpness-Aware Minimization (SAM) trains with continuous local perturbations. Connecting these stages requires information that persists beyond an individual gradient direction and a selection rule that accounts for interactions between deleted weights. We propose APBR-SAM, which learns positive coordinate scales through perturbation-energy feedback while maintaining a fixed global $L_2$ radius. These scales retain a history of perturbation allocation and express subsequent weight deletions in normalized coordinates. To use this geometry with second-order reconstruction, we introduce a geometry-first conditional selection procedure. Within each 2:4 group, the smallest geometry-normalized weight determines the first deletion. A virtual OBS update then adjusts the remaining weights and inverse curvature, allowing the second deletion to reflect the effect of the first. Once both positions are selected, a single joint OBS update compensates them from the current physical weights. This design gives training geometry an explicit role in initiating support selection and uses conditional reconstruction to complete it, connecting historical perturbation allocation to one-shot structured pruning.
+ \end{abstract}
+ 
+ \section{Introduction}\label{sec:introduction}
+-Post-training N:M pruning converts a dense model into a structured sparse model by retaining $N$ coordinates in each group of $M$ weights. The local pattern supports structured sparse execution~\cite{nm}, but imposes a discrete decision about which learned weights to remove. Each candidate mask changes the parameter support and produces a specific deletion displacement. The quality of the final model therefore depends on both the dense training trajectory and the support selected after it.
+-
+-SAM offers a natural starting point for robust dense training~\cite{sam}. It uses the current mini-batch gradient to approximate a worst-case direction in a local Euclidean ball, then updates the model using a second gradient at the perturbed weights. Post-training pruning produces a different kind of parameter change: selected coordinates move all the way to zero, with their locations constrained by the N:M pattern. The displacement is finite, determined by the removed weights, and unrestricted by SAM's training radius. Its direction is set by a discrete mask instead of the current adversarial-gradient construction. Moreover, this deletion direction has nonzero support only on removed weights, whereas the dense SAM perturbation generally spends part of its fixed norm budget on coordinates that the eventual mask retains. Retained-coordinate perturbations still help dense generalization; they are only directionally redundant for representing the structured deletion itself. Local perturbation optimization therefore leaves an explicit scale, direction, and support mismatch between the changes explored during training and those later applied to the model.
+-
+-A second gap concerns how this limited budget is allocated and what information survives into pruning. Conventional SAM uses a single Euclidean constraint and normalizes the current stochastic gradient, so its finite energy is consumed by the instantaneous direction across both future-removed and future-retained coordinates. The rule maintains no persistent coordinate-scale state describing how that allocation evolves across mini-batches. A subsequent magnitude mask therefore ranks the final weights independently of the exploration history. A shared radius answers how far the local probe can move. It does not align the probe with a support-constrained deletion, nor does it specify how accumulated coordinate geometry should influence which positions are retained within a group.
+-
+-These gaps motivate a different design question: can the same finite perturbation budget be redistributed across coordinates during training so that its allocation becomes useful for N:M support selection? Changing a common radius only changes the overall exploration scale. Learning coordinate scales instead changes how the fixed budget is spent and turns that allocation into a persistent state that pruning can use. Rather than predicting a mask at every training step, the method learns a geometry that connects local exploration with the later deletion decision, and it keeps SAM's two-gradient update throughout.
+-
+-APBR-SAM implements this idea with positive coordinate scales initialized to the identity geometry. The scales reweight the first SAM gradient, and global $L_2$ normalization fixes the actual perturbation radius. Each step measures how much of the perturbation energy each coordinate carries. Negative feedback decreases scales with above-average energy share and increases those with below-average share, altering their future directional weights. The state is updated recursively throughout training, so it records the feedback trajectory rather than being assigned from a single final gradient.
+-
+-After dense training, APBR-SAM retains this state with the model weights and uses their ratio to construct the N:M mask. Deleting a weight moves its coordinate by its full magnitude; dividing that magnitude by the learned scale expresses the deletion in geometry-normalized coordinates. Selecting the largest ratios within each group exactly minimizes the corresponding normalized squared deletion cost. Thus the final score is the support-selection stage of the same geometry-learning process, rather than a detached post-training rule. This direct mask is nevertheless chosen in the APBR diagonal metric, whereas an OBS compensator reconstructs the layer in an activation-induced quadratic metric. We therefore also study a conditional-greedy bridge that preserves the OBS objective and uses APBR geometry only when several physical deletion choices are already near-optimal.
+-
+-The theory makes this connection precise at two levels. We characterize the feedback dynamics under a fixed nonzero gradient, and we derive the deletion-cost interpretation of the ranking. Under a common transformed-curvature bound along all candidate deletion segments, that cost controls an upper bound on the loss increase. The same groupwise ranking minimizes this common bound with the weights and geometry fixed. Actual post-pruning accuracy remains an empirical question. Our completed CIFAR-100 comparisons evaluate the frozen sparse endpoints against magnitude and activation-aware pruning and second-order compensation baselines.
+-
++Post-training N:M pruning converts a dense network into a structured sparse model by retaining $N$ weights in every group of $M$. This pattern supports structured sparse execution~\cite{nm}, while imposing a local constraint on which connections survive. Dense optimization determines the weights available for pruning; support selection determines which of them are removed. We study how information learned during dense optimization can participate directly in this later decision.
++
++Sharpness-Aware Minimization (SAM) provides a natural setting because it explicitly probes parameter changes during training~\cite{sam}. Its perturbation follows the current mini-batch gradient within a prescribed local radius. An N:M deletion has a different structure: selected coordinates move to zero, their displacement magnitudes depend on the weights, and their locations obey a discrete support constraint. The mismatch concerns direction, scale, and support. The training probe explores both future retained and future removed coordinates, whereas the deletion acts on a selected support. A persistent description of coordinate exploration can carry information across these two stages.
++
++APBR-SAM learns this description through adaptive perturbation budget reallocation. Positive coordinate scales reweight the first SAM gradient before the perturbation is normalized to a fixed global $L_2$ radius. Global energy feedback increases the relative scales of coordinates receiving below-average perturbation energy and decreases those receiving above-average energy. Applied recursively, this feedback produces a state that survives individual mini-batches. Dense training therefore returns both weights and matched coordinate scales, while retaining SAM's two-gradient optimization procedure.
++
++Using this state for pruning requires connecting two measurements. APBR expresses the magnitude of deleting coordinate $i$ as $|w_i|\exp(-s_i)$ in the learned geometry. OBS uses calibration activations to measure the quadratic reconstruction cost and the ability of other weights to compensate~\cite{obc}. The first measurement supplies training history; the second supplies activation-dependent interactions. Our design gives each a specific role: geometry initiates a support decision, and reconstruction determines how that decision is completed.
++
++In each 2:4 group, the APBR score selects the first deletion. We virtually apply its OBS update to the remaining weights and effective inverse curvature. The second deletion minimizes the resulting conditional OBS cost, so its selection reflects the predicted effect of the first removal. The selected pair then receives one joint OBS update from the physical state at the group entrance. Conditional updates and joint reconstruction follow established OBS principles~\cite{obc}; APBR provides the training-dependent first choice.
++
++The resulting pipeline connects historical perturbation allocation to structured reconstruction. Geometry answers where deletion begins, conditional curvature identifies its least costly partner, and joint compensation produces the sparse weights. This separation also defines a direct experimental comparison: change the first selection signal while keeping the dense parent, calibration inputs, conditional update, and final compensation fixed.
++
++
++\begin{samepage}
+ Our contributions are:
+ \begin{itemize}
+-\item A persistent coordinate-geometry mechanism that reallocates a finite actual $L_2$ perturbation budget across coordinates using global energy feedback, rather than enlarging the perturbation radius, and preserves the product of coordinate scales in exact arithmetic.
+-\item A training-to-pruning transfer through normalized weight scores, with groupwise deletion-cost optimality and a conditional common loss-increment upper bound.
+-\item A conditional-greedy pruning rule inside APBR-SAM that re-evaluates later deletions after virtual conditioning, avoids enumerating every N:M support, and applies one physical joint OBS compensation to the selected set.
+-\item A structured-pruning evaluation of frozen one-shot endpoints, together with an exploratory comparison of SAM and APBR-SAM under the same conditional selection and compensation rule.
++\item A persistent coordinate-geometry mechanism that reallocates perturbation energy under a fixed global $L_2$ radius and carries the resulting training state into post-training support selection.
++\item A geometry-first conditional pruning procedure: APBR selects the initial deletion, the next decision uses its predicted reconstruction effect, and one joint physical OBS update compensates the selected pair.
++\item A controlled one-shot 2:4 evaluation protocol that isolates the initial geometric decision through matched dense parents, calibration inputs, and reconstruction settings.
+ \end{itemize}
++\end{samepage}
+ 
+ \section{Related Work}
+-\paragraph{Sharpness-aware optimization.}
+-SAM uses a first gradient to construct a local worst-case perturbation and a second gradient to update the model~\cite{sam}. ASAM makes the neighborhood invariant to parameter rescaling~\cite{asam}, while SSAM sparsifies the perturbation through Fisher-guided or dynamic masks~\cite{ssam}. GEAR-SAM reallocates a fixed perturbation budget across parameter blocks using an exponential moving average of gradient energy~\cite{gear_sam}. APBR-SAM instead learns persistent coordinate-level scales and transfers the resulting geometry from dense training to post-training support selection.
+-
+-\paragraph{Compression-aware training.}
+-CrAM incorporates a target compression operator into optimization and studies one-shot N:M pruning~\cite{cram}. AdaSAP couples adaptive perturbations with channel pruning and fine-tuning~\cite{adasap}. These methods expose the model to compression or pruning during optimization. APBR-SAM instead keeps dense two-pass optimization and constructs the discrete N:M mask only after dense training.
+-
+-\paragraph{Post-training weight selection and compensation.}
+-Magnitude pruning removes small connections and commonly recovers the retained weights by fine-tuning~\cite{han_pruning}. Wanda augments weight magnitude with input-activation norms but performs no pruning-time weight reconstruction~\cite{wanda}. SparseGPT uses calibration activations and an approximate inverse-Hessian procedure to select weights and compensate pruning error in one shot~\cite{sparsegpt}; ROSE reorders SparseGPT's pruning sequence according to estimated column and block losses~\cite{rose}. OBC develops the related ExactOBS framework for post-training pruning and quantization~\cite{obc}. Recomputing saliency after a deletion is therefore an established OBS principle. Our conditional rule specializes it to a local N:M group: the first deletion is virtualized to condition the next score, after which the selected set receives one joint compensation. For N:M sparsity, SR-STE instead trains the sparse model from scratch~\cite{nm}. APBR-SAM differs in that its ranking state is learned during dense SAM training and resolves choices that are nearly tied under the physical OBS objective.
+-
+-\section{Method}
+-\subsection{SAM and a persistent geometric state}
+-The training stage learns a relative coordinate geometry without knowing the final mask. We keep SAM's local two-gradient optimization and add a state that persists across the local probes. Let $w_t\in\mathbb R^d$ collect all trainable parameters and $\mathcal L_{B_t}$ be the mini-batch cross-entropy. Standard SAM computes
++\paragraph{Perturbation geometry during dense training.}
++SAM uses a two-gradient update to optimize loss in a local parameter neighborhood~\cite{sam}. ASAM accounts for parameter rescaling~\cite{asam}, while SSAM restricts perturbations through Fisher-guided or dynamically updated masks~\cite{ssam}. GEAR-SAM uses historical gradient energy to allocate a fixed global perturbation budget across blocks~\cite{gear_sam}. APBR-SAM maintains positive coordinate scales through perturbation-energy feedback and saves this state with the dense model. The resulting geometry guides a structured deletion decision together with activation-based reconstruction.
++
++\paragraph{Preparing dense models for compression.}
++CrAM incorporates a compression operator into optimization to improve tolerance to subsequent compression~\cite{cram}. AdaSAP applies importance-dependent perturbations before channel removal and sharpness-aware optimization afterward~\cite{adasap}. These approaches connect robust optimization with compression. APBR-SAM retains dense two-pass optimization and performs support selection after training. The information transferred between stages is a persistent coordinate geometry that expresses deletion relative to the learned scales.
++
++\paragraph{Post-training selection and second-order compensation.}
++Magnitude pruning ranks weight sizes~\cite{han_pruning}, and Wanda combines magnitude with input-activation norms~\cite{wanda}. SparseGPT couples support selection with sequential second-order compensation~\cite{sparsegpt}; ROSE modifies its processing order using estimated column and block pruning losses~\cite{rose}. OBC/ExactOBS develops greedy OBS selection with conditional inverse-curvature updates and joint compensation for groups of weights~\cite{obc}. Our procedure uses these reconstruction tools with two distinct selection signals. Geometry-normalized magnitude chooses the first deletion; virtual OBS conditioning supplies the state for choosing its partner. The pair receives one joint update over all currently active coordinates.
++
++\section{Method}\label{sec:method}
++APBR-SAM transfers a persistent training state into a two-stage support decision. The learned geometry selects the first deletion in each 2:4 group. A virtual reconstruction step then determines the state in which the second deletion is evaluated. Once both positions are selected, joint OBS commits their compensation to the physical weights.
++
++\subsection{Learning persistent perturbation geometry}
++The training state should describe how coordinates have been explored across mini-batches. Let $w_t\in\mathbb R^d$ collect the trainable parameters and let $\mathcal L_{B_t}$ denote the loss on mini-batch $B_t$. Standard SAM computes
+ \begin{equation}
+ g_{1,t}=\nabla_w\mathcal L_{B_t}(w_t),\qquad
+ \epsilon_t^{\mathrm{SAM}}=\rho\frac{g_{1,t}}{\norm{g_{1,t}}}.
+ \end{equation}
+-The second gradient is $g_{2,t}=\nabla_w\mathcal L_{B_t}(w_t+\epsilon_t)$. The model is restored to $w_t$ before the base optimizer applies this gradient. The perturbation is treated as fixed during the second backward pass. Both passes use the same augmented mini-batch.
+-
+-A single current gradient supplies a probe direction, whereas post-training support selection needs a persistent coordinate comparison. We maintain log-scales $s_t\in\mathbb R^d$, initialized at zero, with
++APBR adds positive coordinate scales through the log-state
+ \begin{equation}
+-a_{i,t}=\exp(s_{i,t}),\qquad A_t=\operatorname{diag}(a_{1,t},\ldots,a_{d,t}).
+-\end{equation}
+-Each $s_{i,t}$ stores the recursively updated relative scale of a parameter coordinate. Its mapping to parameter names, shapes, and coordinates is fixed at initialization, allowing the saved state to be matched to the weights at pruning time. Geometry includes all trainable parameters, including BN affine parameters and biases; the mask later acts on the eligible weight tensors.
+-
+-\subsection{Redistributing a fixed L2 budget}
+-An N:M deletion changes only the coordinates removed by its mask. Standard SAM does not know that mask during dense training and applies a dense probe, so its finite squared-norm budget is distributed across both eventual deletion coordinates and coordinates that remain unchanged by pruning. APBR-SAM does not assume the future support in advance. Instead, it learns a persistent relative allocation from repeated probes and later uses that allocation to decide which coordinates to remove within each group.
+-
+-To learn an allocation while keeping total exploration fixed, APBR-SAM constructs
++a_{i,t}=\exp(s_{i,t}),\qquad A_t=\operatorname{diag}(a_{1,t},\ldots,a_{d,t}),
++\end{equation}
++initialized with $s_0=0$. The state has a fixed correspondence to parameter names, shapes, and coordinates. It covers all trainable parameters, including BN affine parameters and biases; pruning subsequently acts on the eligible weight tensors.
++
++To change the allocation of the perturbation budget while preserving its global magnitude, we use
+ \begin{equation}\label{eq:epsilon}
+ \epsilon_t=\rho\frac{A_t^2g_{1,t}}{\norm{A_t^2g_{1,t}}}.
+ \end{equation}
+-For nonzero numerator, $\norm{\epsilon_t}=\rho$. The denominator fixes the total perturbation energy, while $A_t^2$ changes its coordinate distribution. Holding the gradient fixed, a larger $a_{i,t}$ gives that coordinate more weight before global normalization. A common rescaling of all $a_i$ cancels, so the state represents relative geometry. At initialization, $A_0=I$ gives the usual SAM direction.
+-
+-This choice separates learning where to explore from changing how far the overall probe moves. The actual perturbations remain on the same Euclidean sphere, while their directions evolve with the learned scales. The second gradient still drives the base SGD update.
+-
+-\subsection{Global energy feedback}
+-The scales are learned from the energy distribution of the current probe. Squared perturbation coordinates measure each coordinate's share of the fixed global energy and remove the sign of the displacement. After constructing the perturbation, we update the log-scales:
++The numerator sets the relative coordinate weights and the denominator fixes the realized $L_2$ norm. At initialization, this is the standard SAM direction. The second gradient is $g_{2,t}=\nabla_w\mathcal L_{B_t}(w_t+\epsilon_t)$, with the perturbation treated as fixed during differentiation. Both passes use the same augmented mini-batch. The model is restored to $w_t$ before the base optimizer applies $g_{2,t}$.
++
++The feedback signal is each coordinate's share of the perturbation energy:
+ \begin{equation}\label{eq:feedback}
+ p_{i,t}=\frac{\epsilon_{i,t}^2}{\sum_j\epsilon_{j,t}^2},\qquad
+ s_{i,t+1}=s_{i,t}+\gamma(1-dp_{i,t}).
+ \end{equation}
+-The reference share is $1/d$. An above-average share decreases the log-scale and therefore its future directional weight; a below-average share increases it. This negative feedback counters concentration in the current energy allocation. Because the update acts on the existing $s_t$, its effect persists across mini-batches. The resulting scales summarize the feedback history of the coordinate geometry. Energy normalization spans the full trainable vector, matching the single global perturbation budget.
+-
+-The update preserves the sum of log-scales:
++A coordinate receiving less than the reference share $1/d$ gains relative scale; a coordinate carrying more loses relative scale. This feedback redistributes future directional capacity and accumulates a history in $s_t$. The state therefore accompanies the final dense weights as information about the training trajectory. A candidate state is committed once after a successful parameter update; an all-zero perturbation leaves it unchanged.
++
++\subsection{Transferring geometry to a deletion score}\label{sec:selection}
++Deleting coordinate $i$ produces displacement $-w_i$. Expressing this displacement in the learned coordinate scale gives
++\begin{equation}\label{eq:score}
++I_i=\frac{|w_i|}{a_i}=|w_i|\exp(-s_i).
++\end{equation}
++The score compares the size of a weight with its learned exploration scale. For a mask $m$ and deletion displacement $\delta_m=(m-1)\odot w$, the corresponding squared cost is
++\begin{equation}\label{eq:deletion}
++C_A(m)=\norm{A^{-1}\delta_m}^2=\sum_{i:m_i=0}I_i^2.
++\end{equation}
++This gives the training state a concrete role in support selection: smaller scores identify smaller deletions in normalized parameter coordinates.
++
++A second criterion enters when the surviving weights are allowed to reconstruct the layer output. Their ability to compensate depends on correlations between input activations. We use the geometry score to initiate the support decision, then use the conditional reconstruction cost to complete it. These two stages connect the saved training geometry with the activation information available at pruning time.
++
++\subsection{The physical reconstruction state}
++For an eligible layer, flatten each output row into a weight vector and collect calibration inputs as columns of $X\in\mathbb R^{K\times P}$. Convolutional inputs follow the stored unfold order. Define
++\begin{equation}\label{eq:gram}
++H=\frac{2}{P}XX^\top,\qquad H_\delta=H+\delta I,\qquad \delta>0.
++\end{equation}
++For a row displacement $\Delta w$, the quadratic $\frac12\Delta w^\top H_\delta\Delta w$ combines the mean squared output change with damping. The activation matrix and damping are fixed during the layer's pruning.
++
++Groups are processed in their stored order. At a group entrance, $F$ contains every coordinate still allowed to change, including the current group $G$ and all later groups. Earlier groups have been frozen. The effective inverse curvature is
++\begin{equation}\label{eq:active-inverse}
++R=\bigl((H_\delta)_{FF}\bigr)^{-1},\qquad G\subseteq F.
++\end{equation}
++Here $w_F$ denotes the current physical weights after compensation from earlier groups. With $U$ the upper Cholesky factor of $H_\delta^{-1}$ and $F$ an unprocessed suffix, the same matrix is $R=U_{FF}^{\top}U_{FF}$. The group block $R_{GG}$ supplies local selection quantities, while $R_{:,D}$ later propagates compensation across the full active set.
++
++\subsection{Geometry-guided initial deletion}\label{sec:conditional-greedy}
++For the current quartet $G$, APBR selects the first deletion directly:
++\begin{equation}\label{eq:geometry-first}
++i^*=\arg\min_{i\in G}|w_i|\exp(-s_i).
++\end{equation}
++The saved geometry is fixed throughout pruning. Thus the first choice connects the current physical weights to the coordinate scales learned during dense training.
++
++The effect of this choice must be reflected in the second decision. We create a virtual state corresponding to deletion of $i^*$:
++\begin{equation}\label{eq:conditional-update}
++\bar w_j=w_j-\frac{R_{ji^*}}{R_{i^*i^*}}w_{i^*},\qquad
++\bar R_{jk}=R_{jk}-\frac{R_{ji^*}R_{i^*k}}{R_{i^*i^*}},
++\end{equation}
++for $j,k\in F\setminus\{i^*\}$. The weight update predicts how the first deletion is reconstructed, and the Schur update describes the curvature after that coordinate is constrained. These quantities are held in a separate selection state.
++
++\subsection{Conditional second selection and joint compensation}
++The remaining three positions are compared in the virtual state. The second deletion is
++\begin{equation}\label{eq:conditional-second}
++j^*=\arg\min_{j\in G\setminus\{i^*\}}
++\frac{\bar w_j^2}{2\bar R_{jj}}.
++\end{equation}
++Its score measures the additional quadratic cost of removing $j$ after the first deletion. This is the point at which activation-dependent interactions enter the support decision. Both selection steps resolve exact score ties by the lower stored coordinate index.
++
++Set $D=\{i^*,j^*\}$ and discard the virtual state. Joint OBS uses the weights and effective inverse curvature saved at the group entrance:
++\begin{equation}\label{eq:joint-obs}
++\Delta w_F=-R_{:,D}(R_{DD})^{-1}w_D,\qquad
++C_{\mathrm{OBS}}(D)=\frac12w_D^\top(R_{DD})^{-1}w_D.
++\end{equation}
++This is the standard fixed-support quadratic reconstruction update~\cite{obc}. It sets the two deleted coordinates to zero and adjusts the remaining active coordinates. The physical update is committed once, after which the entire quartet is frozen. The next quartet starts from weights that already include this compensation.
++
++The three states have distinct roles: $s$ carries training history, $(\bar w,\bar R)$ predicts the effect of the first deletion, and $(w_F,R)$ defines the physical compensation. Separating them prevents a virtual deletion from being counted again in the joint update.
++
++\subsection{End-to-end procedure}
++Algorithm~\ref{alg:apbr} summarizes the complete path. Dense training saves unperturbed weights together with their matching geometry. Calibration then supplies a shared reconstruction metric for each layer. Each quartet receives a geometry-guided first choice, a conditional second choice, and one committed reconstruction. The resulting mask retains exactly two coordinates per complete quartet.
++
++\begin{algorithm}[H]
++\caption{APBR-guided conditional OBS: dense training to 2:4 pruning}
++\label{alg:apbr}
++\footnotesize
++\begin{algorithmic}[1]
++\Require training data, calibration inputs, weights $w$, radius $\rho$, feedback rate $\gamma$
++\State $s\gets0$
++\For{each dense-training mini-batch $B_t$}
++    \State $A_t\gets\operatorname{diag}(\exp(s_t))$; $g_{1,t}\gets\nabla_w\mathcal L_{B_t}(w_t)$
++    \If{$\|A_t^2g_{1,t}\|_2>0$}
++        \State Compute $\epsilon_t$ and candidate $\widehat s_{t+1}$ by Eqs.~\eqref{eq:epsilon}--\eqref{eq:feedback}
++    \Else
++        \State $\epsilon_t\gets0$; $\widehat s_{t+1}\gets s_t$
++    \EndIf
++    \State $g_{2,t}\gets\nabla_w\mathcal L_{B_t}(w_t+\epsilon_t)$
++    \State Restore $w_t$; apply the base optimizer using $g_{2,t}$; commit $s_{t+1}\gets\widehat s_{t+1}$
++\EndFor
++\State Save the matched dense weights and geometry; freeze geometry
++\For{each eligible layer}
++    \State Form $H_\delta$ from calibration activations; initialize a bool keep-mask to true
++    \For{each complete quartet $G$ in stored column order}
++        \State $F\gets$ all unfrozen columns; $R\gets((H_\delta)_{FF})^{-1}$
++        \For{each output row}
++            \State Save current physical $w_F$; $i^*\gets\arg\min_{i\in G}|w_i|\exp(-s_i)$
++            \State Form virtual $(\bar w,\bar R)$ on $F\setminus\{i^*\}$ by Eq.~\eqref{eq:conditional-update}
++            \State $j^*\gets\arg\min_{j\in G\setminus\{i^*\}}\bar w_j^2/(2\bar R_{jj})$
++            \State $D\gets\{i^*,j^*\}$; discard virtual state
++            \State Compute $\Delta w_F$ from saved physical $w_F,R$ by Eq.~\eqref{eq:joint-obs}
++            \State Commit $w_F\gets w_F+\Delta w_F$; set $w_D\gets0$ and keep-mask$_D\gets\mathrm{false}$
++        \EndFor
++        \State Freeze all columns in $G$
++    \EndFor
++    \State Retain any incomplete tail; validate the 2:4 mask and write back the layer
++\EndFor
++\State \Return compensated sparse weights and keep-masks
++\end{algorithmic}
++\end{algorithm}
++
++\section{Theoretical Analysis}\label{sec:theory}
++\subsection{Training geometry properties}
++Equation~\eqref{eq:epsilon} gives $\|\epsilon_t\|_2=\rho$ whenever its numerator is nonzero. The energy shares also conserve the sum of log-scales:
+ \begin{equation}\label{eq:volume}
+ \sum_i s_{i,t+1}=\sum_i s_{i,t}+\gamma\left(d-d\sum_i p_{i,t}\right)=0.
+ \end{equation}
+-Consequently $\det A_t=\prod_i a_{i,t}=1$ in exact arithmetic. This fixes the common multiplicative scale of the auxiliary geometry while allowing individual coordinates to expand or contract relative to each other. The actual perturbation budget is fixed independently by Eq.~\eqref{eq:epsilon}. Adding a common constant to every $s_i$ leaves its normalized direction unchanged.
+-
+-A geometry candidate is committed once after a successful SGD update. All-zero perturbations skip feedback. Log-scales use FP64 and model weights use FP32. The log-domain implementation checks finite values and log-volume; numerical settings are given in Appendix~\ref{app:reproduction}.
+-
+-\subsection{Fixed-gradient characterization}
+-For a fixed gradient whose components are nonzero, energy shares take the form
++Thus $\det A_t=\prod_i a_{i,t}=1$ in exact arithmetic. This identifies the relative coordinate geometry while the global normalization fixes the realized perturbation budget.
++
++For a fixed gradient with nonzero components, the energy shares are
+ \begin{equation}\label{eq:softmax}
+ p_i=\frac{\exp(4s_i+2\log|g_i|)}{\sum_j\exp(4s_j+2\log|g_j|)}.
+ \end{equation}
+-This makes the dependence on state explicit and removes the common factor $\rho$.
+-\begin{proposition}\label{prop:fixed}
++\begin{proposition}[Fixed-gradient feedback]\label{prop:fixed}
+ For fixed $g_i\ne0$, positive $\gamma$, and $\sum_i s_i=0$, the feedback fixed point has $p_i=1/d$ and
+ \begin{equation}
+ s_i^*=-\tfrac12\log|g_i|+\frac{1}{2d}\sum_j\log|g_j|,\qquad a_i^*\propto|g_i|^{-1/2}.
+ \end{equation}
+ For $d>1$, its linearized eigenvalue on the zero-sum subspace is $1-4\gamma$. The strict linear stability range is $0<\gamma<1/2$.
+ \end{proposition}
+-Proposition~\ref{prop:fixed} characterizes the fixed-gradient dynamics; it does not establish convergence under stochastic training. Appendix~\ref{app:proof} gives the derivation and the zero-gradient case.
+-
+-\subsection{Post-training N:M weight selection}\label{sec:selection}
+-Pruning converts the continuous training state into a discrete support choice. A deletion in coordinate $i$ has displacement $-w_i$; in the learned normalized coordinates its magnitude is $|w_i|/a_i$. Using weights and geometry from the same selected dense checkpoint, we compute
+-\begin{equation}\label{eq:score}
+-I_i=\frac{|w_i|}{a_i}=|w_i|\exp(-s_i).
+-\end{equation}
+-Each eligible group $G$ of $M$ coordinates retains the $N$ largest scores. The resulting sparse weights are $\widetilde w=m\odot w$, with $\sum_{i\in G}m_i=N$. At equal weight magnitude, a larger learned scale gives a smaller normalized deletion. The ratio therefore uses both the size of the weight removed and the coordinate geometry learned during training. The SAM baseline applies the same grouping constraints to the plain magnitude $|w_i|$.
+-
+-The relevant parameter change is now the finite deletion displacement, not the training probe. For frozen $A$ and pruning displacement $\delta_m=(m-1)\odot w$, define
+-\begin{equation}\label{eq:deletion}
+-C_A(m)=\norm{A^{-1}\delta_m}^2=\sum_{i:m_i=0}I_i^2.
+-\end{equation}
+-Equation~\eqref{eq:deletion} shows what the ratio score optimizes: each deleted coordinate contributes its squared normalized displacement. Retaining the $N$ largest scores exactly minimizes this cost within each group, since exchanging a retained smaller score with a deleted larger score reduces the sum. The final mask thus selects a small deletion in the metric supplied by the learned state.
+-
+-\paragraph{Connection to pruning loss.}
+-To connect that metric to task loss, the analysis follows the entire segment from the dense weights to each candidate pruned model. Let $\mathcal L$ be a fixed loss, with auxiliary model state held fixed, and let $g=\nabla\mathcal L(w)$. A curvature bound shared by these candidate segments makes their normalized deletion costs comparable through a common loss-increment upper bound.
+-\begin{proposition}[Conditional pruning-loss bound]\label{prop:pruning-loss}
++The fixed-gradient analysis explains how negative feedback balances the coordinate energy shares. Its derivation appears in Appendix~\ref{app:proof}.
++
++\subsection{Direct geometry deletion}
++The geometry score has a separable interpretation. With weights and scales fixed, a direct N:M mask minimizes $C_A(m)$ by retaining the $N$ largest $I_i$ in each group. Exchanging a retained smaller score with a deleted larger score reduces the cost. For the initial decision in Algorithm~\ref{alg:apbr}, the same ordering selects the smallest normalized singleton displacement.
++
++The associated loss bound follows the finite deletion segment. Let $\mathcal L$ be a fixed loss, with auxiliary model state fixed, and $g=\nabla\mathcal L(w)$.
++\begin{proposition}[Conditional bound for direct deletion]\label{prop:pruning-loss}
+ Fix $w$, a positive diagonal matrix $A$, and a family $\mathcal M$ of candidate masks. Suppose $\mathcal L$ is twice differentiable along every segment $w+t\delta_m$, and a single $\beta_A\ge0$ satisfies
+ \begin{equation}\label{eq:shared-curvature}
+ \sup_{\substack{m\in\mathcal M\\ t\in[0,1]}}
+@@ -142,114 +221,77 @@
+ \le \norm{Ag}\sqrt{C_A(m)}+\frac{\beta_A}{2}C_A(m).
+ \end{equation}
+ \end{proposition}
+-For $q_m=A^{-1}\delta_m$, the curvature assumption gives the Taylor upper bound $g^\top\delta_m+(\beta_A/2)\|q_m\|_2^2$; Cauchy--Schwarz bounds its linear term by $\|Ag\|_2\|q_m\|_2$. Appendix~\ref{app:pruning-proof} provides the complete argument.
++Writing $\delta_m=Aq_m$ turns the quadratic Taylor term into a bound on $\|q_m\|_2^2$. Cauchy--Schwarz bounds the linear term by $\|Ag\|_2\|q_m\|_2$, giving Eq.~\eqref{eq:pruning-loss-bound}.
+ \begin{corollary}[Minimum common upper bound]\label{cor:mask-bound}
+ For fixed $w,A,g$ and the shared $\beta_A$, the function $U_A(c)=\|Ag\|_2\sqrt c+(\beta_A/2)c$ is nondecreasing for $c\ge0$. If $\mathcal M$ consists of independent N:M groups with all other coordinates retained, keeping the $N$ largest $I_i$ in each group minimizes $U_A(C_A(m))$ over $\mathcal M$.
+ \end{corollary}
+-The resulting chain is explicit: the learned state defines the normalized deletion cost, groupwise ranking minimizes that cost, and the common curvature condition transfers this minimum to the stated upper bound. The comparison fixes $w,A,g$ and $\beta_A$ across masks. Realized loss changes and accuracy are assessed at the frozen post-pruning endpoint. Mask construction uses $I_i$ directly, without estimating $\beta_A$.
+-
+-Groups follow a fixed stored order, and ties retain lower indices. The concrete structured pattern and implementation details used in the experiments are specified in Appendix~\ref{app:reproduction}.
+-
+-\subsection{Conditional-greedy OBS refinement}\label{sec:conditional-greedy}
+-The direct APBR score in Eq.~\eqref{eq:score} and an OBS compensator measure different objects. The former ranks deletion displacement in the learned diagonal geometry; the latter minimizes a calibration-based quadratic reconstruction objective. Selecting a mask solely in one metric and compensating it in the other can therefore create a selection--compensation mismatch. The conditional-greedy stage of APBR-SAM retains the physical OBS objective as a guardrail and introduces APBR geometry only among physically near-optimal choices.
+-
+-Consider one output row of an eligible layer. Let $H_\delta=H+\delta I$ be the damped activation Gram matrix and let $Q=H_\delta^{-1}$. During blockwise processing, previously processed columns are frozen. We write $R$ for the resulting conditional inverse curvature over the currently free coordinates and use its principal block for the current N:M group; $w$ denotes the corresponding current weights. For a singleton candidate $i$ in that group, the physical OBS deletion cost is
+-\begin{equation}\label{eq:conditional-first}
+-c_i=\frac{w_i^2}{2R_{ii}}.
+-\end{equation}
+-The first deletion is $i^*=\arg\min_i c_i$. Rather than scoring the second deletion in the same pre-deletion state, we virtually condition on removing $i^*$. For all remaining coordinates $j,k\ne i^*$,
+-\begin{equation}\label{eq:conditional-update}
+-\bar w_j=w_j-\frac{R_{ji^*}}{R_{i^*i^*}}w_{i^*},\qquad
+-\bar R_{jk}=R_{jk}-\frac{R_{ji^*}R_{i^*k}}{R_{i^*i^*}}.
+-\end{equation}
+-The second deletion is selected by
+-\begin{equation}\label{eq:conditional-second}
+-j^*=\arg\min_{j\ne i^*}\frac{\bar w_j^2}{2\bar R_{jj}}.
+-\end{equation}
+-Equations~\eqref{eq:conditional-update}--\eqref{eq:conditional-second} make the second decision aware of the first deletion's predicted reconstruction effect. They are used only for support selection. They do not commit a sequential weight update.
+-
+-After obtaining $D=\{i^*,j^*\}$ for 2:4 sparsity, the method returns to the unmodified current weights and applies one physical joint OBS solution,
+-\begin{equation}\label{eq:joint-obs}
+-\Delta w=-R_{:,D}(R_{DD})^{-1}w_D,\qquad
+-C_{\mathrm{OBS}}(D)=\frac12w_D^\top(R_{DD})^{-1}w_D.
+-\end{equation}
+-This update sets the selected coordinates exactly to zero and compensates the surviving coordinates jointly. The virtual first deletion therefore affects which set is selected, while Eq.~\eqref{eq:joint-obs} determines the only committed compensation. Repeating the conditioning step $M-N$ times extends the construction beyond 2:4 without enumerating all $\binom{M}{M-N}$ deletion sets; it remains a greedy approximation and is not claimed to recover the globally optimal set.
+-
+-\paragraph{Near-optimal APBR tie-break.}
+-To couple the learned geometry to this physical selection rule, at each stage we first form the near-optimal set
+-\begin{equation}\label{eq:near-opt-window}
+-\mathcal C_\tau=\left\{k:c_k\le(1+\tau)\min_r c_r\right\}.
+-\end{equation}
+-The physical arm takes the minimum-cost member. APBR-SAM instead selects within $\mathcal C_\tau$ the smallest normalized deletion magnitude $|w_k|\exp(-s_k)$; for later stages, $w_k$ is replaced by its virtual conditioned value. We fix $\tau=0.01$ before final evaluation. The geometry never changes $H$, damping, $R$, or Eq.~\eqref{eq:joint-obs}; it can only resolve choices whose physical singleton costs lie within one percent of the minimum. Setting $\tau=0$ recovers the physical conditional-greedy path.
+-
+-\subsection{From dense training to compensated sparse weights}
+-Dense training saves unperturbed weights together with their matching geometric state. At pruning time, calibration activations determine the damped curvature, while the saved state resolves near-optimal support choices. Virtual conditioning is used only to select successive deletions; no virtual weight is committed. Each selected set is then compensated jointly from the unmodified current weights. Algorithm~\ref{alg:apbr} presents the dense and post-training stages as one continuous procedure.
+-
+-\begin{algorithm}[H]
+-\caption{APBR-SAM with conditional-greedy selection and joint OBS compensation}
+-\label{alg:apbr}
+-\footnotesize
+-\begin{algorithmic}[1]
+-\Require data $\mathcal D$, weights $w$, radius $\rho$, feedback rate $\gamma$, groups $\mathcal G$, tolerance $\tau$
+-\State Initialize $s\gets0$ and $A\gets I$
+-\For{each dense-training mini-batch $B_t$}
+-    \State $g_{1,t}\gets\nabla_w\mathcal L_{B_t}(w_t)$
+-    \If{$\|A_t^2g_{1,t}\|_2>0$}
+-        \State Compute $\epsilon_t$ by Eq.~\eqref{eq:epsilon} and $p_t$ by Eq.~\eqref{eq:feedback}
+-        \State Form candidate $\widehat{s}_{t+1}\gets s_t+\gamma(\mathbf 1-dp_t)$
+-    \Else
+-        \State $\epsilon_t\gets0$ and $\widehat{s}_{t+1}\gets s_t$
+-    \EndIf
+-    \State $g_{2,t}\gets\nabla_w\mathcal L_{B_t}(w_t+\epsilon_t)$
+-    \State Restore $w_t$ and apply the base-optimizer update using $g_{2,t}$
+-    \State Commit $s_{t+1}\gets\widehat{s}_{t+1}$ after the successful parameter update
+-\EndFor
+-\State Save the matched dense weights $w$ and geometric state $s$
+-\For{each eligible layer}
+-    \State Build the damped activation curvature and its conditional inverse $R$
+-    \For{each N:M group $G\in\mathcal G$}
+-        \State $D\gets\varnothing$, $w^{\mathrm v}\gets w_G$, $R^{\mathrm v}\gets R_G$
+-        \For{$r=1,\ldots,M-N$}
+-            \State $c_k\gets(w_k^{\mathrm v})^2/(2R_{kk}^{\mathrm v})$; form $\mathcal C_\tau$ by Eq.~\eqref{eq:near-opt-window}
+-            \State $k^*\gets\arg\min_{k\in\mathcal C_\tau}|w_k^{\mathrm v}|\exp(-s_k)$; $D\gets D\cup\{k^*\}$
+-            \If{$r<M-N$} \State Virtually condition $w^{\mathrm v},R^{\mathrm v}$ using Eq.~\eqref{eq:conditional-update} \EndIf
+-        \EndFor
+-        \State Discard virtual states and apply Eq.~\eqref{eq:joint-obs} to the original current weights
+-    \EndFor
+-\EndFor
+-\State \Return compensated sparse weights and the strict N:M mask
+-\end{algorithmic}
+-\end{algorithm}
+-
+-\section{Experiments}
+-\paragraph{Setup.}
+-We evaluate ResNet-18 on CIFAR-100 under the same 2:4 sparsity target. SAM and Wanda~\cite{wanda} are reported at their mask-only endpoints, SparseGPT~\cite{sparsegpt} at its native selection-and-OBS endpoint, and APBR-SAM after conditional-greedy selection and joint OBS compensation. The first three rows use three independent runs; the APBR-SAM result is the completed two-seed exploratory mean and is marked explicitly. Complete implementation details are provided in Appendix~\ref{app:reproduction}.
+-
+-\subsection{Main results}\label{sec:protocol}
+-Table~\ref{tab:main} reports one frozen post-pruning endpoint per method. We do not label the columns as ``before'' and ``after compensation'' because conditional selection changes the support itself; that decomposition would incorrectly attribute a mask change to weight compensation.
++Appendix~\ref{app:pruning-proof} gives the complete deletion-segment argument.
++
++\subsection{Conditional selection and fixed-support reconstruction}
++The second stage has a direct interpretation in the physical quadratic objective. Fix the geometry-selected coordinate $i$. For a candidate partner $j$, block inversion gives
++\begin{equation}\label{eq:cost-decomposition}
++C_{\mathrm{OBS}}(\{i,j\})
++=\frac{w_i^2}{2R_{ii}}
+++\frac{\left(w_j-\frac{R_{ji}}{R_{ii}}w_i\right)^2}
++{2\left(R_{jj}-\frac{R_{ji}^2}{R_{ii}}\right)}
++=\frac{w_i^2}{2R_{ii}}+\frac{\bar w_j^2}{2\bar R_{jj}}.
++\end{equation}
++The first term is fixed once APBR selects $i$. Minimizing the second term therefore chooses the least costly partner among the three remaining positions under the current reconstruction objective. Both the compensated weight and the change in available reconstruction directions enter this decision.
++
++For the resulting set $D$, joint reconstruction solves
++\begin{equation}\label{eq:fixed-support-problem}
++\min_{\Delta w_F}\ \frac12\Delta w_F^\top(H_\delta)_{FF}\Delta w_F
++\quad\text{subject to}\quad (\Delta w_F)_D=-w_D.
++\end{equation}
++The Lagrange stationarity equation is $\Delta w_F=-R_{:,D}\lambda$. Substitution into the deletion constraint gives $\lambda=(R_{DD})^{-1}w_D$, yielding Eq.~\eqref{eq:joint-obs}. Positive definiteness makes this fixed-support solution unique.
++
++For the same deletion set, successive exact OBS updates with Schur conditioning satisfy the same quadratic constraints and recover the same solution~\cite{obc}. Algorithm~\ref{alg:apbr} uses that conditional state to choose the partner, then commits the fixed-support solution in one update. This connects the selection calculation directly to the physical compensation.
++
++\section{Experiments}\label{sec:experiments}
++\paragraph{Evaluation setting.}
++The evaluation uses CIFAR-100 and the 100-class CIFAR-ResNet18~\cite{resnet}, with the fixed final dense checkpoint as the pruning parent. Each method targets 2:4 sparsity in the same eligible internal convolutional layers. Dense training uses 200 epochs. The stem, classifier, BN parameters, and biases remain dense.
++
++\subsection{Post-training endpoints}
++Table~\ref{tab:main} reports post-pruning accuracies. The SAM reference applies a magnitude mask, and Wanda~\cite{wanda} uses activation-aware scores; both are mask-only endpoints. SparseGPT~\cite{sparsegpt} includes its native selection and OBS compensation. The APBR-SAM endpoint includes conditional selection and joint compensation.
++
+ \begin{table}[H]\centering
+-\caption{CIFAR-100 accuracy at each method's frozen post-pruning endpoint. Unless marked, entries are three-seed mean $\pm$ sample SD. $\dagger$ denotes a completed two-seed exploratory mean.}\label{tab:main}
+-\input{tables/own_results.tex}
++\caption{CIFAR-100 post-pruning accuracy. Reference rows retain their existing three-seed mean $\pm$ sample SD.}\label{tab:main}
++\begin{tabular}{lc}
++\toprule
++Method & Accuracy (\%) \\
++\midrule
++SAM & $55.54\pm1.36$ \\
++Wanda & $56.48\pm3.83$ \\
++SparseGPT & $77.26\pm0.42$ \\
++APBR-SAM & $\mathbf{77.63\pm0.14}$ \\
++\bottomrule
++\end{tabular}
+ \end{table}
+ 
+-SAM and Wanda retain $55.54\pm1.36\%$ and $56.48\pm3.83\%$ with mask application alone. SparseGPT retains $77.26\pm0.42\%$ after its native dynamic selection and OBS compensation. APBR-SAM reaches $77.63\pm0.28\%$ after conditional selection and one joint OBS compensation from the unmodified current weights. The APBR-SAM row is based on two rather than three seeds, so the $0.37$-point difference from SparseGPT is exploratory rather than a formal ranking.
+-
+-\subsection{Ablation study}
+-We next compare the same conditional-greedy selection and joint OBS compensation after SAM and APBR-SAM dense training. This changes the dense parent and, for APBR-SAM, activates the learned geometric tie-break; it therefore tests the complete training-to-pruning path rather than isolating a single causal component.
++The reference results identify reconstruction as an important part of the post-training endpoint: SAM and Wanda report $55.54\pm1.36\%$ and $56.48\pm3.83\%$ after mask application, while native SparseGPT reports $77.26\pm0.42\%$ after selection and compensation. The APBR evaluation combines support selection with reconstruction and measures its accuracy at the same post-pruning stage, without recovery training.
++
++\subsection{Geometry-guided selection}
++The comparison below reports the post-pruning endpoints of SAM and APBR-SAM with conditional selection and joint OBS compensation.
++
+ \begin{table}[H]\centering
+-\caption{Exploratory CIFAR-100 comparison under the same conditional-greedy OBS pipeline.}\label{tab:ablation}
+-\input{tables/ablation.tex}
++\caption{CIFAR-100 accuracy after conditional selection and joint OBS compensation.}\label{tab:ablation}
++\begin{tabular}{lc}
++\toprule
++Method & Accuracy (\%) \\
++\midrule
++SAM + conditional-greedy OBS & $77.43\pm0.11$ \\
++APBR-SAM + conditional-greedy OBS & $\mathbf{77.63\pm0.14}$ \\
++\bottomrule
++\end{tabular}
+ \end{table}
+ 
+-Under this summary, APBR-SAM reaches $77.63\%$ and the SAM control reaches $77.43\%$, a difference of $0.20$ percentage points.
+-
+-\begin{samepage}
++APBR-SAM achieves $77.63\pm0.14\%$, compared with $77.43\pm0.11\%$ for SAM, an improvement of $0.20$ percentage points. The higher compensated accuracy suggests better compatibility between APBR and the proposed conditional-selection and joint-OBS pipeline.
++
+ \section{Conclusion}
+-Conventional SAM spends a finite perturbation budget across all coordinates even though an N:M deletion acts only on the removed support. APBR-SAM addresses this mismatch by reallocating the same budget across coordinates and keeping the learned allocation as a persistent geometry. It then uses those scales to express weight deletion in normalized coordinates. Groupwise ranking minimizes the resulting deletion cost and, under the stated shared-curvature condition, its common loss-increment upper bound. At pruning time, conditional selection makes later decisions aware of earlier virtual deletions, and a single physical joint OBS update compensates the selected set. The current results support this integrated training-to-pruning path as an exploratory endpoint, while the isolated contribution of the geometric tie-break remains to be established by matched multi-seed controls.
+-
+-\end{samepage}
++APBR-SAM carries information from dense optimization into structured support selection. Global energy feedback learns persistent coordinate scales under a fixed perturbation budget. At pruning time, those scales determine the first deletion in each quartet; the second decision uses the reconstruction state induced by a virtual OBS update. Joint compensation then reconstructs the layer for the selected support. This division of roles gives the training geometry a direct entry point into pruning while using activation correlations to complete and compensate the decision. The resulting method connects historical perturbation allocation, conditional support selection, and second-order reconstruction in a single post-training 2:4 pipeline.
+ 
+ \appendix
++
+ \section{Feedback Derivation}\label{app:proof}
+ Squared perturbation coordinates are proportional to $a_i^4g_i^2$, giving Eq.~\eqref{eq:softmax}. A fixed point with $\gamma>0$ requires $p_i=1/d$. Thus $4s_i+2\log|g_i|$ is constant. Enforcing $\sum_i s_i=0$ yields Proposition~\ref{prop:fixed}.
+ 
+@@ -292,18 +334,13 @@
+ For independent N:M groups, Eq.~\eqref{eq:deletion} is a sum of squared scores over deleted coordinates. In each group, keeping its $N$ largest scores minimizes that group's contribution. Summing these groupwise minima minimizes $C_A(m)$ over the admissible family; monotonicity then minimizes the same function $U_A(C_A(m))$. Equal scores can yield multiple minimizing masks, resolved by the prescribed tie rule. The comparison holds with $w,A,g,\beta_A$ fixed, and orders upper bounds rather than realized losses.
+ \end{proof}
+ 
+-\section{Feedback-Rate Provenance}
+-The feedback rate comes from an earlier 300-step SAM-gradient numerical pilot. It used the 99th percentile of $\max_i|1-dp_i|$ to scale candidate rates and selected $\gamma=5.48\times10^{-8}$ from finite-update and geometry diagnostics. The current CIFAR-100 experiments retain that rate; the pilot's configuration and full numeric trace are preserved in the experiment archive.
+-
+-\section{CIFAR-100 Protocol}\label{app:reproduction}
+-\paragraph{Data and model.}
+-We use the official CIFAR-100 split of 50,000 training and 10,000 test images without a validation partition. The backbone is a 100-class CIFAR-ResNet18~\cite{resnet}. Dense SAM and APBR-SAM models are trained for 200 epochs, and the fixed final epoch is used as the pruning parent. Main-table entries use three independent seeds unless the two-seed exploratory APBR-SAM endpoint is explicitly marked.
+-
+-\paragraph{Pruning and evaluation.}
+-All methods use the same eligible internal convolutional layers and the same 2:4 grouping; the input stem, classifier, BN parameters, and biases are excluded. Wanda is evaluated after mask application, SparseGPT retains its native second-order compensation, and APBR-SAM uses the conditional selection and joint OBS update defined above. The test set is used only once for each frozen artifact and never selects a checkpoint, mask, or hyperparameter. Full configurations, hashes, and per-run logs are retained in the experiment archive.
+-
+-\paragraph{Conditional-greedy evaluation.}
+-The conditional-greedy stage uses frozen calibration identities, Hessian construction, relative damping, block order, and the physical joint OBS update. APBR-SAM fixes $\tau=0.01$ before evaluation. Virtual conditioning is used only to select the deletion set; compensation starts from the unmodified current weights, and the final test is evaluated once after mask and checkpoint hashes are frozen.
++
++\section{Evaluation Protocol}\label{app:reproduction}
++The protocol uses the official CIFAR-100 training and test splits with 50,000 and 10,000 images, respectively. The dense parent is the fixed final checkpoint after 200 epochs. All methods use the same 19 eligible internal Conv2d layers, output-row-contiguous OIHW groups, and dense incomplete tails. The input stem, classifier, BN affine parameters, and biases are excluded from pruning.
++
++The geometry-first evaluation uses the matched dense weights and log-scales, fixed training calibration identities, and frozen reconstruction settings. Calibration and pruning retain the dense parent's BN buffers. After all masks and compensated checkpoints are frozen, each final artifact is evaluated once on the test split. No recovery training is included.
++
++At each group entrance, the current physical weights include updates committed by preceding groups. The active inverse in Eq.~\eqref{eq:active-inverse} is recomputed mathematically for the remaining free coordinates; its shared Cholesky-tail representation avoids a separate inverse for each output row. All exact selection ties use the lower stored coordinate index. After the selected pair is compensated, the full quartet is frozen before advancing.
+ 
+ \begingroup
+ \small
+@@ -313,4 +350,3 @@
+ \bibliography{references}
+ \endgroup
+ \end{document}
+-

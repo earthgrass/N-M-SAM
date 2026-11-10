@@ -1,0 +1,125 @@
+\section{Method}\label{sec:method}
+APBR-SAM transfers a persistent training state into a two-stage support decision. The learned geometry selects the first deletion in each 2:4 group. A virtual reconstruction step then determines the state in which the second deletion is evaluated. Once both positions are selected, joint OBS commits their compensation to the physical weights.
+
+\subsection{Learning persistent perturbation geometry}
+The training state should describe how coordinates have been explored across mini-batches. Let $w_t\in\mathbb R^d$ collect the trainable parameters and let $\mathcal L_{B_t}$ denote the loss on mini-batch $B_t$. Standard SAM computes
+\begin{equation}
+g_{1,t}=\nabla_w\mathcal L_{B_t}(w_t),\qquad
+\epsilon_t^{\mathrm{SAM}}=\rho\frac{g_{1,t}}{\norm{g_{1,t}}}.
+\end{equation}
+APBR adds positive coordinate scales through the log-state
+\begin{equation}
+a_{i,t}=\exp(s_{i,t}),\qquad A_t=\operatorname{diag}(a_{1,t},\ldots,a_{d,t}),
+\end{equation}
+initialized with $s_0=0$. The state has a fixed correspondence to parameter names, shapes, and coordinates. It covers all trainable parameters, including BN affine parameters and biases; pruning subsequently acts on the eligible weight tensors.
+
+To change the allocation of the perturbation budget while preserving its global magnitude, we use
+\begin{equation}\label{eq:epsilon}
+\epsilon_t=\rho\frac{A_t^2g_{1,t}}{\norm{A_t^2g_{1,t}}}.
+\end{equation}
+The numerator sets the relative coordinate weights and the denominator fixes the realized $L_2$ norm. At initialization, this is the standard SAM direction. The second gradient is $g_{2,t}=\nabla_w\mathcal L_{B_t}(w_t+\epsilon_t)$, with the perturbation treated as fixed during differentiation. Both passes use the same augmented mini-batch. The model is restored to $w_t$ before the base optimizer applies $g_{2,t}$.
+
+The feedback signal is each coordinate's share of the perturbation energy:
+\begin{equation}\label{eq:feedback}
+p_{i,t}=\frac{\epsilon_{i,t}^2}{\sum_j\epsilon_{j,t}^2},\qquad
+s_{i,t+1}=s_{i,t}+\gamma(1-dp_{i,t}).
+\end{equation}
+A coordinate receiving less than the reference share $1/d$ gains relative scale; a coordinate carrying more loses relative scale. This feedback redistributes future directional capacity and accumulates a history in $s_t$. The state therefore accompanies the final dense weights as information about the training trajectory. A candidate state is committed once after a successful parameter update; an all-zero perturbation leaves it unchanged.
+
+\subsection{Transferring geometry to a deletion score}\label{sec:selection}
+Deleting coordinate $i$ produces displacement $-w_i$. Expressing this displacement in the learned coordinate scale gives
+\begin{equation}\label{eq:score}
+I_i=\frac{|w_i|}{a_i}=|w_i|\exp(-s_i).
+\end{equation}
+The score compares the size of a weight with its learned exploration scale. For a mask $m$ and deletion displacement $\delta_m=(m-1)\odot w$, the corresponding squared cost is
+\begin{equation}\label{eq:deletion}
+C_A(m)=\norm{A^{-1}\delta_m}^2=\sum_{i:m_i=0}I_i^2.
+\end{equation}
+This gives the training state a concrete role in support selection: smaller scores identify smaller deletions in normalized parameter coordinates.
+
+A second criterion enters when the surviving weights are allowed to reconstruct the layer output. Their ability to compensate depends on correlations between input activations. We use the geometry score to initiate the support decision, then use the conditional reconstruction cost to complete it. These two stages connect the saved training geometry with the activation information available at pruning time.
+
+\subsection{The physical reconstruction state}
+For an eligible layer, flatten each output row into a weight vector and collect calibration inputs as columns of $X\in\mathbb R^{K\times P}$. Convolutional inputs follow the stored unfold order. Define
+\begin{equation}\label{eq:gram}
+H=\frac{2}{P}XX^\top,\qquad H_\delta=H+\delta I,\qquad \delta>0.
+\end{equation}
+For a row displacement $\Delta w$, the quadratic $\frac12\Delta w^\top H_\delta\Delta w$ combines the mean squared output change with damping. The activation matrix and damping are fixed during the layer's pruning.
+
+Groups are processed in their stored order. At a group entrance, $F$ contains every coordinate still allowed to change, including the current group $G$ and all later groups. Earlier groups have been frozen. The effective inverse curvature is
+\begin{equation}\label{eq:active-inverse}
+R=\bigl((H_\delta)_{FF}\bigr)^{-1},\qquad G\subseteq F.
+\end{equation}
+Here $w_F$ denotes the current physical weights after compensation from earlier groups. With $U$ the upper Cholesky factor of $H_\delta^{-1}$ and $F$ an unprocessed suffix, the same matrix is $R=U_{FF}^{\top}U_{FF}$. The group block $R_{GG}$ supplies local selection quantities, while $R_{:,D}$ later propagates compensation across the full active set.
+
+\subsection{Geometry-guided initial deletion}\label{sec:conditional-greedy}
+For the current quartet $G$, APBR selects the first deletion directly:
+\begin{equation}\label{eq:geometry-first}
+i^*=\arg\min_{i\in G}|w_i|\exp(-s_i).
+\end{equation}
+The saved geometry is fixed throughout pruning. Thus the first choice connects the current physical weights to the coordinate scales learned during dense training.
+
+The effect of this choice must be reflected in the second decision. We create a virtual state corresponding to deletion of $i^*$:
+\begin{equation}\label{eq:conditional-update}
+\bar w_j=w_j-\frac{R_{ji^*}}{R_{i^*i^*}}w_{i^*},\qquad
+\bar R_{jk}=R_{jk}-\frac{R_{ji^*}R_{i^*k}}{R_{i^*i^*}},
+\end{equation}
+for $j,k\in F\setminus\{i^*\}$. The weight update predicts how the first deletion is reconstructed, and the Schur update describes the curvature after that coordinate is constrained. These quantities are held in a separate selection state.
+
+\subsection{Conditional second selection and joint compensation}
+The remaining three positions are compared in the virtual state. The second deletion is
+\begin{equation}\label{eq:conditional-second}
+j^*=\arg\min_{j\in G\setminus\{i^*\}}
+\frac{\bar w_j^2}{2\bar R_{jj}}.
+\end{equation}
+Its score measures the additional quadratic cost of removing $j$ after the first deletion. This is the point at which activation-dependent interactions enter the support decision. Both selection steps resolve exact score ties by the lower stored coordinate index.
+
+Set $D=\{i^*,j^*\}$ and discard the virtual state. Joint OBS uses the weights and effective inverse curvature saved at the group entrance:
+\begin{equation}\label{eq:joint-obs}
+\Delta w_F=-R_{:,D}(R_{DD})^{-1}w_D,\qquad
+C_{\mathrm{OBS}}(D)=\frac12w_D^\top(R_{DD})^{-1}w_D.
+\end{equation}
+This is the standard fixed-support quadratic reconstruction update~\cite{obc}. It sets the two deleted coordinates to zero and adjusts the remaining active coordinates. The physical update is committed once, after which the entire quartet is frozen. The next quartet starts from weights that already include this compensation.
+
+The three states have distinct roles: $s$ carries training history, $(\bar w,\bar R)$ predicts the effect of the first deletion, and $(w_F,R)$ defines the physical compensation. Separating them prevents a virtual deletion from being counted again in the joint update.
+
+\subsection{End-to-end procedure}
+Algorithm~\ref{alg:apbr} summarizes the complete path. Dense training saves unperturbed weights together with their matching geometry. Calibration then supplies a shared reconstruction metric for each layer. Each quartet receives a geometry-guided first choice, a conditional second choice, and one committed reconstruction. The resulting mask retains exactly two coordinates per complete quartet.
+
+\begin{algorithm}[H]
+\caption{APBR-guided conditional OBS: dense training to 2:4 pruning}
+\label{alg:apbr}
+\footnotesize
+\begin{algorithmic}[1]
+\Require training data, calibration inputs, weights $w$, radius $\rho$, feedback rate $\gamma$
+\State $s\gets0$
+\For{each dense-training mini-batch $B_t$}
+    \State $A_t\gets\operatorname{diag}(\exp(s_t))$; $g_{1,t}\gets\nabla_w\mathcal L_{B_t}(w_t)$
+    \If{$\|A_t^2g_{1,t}\|_2>0$}
+        \State Compute $\epsilon_t$ and candidate $\widehat s_{t+1}$ by Eqs.~\eqref{eq:epsilon}--\eqref{eq:feedback}
+    \Else
+        \State $\epsilon_t\gets0$; $\widehat s_{t+1}\gets s_t$
+    \EndIf
+    \State $g_{2,t}\gets\nabla_w\mathcal L_{B_t}(w_t+\epsilon_t)$
+    \State Restore $w_t$; apply the base optimizer using $g_{2,t}$; commit $s_{t+1}\gets\widehat s_{t+1}$
+\EndFor
+\State Save the matched dense weights and geometry; freeze geometry
+\For{each eligible layer}
+    \State Form $H_\delta$ from calibration activations; initialize a bool keep-mask to true
+    \For{each complete quartet $G$ in stored column order}
+        \State $F\gets$ all unfrozen columns; $R\gets((H_\delta)_{FF})^{-1}$
+        \For{each output row}
+            \State Save current physical $w_F$; $i^*\gets\arg\min_{i\in G}|w_i|\exp(-s_i)$
+            \State Form virtual $(\bar w,\bar R)$ on $F\setminus\{i^*\}$ by Eq.~\eqref{eq:conditional-update}
+            \State $j^*\gets\arg\min_{j\in G\setminus\{i^*\}}\bar w_j^2/(2\bar R_{jj})$
+            \State $D\gets\{i^*,j^*\}$; discard virtual state
+            \State Compute $\Delta w_F$ from saved physical $w_F,R$ by Eq.~\eqref{eq:joint-obs}
+            \State Commit $w_F\gets w_F+\Delta w_F$; set $w_D\gets0$ and keep-mask$_D\gets\mathrm{false}$
+        \EndFor
+        \State Freeze all columns in $G$
+    \EndFor
+    \State Retain any incomplete tail; validate the 2:4 mask and write back the layer
+\EndFor
+\State \Return compensated sparse weights and keep-masks
+\end{algorithmic}
+\end{algorithm}

@@ -1,0 +1,62 @@
+\section{Theoretical Analysis}\label{sec:theory}
+\subsection{Training geometry properties}
+Equation~\eqref{eq:epsilon} gives $\|\epsilon_t\|_2=\rho$ whenever its numerator is nonzero. The energy shares also conserve the sum of log-scales:
+\begin{equation}\label{eq:volume}
+\sum_i s_{i,t+1}=\sum_i s_{i,t}+\gamma\left(d-d\sum_i p_{i,t}\right)=0.
+\end{equation}
+Thus $\det A_t=\prod_i a_{i,t}=1$ in exact arithmetic. This identifies the relative coordinate geometry while the global normalization fixes the realized perturbation budget.
+
+For a fixed gradient with nonzero components, the energy shares are
+\begin{equation}\label{eq:softmax}
+p_i=\frac{\exp(4s_i+2\log|g_i|)}{\sum_j\exp(4s_j+2\log|g_j|)}.
+\end{equation}
+\begin{proposition}[Fixed-gradient feedback]\label{prop:fixed}
+For fixed $g_i\ne0$, positive $\gamma$, and $\sum_i s_i=0$, the feedback fixed point has $p_i=1/d$ and
+\begin{equation}
+s_i^*=-\tfrac12\log|g_i|+\frac{1}{2d}\sum_j\log|g_j|,\qquad a_i^*\propto|g_i|^{-1/2}.
+\end{equation}
+For $d>1$, its linearized eigenvalue on the zero-sum subspace is $1-4\gamma$. The strict linear stability range is $0<\gamma<1/2$.
+\end{proposition}
+The fixed-gradient analysis explains how negative feedback balances the coordinate energy shares. Its derivation appears in Appendix~\ref{app:proof}.
+
+\subsection{Direct geometry deletion}
+The geometry score has a separable interpretation. With weights and scales fixed, a direct N:M mask minimizes $C_A(m)$ by retaining the $N$ largest $I_i$ in each group. Exchanging a retained smaller score with a deleted larger score reduces the cost. For the initial decision in Algorithm~\ref{alg:apbr}, the same ordering selects the smallest normalized singleton displacement.
+
+The associated loss bound follows the finite deletion segment. Let $\mathcal L$ be a fixed loss, with auxiliary model state fixed, and $g=\nabla\mathcal L(w)$.
+\begin{proposition}[Conditional bound for direct deletion]\label{prop:pruning-loss}
+Fix $w$, a positive diagonal matrix $A$, and a family $\mathcal M$ of candidate masks. Suppose $\mathcal L$ is twice differentiable along every segment $w+t\delta_m$, and a single $\beta_A\ge0$ satisfies
+\begin{equation}\label{eq:shared-curvature}
+\sup_{\substack{m\in\mathcal M\\ t\in[0,1]}}
+\left\|A\nabla^2\mathcal L(w+t\delta_m)A\right\|_2\le\beta_A,
+\end{equation}
+where the matrix norm is spectral. Then every $m\in\mathcal M$ satisfies
+\begin{equation}\label{eq:pruning-loss-bound}
+\mathcal L(w+\delta_m)-\mathcal L(w)
+\le \norm{Ag}\sqrt{C_A(m)}+\frac{\beta_A}{2}C_A(m).
+\end{equation}
+\end{proposition}
+Writing $\delta_m=Aq_m$ turns the quadratic Taylor term into a bound on $\|q_m\|_2^2$. Cauchy--Schwarz bounds the linear term by $\|Ag\|_2\|q_m\|_2$, giving Eq.~\eqref{eq:pruning-loss-bound}.
+\begin{corollary}[Minimum common upper bound]\label{cor:mask-bound}
+For fixed $w,A,g$ and the shared $\beta_A$, the function $U_A(c)=\|Ag\|_2\sqrt c+(\beta_A/2)c$ is nondecreasing for $c\ge0$. If $\mathcal M$ consists of independent N:M groups with all other coordinates retained, keeping the $N$ largest $I_i$ in each group minimizes $U_A(C_A(m))$ over $\mathcal M$.
+\end{corollary}
+Appendix~\ref{app:pruning-proof} gives the complete deletion-segment argument.
+
+\subsection{Conditional selection and fixed-support reconstruction}
+The second stage has a direct interpretation in the physical quadratic objective. Fix the geometry-selected coordinate $i$. For a candidate partner $j$, block inversion gives
+\begin{equation}\label{eq:cost-decomposition}
+C_{\mathrm{OBS}}(\{i,j\})
+=\frac{w_i^2}{2R_{ii}}
++\frac{\left(w_j-\frac{R_{ji}}{R_{ii}}w_i\right)^2}
+{2\left(R_{jj}-\frac{R_{ji}^2}{R_{ii}}\right)}
+=\frac{w_i^2}{2R_{ii}}+\frac{\bar w_j^2}{2\bar R_{jj}}.
+\end{equation}
+The first term is fixed once APBR selects $i$. Minimizing the second term therefore chooses the least costly partner among the three remaining positions under the current reconstruction objective. Both the compensated weight and the change in available reconstruction directions enter this decision.
+
+For the resulting set $D$, joint reconstruction solves
+\begin{equation}\label{eq:fixed-support-problem}
+\min_{\Delta w_F}\ \frac12\Delta w_F^\top(H_\delta)_{FF}\Delta w_F
+\quad\text{subject to}\quad (\Delta w_F)_D=-w_D.
+\end{equation}
+The Lagrange stationarity equation is $\Delta w_F=-R_{:,D}\lambda$. Substitution into the deletion constraint gives $\lambda=(R_{DD})^{-1}w_D$, yielding Eq.~\eqref{eq:joint-obs}. Positive definiteness makes this fixed-support solution unique.
+
+For the same deletion set, successive exact OBS updates with Schur conditioning satisfy the same quadratic constraints and recover the same solution~\cite{obc}. Algorithm~\ref{alg:apbr} uses that conditional state to choose the partner, then commits the fixed-support solution in one update. This connects the selection calculation directly to the physical compensation.

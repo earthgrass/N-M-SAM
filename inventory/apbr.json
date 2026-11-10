@@ -1,0 +1,1599 @@
+{
+  "read_only_audit": true,
+  "date": "2026-11-10",
+  "source_repository": "APBR-post-training-benchmark",
+  "source_head": "55fe3e300dbbd09c1178a6316afebc9ecf367947",
+  "paper_repository": "paper/narrative_revision_20261106",
+  "paper_head": "5ea3a042f44a8bdbf4e842b745536fa026b6d612",
+  "recommended_branch_separation": [
+    "apbr-implemented-original-and-l2",
+    "apbr-paper-geometry-first-no-tau"
+  ],
+  "versions": [
+    {
+      "id": "apbr_vpr",
+      "perturbation": "rho A^2 g / ||A g||",
+      "constraint": "ellipsoid; actual global L2 need not equal rho",
+      "source": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/optim/geometry.py"
+    },
+    {
+      "id": "apbr_fixed_l2",
+      "perturbation": "rho A^2 g / ||A^2 g||",
+      "constraint": "actual global L2 = rho",
+      "source": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/optim/geometry.py"
+    },
+    {
+      "id": "physical_conditional_obs",
+      "first": "argmin 0.5 w_i^2/R_ii",
+      "second": "argmin conditional physical singleton OBS cost after virtual conditioning",
+      "compensation": "one joint physical OBS update from current group-entry physical state",
+      "implemented": true
+    },
+    {
+      "id": "nearoptimal_conditional_obs_tau001",
+      "first": "geometry argmin within <=1.01 times physical minimum",
+      "second": "geometry argmin within <=1.01 times conditional physical minimum using virtual w",
+      "compensation": "one joint physical OBS update",
+      "implemented": true,
+      "tau_zero_is_not_paper_method": true
+    },
+    {
+      "id": "paper_geometry_first_no_tau",
+      "first": "direct argmin |w_i| exp(-s_i)",
+      "second": "pure conditional physical OBS after virtual conditioning",
+      "compensation": "one joint physical OBS update on full remaining active coordinates",
+      "implemented_and_run_verified": false,
+      "paper_values_status": "author-confirmed supplied; no new independent artifact identity"
+    }
+  ],
+  "paper_latest_pdf": {
+    "path": "paper/narrative_revision_20261106/APBR-SAM_geometry_first_20261106_ablation_analysis.pdf",
+    "sha256": "c41b0c86cc8fb48d50d305a6915017267326745aee2a382e44b68102bab0fde0"
+  },
+  "paper_provenance_entrypoints": [
+    "paper/narrative_revision_20261106/review/AUTHOR_VALUE_UPDATE_20261106.md",
+    "paper/narrative_revision_20261106/TAU_ORIGIN_AUDIT.md",
+    "paper/narrative_revision_20261106/ALGORITHM_VERSION_MAPPING.md",
+    "paper/narrative_revision_20261106/RESULT_PROVENANCE_CHECK.md",
+    "paper/narrative_revision_20261106/PENDING_EXPERIMENTS.md"
+  ],
+  "paper_source_archive_instruction": "Use git archive current HEAD for complete unchanged manuscript source/history snapshot. Earlier source ZIP in parent paper/ is not current. Keep author update beside earlier provenance reports; earlier PENDING descriptions are historical, not current table contents.",
+  "source_files": [
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/AGENTS.md",
+      "sha256": "29cefd3e9a1d1142f5c04ddbf760b32fb3f04266376e5de9961fcdce524d3841",
+      "bytes": 1543
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/apbr_nearoptimal_conditional_obs/__init__.py",
+      "sha256": "b1a2a853700146549e9437b723dd7cdd98064ba5f6e662d7c1a5ee1e10e56cd2",
+      "bytes": 294
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/apbr_nearoptimal_conditional_obs/adapter.py",
+      "sha256": "24b7eb92eae8fbb1e0e9dbf88eafa06de9673898318ffd0770a80a0a1759847a",
+      "bytes": 12264
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/cifar100_model.py",
+      "sha256": "9dfd402b4aac66d8ed18062089a07f3779ba119c909859e031b15abd94ade889",
+      "bytes": 477
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/common/__init__.py",
+      "sha256": "13416e972e9d065d8511fbd90be362985b35a94dc4c8d79484ac1b90873d0a59",
+      "bytes": 394
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/common/conv2d.py",
+      "sha256": "e6a45097853a8613fabb013e320011f2c2d48d70f9e83a56c2552c94b9129c63",
+      "bytes": 3885
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/common/nm.py",
+      "sha256": "d44f7fa7927f4a8d46adc113b2667188f4deda4a3cc07a97ed43b80d21a711f0",
+      "bytes": 1516
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/conditional_greedy_obs/__init__.py",
+      "sha256": "2fd67edf7b1f448163948e2ab48e79ce76e46e4a7455fc953ece15590f301df5",
+      "bytes": 152
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/conditional_greedy_obs/adapter.py",
+      "sha256": "1d354186320af304315cfe45496cbf2b15071c5f0a3f4f633095af248e0c8ecf",
+      "bytes": 7226
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/fixedmask_obs/__init__.py",
+      "sha256": "a7ba5c3151ed3c52780a9fe6ff6b6be48944409047aa54db16f6cc56ffce2583",
+      "bytes": 164
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/fixedmask_obs/adapter.py",
+      "sha256": "d7cff3b33665811bad242ed8139b03dbbff493a665f63074b87aec266d3b88c3",
+      "bytes": 8871
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/geo_dynamic_obs/__init__.py",
+      "sha256": "72bd3f4dddcd16dd2a0a892b02d28857501702f49701e9fef1248bc698a1253c",
+      "bytes": 132
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/rose/__init__.py",
+      "sha256": "e635d303fce2832a31ced1d60b88efd2b56399b1242d826c7a3c0e2e314e692f",
+      "bytes": 98
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/sparsegpt/__init__.py",
+      "sha256": "ca62f2dd57e9d53a4fc61bef42f42636195467d04d4c444a4d92556d50b072e7",
+      "bytes": 108
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/sparsegpt/adapter.py",
+      "sha256": "4b1462b1f09e6e3789406cb506fc4c47b47cfd159fa3d0e4fc013f45927a3f36",
+      "bytes": 6593
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/wanda/__init__.py",
+      "sha256": "e3050cbd3fa8bf0a2267fd09e81d22affef8c9097971c85eb9b1446c1199686f",
+      "bytes": 62
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/benchmark/model.py",
+      "sha256": "befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71",
+      "bytes": 2718
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/benchmark/nm.py",
+      "sha256": "92433dbfd3b768b28922b89954d76fde7c3a6fdd23e661622ac248526b44678f",
+      "bytes": 2283
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/configs/cifar100_50k10k_apbr_fixed_l2_seed0_20261102.yaml",
+      "sha256": "6f334677391254f79789e591eff5c98a0cd263c28269208a03ce6ebfcc33111b",
+      "bytes": 3115
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/configs/cifar100_50k10k_apbr_fixed_l2_seed1to4_rtx5090_20261103.yaml",
+      "sha256": "653c3912f35aae7f75149bf94f4265545776fa413958356f45dbccf909270600",
+      "bytes": 3219
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/configs/cifar100_50k10k_final_v1.yaml",
+      "sha256": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6",
+      "bytes": 3096
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_apbr_gpt_mask_match_local.py",
+      "sha256": "5d96a28060701e5c9b91985c28fa9e28022fd37d1567ac6087f37474c4ee3fc4",
+      "bytes": 8188
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_apbr_l2_nearoptimal_conditional_seed0_full_cpu.py",
+      "sha256": "657cf673e4b7f8300367c2467b6e9325278caadf2d5a7230d210e519b5095af5",
+      "bytes": 5412
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_apbr_l2_nearoptimal_conditional_seed1_full_cpu.py",
+      "sha256": "be9f3e56d59af97dc016cddb5c101abb3704876dcdb68b20dea990bd46164403",
+      "bytes": 5409
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_apbr_l2_nearoptimal_conditional_seed2_full_cpu.py",
+      "sha256": "76b4b00df3f7c3cbeae9dab3d9fc8ba85da112d1a9f59e5a7922326d3c5737dd",
+      "bytes": 5409
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_apbr_l2_nearoptimal_conditional_seed3_full_cpu.py",
+      "sha256": "8d760b7bbbd43f4bc5c22f65e9beaadf491ab5c1945b79b4814be97cdece4b7f",
+      "bytes": 5409
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_apbr_nearoptimal_conditional_seed0_full_cpu.py",
+      "sha256": "93f254b4c6f01c574c0a2531d69bd828c8592b11a5830b9b413178a58be40261",
+      "bytes": 5338
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_apbr_vpr_nearoptimal_conditional_seed3_full_cpu.py",
+      "sha256": "b70fa25efaf0345e7308445471ed577272da314c231ca2a8690e334862d1a816",
+      "bytes": 5405
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_sam_apbr_conditional_seed1_cpu.py",
+      "sha256": "4f3158a0a4aae838731800b72242586e638059b2071af0d5c7c4b5e4baa29690",
+      "bytes": 4088
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_sam_conditional_seed23_cpu.py",
+      "sha256": "8deb19edb3a7e73763eb7a6620057f64474370b0b79066a92bb25cdfd0d1e133",
+      "bytes": 4447
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_sam_conditional_seed2_historical_cpu.py",
+      "sha256": "5b5973c9294b69fe4a23ad0dd074286e71a1ea21f613bd42d7a7ac481bd03650",
+      "bytes": 4554
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/audit_sam_conditional_seed2_newfinal_cpu.py",
+      "sha256": "737e58656da93b88654f2a0bc35283b74fb5a623805c4de41c54d5fef9836507",
+      "bytes": 4452
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/compare_sam_apbr_apbr_l2_conditional_seed01.py",
+      "sha256": "e98a102a5512e93cf399ec20d82c0240591b0d1e29aff651fbea1d17f3983009",
+      "bytes": 8514
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/compare_sam_apbr_conditional_seed0.py",
+      "sha256": "ea45207f24d76cd0854e3026317b833b23b301acbf30a5337b9dcacaa66b1021",
+      "bytes": 8849
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/evaluate_cifar100_apbr_fixed_l2_seed0.py",
+      "sha256": "e7f657dd647dbfa1632ba3fa77f48588e7405fd128d03917bebdec38354d2d00",
+      "bytes": 5892
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_gpt_fixedmask_cpu_full.py",
+      "sha256": "df80b5e8424a709e6487a323236b13d87fe9371786eb103ca1c0a52603d8e135",
+      "bytes": 10009
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_l2_nearoptimal_conditional_seed0_full_cpu.py",
+      "sha256": "ec2d6d146ee497b3e0072f3b880f884684ec9b5f33c4a1d900ecb416f2582cf0",
+      "bytes": 15462
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_l2_nearoptimal_conditional_seed1_full_cpu.py",
+      "sha256": "a0f393695ffd0e13de0a2b7b6838a45fa4f6d68c57afe2e5fc0cbae1a8414d9c",
+      "bytes": 16981
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_l2_nearoptimal_conditional_seed2_full_cpu.py",
+      "sha256": "f2b996dc0bfc9274a50cb7920d9a4ed5a7009c8fde25552613c840cfc76c04c6",
+      "bytes": 16413
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_l2_nearoptimal_conditional_seed3_full_cpu.py",
+      "sha256": "814d5e13b6258a7d316ae7aefc7872b1cc30cd456fe9176daea861ac5e7192a0",
+      "bytes": 16413
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_nearoptimal_conditional_seed0_full_cpu.py",
+      "sha256": "f5371f7a5fffacde6399017b41e26e60431e4c96a84352630845eb58c0aebab8",
+      "bytes": 16234
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_apbr_vpr_nearoptimal_conditional_seed3_full_cpu.py",
+      "sha256": "e6870e69459a6e5d68602b9f0847d4bdfaede8d0fa0ff9bdca2cad4be14dc517",
+      "bytes": 16482
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_50k_formal_training.py",
+      "sha256": "a78049fd9225b5d7f72f72b0063cc3b913cb7c55b738535876d5bcffd4e1b8fa",
+      "bytes": 19583
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_apbr_fixed_l2_seed0_postprocess.py",
+      "sha256": "a4fb650566059ddd9f8b9de6d4f446bc7564c6b13b784a121a2ecd3842b82f80",
+      "bytes": 10912
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_apbr_fixed_l2_seed0_sparsegpt.py",
+      "sha256": "ec722ae867b7b33a3961e1b0104c98f496eb9ca621ba7c280d20f1fa522a1f3a",
+      "bytes": 13301
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_apbr_fixed_l2_seed0_training.py",
+      "sha256": "57f579f756f125fb006f772f2b5ceaa693cb6714f27dd290d53f10296caf0fb8",
+      "bytes": 18383
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_apbr_fixed_l2_seed1to4_training.py",
+      "sha256": "79c672ec09afe304c3901a4807af0bb5122d176e62385604d698b4cef66d03ba",
+      "bytes": 18404
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_conditional_greedy_seed0_cpu.py",
+      "sha256": "ccbb93d7adcb0e763a4b0f67302eb661a0afd9714c75c6b0c97658ddaf9d6a52",
+      "bytes": 8912
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_sam_apbr_conditional_seed1_cpu.py",
+      "sha256": "49085de0b997aa5c4e14b69e55798024ea228ccc95013d8c14c841ecffc6abb6",
+      "bytes": 12423
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_sam_conditional_seed23_cpu.py",
+      "sha256": "e358ed542aa976c678f3bed154aed445749d4f8e1325da7d2e05312e8a64e7e6",
+      "bytes": 11656
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_sam_conditional_seed2_historical_cpu.py",
+      "sha256": "81d63a0e458474d033b691e2cde79ee46022797b1b7e093df5e32cd072518b7b",
+      "bytes": 12098
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_sam_conditional_seed2_newfinal_cpu.py",
+      "sha256": "5512b6efe8c1b633313834f46316e3904d2f7753a9c2039220ea9f809423b202",
+      "bytes": 11705
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_sam_singleton_conditional_seed0_cpu.py",
+      "sha256": "d4bc1263eecbdb464bb837b04e96195ebbff03cfb4b6bf993d8c9b36a2187151",
+      "bytes": 10198
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/tests/test_apbr_nearoptimal_conditional_obs.py",
+      "sha256": "a2ded42ad2e2b1b422286452125c16043ecb2f47a07ab139cbdfbe480e2495da",
+      "bytes": 9655
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/tests/test_blockwise_apbr_geometry.py",
+      "sha256": "d0aced58a8820e607925c5c9e3aa99a1fd760cb1b79edea895e43d0fd3a25a3d",
+      "bytes": 4436
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/tests/test_conditional_greedy_obs.py",
+      "sha256": "7598ddbfd5ce51772a960e299880028193cb4426011dc56202b3363970123b3e",
+      "bytes": 5463
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/tests/test_fixedmask_obs.py",
+      "sha256": "37766c395b3ba18f159ff84ecb7cec34a090a1fc4c7acd719831ba6421161fe0",
+      "bytes": 5358
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/tests/test_geo_rank_sparsegpt.py",
+      "sha256": "90496a82e2d967e8c5fbd575ddf5a2d89819b1d569004a81ee00457569d4b48c",
+      "bytes": 2802
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/tests/test_geometry_regularized_compensation.py",
+      "sha256": "f2fd67a2d1e8dc133c3e6d12c9d8061e63c2340404fc786edda301046df9035a",
+      "bytes": 1842
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/tests/test_gpt_score_conditional.py",
+      "sha256": "9d55e5a73702bb4c553cf7e6d197912da9271d99a81157873ac86009ad488805",
+      "bytes": 5858
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/tests/test_radius_guided_sparsegpt.py",
+      "sha256": "896d801d0b2d3c214f1a716ae29e2ea6b43c023c61fa7c860dc7a68b9cc2a8ca",
+      "bytes": 3036
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/pyproject.toml",
+      "sha256": "7b7718279926c365f606386cb5a8ef8bc6c539e6b9cfb3ee4572e14fdce25f43",
+      "bytes": 563
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/README.md",
+      "sha256": "a9a32c501778320ff9d99a74ab7ee13e8eb6cb24ec9bbec4940b1b1a1d135cfb",
+      "bytes": 9786
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/__init__.py",
+      "sha256": "7434eeda4335a2cb85f8be14ffc5a382f2eb5929571fd9b023452a3e6ba3d65a",
+      "bytes": 96
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/__main__.py",
+      "sha256": "cf7390a2508a0fcad4777a4a629fc5212ab655cb45845975995f835676a834e3",
+      "bytes": 29
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/analysis/__init__.py",
+      "sha256": "49a4273ab406c0cba1c826d2db68a4273ee212fce515e02da04d82ab44b5af65",
+      "bytes": 67
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/analysis/artifacts.py",
+      "sha256": "795e704788494b14ef0826cb10cb2736c4ef01ecaf6ac88199251b074938821e",
+      "bytes": 6432
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/analysis/report.py",
+      "sha256": "b2877422692371b24d2ac6465d88ae989fa366b1797380c3e8627c1fc6935bdb",
+      "bytes": 10968
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/analysis/statistics.py",
+      "sha256": "503c04893d653facd03128fd3f2e589b576f676edacdcbfa6566fa720978c0b2",
+      "bytes": 1783
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/analysis/summary.py",
+      "sha256": "872c2e9afbf1324fe750d0385968d7387069aca692b2ed66c23715bf250d02da",
+      "bytes": 8438
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/cli.py",
+      "sha256": "41201f3832a5a6cac406223941c3737b3db279fa0cb1df591c8b729f40cf3648",
+      "bytes": 4591
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/config.py",
+      "sha256": "68377e85b5afd8df013bda0e0f1b84f31284cf9295fe24b5880b20b655e6b9e9",
+      "bytes": 9081
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/data/__init__.py",
+      "sha256": "60fc7b2af5eee9483b6d6e5698772c568648056f5669775e8e82634e01335888",
+      "bytes": 4677
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/evaluation/__init__.py",
+      "sha256": "d14bc5c5f063e2ab783c7ce32ac46e62a513bff6ab8bae2ca41898656b02ffdd",
+      "bytes": 3159
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/guided_recovery_adapter.py",
+      "sha256": "5bc38a80a79c1d40b8a13e4968a3a7402fe4ad7c9698ada99594e3a116622012",
+      "bytes": 2771
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/l2_observer.py",
+      "sha256": "964ef1396495db3094ab09b1af8a35c0ca9522d56d1148431dd54d5369e63ad6",
+      "bytes": 3979
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/l2_protocol.py",
+      "sha256": "8a884984b9567452aef41f8acb22da8aa8735676df2e782de9fa39134dcdf9db",
+      "bytes": 3477
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/models/__init__.py",
+      "sha256": "760a8dd26f1146a6ec175b81f35f25589ac9318f62380e08e2d53c04556bef02",
+      "bytes": 2042
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/optim/__init__.py",
+      "sha256": "ad7231cea392055174eb78d8e70085d4d46db905ce1a3e22a2f0f3b26dedc769",
+      "bytes": 185
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/optim/geometry.py",
+      "sha256": "8e0e6d42bcf34a7a8c3b79dc4b76081e9d8c0d6313b183ce0f59109bd39058b5",
+      "bytes": 10022
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/optim/step.py",
+      "sha256": "3c022f2815d577ef3d94ffeed40cb93c06e2359a2734c857a06f1a0c1f738ac2",
+      "bytes": 6424
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/provenance.py",
+      "sha256": "c2be92817be378eba7eb059d6f7d660bd674adf7f2d8a425572e94987c05e0e4",
+      "bytes": 3246
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/pruning/__init__.py",
+      "sha256": "dfb81dd3ff0a41e6ad405b35177ab0f14a27da8a6d64a6c9ef4ac73d5bdee723",
+      "bytes": 4939
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/repro.py",
+      "sha256": "4ddb0609a19314c34db7a2ec7ea0925e4e011696d4d7bd28eac4defe14148c13",
+      "bytes": 7169
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/training/__init__.py",
+      "sha256": "7c20309bae9f47899bbd811fb50392a04c907825f6744516b78d699a9dac60f6",
+      "bytes": 106
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/src/vpr_sam/training/engine.py",
+      "sha256": "7f45552923ead9fa3cbf1de8a2d8651db537a8f7acc756ea7cffdc19a2528725",
+      "bytes": 16175
+    }
+  ],
+  "small_run_evidence": [
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/historical_physical_replay.json",
+      "sha256": "848da778bc39a195d2e1d9addd327479926d6d22f1823396dc42b4b2913a9d40",
+      "bytes": 362
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/independent_audit.json",
+      "sha256": "ca43206b6a8987488c1d768ae88710cc3c557e1fcdc6efff6219912b79e17c08",
+      "bytes": 2007
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_01.json",
+      "sha256": "37741d3277d534d6a07fcecfce90b63219a7b30899c43ceedb91dc3cb4f8719e",
+      "bytes": 3871
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_02.json",
+      "sha256": "04479871920fe4c78b497c319be8473199713004d59694df2c0c3d996c6045fd",
+      "bytes": 3872
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_03.json",
+      "sha256": "cee2d000ada82eee330f33712a694e88a658a2e12bdc0e7baf6109b1529e232a",
+      "bytes": 3864
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_04.json",
+      "sha256": "32c99978022f65a4d242c8ae1103b1794c74c0ad264f7d157c76b57ebe5e5210",
+      "bytes": 3870
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_05.json",
+      "sha256": "6472e8252fa325946bd61cc2e10db1c3b243a6a7803b4dd70700f4812f1f5735",
+      "bytes": 3852
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_06.json",
+      "sha256": "5ec87a8ff544f78182e6a75012736494cac23fa03af9b9c5afc0b327a3421a47",
+      "bytes": 3861
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_07.json",
+      "sha256": "cbe3723762907d47e0bb8c1bc03a5ad8d23a789b347ff0a1f3dd62eb21670704",
+      "bytes": 3856
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_08.json",
+      "sha256": "d6fdef4e7d7d5a91091a2387626c029861d6e36dc634b3d409300003850d2f85",
+      "bytes": 3857
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_09.json",
+      "sha256": "d65a13d30116f502ccab752a177000a04b648de42f7016f11b6056c273151251",
+      "bytes": 3872
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_10.json",
+      "sha256": "625cb956d568fdc055a9e1165d84ca890b29028fbd7f295209373a1c5068782e",
+      "bytes": 3854
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_11.json",
+      "sha256": "8eebcf43b48b4479ef73fbf5794a5b10ff463a6e132fcef7557c6dc6ee9f3287",
+      "bytes": 3863
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_12.json",
+      "sha256": "2d4fc6ab71e13288d37f825c289c13f2fc37b7661d37809f1f0ac983fbfa0cdb",
+      "bytes": 3864
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_13.json",
+      "sha256": "f4968073129082dd922d8ab5cda5716825962733b27a1cd321a14d03532173ea",
+      "bytes": 3858
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_14.json",
+      "sha256": "e92afc73a76c14a61f8557f8380c3a44d88a97f29701b1254b864519ae74877a",
+      "bytes": 3883
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_15.json",
+      "sha256": "35bb4577c74a444e41183d522a354260266ba5f745f4ce87aa2c7d52ab66c385",
+      "bytes": 3855
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_16.json",
+      "sha256": "8c31da4daf242c6024eea123e267e2c60c2055b5354b6c15c7a29d354a96c1c7",
+      "bytes": 3856
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_17.json",
+      "sha256": "20915494c4ce80ae2859b1d8dd9a4a4aaaf9bf70942f3d12b4392e7a8690f47f",
+      "bytes": 3862
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_18.json",
+      "sha256": "1449784c3bffd3d64656e67cac23ceaa9aae4292742843488ac8e3c69a94f8e4",
+      "bytes": 3853
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_19.json",
+      "sha256": "8baf27b1cb0a50abc5877752f611f988915921feffcdd3f0d2fa542ddcd3acd3",
+      "bytes": 3878
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/pre_test_freeze.json",
+      "sha256": "7e82fed6c8d04a0a1751ae1de9aa3e875752157c2b0e5829cbeb768796e82f9d",
+      "bytes": 1544
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/preflight.json",
+      "sha256": "7c078f3e07d92f8e71da106831aff075750ddaed526f4139bc8343b9b4cd441f",
+      "bytes": 14004
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_nearoptimal_conditional_seed0_full_cpu_20261103_v1/results.json",
+      "sha256": "a928dddbd9a431a2d6f1cb98a1ee3210484efe1b3115d67ce0237e6ca2a2dbe8",
+      "bytes": 3399
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_apbr_conditional_seed1_cpu_20261103_v1/audit.json",
+      "sha256": "5542bf85ae6ae78a7c90f5a18036cfb37aa2443b06d3bf6f4d21155558d7f530",
+      "bytes": 909
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_apbr_conditional_seed1_cpu_20261103_v1/pre_test_freeze.json",
+      "sha256": "ba00b0aa1a46851b3eb25e985cec5d8c9e701f18f02e8a8f42054a0b3ffe569e",
+      "bytes": 1057
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_apbr_conditional_seed1_cpu_20261103_v1/preflight.json",
+      "sha256": "cfe9bb5cccd359b8dcac095d692177424a54f90848b6733b6976370e0e9c7bac",
+      "bytes": 13246
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_apbr_conditional_seed1_cpu_20261103_v1/results.json",
+      "sha256": "d545fd5c59b515f9c22187eca347050038d6719a1bb8009e354fc52962536e55",
+      "bytes": 2938
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/independent_audit.json",
+      "sha256": "85f1b27a9b46c4c2dc49833a5dd2b225a65bf22645c6248921819b0d09f30f18",
+      "bytes": 2054
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_01.json",
+      "sha256": "5111d644b9794f6c5f74be19fc96e9c8840786844ef835d7b7de8f9665b36eb9",
+      "bytes": 3872
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_02.json",
+      "sha256": "8f843d7f289bb9f69141453173aba6a4b76a33b4e8d3b397bc62e8bc82cfa661",
+      "bytes": 3859
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_03.json",
+      "sha256": "c2ecf84fc1a72a711accabccda69b26db8e4d3aedcbb5b4bef37afb3e341d476",
+      "bytes": 3854
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_04.json",
+      "sha256": "ee6ca9e51c8544ffa136508e6cc7433bb56d4c63d0687603d961ebcd7b1c614c",
+      "bytes": 3878
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_05.json",
+      "sha256": "ea6ff0f2aa7785b1d4377bb1fb62cdff5e46dd4223f5895a62bea487efb9baa6",
+      "bytes": 3847
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_06.json",
+      "sha256": "6e174ccbdbb53112934dd8309a92bda97c0f2130e831fe0efbe40e5af794082b",
+      "bytes": 3860
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_07.json",
+      "sha256": "7fb43d264305684d2d9433a715f394bf4b3a5374f893e279d311563b09cc6973",
+      "bytes": 3861
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_08.json",
+      "sha256": "0fe64408a217e525502c3774ec10a909fb606a3139aa41a9b834edbc4c635dfd",
+      "bytes": 3862
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_09.json",
+      "sha256": "bbddefbf6f33620d5ef46a4acb18418b19c877f81ee8f43ef4cb97ded0f2082d",
+      "bytes": 3867
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_10.json",
+      "sha256": "b73e496c7e83f460ab3e634c31ddd5581fb5ed047cfc6e9760c45ad08545ae0f",
+      "bytes": 3853
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_11.json",
+      "sha256": "832b65598d38b46d9704c12f651c9eabdc363e27ee35d5d73a10a4f841327469",
+      "bytes": 3858
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_12.json",
+      "sha256": "d56e913a467d57494a93547938130c3b01c092f986c527e9ab4d6c31781af538",
+      "bytes": 3854
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_13.json",
+      "sha256": "12773dac6eb07108731986b91f7f44162b5dd9c9b10a1bb137105c1e9f6edca2",
+      "bytes": 3860
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_14.json",
+      "sha256": "6feb869f0b0181ecfe026f3a1972f27f5a245573e6d73cc5abcc4054b297cabf",
+      "bytes": 3886
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_15.json",
+      "sha256": "617059dfb53c2ccf8c2bcc32265b0da8e7a2d32ab9ec361e4bdabf58aa1f2a51",
+      "bytes": 3852
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_16.json",
+      "sha256": "a9c619959c4ddd77e86965087c31152cf29f2b5fd9ad76d20124c7acf3114003",
+      "bytes": 3865
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_17.json",
+      "sha256": "16bb1e584c7324a93e0f83987ff7e9e0952d1b68f345a1adc46c8a1ef799975d",
+      "bytes": 3856
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_18.json",
+      "sha256": "ad9d1d2f47ec614049cea65d8c5162e56545e8a3375220bdc5dddf24844940fb",
+      "bytes": 3855
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/layer_19.json",
+      "sha256": "5d1a3181da99319b9a7adf1665ae198bba8b5c2cc061b6a104cb61009b2d0ff0",
+      "bytes": 3882
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/pre_test_freeze.json",
+      "sha256": "b1dfeffa55cfcba459edb5a77cb962a67790b6c9c38012854dad5c28ed892d1a",
+      "bytes": 1544
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/preflight.json",
+      "sha256": "295b6d013f631529c82597f72667c45207699332b19e85f37d401e2f4fee1765",
+      "bytes": 14029
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/pretest_numerical_audit.json",
+      "sha256": "34428e705e95f14ee52a1c88d7b8d210af135f8bdb9484ec72b95adaeecd7988",
+      "bytes": 395
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed0_full_cpu_20261103_v1/results.json",
+      "sha256": "ce92ab78a2e717b6fac06c4059147d5a74abe43314ebdfbac98bbb68f1f14843",
+      "bytes": 3423
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/independent_audit.json",
+      "sha256": "33c9aa56a7cdb24091838012250e6974f28e80675354c558d0ee4749cd846294",
+      "bytes": 2055
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_01.json",
+      "sha256": "53953ce7e9790054375260495f1ccc93a59bcdf8a1ab8477f9456ca4921ff8c0",
+      "bytes": 3868
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_02.json",
+      "sha256": "d90e0887a200c7535923a251a2c609457e065e3aed35a61a0656f3585c00b7bb",
+      "bytes": 3855
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_03.json",
+      "sha256": "4990e5880fe4654f4f0dfeb99d91dad60420683a3530abae7440c7acfdb3c990",
+      "bytes": 3863
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_04.json",
+      "sha256": "ac79c4700bbb5e164933aaedfc139261f093c482cb66b52e77a03df5aa738a68",
+      "bytes": 3862
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_05.json",
+      "sha256": "192066b577b5ec305e111e4bfcdf4999d4c6b73e9f25f8558689e1696606de72",
+      "bytes": 3841
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_06.json",
+      "sha256": "e5965411c5df41ccb7ab9d7f43e06815b188d6dd6c4068058667049c7fa82292",
+      "bytes": 3848
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_07.json",
+      "sha256": "d6b7f36bb9b8fedc7829b088c50d099659f29bd6d03579dd944d4f1e287cddb7",
+      "bytes": 3851
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_08.json",
+      "sha256": "25c04ada2ed3b561ac99f313cd97a5051c05f03d509dd0664f06938543a759a5",
+      "bytes": 3856
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_09.json",
+      "sha256": "81e4443bee113c1d1283788183b6d273e082cb88a47a8f42f9e5409ad9727446",
+      "bytes": 3874
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_10.json",
+      "sha256": "543c28a6478556b2ebbb09777feb11a157777be2418289de5b2cdc887fc8f17b",
+      "bytes": 3843
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_11.json",
+      "sha256": "35cb390e58130bff977aa5b1ecdda22f8c21e2bc5c47ba6d4be1b4e43bc1ddf7",
+      "bytes": 3851
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_12.json",
+      "sha256": "64a413f06aece1d3af1e276f015212112e6c18bed11e19d1298fa09024b9ef5d",
+      "bytes": 3860
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_13.json",
+      "sha256": "1219e3aceda004cb2f7c09eba06a8b0504054dfc1b18145cb785647e9f3626cd",
+      "bytes": 3855
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_14.json",
+      "sha256": "2c043a7184a94208763bf6d84408c31a0dad4e205476159cec015a91c4d7b173",
+      "bytes": 3869
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_15.json",
+      "sha256": "956af3a1c59074933adf9d2ba305049822690d3584fd3de3635ec94cfbbe2852",
+      "bytes": 3844
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_16.json",
+      "sha256": "6fe4278153fbbefd0ca22fb28968807d0e9a65dc32c37a22e607764f52eb8691",
+      "bytes": 3853
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_17.json",
+      "sha256": "81fbbea6f3d7408593c6d38f61321d1c14032d7aa6b035dfe1fcadf80026861f",
+      "bytes": 3862
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_18.json",
+      "sha256": "45d41d5dd096cf71cbe71ff26160a293b3c605bc9be27495d4eb0f5c331a4610",
+      "bytes": 3853
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/layer_19.json",
+      "sha256": "4a418c621601575998ab917fe8581b5c9a225f3271ac24f311f0ea5c867f3a9f",
+      "bytes": 3867
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/pre_test_freeze.json",
+      "sha256": "b13f255b8984b14c5c75601c82a6092e2c7c60008f4ac57303091511090e6772",
+      "bytes": 1544
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/preflight.json",
+      "sha256": "e8f6c0c6f557d67f7ca992a83b102290e5865e0051d92cd05dc352e673d8b7cd",
+      "bytes": 14196
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/pretest_numerical_audit.json",
+      "sha256": "d5f687aa01af5dcdc24d74e03b3ecc3bc9e581e892788325814e31bf06ab8b8b",
+      "bytes": 395
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed1_full_cpu_20261103_v1/results.json",
+      "sha256": "3a3340c0e3e1ac96b97b1feef7b8503e9b33bf88fdd375b048224a6cb45630f4",
+      "bytes": 3655
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/independent_audit.json",
+      "sha256": "4666ac5dbdfa04fc575c30b9e385997e8e1653bd989f07233a7fd55c5989d2ce",
+      "bytes": 2054
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_01.json",
+      "sha256": "4b1cad2a7da537ad150bbbd33fdcbf1e9066dcd0ccffd59399d96b5fb64a9d67",
+      "bytes": 3872
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_02.json",
+      "sha256": "d8c6782e68be6b91bc280a423b356f3bb9344fece5f9611d43afb87ed5c8b8a9",
+      "bytes": 3858
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_03.json",
+      "sha256": "21feea731f2ec6185c66ad10bd40768b668290faa25a6572145acba067eb8f5d",
+      "bytes": 3863
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_04.json",
+      "sha256": "ab3267070f5c5dcd1f18c19148d230d1687fb9a7a26e426ba8fb8fbac6d537f9",
+      "bytes": 3862
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_05.json",
+      "sha256": "063ae92f11d0505145316bbbc2c2dfdb73b4c46c44c6246e7b0144bf4622817b",
+      "bytes": 3846
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_06.json",
+      "sha256": "dcaf59424e90b977fad8edc3acfdc4ef0e53272d91426562a354d796d817334e",
+      "bytes": 3850
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_07.json",
+      "sha256": "be8a22478ab4e20dad2b2f22adc0e4783aa5a337f009cae5c170053cf201f9b6",
+      "bytes": 3849
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_08.json",
+      "sha256": "fafd125a451e10f1f44bfd8738a4f17ff1539528a4455d4b920d21b21977f480",
+      "bytes": 3844
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_09.json",
+      "sha256": "938a883f38890e93ded6b63fd165f89168e37c2800f5d43c885e3ea3ef7ddb32",
+      "bytes": 3870
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_10.json",
+      "sha256": "e705935e70ca6467ca5297e532d86dbdbcc0433c23132cccd5a78f5e1e6ff461",
+      "bytes": 3850
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_11.json",
+      "sha256": "d0f4452ad0a48e5e6ab596333cbdd22e5a6232c33e2b3a406224d4c522d53f04",
+      "bytes": 3859
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_12.json",
+      "sha256": "48c1cf1421d5e722511c4faddc720754fb9f240f2897104473e03cac81d432b8",
+      "bytes": 3858
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_13.json",
+      "sha256": "d3226b13b982890aee9482792da8b3a1c6b5ee569dffc0d2a3c5a513f88cf9cf",
+      "bytes": 3855
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_14.json",
+      "sha256": "c8d3355bf8cb831775ddc536032ee149e7b5d6b02c0811ea2b6392197da8f850",
+      "bytes": 3879
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_15.json",
+      "sha256": "f31881f97eff7d8eacce967ad5eb4575ee2b42767448e825e84c32c8864593c1",
+      "bytes": 3849
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_16.json",
+      "sha256": "0b895e962f4f749d5a6b4dcfa1cde0d983102d2db54b8e1003285f7d6cad9687",
+      "bytes": 3859
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_17.json",
+      "sha256": "2b8583bbb64a115841221c97bb7949ee5e65e49cd2cecfa139d408e42de11366",
+      "bytes": 3855
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_18.json",
+      "sha256": "dc6416e3638cc6daac6866e0fcdf5b9cf48e0a15fdf32b33b270954e9b017d77",
+      "bytes": 3851
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/layer_19.json",
+      "sha256": "b06ff12cec6ca1caca24c58d867c14b8cbcea5aab3e5ab14ce685b5cc4d633ee",
+      "bytes": 3875
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/pre_test_freeze.json",
+      "sha256": "a98639422a38fc7c2b872ce3e8c3d7c2bdb134d6587cd7b1b683b125c425f53d",
+      "bytes": 1544
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/preflight.json",
+      "sha256": "1b3f741e131233a73e5bf2373c34c997e06aaf079bf11762add86a8ef149556f",
+      "bytes": 14031
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/pretest_numerical_audit.json",
+      "sha256": "f850b6d44cb7a8d7307c746cca74ce64e336da552e29fd981a4c8dc1af6a1190",
+      "bytes": 395
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed2_full_cpu_20261104_v1/results.json",
+      "sha256": "8edcf292243482a68e0cf1d029b6b37c624049decbe68ec73b539625de863563",
+      "bytes": 3656
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/independent_audit.json",
+      "sha256": "ac624308e41493e7378961a2cf9e178a0ea8b3973faaa7b2493365e818790726",
+      "bytes": 2054
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_01.json",
+      "sha256": "a91151574fd1683f026e5f4b31d1912176fb514b5e54d5f74478cafee5612747",
+      "bytes": 3867
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_02.json",
+      "sha256": "f9e3e8e26c303d548e008616895489846b48a7c13ed051a87be9873f9117275c",
+      "bytes": 3866
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_03.json",
+      "sha256": "ee538a077acdace10fbfc826c477b1f3dac6589427daf4fc513db1ea508f7dad",
+      "bytes": 3862
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_04.json",
+      "sha256": "acae58e93e93913390e82cb5e15733ff5680162ccf83c7f0e4a9bb9955d1a6f1",
+      "bytes": 3869
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_05.json",
+      "sha256": "12bb1b5855b46fa19c549d4136decadd5806d20a9070c9b84ac2ab00d7c46de6",
+      "bytes": 3850
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_06.json",
+      "sha256": "704219096aa39fed86e41871c295ba2b387e1a443c64f68c70f46795913c809e",
+      "bytes": 3858
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_07.json",
+      "sha256": "16ff773604dd7b706344f1c4497c004a695b7170c874e015e7dfe8e2528dfa40",
+      "bytes": 3858
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_08.json",
+      "sha256": "22f00478d98c42cb86a6f0b8a30285fc5ab9393cd6423e9e6717fc0f1311cc96",
+      "bytes": 3859
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_09.json",
+      "sha256": "618c526e6054d7852029e6868c5b0a35b10f0f7062935d11627aec09d440349f",
+      "bytes": 3881
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_10.json",
+      "sha256": "ea74773358c7e6e69c0a6af1740035aa4444133ab0b7852a1afcda096697ee6c",
+      "bytes": 3848
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_11.json",
+      "sha256": "cd254ca73e7fc48a53bc009589124f6764850da2ede2374eb18aebf363aedfa4",
+      "bytes": 3860
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_12.json",
+      "sha256": "e7547b77cfaf3fa3f8c722b9ee3e8338b7dccaa6b2fc353cda7241636e5678b8",
+      "bytes": 3868
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_13.json",
+      "sha256": "0951ba0d1dc09491ab687fa1bef1a4a1ceb21337253164d63fb3226c25a7666d",
+      "bytes": 3859
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_14.json",
+      "sha256": "e97253ab25d58ef9b4a27ecd98edaa56cca042adac2f4917b9c43b4780295a60",
+      "bytes": 3875
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_15.json",
+      "sha256": "79934950e3fbcedebe042512900370f17dec62105919408aa653fe7483c89fb7",
+      "bytes": 3847
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_16.json",
+      "sha256": "39ea3f2326757a0456f53b3ac83fca291a10a9a7d3d4561ece2f1ed6b6528c1e",
+      "bytes": 3864
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_17.json",
+      "sha256": "8ac41d900b4c5b173a569773a6d4fc7bcb080561ae534ee6fcf94332816c8c25",
+      "bytes": 3864
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_18.json",
+      "sha256": "2785be3f2c8bfe623225d2f4cbd5f0f1c5f66dbfe6bef4e2fe2a411e6fa6a2a4",
+      "bytes": 3852
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_19.json",
+      "sha256": "32742510df18fcb9caa79dd280310142969e4e8b25239afd74050fbb7badc547",
+      "bytes": 3876
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/pre_test_freeze.json",
+      "sha256": "edd0d8577b82fb06bd50ece9c9173365d7cca44999fdeb34efb3ada1c5917528",
+      "bytes": 1544
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/preflight.json",
+      "sha256": "11a5962bc94364461a5c5f8747f896e13066409e92aa70f9e3522b6d1fcf924c",
+      "bytes": 14031
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/pretest_numerical_audit.json",
+      "sha256": "1a116cb3ff8e2f0ab05d005d5664e203ef153f6b6f8c2baa3ebf7e93dc676cf9",
+      "bytes": 395
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_l2_nearoptimal_conditional_seed3_full_cpu_20261104_v1/results.json",
+      "sha256": "a1598dbe827ffdd44b802e289de30e38e44852465a1ffb53eb9c1d7e6f9ed065",
+      "bytes": 3656
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/independent_audit.json",
+      "sha256": "a4e374ac75c4ab7faff79a6b6400e35789506bc7746651730ddb2337f08d1277",
+      "bytes": 2055
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_01.json",
+      "sha256": "b9d275e4e1d07013937abfdd866f5e9a4403a3384f180f66a7626e3eabf2e32e",
+      "bytes": 3880
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_02.json",
+      "sha256": "0943109d22d47907893a5f62f7ce252a751bbd0374b5f66c6f60ec06cef68b9e",
+      "bytes": 3874
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_03.json",
+      "sha256": "fb3a8949e14a4e4d1f77c2bac770cd848392627bd09cf2a4769194683096c675",
+      "bytes": 3856
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_04.json",
+      "sha256": "9ae201d42933b731d60185d0d8bbb06c01e2587535ed490d67d5b6390121060a",
+      "bytes": 3866
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_05.json",
+      "sha256": "707bc2fc5c87bfb01d2fcf248c88930f91c1d8838bb09c43e7e50b543319d40e",
+      "bytes": 3849
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_06.json",
+      "sha256": "f33bb90968647defa53143c65efb838d5e7b4a51d57f2cc33720a26f04b21ba9",
+      "bytes": 3862
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_07.json",
+      "sha256": "f402a4bbe16123c94f9c17f12f3a3d47069d04ebf3c8aff807ff0c87f510fd22",
+      "bytes": 3862
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_08.json",
+      "sha256": "61a776e8cded63be94b95d57c09e8ae0157870086aa08d7516d69921ebeb2178",
+      "bytes": 3858
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_09.json",
+      "sha256": "f724d4b26e203a019e2a9543ab3e1c7e16c60b4445398e15b91fd7f649b6f37c",
+      "bytes": 3881
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_10.json",
+      "sha256": "ee6e6b35d8396c399107d402b3b1a0369a8d9c577e178ec89bf60f69869e497c",
+      "bytes": 3860
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_11.json",
+      "sha256": "2747f19e0fccbaad61548012f3c1c02cde9dce333dfabe8b0a312ae8bd373110",
+      "bytes": 3852
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_12.json",
+      "sha256": "e03e76b44212930284343cbbbb5539440b7e02f7164c4d384d1134d5c228b172",
+      "bytes": 3861
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_13.json",
+      "sha256": "27028d6d965274a528dcd643b236e3b68e69c270c0fd308b0bf8e98c1e26a3bf",
+      "bytes": 3858
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_14.json",
+      "sha256": "b324ded94c63fa588b265369ece18b15a80c31f864facc5cabd6e7423fe9b0af",
+      "bytes": 3884
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_15.json",
+      "sha256": "8498d91aefcf2f6d7f0ab70a22f97d6e5dadff2eb9ea2462b44929ed2e44756f",
+      "bytes": 3854
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_16.json",
+      "sha256": "03f8f6573c3481268c89b74806a0a1403d757de0049303e17a5085d748ffd283",
+      "bytes": 3861
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_17.json",
+      "sha256": "c821151f4a7cd780bb951e076ba83e79381645e70ca84ea52125aa90d942c76d",
+      "bytes": 3860
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_18.json",
+      "sha256": "7e688bc4760429cd1f69dbfb48fd57b4c222cf288ac560952bf4342e613924a0",
+      "bytes": 3847
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/layer_19.json",
+      "sha256": "270aa6c5da4125f6178f3a4eac75bbd527f70f85ebc2d9989b6bdcff0eb9745b",
+      "bytes": 3878
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/pre_test_freeze.json",
+      "sha256": "340b6f0a5891e71f8e161b32465593270e384dd0cb024ed7d7fa91916b40730d",
+      "bytes": 1544
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/preflight.json",
+      "sha256": "7d47afdb1758bc3b924fa4dc29d32b0badd5aadf02cc7c2b99411d28046ce96a",
+      "bytes": 14003
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/pretest_numerical_audit.json",
+      "sha256": "a5ad70093411051c4c96f48cb5aff41078537f977ed885fedc03c0a8e49db9f6",
+      "bytes": 395
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/apbr_vpr_nearoptimal_conditional_seed3_full_cpu_20261104_v1/results.json",
+      "sha256": "5d14bb2717e7d2a3116f74a547010812a4a8d51f6cc2431d0b09e25e2ef903ad",
+      "bytes": 3625
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_01.json",
+      "sha256": "255cbcddd251522d49c31eab53cc6bc9891a0c3a4dbc87e8d3ec7c7d03658ef2",
+      "bytes": 708
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_02.json",
+      "sha256": "b523038ebb1ae8e88052dd8320ab61a30f00e429f467c937f3714d0319bea631",
+      "bytes": 706
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_03.json",
+      "sha256": "620ed94b4540e2b7584a9742ee45054d3b92209ed359c75272cd6143afe9832d",
+      "bytes": 706
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_04.json",
+      "sha256": "817b6d21dc58954b5f7def4f5c3a91a1dc717e396161b1dcd1497edb7a5197ac",
+      "bytes": 706
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_05.json",
+      "sha256": "0e002340fa7f1fbe5d5919cce9d0bfc02748de6c4667782477915d8494fa5287",
+      "bytes": 703
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_06.json",
+      "sha256": "e2d88f87eb726d3f8b76f08efde9a8bc39ba1e501b11e761bd02b6679b4583fe",
+      "bytes": 706
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_07.json",
+      "sha256": "28e3f5e72b953e1f28130052d9987481516d9403f10fa6331a07be4bb05e94a6",
+      "bytes": 710
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_08.json",
+      "sha256": "61165f592931e4aa1113816b1cd8171cbe5c3abeeb314eba6272bb4355e6451c",
+      "bytes": 706
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_09.json",
+      "sha256": "794c2b96d5a6561b378e8a3a3ab7dc507e84be094abf3c479c91a3abe3716f58",
+      "bytes": 706
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_10.json",
+      "sha256": "cc8be6a617f9daa91c2b13488a2507341be99341354aa2ce8082bda6ac4a9dae",
+      "bytes": 705
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_11.json",
+      "sha256": "4189dfe4c41903478a856b68550ad78661cf5906ac73e1fd07d5edaaa2dfd3fc",
+      "bytes": 703
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_12.json",
+      "sha256": "75b881c6bdc581fccb9b436cd7d1c120b27505434bd784f6cf90745146c1577f",
+      "bytes": 714
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_13.json",
+      "sha256": "d1877fd82b1eb9b3bda7838248a4cf3013ac669a748c3856514eff8e577e857a",
+      "bytes": 701
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_14.json",
+      "sha256": "e6d45b91a7387af2005dc8369749d3eec2103aedadbae5fcfee8d7829efa827f",
+      "bytes": 707
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_15.json",
+      "sha256": "dbe0529a835d83f09fa7bc16084bfd20574107a2e84e70930e0909e2ca376cdf",
+      "bytes": 705
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_16.json",
+      "sha256": "e2cfc902bd82373e3c6165f01d99acfea7053b015ba0a56ba32ec891f291862e",
+      "bytes": 701
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_17.json",
+      "sha256": "4bfa3fd099828c9f404f0f3bd200f8cd38d050eeb3e456ed63b670fd81ff0c48",
+      "bytes": 712
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_18.json",
+      "sha256": "c764178368afbe07e1648e29f68f5578646ff1ec0d93fd991bbc23d5be11bb87",
+      "bytes": 703
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/layer_19.json",
+      "sha256": "cba3813082925bdc20ba22b8a19f33f262704a4a2819e720eab7bd1a9f4df189",
+      "bytes": 703
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/pre_test_freeze.json",
+      "sha256": "29aca908eb4bb39f53208073d68bd70fc28b0cfc04a049c5dd32129671318e3a",
+      "bytes": 278
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_singleton_conditional_seed0_cpu_20261103/results.json",
+      "sha256": "b3014974a7cca963d01164dea1e680f1680844d785f30ed9878ba4fe73968d6f",
+      "bytes": 2122
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/independent_audit.json",
+      "sha256": "ca320df611fc0cee229e66da0a57a438ebc403d071ac3c8c3d1ea0510564ad67",
+      "bytes": 1092
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_01.json",
+      "sha256": "8f5720b5a52dd3bfe6c6cb35a725fbaaaa98c2dd9feca4b7d7cce2d797a6530a",
+      "bytes": 461
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_02.json",
+      "sha256": "ef6595ebe36ea68afed9b3768a7c7243fde121bc80a9bb6cc5c34db461cee4d0",
+      "bytes": 461
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_03.json",
+      "sha256": "41627e1bd613938e04be3ccc9c23807f4f4f3aeef065190ac9c90e0c319b9a7a",
+      "bytes": 461
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_04.json",
+      "sha256": "eeddc6e8c733fc723aa8b79f50b536905f3598d945ea0e9bcef4057dd38988d6",
+      "bytes": 462
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_05.json",
+      "sha256": "4e35237ff514ecd8f32f91df483604d47ba99c122adb77a057bcf9ff00d43cc5",
+      "bytes": 461
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_06.json",
+      "sha256": "c0903e84ca525135490de29e49b1c64722fa0e4cb17c195e892e7bb1004e4b16",
+      "bytes": 461
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_07.json",
+      "sha256": "f5161efe0b712fda875a887ab07e7eeff64f269370d7bbd96c7cf7354f2c6e24",
+      "bytes": 467
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_08.json",
+      "sha256": "a703121e3ba70db3fc15f4d2664b29c1ab843f0359a473d4a660a206af5caf00",
+      "bytes": 461
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_09.json",
+      "sha256": "f6ec6f82f5ea5c144a8119ac6491cda3a3c92055921ee812d6957bfc0a07426f",
+      "bytes": 460
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_10.json",
+      "sha256": "f83fcf9a971e82f1ac02ca9ce68fccec35c0bf8509689dc231db6f4238e44dd9",
+      "bytes": 462
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_11.json",
+      "sha256": "efee517ce575d34c3c1da7c3c08306386bc68933786774dc45e7511563e8e47d",
+      "bytes": 457
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_12.json",
+      "sha256": "3bb61b684f1f3376b0dbada28aed7f7f3d4f9b3d1827dfcd3a3dfbe467f7ca9c",
+      "bytes": 468
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_13.json",
+      "sha256": "b0d91d79a48615990f12dfcbbeb95699e7777b255dab15dcb9a38205d2cbf949",
+      "bytes": 460
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_14.json",
+      "sha256": "acba4f3a6fd4f25cab10f4381746e3d000934a56e3eeeebf9307871ea47b51a9",
+      "bytes": 460
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_15.json",
+      "sha256": "dfb3206e6e2ccb1f133921a776a3590aad6173f39df5bf65e9a1bce82c2c7647",
+      "bytes": 459
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_16.json",
+      "sha256": "2656e08025d80029781c08262994b80a3494770c01c6ffa99b3551b16f2cbf49",
+      "bytes": 460
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_17.json",
+      "sha256": "9286ebed6681b3b0a46a2a9972379e8c54ac6cd143e765cc54c0d711d610fb6f",
+      "bytes": 466
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_18.json",
+      "sha256": "cd35a7c16ef2052e7640ee7bf3ac850fa1ca1d675ac6b2ff9760b6772fc58ab4",
+      "bytes": 458
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/layer_19.json",
+      "sha256": "9d552f6f81c2ba21a7e400dae239c722172a24b878764b8423ac9d0dff9749a9",
+      "bytes": 460
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/pre_test_freeze.json",
+      "sha256": "225d3a7f51b06417ff7fea9bbf7e76de02298738d6f6ba1ce2524b7bfdbdfebf",
+      "bytes": 1093
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/preflight.json",
+      "sha256": "c77401a3f95e047f32f654b3ffd06b5aea22a88a7d393576077ad5d2307224bf",
+      "bytes": 13896
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/replay_comparison.json",
+      "sha256": "4f562c023ef0cf4ec2b9a08eaa94e776212731568f6b5f035e5418e0665bef95",
+      "bytes": 953
+    },
+    {
+      "path": "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/sam_conditional_seed2_newfinal_cpu_20261104_v1/results.json",
+      "sha256": "4de18a8063d73a00d49d9aa81d8a57c41b5d15e270d61d6dc6094fd52500c0de",
+      "bytes": 1751
+    }
+  ],
+  "research_docs": [
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/apbr_l2_nearoptimal_conditional_seed0_20261103/RESULTS.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/apbr_l2_nearoptimal_conditional_seed0_20261103/SHA256SUMS.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/apbr_nearoptimal_conditional_seed0_20261103_v2/ANALYSIS.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/apbr_nearoptimal_conditional_seed0_20261103_v2/CROSS_PARENT_COMPARISON.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/apbr_nearoptimal_conditional_seed0_20261103_v2/CROSS_PARENT_COMPARISON.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/apbr_nearoptimal_conditional_seed0_20261103_v2/FULL_MODEL_REPORT.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/apbr_nearoptimal_conditional_seed0_20261103_v2/PILOT_REPORT.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/apbr_nearoptimal_conditional_seed0_20261103_v2/SHA256SUMS.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/apbr_nearoptimal_conditional_seed0_20261103_v2/SHA256SUMS_FULL.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/ADAPTATION_DECISIONS.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/BASELINE_AUDIT_MATRIX.csv",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/BASELINE_SOURCE_AUDIT.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/CIFAR100_EXPERIMENT_PLAN.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/CONV2D_ADAPTATION_DESIGN.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/ENGINEERING_STATE_REPORT.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/NM_LAYOUT_SEMANTICS.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/NUMERICAL_SMOKE_REPORT.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/TEST_EVIDENCE/SHA256SUMS.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/TEST_EVIDENCE/adapter_tests.environment.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/TEST_EVIDENCE/adapter_tests_v2.environment.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/TEST_EVIDENCE/project_suite.environment.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/TEST_EVIDENCE/project_suite_v2.environment.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/TEST_EVIDENCE/project_suite_v3.environment.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/TEST_EVIDENCE/smoke_results.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/TEST_EVIDENCE/smoke_results_v2.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_baseline_audit_20261026/TEST_EVIDENCE/source_lock.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/PHASE0_GPU_SMOKE_RESULTS.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/PHASE0_SHA256SUMS.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/gpu_query_before_phase0.csv",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/nvidia_smi_after_phase0.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/nvidia_smi_before_phase0.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/phase0_exit_code.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/phase0_finished_at.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/phase0_smoke_help.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/phase0_started_at.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/portable_split_sha256_comparison.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/prepare_protocol_help.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/preportable_uploaded_protocol/CIFAR100_DATA_SPLIT_MANIFEST.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/preportable_uploaded_protocol/indices/bn_only_4096.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/preportable_uploaded_protocol/indices/calibration_1024.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/preportable_uploaded_protocol/indices/train_45000.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/preportable_uploaded_protocol/indices/validation_5000.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recompute_portable_stdout.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recompute_stdout.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recomputed/CIFAR100_DATA_SPLIT_MANIFEST.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recomputed/indices/bn_only_4096.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recomputed/indices/calibration_1024.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recomputed/indices/train_45000.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recomputed/indices/validation_5000.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recomputed_portable/CIFAR100_DATA_SPLIT_MANIFEST.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recomputed_portable/indices/bn_only_4096.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recomputed_portable/indices/calibration_1024.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recomputed_portable/indices/train_45000.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_formal_matrix_20261026/REMOTE_PHASE0_4080S_20261026/split_recomputed_portable/indices/validation_5000.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/CIFAR100_DATA_IDENTITY.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/CIFAR100_MODEL_IDENTITY.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_RESULTS.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/GPU_GATE_RESULTS_LOCAL_NO_CUDA.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/SHA256SUMS_before_data_pass.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/SHA256SUMS_before_remote_gpu_gate.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/SPARSEGPT_GPU_GATE_REPORT_LOCAL_NO_CUDA.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity_before_cross_label_set_fix.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity_before_duplicate_label_check.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity_pending.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/environment.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/environment_decode_failed.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/gpu_gate_before_model_audit_link.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/gpu_gate_data_pending.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/gpu_gate_precondition_corrected.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_before_dataset_hash_link.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_data_pending.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_precondition_corrected.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_superseded.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests.environment.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests_final.environment.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests_rerun.environment.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_RESULTS_REMOTE.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/archive_preflight.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/audit_cifar100_identity_help.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/cuda_matrix_test.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_audit_stdout.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_identity_comparison.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_identity_comparison_path_sensitive.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_identity_comparison_stdout.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_identity_comparison_stdout_v2.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_identity_remote.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/environment.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/gate_exit_code.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/gate_finished.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/gate_started.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/gpu_gate_stdout_stderr.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_audit_stdout.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_identity_comparison.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_identity_comparison_exact.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_identity_comparison_stdout.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_identity_comparison_stdout_v2.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_identity_remote.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/nvidia_smi_after_gate_process_exit.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/nvidia_smi_full.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/nvidia_smi_query.csv",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/nvidia_smi_query_after_gate_process_exit.csv",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/pytest_availability.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/pytest_remote_focused_stdout.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/repository_final_state.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/run_sparsegpt_gate_help.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_RESOURCE_V2/GPU_RESOURCE_ACCEPTANCE_V2.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_RESOURCE_V2/GPU_RESOURCE_GATE_V2_RESULTS.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_RESOURCE_V2/post_exit_samples.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/SHA256SUMS_REMOTE.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/SPARSEGPT_GPU_GATE_REPORT_REMOTE.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/SHA256SUMS.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/cifar100_gpu_gate_20261026/SPARSEGPT_GPU_GATE_REPORT.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/conditional_greedy_obs_seed0_20261103/EXPERIMENT_REPORT.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/conditional_greedy_obs_seed0_20261103/SHA256SUMS.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_apbr_conditional_seed1_20261103/REPORT.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_apbr_conditional_seed1_20261103/SHA256SUMS.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_apbr_l2_conditional_seed01_20261103/COMPARISON.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_apbr_l2_conditional_seed01_20261103/SHA256SUMS.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_apbr_l2_conditional_seed01_20261103/comparison.json",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_apbr_l2_conditional_seed2_20261104/COMPARISON.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_apbr_l2_conditional_seed2_20261104/HANDOFF_NOTE.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_apbr_l2_conditional_seed2_20261104/SHA256SUMS.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_apbr_l2_conditional_seed2_20261104/SHA256SUMS_handoff.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_apbr_l2_conditional_seed3_20261104/SHA256SUMS.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_apbr_l2_conditional_seed3_20261104/STATUS.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_conditional_seed2_newfinal_cpu_20261104/RESULTS.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_conditional_seed2_newfinal_cpu_20261104/SHA256SUMS.txt",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_singleton_conditional_seed0_20261103/EXPERIMENT_REPORT.md",
+    "APBR-post-training-benchmark/vpr_sam_research/experiments/post_training_nm_benchmark/docs/research/sam_singleton_conditional_seed0_20261103/SHA256SUMS.txt"
+  ],
+  "resume_notes": [
+    "No execution during archival. Restore data/checkpoints via recorded SHA256; paths in runners are machine-specific and require deliberate remapping before any future run.",
+    "Native SparseGPT, fixed-mask OBS, physical conditional OBS, tau-window geometry conditional OBS, paper-only direct geometry-first rule are distinct methods.",
+    "Archive original source bytes plus configs and run-specific source hashes; current training script has uncommitted changes, so Git HEAD alone is insufficient source identity.",
+    "Do not upload raw checkpoint datasets or remote-credential helper files into Git. Preserve their local asset manifest and run references."
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "ai-research-writing/paper-state-v1",
+  "mode": "full-paper",
+  "stage": "drafting",
+  "target_venue": "CVPR 2027; author-requested single-column working draft",
+  "main_tex": "main.tex",
+  "bibliography": "references.bib",
+  "required_artifacts": [
+    "TAU_ORIGIN_AUDIT.md",
+    "ALGORITHM_VERSION_MAPPING.md",
+    "RESULT_PROVENANCE_CHECK.md",
+    "NARRATIVE_REVISION_REPORT.md",
+    "PENDING_EXPERIMENTS.md"
+  ],
+  "blockers": [
+    "The geometry-first no-threshold method has no verified evaluation artifacts; manuscript results are PENDING.",
+    "Historical SAM 77.43 paper-cell-to-run mapping remains unverified."
+  ],
+  "build": {
+    "status": "passed",
+    "command": "xelatex -interaction=nonstopmode -halt-on-error -file-line-error main.tex",
+    "pdf": "main.pdf",
+    "external_inputs": [],
+    "input_sha256": "714285e449f97bd94cc4653cef5db77cef9c85a1fb5d47d9e2a27e1726494934",
+    "pdf_sha256": "c41b0c86cc8fb48d50d305a6915017267326745aee2a382e44b68102bab0fde0",
+    "log": "build-attestation.log",
+    "log_sha256": "263565a1c11c881f20b57c937487a36cc024ca6f4b55a240e0084b5b176bc476",
+    "exit_code": 0,
+    "tool_version": "MiKTeX-XeTeX 4.16 (MiKTeX 25.12)",
+    "attestation": "executed",
+    "ran_at": "2026-11-06T06:47:23.581816+00:00"
+  },
+  "author_value_update": {
+    "status": "author-confirmed",
+    "date": "2026-11-06",
+    "record": "review/AUTHOR_VALUE_UPDATE_20261106.md",
+    "new_independent_run_verification": false
+  }
+}

@@ -1,0 +1,50 @@
+
+\section{Feedback Derivation}\label{app:proof}
+Squared perturbation coordinates are proportional to $a_i^4g_i^2$, giving Eq.~\eqref{eq:softmax}. A fixed point with $\gamma>0$ requires $p_i=1/d$. Thus $4s_i+2\log|g_i|$ is constant. Enforcing $\sum_i s_i=0$ yields Proposition~\ref{prop:fixed}.
+
+Differentiating the shares gives $D_sp=4(\operatorname{diag}(p)-pp^\top)$, so the update Jacobian is
+\begin{equation}
+J=I-4\gamma d(\operatorname{diag}(p)-pp^\top).
+\end{equation}
+At $p=\mathbf1/d$, $J=I-4\gamma(I-\mathbf1\mathbf1^\top/d)$. Every zero-sum direction has eigenvalue $1-4\gamma$, giving $|1-4\gamma|<1$ precisely when $0<\gamma<1/2$. The common-scale direction has eigenvalue one and is excluded by the zero-sum constraint. If a fixed gradient coordinate is zero while another is nonzero, its share is zero and its log-scale increases by $\gamma$ each step; the component-wise nonzero assumption is required for this interior fixed point.
+
+For the training perturbation $\epsilon$ in Eq.~\eqref{eq:epsilon}, the linearized loss change is
+\begin{equation}\label{eq:training-linear-bound}
+g^\top\epsilon=\rho\frac{g^\top A^2g}{\norm{A^2g}}\le\rho\norm g,
+\end{equation}
+by Cauchy--Schwarz. Standard SAM maximizes the linearized loss on the sphere; APBR-SAM uses the learned state to reweight that direction.
+
+
+\section{Pruning-Loss Bound: Complete Proof}\label{app:pruning-proof}
+This appendix proves Proposition~\ref{prop:pruning-loss} and Corollary~\ref{cor:mask-bound} for the deletion displacement $\delta_m$. The training perturbation $\epsilon$ in Eq.~\eqref{eq:training-linear-bound} is a different vector.
+
+\begin{proof}[Proof of Proposition~\ref{prop:pruning-loss}]
+Fix any $m\in\mathcal M$ and set $q_m=A^{-1}\delta_m$ and $h_m(t)=\mathcal L(w+t\delta_m)$. Since $A$ is positive diagonal, it is invertible and $\delta_m=Aq_m$. Along the candidate segment,
+\begin{align}\label{eq:deletion-path-derivatives}
+h_m'(0)&=g^\top\delta_m=(Ag)^\top q_m,\\
+h_m''(t)&=q_m^\top A\nabla^2\mathcal L(w+t\delta_m)Aq_m
+\le\beta_A\|q_m\|_2^2.\notag
+\end{align}
+The last inequality follows from the spectral-norm bound in Eq.~\eqref{eq:shared-curvature}. Define $r_m(t)=h_m(t)-h_m(0)-t h_m'(0)-(\beta_A/2)t^2\|q_m\|_2^2$. Its second derivative is nonpositive. The mean value theorem therefore makes $r_m'$ nonincreasing; since $r_m(0)=r_m'(0)=0$, it follows that $r_m(1)\le0$. Thus
+\begin{equation}\label{eq:pruning-taylor-bound}
+\mathcal L(w+\delta_m)-\mathcal L(w)
+\le(Ag)^\top q_m+\frac{\beta_A}{2}\|q_m\|_2^2.
+\end{equation}
+Applying $(Ag)^\top q_m\le\|Ag\|_2\|q_m\|_2$ and $\|q_m\|_2^2=C_A(m)$ gives Eq.~\eqref{eq:pruning-loss-bound}. The case $C_A(m)=0$ has $\delta_m=0$ and both sides equal zero. The same $\beta_A$ applies to every mask by assumption, so the conclusion holds throughout $\mathcal M$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:mask-bound}]
+For any $0\le u\le v$,
+\begin{equation}\label{eq:bound-monotonicity}
+U_A(v)-U_A(u)=\|Ag\|_2(\sqrt v-\sqrt u)+\frac{\beta_A}{2}(v-u)\ge0.
+\end{equation}
+For independent N:M groups, Eq.~\eqref{eq:deletion} is a sum of squared scores over deleted coordinates. In each group, keeping its $N$ largest scores minimizes that group's contribution. Summing these groupwise minima minimizes $C_A(m)$ over the admissible family; monotonicity then minimizes the same function $U_A(C_A(m))$. Equal scores can yield multiple minimizing masks, resolved by the prescribed tie rule. The comparison holds with $w,A,g,\beta_A$ fixed, and orders upper bounds rather than realized losses.
+\end{proof}
+
+
+\section{Evaluation Protocol}\label{app:reproduction}
+The protocol uses the official CIFAR-100 training and test splits with 50,000 and 10,000 images, respectively. The dense parent is the fixed final checkpoint after 200 epochs. All methods use the same 19 eligible internal Conv2d layers, output-row-contiguous OIHW groups, and dense incomplete tails. The input stem, classifier, BN affine parameters, and biases are excluded from pruning.
+
+The geometry-first evaluation uses the matched dense weights and log-scales, fixed training calibration identities, and frozen reconstruction settings. Calibration and pruning retain the dense parent's BN buffers. After all masks and compensated checkpoints are frozen, each final artifact is evaluated once on the test split. No recovery training is included.
+
+At each group entrance, the current physical weights include updates committed by preceding groups. The active inverse in Eq.~\eqref{eq:active-inverse} is recomputed mathematically for the remaining free coordinates; its shared Cholesky-tail representation avoids a separate inverse for each output row. All exact selection ties use the lower stored coordinate index. After the selected pair is compensated, the full quartet is frozen before advancing.
