@@ -1,0 +1,230 @@
+{
+  "status": "PASS",
+  "seed": 0,
+  "verified_transfer": {
+    "geo_obs_fixed_l2_seed0_v1": {
+      "verified_files": 49,
+      "manifest_sha256": "3e33eaaf8f9124206ca7b6b54124d9546fe733be5e9e5702e3e437e12034841c"
+    },
+    "geo_dynamic_fixed_l2_seed0_v1": {
+      "verified_files": 113,
+      "manifest_sha256": "648539b95b9e38510eccebb878060d3f213870fdf72e37cb82c4ef480bad313b"
+    },
+    "geo_dynamic_vpr_seed0_v1": {
+      "verified_files": 113,
+      "manifest_sha256": "6eb9f2ff4e3189edbf54135c5e51493951dc6fcf648b5876f9ac4e0a35e5134a"
+    }
+  },
+  "references": {
+    "apbr_fixed_l2_dense": {
+      "endpoint": "dense",
+      "accuracy_percent": 78.91,
+      "cross_entropy": 0.8072,
+      "checkpoint_sha256": "d68fbffc5f862be07656c5b45b8dcde2a5411865c0e5e03f2f45c2f97926b742",
+      "verified": true
+    },
+    "apbr_fixed_l2_native_sparsegpt": {
+      "endpoint": "original_sparsegpt_native",
+      "accuracy_percent": 77.12,
+      "cross_entropy": 0.86602,
+      "checkpoint_sha256": "efc18374262af5b752fdf03b27dac65256a75daefaf232e0b4a804576c9c8ada",
+      "verified": true
+    },
+    "apbr_vpr_dense": {
+      "status": "PASS",
+      "protocol_id": "cifar100_50k10k_final_v1",
+      "checkpoint_role": "dense_final",
+      "checkpoint_path": "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/cifar100_50k10k_final_v1/seed0/apbr_sam/final_epoch_200.pt",
+      "checkpoint_sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+      "test_pickle_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+      "test_count": 10000,
+      "test_accuracy": 0.7868,
+      "test_loss": 0.8031096732139588,
+      "selection_performed": false,
+      "hyperparameter_change_performed": false,
+      "elapsed_seconds": 1.1514152819290757,
+      "peak_allocated_bytes": 223524352,
+      "peak_reserved_bytes": 245366784
+    },
+    "apbr_vpr_native_sparsegpt": {
+      "status": "PASS",
+      "protocol_id": "cifar100_50k10k_final_v1",
+      "checkpoint_role": "raw_hard",
+      "checkpoint_path": "/root/autodl-tmp/apbr_original_sparsegpt_20261030/artifacts/seed0/apbr_sam_original_sparsegpt/sparsegpt_final.pt",
+      "checkpoint_sha256": "0ff0eb2f8a9371ab47f39a8a8d0ea8b237e4f0ed89eb6ff583f05a4d4d1d6e04",
+      "test_pickle_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+      "test_count": 10000,
+      "test_accuracy": 0.7699,
+      "test_loss": 0.8581003943443298,
+      "selection_performed": false,
+      "hyperparameter_change_performed": false,
+      "elapsed_seconds": 0.8129437938332558,
+      "peak_allocated_bytes": 257078784,
+      "peak_reserved_bytes": 356515840
+    },
+    "sam_native_sparsegpt": {
+      "status": "PASS",
+      "protocol_id": "cifar100_50k10k_final_v1",
+      "checkpoint_role": "raw_hard",
+      "checkpoint_path": "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/artifacts/cifar100_50k10k_final_v1/seed0/methods/sparsegpt/raw_hard.pt",
+      "checkpoint_sha256": "77c6ab8a4468842ba211dec422db81f14933ea1403b9c9c35883463e321b7bcf",
+      "test_pickle_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+      "test_count": 10000,
+      "test_accuracy": 0.7747,
+      "test_loss": 0.8502597255706787,
+      "selection_performed": false,
+      "hyperparameter_change_performed": false,
+      "elapsed_seconds": 1.0018182187341154,
+      "peak_allocated_bytes": 223524352,
+      "peak_reserved_bytes": 245366784
+    }
+  },
+  "static_l2": {
+    "group_obs": {
+      "accuracy_percent": 76.36,
+      "ce": 0.8972332360744476,
+      "checkpoint_sha256": "6eceebc1e3f2bda665ee251e3d5b94e71ca9f878051ccc0c68ab987a9352ab78",
+      "mask_sha256": "27dcce9d75f9c3a2ca1ef6fa955389bf2da09a9888c61fbad0cd54dc6caf56b9",
+      "pruning_compensation_seconds": 2.779077176004648
+    },
+    "geo_obs": {
+      "accuracy_percent": 76.45,
+      "ce": 0.8958220355033875,
+      "checkpoint_sha256": "3788d48fa6df28c26712dafaf7e815292eb7be5352c7f311dfb9200be37e4293",
+      "mask_sha256": "8e1b576171b00ac94734cc2220fe4c895a8e056dd58446137d3bb993762d08d0",
+      "pruning_compensation_seconds": 5.76083829253912
+    }
+  },
+  "dynamic_l2": {
+    "dynamic_group_obs": {
+      "accuracy_percent": 77.61,
+      "ce": 0.8362920593261719,
+      "checkpoint_sha256": "33cdc76e6f6b8cf580576bda4d882bc6125ce441ea063ab253e1caeb0ee46da4",
+      "mask_sha256": "06b733626c5d474d1c0590d1e251e0579ce001da8c3fe480c4e34ff4b78a6257",
+      "pruning_compensation_seconds": 5.167114516720176
+    },
+    "geo_select_std_comp": {
+      "accuracy_percent": 77.72,
+      "ce": 0.8354762056350707,
+      "checkpoint_sha256": "cbb7aef4f025a43e4778eaf1696db8434ed54ae0fced53011aa49215af958b29",
+      "mask_sha256": "1ccb7fc318772f5276628c5fba9b3393c409964ca256969500ca05574fbcfd7c",
+      "pruning_compensation_seconds": 4.961736287921667
+    },
+    "geo_full": {
+      "accuracy_percent": 77.68,
+      "ce": 0.8358988278865814,
+      "checkpoint_sha256": "cc215bc93f66123a33057676842898c1f36c5911cec366350d870864643e9f38",
+      "mask_sha256": "07846e52d0417bb6af83990c1fc168daa7d98096fc3ca096aa5d3dbf2579d6cf",
+      "pruning_compensation_seconds": 4.913805488497019
+    },
+    "shuffled_geo_select": {
+      "accuracy_percent": 77.58,
+      "ce": 0.8363970432281495,
+      "checkpoint_sha256": "9aced9f0d6be5678441f8c9af5466fa5f94b4eb53f769ecc680dd26e9ed3bbda",
+      "mask_sha256": "7e5afdcd5e470e5357034be6f6cd0a407c1cb44814ba2e3e71b8909b620e0935",
+      "pruning_compensation_seconds": 4.9323170986026525
+    },
+    "shuffled_geo_full": {
+      "accuracy_percent": 77.69,
+      "ce": 0.8370765768051147,
+      "checkpoint_sha256": "4e25c13c6b7d50eef71130e1373c8fd061844f6e3d25780c17c8af211aa3991b",
+      "mask_sha256": "0dd29389fccd4cb358edabd28a14ff473a6185936176693d2bbfa63b6c4da9e1",
+      "pruning_compensation_seconds": 4.885184047743678
+    }
+  },
+  "dynamic_vpr": {
+    "dynamic_group_obs": {
+      "accuracy_percent": 77.86,
+      "ce": 0.8298147562980652,
+      "checkpoint_sha256": "60b09d9d824ebe70cf8d9c94fa27cb21217da3c85f7fbdec70d378f4fc22af51",
+      "mask_sha256": "601676a71a676e0d20847fb2c0fd42d9336ad4c87d3f093fcfa1ea049de54058",
+      "pruning_compensation_seconds": 5.170233407989144
+    },
+    "geo_select_std_comp": {
+      "accuracy_percent": 77.83,
+      "ce": 0.8281950122833251,
+      "checkpoint_sha256": "da72f3875dcf43af170b59975ba1edc1a1a99b8e0e86b6a893e2ca58063afc16",
+      "mask_sha256": "50b4ef33579277355078283e9263bc479cdfbb892fdeb430e8b04e208338958a",
+      "pruning_compensation_seconds": 4.929753810167313
+    },
+    "geo_full": {
+      "accuracy_percent": 77.86,
+      "ce": 0.8267444700241089,
+      "checkpoint_sha256": "265ef367b152d70a71b1c40b8d06c772bb6f78932cadd29c303b77df677203cf",
+      "mask_sha256": "c953d436bba8addb93a28e5fda7c43013e47e5d84c56fa4a402400179817799a",
+      "pruning_compensation_seconds": 4.884168805554509
+    },
+    "shuffled_geo_select": {
+      "accuracy_percent": 77.8,
+      "ce": 0.830283266544342,
+      "checkpoint_sha256": "9512d58fc92196ad784482e6357d09a1447d53366631d0237c8447eb13384848",
+      "mask_sha256": "40c63b92fcf12ac10334906c6f4e53c17a6c703ef515dd485187a0f0b3b20539",
+      "pruning_compensation_seconds": 4.939748959615827
+    },
+    "shuffled_geo_full": {
+      "accuracy_percent": 77.76,
+      "ce": 0.8304737457275391,
+      "checkpoint_sha256": "044fe0f12393c0036541700c7d570f2649d33fbddf885330095c0e23dc5d0b70",
+      "mask_sha256": "77a37a0f6eff36953e667d2653f7fd9d031fc94113de28d03d5dfd224136e2c5",
+      "pruning_compensation_seconds": 4.845114396885037
+    }
+  },
+  "mask_disagreement": {
+    "fixed_l2": {
+      "geo_select_std_comp": {
+        "changed_groups": 115818,
+        "total_groups": 2789376,
+        "changed_percent": 4.152111439977974
+      },
+      "geo_full": {
+        "changed_groups": 134595,
+        "total_groups": 2789376,
+        "changed_percent": 4.825272749174009
+      },
+      "shuffled_geo_select": {
+        "changed_groups": 122584,
+        "total_groups": 2789376,
+        "changed_percent": 4.394674651248164
+      },
+      "shuffled_geo_full": {
+        "changed_groups": 140317,
+        "total_groups": 2789376,
+        "changed_percent": 5.030408234673275
+      }
+    },
+    "vpr": {
+      "geo_select_std_comp": {
+        "changed_groups": 113636,
+        "total_groups": 2789376,
+        "changed_percent": 4.073886059104258
+      },
+      "geo_full": {
+        "changed_groups": 131013,
+        "total_groups": 2789376,
+        "changed_percent": 4.696856931442731
+      },
+      "shuffled_geo_select": {
+        "changed_groups": 120864,
+        "total_groups": 2789376,
+        "changed_percent": 4.3330121145374445
+      },
+      "shuffled_geo_full": {
+        "changed_groups": 135119,
+        "total_groups": 2789376,
+        "changed_percent": 4.844058312683553
+      }
+    }
+  },
+  "paired_differences": {
+    "l2_geo_select_minus_dynamic_group_pp": 0.10999999999999943,
+    "l2_geo_select_minus_shuffled_pp": 0.14000000000000057,
+    "vpr_geo_select_minus_dynamic_group_pp": -0.030000000000001137,
+    "vpr_geo_select_minus_shuffled_pp": 0.030000000000001137,
+    "l2_dynamic_group_minus_native_sparsegpt_pp": 0.4899999999999949,
+    "vpr_dynamic_group_minus_native_sparsegpt_pp": 0.8699999999999903,
+    "l2_geo_select_minus_different_parent_sam_native_pp": 0.25,
+    "vpr_geo_select_minus_different_parent_sam_native_pp": 0.35999999999999943,
+    "vpr_geo_full_minus_different_parent_sam_native_pp": 0.39000000000000057
+  },
+  "interpretation": "Single-seed exploratory comparison; cross-parent values are not geometry-only causal estimates."
+}

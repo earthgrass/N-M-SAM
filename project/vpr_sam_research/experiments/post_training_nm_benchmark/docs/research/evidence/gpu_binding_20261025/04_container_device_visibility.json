@@ -1,0 +1,7 @@
+{
+  "label": "04_container_device_visibility",
+  "command": "/root/miniconda3/bin/python -B - <<'PY'\nimport os,pathlib,json\nprint(json.dumps({'NVIDIA_VISIBLE_DEVICES':os.environ.get('NVIDIA_VISIBLE_DEVICES'),'CUDA_VISIBLE_DEVICES':os.environ.get('CUDA_VISIBLE_DEVICES'),'device_nodes':[str(p) for p in pathlib.Path('/dev').glob('nvidia*')]},indent=2))\nfound=[];denied=0\nfor proc in pathlib.Path('/proc').iterdir():\n if not proc.name.isdigit():continue\n try:\n  for fd in (proc/'fd').iterdir():\n   try:target=os.readlink(fd)\n   except OSError:continue\n   if target.startswith('/dev/nvidia'):\n    found.append({'pid':int(proc.name),'comm':(proc/'comm').read_text().strip(),'device':target})\n except (PermissionError,FileNotFoundError):denied+=1\nprint(json.dumps({'container_visible_device_holders':found,'unreadable_process_fd_directories':denied,'host_pid_namespace_entered':False},indent=2))\n\nPY\nnvidia-smi --query-gpu=accounting.mode,compute_mode --format=csv,noheader",
+  "exit_code": 0,
+  "stdout": "{\n  \"NVIDIA_VISIBLE_DEVICES\": null,\n  \"CUDA_VISIBLE_DEVICES\": null,\n  \"device_nodes\": [\n    \"/dev/nvidia-caps\",\n    \"/dev/nvidiactl\",\n    \"/dev/nvidia-uvm-tools\",\n    \"/dev/nvidia-uvm\",\n    \"/dev/nvidia1\"\n  ]\n}\n{\n  \"container_visible_device_holders\": [],\n  \"unreadable_process_fd_directories\": 0,\n  \"host_pid_namespace_entered\": false\n}\nDisabled, Default\n",
+  "stderr": ""
+}

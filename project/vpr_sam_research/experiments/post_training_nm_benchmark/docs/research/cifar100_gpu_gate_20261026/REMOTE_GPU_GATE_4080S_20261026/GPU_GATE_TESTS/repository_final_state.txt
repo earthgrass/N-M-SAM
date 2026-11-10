@@ -1,0 +1,82 @@
+repo_root=/root/autodl-tmp/cifar100_gate_transfer/project
+branch=research/post-training-nm-benchmark
+head=9ff061a009e19e619a8a8ae3f5b08b494c83b8d0
+protected_file_sha256:
+befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71  benchmark/model.py
+92433dbfd3b768b28922b89954d76fde7c3a6fdd23e661622ac248526b44678f  benchmark/nm.py
+0681675db4e8d14e2d3b2205c2090e4b9f838db4eb8bfd9e0b70092fe073665c  benchmark/obc.py
+protected_file_diff_begin:
+protected_file_diff_end
+status:
+?? baseline_adapters/__init__.py
+?? baseline_adapters/cifar100_model.py
+?? baseline_adapters/common/__init__.py
+?? baseline_adapters/common/conv2d.py
+?? baseline_adapters/common/nm.py
+?? baseline_adapters/rose/__init__.py
+?? baseline_adapters/rose/adapter.py
+?? baseline_adapters/sparsegpt/__init__.py
+?? baseline_adapters/sparsegpt/adapter.py
+?? baseline_adapters/wanda/__init__.py
+?? baseline_adapters/wanda/adapter.py
+?? docs/research/cifar100_gpu_gate_20261026/CIFAR100_DATA_IDENTITY.md
+?? docs/research/cifar100_gpu_gate_20261026/CIFAR100_MODEL_IDENTITY.md
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_RESULTS.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/SHA256SUMS_before_data_pass.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity_before_cross_label_set_fix.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity_before_duplicate_label_check.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/dataset_identity_pending.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/environment.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/environment_decode_failed.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/gpu_gate_before_model_audit_link.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/gpu_gate_data_pending.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/gpu_gate_precondition_corrected.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_before_dataset_hash_link.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_data_pending.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_precondition_corrected.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/model_identity_superseded.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests.environment.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests.xml
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests_final.environment.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests_final.xml
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests_rerun.environment.json
+?? docs/research/cifar100_gpu_gate_20261026/GPU_GATE_TESTS/pytest_tests_rerun.xml
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_RESULTS_REMOTE.json
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/archive_preflight.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/audit_cifar100_identity_help.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/cuda_matrix_test.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_audit_stdout.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_identity_comparison.json
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_identity_comparison_path_sensitive.json
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_identity_comparison_stdout.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_identity_comparison_stdout_v2.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/dataset_identity_remote.json
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/environment.json
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/gate_exit_code.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/gate_finished.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/gate_started.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/gpu_gate_stdout_stderr.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_audit_stdout.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_identity_comparison.json
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_identity_comparison_exact.json
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_identity_comparison_stdout.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_identity_comparison_stdout_v2.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/model_identity_remote.json
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/nvidia_smi_after_gate_process_exit.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/nvidia_smi_full.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/nvidia_smi_query.csv
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/nvidia_smi_query_after_gate_process_exit.csv
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/pytest_remote_focused_stdout.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/repository_final_state.txt
+?? docs/research/cifar100_gpu_gate_20261026/REMOTE_GPU_GATE_4080S_20261026/GPU_GATE_TESTS/run_sparsegpt_gate_help.txt
+?? docs/research/cifar100_gpu_gate_20261026/SHA256SUMS.json
+?? docs/research/cifar100_gpu_gate_20261026/SPARSEGPT_GPU_GATE_REPORT.md
+?? scripts/audit_cifar100_identity.py
+?? scripts/audit_cifar100_model_identity.py
+?? scripts/capture_cifar100_gate_environment.py
+?? scripts/run_sparsegpt_single_layer_gpu_gate.py
+?? scripts/write_cifar100_gate_sha256_manifest.py
+?? tests/test_cifar100_baseline_adapters.py
+?? tests/test_cifar100_identity_gpu_gate.py

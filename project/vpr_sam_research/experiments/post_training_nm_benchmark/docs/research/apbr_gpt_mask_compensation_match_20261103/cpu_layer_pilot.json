@@ -1,0 +1,80 @@
+{
+  "status": "CPU_SINGLE_LAYER_PILOT_ONLY",
+  "layer": "layer1.0.conv1",
+  "train_sample_ids": [
+    2234,
+    44177,
+    45791,
+    38615,
+    13656,
+    28030,
+    9091,
+    34340,
+    13950,
+    6513,
+    19262,
+    23407,
+    0,
+    26778,
+    35922,
+    27069,
+    9215,
+    9712,
+    865,
+    14184,
+    12246,
+    44417,
+    12650,
+    9930,
+    22811,
+    23390,
+    24272,
+    2320,
+    22682,
+    26259,
+    41544,
+    7723
+  ],
+  "train_sample_count": 32,
+  "hessian_shape": [
+    576,
+    576
+  ],
+  "parent_sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+  "apbr_mask_file_sha256": "74ea702356b6cb3f10ad34985ca8de6757ccb80702cced3debe4ec5936b9b9b3",
+  "gpt_mask_file_sha256": "aea9e43dfe90f0e5cfa137769648e13a72d5971362a8291e81e3d7d565a217e1",
+  "obs_config": {
+    "algorithm": "sparsegpt_ordered_fixed_external_mask",
+    "compute_dtype": "float32",
+    "percdamp": 0.01,
+    "blocksize": 128,
+    "dynamic_mask_selection": false,
+    "recovery_epochs": 0
+  },
+  "results": {
+    "apbr": {
+      "raw_physical_quadratic_error": 0.18871166708387282,
+      "obs_physical_quadratic_error": 0.012110295030826636,
+      "survivor_changed_count": 18391,
+      "deleted_exact_zero": true,
+      "finite": true,
+      "damp": 0.0045303176157176495,
+      "decomposition_seconds": 0.013265900081023574,
+      "compensation_seconds": 0.029613800114020705,
+      "wall_seconds": 0.04645509994588792
+    },
+    "gpt": {
+      "raw_physical_quadratic_error": 0.18917867889750217,
+      "obs_physical_quadratic_error": 0.006273838238970567,
+      "survivor_changed_count": 18400,
+      "deleted_exact_zero": true,
+      "finite": true,
+      "damp": 0.0045303176157176495,
+      "decomposition_seconds": 0.001734099816530943,
+      "compensation_seconds": 0.023350500036031008,
+      "wall_seconds": 0.02637819992378354
+    }
+  },
+  "test_accessed": false,
+  "full_model_accuracy_measured": false
+}

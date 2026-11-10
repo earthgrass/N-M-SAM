@@ -1,0 +1,101 @@
+--- a/CNN_pruning/prune/SNOWS.py
++++ b/CNN_pruning/prune/SNOWS.py
+@@ -1,3 +1,4 @@
++from benchmark.snows_step_result import SNOWSSolverResult, ensure_step_finite, record_step
+ import numpy as np
+ import torch
+ import torch.nn as nn
+@@ -147,6 +148,7 @@
+     getattr(block_sp, conv_layer).weight.data = w_warm * Z # Apply the initial mask
+     model_update = replace_func(model_update, block_number, block_sp)
+ 
++    line_search_trace = []
+     loss_history = []
+     
+     # Ensure the number of available blocks does not exceed actual number of layers
+@@ -255,8 +257,12 @@
+ 
+             sub_model_sparse = get_submodel(model_update, num_blocks, block_number)
+ 
++            ensure_step_finite(getattr(sub_model_sparse[mod_num], conv_layer).weight, W_original, input_weight=W_original, gradient=grad_W, validation_gradient=grad_W_val, direction=full_newton_step, loss=last_batch_loss_pruned, gradient_norm=grad_W.norm(), validation_gradient_norm=grad_W_val.norm(), direction_norm=full_newton_step.norm(), gradient_dot_direction=torch.dot(grad_W.flatten(), full_newton_step.flatten()))
++            step_accepted = False
+             for bt in range(max_backtracking_steps):
++                attempted_alpha = alpha
+                 W_new = W_original + alpha * full_newton_step
++                ensure_step_finite(getattr(sub_model_sparse[mod_num], conv_layer).weight, W_original, candidate=W_new)
+ 
+                 with torch.no_grad():
+                     getattr(sub_model_sparse[mod_num], conv_layer).weight.data = W_new
+@@ -268,7 +274,9 @@
+                 last_batch_loss_pruned_new = sum(mse_loss(last_batch_ydata_dense[i], last_batch_ydata_pruned[i]) for i in range(min_length)).item()
+ 
+                 # Check if the Armijo condition is satisfied
++                ensure_step_finite(getattr(sub_model_sparse[mod_num], conv_layer).weight, W_original, candidate_loss=last_batch_loss_pruned_new)
+                 if last_batch_loss_pruned_new <= last_batch_loss_pruned + c * alpha * torch.dot(grad_W.flatten(), full_newton_step.flatten()):
++                    step_accepted = True
+                     break
+                 else:
+                     # Reduce the step size and continue backtracking
+@@ -280,7 +288,8 @@
+                         getattr(sub_model_sparse[mod_num], conv_layer).weight.data = W_original
+ 
+             with torch.no_grad():
+-                getattr(sub_model_sparse[mod_num], conv_layer).weight.data = W_new
++                getattr(sub_model_sparse[mod_num], conv_layer).weight.data = W_new if step_accepted else W_original
++            line_search_trace.append(record_step(step_accepted, bt + 1, attempted_alpha, last_batch_loss_pruned, last_batch_loss_pruned_new, grad_W, full_newton_step, grad_W_val))
+ 
+             model_update = replace_func(model_update, block_number, sub_model_sparse[mod_num])
+ 
+@@ -298,9 +307,9 @@
+                 break
+ 
+             if total_batches >= max_steps:
+-                return getattr(sub_model_sparse[mod_num], conv_layer).weight.data, current_loss
+-
+-    return getattr(sub_model_sparse[mod_num], conv_layer).weight.data, current_loss
++                return SNOWSSolverResult(getattr(sub_model_sparse[mod_num], conv_layer).weight.data, current_loss, line_search_trace)
++
++    return SNOWSSolverResult(getattr(sub_model_sparse[mod_num], conv_layer).weight.data, current_loss, line_search_trace)
+ 
+ 
+ def register_hooks_for_blocks(sub_model_dense, sub_model_sparse, conv_layer, k_step, num_blocks, outputs_to_reconstruct, dense_hooks, sparse_hooks):
+--- a/CNN_pruning/prune/Layer_pruner_new.py
++++ b/CNN_pruning/prune/Layer_pruner_new.py
+@@ -303,7 +303,7 @@
+                         w_sol = w_sol.T.reshape(-1).reshape(param_size).to(device).to(torch.float32)
+                     mask = (torch.abs(w_sol) > 0).float()
+                     block_count = get_block_number_for_param(self.layerparams, cur_module)
+-                    w_sol, _ = solve_for_W_given_Z(
++                    solver_result = solve_for_W_given_Z(
+                         Z=mask,
+                         model=self.model,
+                         model_update=model_update,
+@@ -322,6 +322,9 @@
+                         CG_iterations=max_CG_iterations,
+                         stagnation_threshold=stagnation_threshold
+                     )
++                    w_sol, _ = solver_result
++                    self.solver_diagnostics = getattr(self, 'solver_diagnostics', [])
++                    self.solver_diagnostics.append({'status': solver_result.status, 'line_search': solver_result.line_search})
+                 else:
+                     w_sol = w_var
+ 
+@@ -617,7 +620,7 @@
+                         mask = (torch.abs(w_sol) > 0).float()
+                         w_sol = w_sol * mask
+                     if 'fc' not in conv_layer:
+-                        w_sol, _ = solve_for_W_given_Z(
++                        solver_result = solve_for_W_given_Z(
+                             Z=mask,
+                             model=self.model,
+                             model_update=model_update,
+@@ -636,6 +639,9 @@
+                             CG_iterations=max_CG_iterations,
+                             max_steps=max_steps
+                         )
++                        w_sol, _ = solver_result
++                        self.solver_diagnostics = getattr(self, 'solver_diagnostics', [])
++                        self.solver_diagnostics.append({'status': solver_result.status, 'line_search': solver_result.line_search})
+                     else:
+                         w_sol = w_var
+                 else:

@@ -1,0 +1,74 @@
+{
+  "methods": {
+    "OBC": {
+      "status": "BLOCKED_CALIBRATION_APPROVAL",
+      "reasons": [
+        "BLOCKED_CONFIG_REVIEW",
+        "BLOCKED_CALIBRATION_APPROVAL: Calibration budget/indices/rounds are pending user decision",
+        "BLOCKED_CONFIG_REVIEW: current source/config not reviewed and frozen",
+        "BLOCKED_CONFIG_REVIEW: current pilot input hash not freshly verified"
+      ],
+      "cuda_acceptance": "NOT_RUN"
+    },
+    "SNOWS": {
+      "status": "BLOCKED_SOURCE",
+      "reasons": [
+        "controlled kernels are not the complete solver",
+        "unresolved Armijo rejected-step semantics",
+        "CIFAR18 hook bridge and explicit-zero Mask unverified",
+        "calibration/optimization budget unapproved"
+      ],
+      "cuda_acceptance": "NOT_RUN"
+    }
+  },
+  "source": {
+    "files": {
+      "benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "benchmark/artifacts.py": "2e948b57c8b912462589ac9582df1f9737e71d304f06076537c7c467b7a9f232",
+      "benchmark/audit_inputs.py": "b8c8adccf621263edbd924eb3ac74335119aaa3eb3d4356c415ad7143643ad81",
+      "benchmark/calibration.py": "5c8d378d8abd588622bcb11d55d7d7729ed68e1805ae542eab575166b3f65f68",
+      "benchmark/common.py": "1a393b8b5f165bc356202732f771f0086155fadb8aeef8111135f1dbe6d7319a",
+      "benchmark/data.py": "d3c7ea43872ecc8d6334b3d994035e80708892dbcbd567c8622fbb59f94302e8",
+      "benchmark/evaluation.py": "4e92e30bfada721fa45a7661a65d8bd03f90c7dfe140b47c75348da38df0f43c",
+      "benchmark/model.py": "befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71",
+      "benchmark/nm.py": "92433dbfd3b768b28922b89954d76fde7c3a6fdd23e661622ac248526b44678f",
+      "benchmark/obc.py": "0681675db4e8d14e2d3b2205c2090e4b9f838db4eb8bfd9e0b70092fe073665c",
+      "benchmark/obc_smoke.py": "be08d754634d914e293ac4b4ee35db231c48e54ced6589908bba8c8f705e37f8",
+      "benchmark/pipeline.py": "ea23c0d5d1f361dca84b5bf9c00b44ed759af3eb273312c93443a017a529f2fa",
+      "benchmark/preflight.py": "3e37a50824c3e07ae2337ddd1e1ae138af46cd56f5451cf892918f669048fe4a",
+      "benchmark/probes.py": "c466e38883c654848961976007c5b2b2a015c498e26e88bca1f7c7be8fa4f78b",
+      "benchmark/recovery.py": "9ebd32b246fd55e60d53bf8a1f371d0567f2148cdec1d83fb6bbeb7c0998bb42",
+      "benchmark/resource_monitor.py": "3105b53f546e569392f0c1f7740700dc84faa11d8f1b84790d7cfec3e39f206d",
+      "benchmark/run_obc.py": "c9cc1007f14981098b25098eef14421c31c85feaa1d983582467ebcc7fc4c699",
+      "benchmark/smoke_readiness.py": "184af70a78d1eb646ff9c11a702d978d11b54d0e3b50884e67441faa71cf9bfc",
+      "benchmark/snows_patch.py": "ae98a0be247724345ffed672d6478ad07b5bfe8eaff1749c2f66dd9773ac45f7",
+      "benchmark/snows_repair_kernels.py": "ac54484c44296d790418d2c6c7ff8d1093de300e2f4ee825548f7816be69f503",
+      "benchmark/upstream.py": "de9f2bb09a1f1e7459e628ef1ac1fb0a8790135073d800fc182a43391469dab8",
+      "configs/bn_train_ids.json": "c115a2560e164bd48f8e1f1ef2dda0ec28748fcbb58eb0155931696b1945cb56",
+      "configs/existing_inputs.json": "081039dea2349cd0ffd6045190fb8737465d351664767b79b24bfdf8ced25fe4",
+      "configs/gpu_execution_manifest.json": "1226fa2c8beec6e7ef87cecb656f8179586229d3c1bce5012984e3863aaf1f82",
+      "configs/historical_protocol.yaml": "6986af80a36e600c82b4bc90d9779aff8753813f7d4aa20479a0ea262dece44a",
+      "configs/obc_cuda_smoke.yaml": "5f626ae1de317e7ecdb37f992dfbde66065de487a991fce1556a4a14cb0bdec0",
+      "configs/post_training_nm_benchmark.yaml": "e0d323d4ef74de55ead1cad328655026cf2d244b6038d5ca01e758433fe17c96",
+      "configs/upstream_lock.json": "029568c3f4823b6405960f5cb7e54bda5e477e4f5068016a4b820f7a803a5b77",
+      "scripts/acceptance_tracebacks.py": "3bee83bc7b9ddf43f55db08c9da5ccb3d0497d6d49abafb94cdeffbb2ad8d20b",
+      "scripts/fetch_upstream.py": "7139f4d047088a325e7cefb89de9ab6beea3f4a34fb40943e6b40bbdee5a2616",
+      "scripts/package_acceptance.py": "a3fe1250fb77aa12dd346808ab0e816ee9333af83dde6b2c69c6aae30639c801",
+      "scripts/package_evidence.py": "48dba235e9a248f954ea7cb070516e6e5ce422b3dfea097dbc827248dac9fe37",
+      "scripts/package_smoke_readiness.py": "887afc8c489293c9dd0b7acd643dc2ea1b20af88055393958a65b282a73e735a",
+      "scripts/prepare_configuration.py": "7e780fd555ec36fc72da9632525bb19014f6ecfda46c4a1e2de233b94df74114",
+      "scripts/prepare_snows_patch.py": "24366ab29f42992e1c9c615dab7e71bad56c88c70fe92fea4d088def8cc9e938",
+      "scripts/snows_solver_blockers.py": "77f371712a02684b736b074cbfe2ebe06b68e188780f2bb9ea201ec20cd49941",
+      "patches/snows_minimal_diagnostic.patch": "8283c92ff818f574ac4bae0b074d182c6b62adf853ca35595a127ef23a09d4d3"
+    },
+    "sha256": "e5b061840a39480d90982c47445c955fa484525ea0d8609d2f839c687e0fd92d"
+  },
+  "smoke_config_sha256": "5f626ae1de317e7ecdb37f992dfbde66065de487a991fce1556a4a14cb0bdec0",
+  "formal_config_sha256": "e0d323d4ef74de55ead1cad328655026cf2d244b6038d5ca01e758433fe17c96",
+  "snapshot_commit": "551c891a69dcd9631ec6a6ba16c8562ab54f82e4",
+  "source_tree_clean": false,
+  "input_hash_rechecked_this_command": false,
+  "prior_inputs": "existing original15-file verified inventory retained; no redundant full audit",
+  "server_contacted": false,
+  "gpu_started": false
+}

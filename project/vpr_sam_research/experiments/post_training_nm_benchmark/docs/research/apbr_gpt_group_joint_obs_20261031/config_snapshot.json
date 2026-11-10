@@ -1,0 +1,34 @@
+{
+  "experiment": "apbr_gpt_group_joint_obs_cpu_gate_20261031",
+  "scope": "isolated_implementation_and_cpu_numerical_validation",
+  "device": "cpu",
+  "synthetic_only": true,
+  "server_contacted": false,
+  "cuda_used": false,
+  "dataset_loaded": false,
+  "test_accessed": false,
+  "training": false,
+  "full_model": false,
+  "seeds_run": [],
+  "selection": {
+    "keep_n": 2,
+    "m": 4,
+    "pair_order": [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]],
+    "main_tau": 0.01,
+    "sensitivity_tau": [0.005, 0.02],
+    "shuffle_seeds": [20261031, 20261032, 20261033],
+    "tie_order": "first_pair_in_frozen_lexicographic_order",
+    "tolerance_ulps": 64,
+    "tolerance_scale": "per_block_max_absolute_candidate_cost",
+    "all_zero_block_tolerance": 0.0,
+    "qdd_condition_limit": 100000000.0
+  },
+  "obs": {
+    "relative_damping": 0.01,
+    "formal_blocksize": 128,
+    "formal_compute_dtype": "float32",
+    "compensator": "existing_fixedmask_obs_matrix",
+    "new_compensation_rule": false
+  },
+  "next_authorized_stage": "none_without_user_instruction"
+}
