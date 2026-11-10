@@ -1,0 +1,44 @@
+\section{Theoretical Analysis}
+\label{sec:theory}
+The following results characterize the proposed signal and budget allocation. They do not establish superior task accuracy, convergence, or generalization. Proofs are given in Appendix~\ref{app:proofs}.
+
+\subsection{Single-coordinate OBS cost}
+\begin{proposition}[Conditional deletion cost]
+\label{prop:obs}
+Let $B\succ0$, $Q=B^{-1}$, and $w$ be a fixed active weight row. If all coordinates except a designated deletion $j$ are free to adjust, then
+\begin{equation}
+ \min_{\Delta w:\,\Delta w_j=-w_j}\frac12\Delta w^\top B\Delta w
+ =\frac{w_j^2}{2Q_{jj}},\qquad
+ \Delta w^*=-\frac{w_j}{Q_{jj}}Q_{:j}.
+\end{equation}
+\end{proposition}
+This standard OBS result supplies the meaning of conditional compensability; it is not our contribution \cite{obc}. A corresponding group cost is $\frac12w_S^\top(Q_{SS})^{-1}w_S$ when the other coordinates remain free. Generally it is not the sum of singleton costs. After earlier deletions or restrictions, the relevant inverse is that of the current free-coordinate quadratic. A diagonal estimated before training updates does not encode all such later conditions.
+
+\subsection{Historical geometric averaging}
+Define $G_k=\exp(D^{-1}\sum_{i\in\E}\log Q_{k,ii})$, with the output-row multiplicities from Eq.~\eqref{eq:center}. Here $Q_{k,ii}$ denotes the shared diagonal value mapped to coordinate $i$.
+\begin{proposition}[Relative geometric history]
+\label{prop:history}
+For the zero initialization and fixed $\eta\in[0,1]$, the eligible scale satisfies
+\begin{equation}
+ b_{i,e}=\prod_{k=0}^{e}\left(\frac{Q_{k,ii}}{G_k}\right)^{\eta(1-\eta)^{e-k}},
+ \qquad \sum_{i\in\E}s_{i,e}=0.
+ \label{eq:product}
+\end{equation}
+\end{proposition}
+The observed exponents sum to $1-(1-\eta)^{e+1}$; the remaining mass belongs to the initial unit scale. Thus early epochs shrink toward isotropy, without EMA bias correction. Setting $\eta=0$ gives the standard SAM direction, while $\eta=1$ gives Direct-Q with the \emph{same global centering and unit noneligible scales}. The history averages log inverse-Gram scales, not realized perturbation vectors or their energies.
+
+\subsection{Fixed radius and budget competition}
+\begin{proposition}[Fixed-budget redistribution]
+\label{prop:budget}
+For nonzero $b\odot g$ and positive $b$, Eq.~\eqref{eq:perturb} has $\|\epsilon\|_2=\rho$. Define $p_i=\epsilon_i^2/\rho^2$. Then $\sum_i p_i=1$, and, holding $g$ and other scales fixed,
+\begin{align}
+ \frac{\partial p_i}{\partial\log b_i}&=2p_i(1-p_i),\\
+ \frac{\partial p_j}{\partial\log b_i}&=-2p_ip_j\quad(j\ne i).
+\end{align}
+\end{proposition}
+The derivatives describe competition in a fixed budget. Increasing one scale increases its energy share unless its gradient is zero or it already receives all the energy. They are partial derivatives with respect to an unconstrained scale; a centered update changing several scales has the corresponding combined derivative. They do not imply that every coordinate with a large $Q_{ii}$ receives a large realized share: $g_i^2$ matters as well.
+
+\subsection{What these properties do not establish}
+Three distinctions are essential. First, high conditional compensability, low actual deletion cost, and membership in the final SparseGPT deletion set are different concepts. Second, a constant global $L_2$ radius does not reproduce the magnitude or direction of a finite deletion displacement. Third, more perturbation energy on a future deleted support is a diagnostic association, not a sufficient condition for better classification.
+
+For example, a coordinate with a large inverse diagonal but a zero task gradient receives no perturbation in Eq.~\eqref{eq:perturb}. A pair of highly correlated features may each be individually replaceable while being costly to remove together. The history is also delayed: it summarizes several past models, whereas the final compressor sees a different model. These are reasons to test the proposal, rather than consequences resolved by the propositions. The log-EMA is a specified statistical mechanism, not an optimal solution derived from the task loss.

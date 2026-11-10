@@ -1,0 +1,388 @@
+SHA256 f46c50581fff947b4f27a5cfbc7dc15106d59a95cb6d7229aa805ff8aa273ec2
+Pages 9
+APBR-SAM: Adaptive Perturbation Budget Reallocation for
+Post-Training N:M Structured Pruning
+Abstract
+Sharpness-aware minimization (SAM) explores local parameter perturbations during dense training, while post-
+training N:M pruning deletes weights through finite, discrete changes to their support. Scale alone does not capture the
+mismatch. Conventional SAM distributes its fixed perturbation budget across all coordinates, including weights that
+will be retained, whereas an N:M deletion direction is supported only on the removed coordinates. Perturbing retained
+coordinates can still benefit dense optimization, but it is directionally redundant for representing that structured
+deletion. We study how this finite budget can instead be spent to learn a geometry that informs the subsequent
+support decision.
+We propose Adaptive Perturbation Budget Reallocation for SAM (APBR-SAM). Rather than enlarging the per-
+turbation space, APBR-SAM reallocates the same finite global L2 budget across coordinates. It maintains persistent
+positive scales that reweight SAM’s first gradient while keeping the realized radius fixed. Feedback decreases the
+relative scales of coordinates that repeatedly receive above-average perturbation energy and increases those receiving
+below-average energy, so the scales settle into an anisotropic geometry over the training trajectory. After training,
+weight magnitude divided by the learned scale ranks coordinates within each N:M group, transferring the geometric
+state into a structured mask.
+We formalize the transfer with a normalized deletion cost. At fixed weights and scales, the ranking minimizes that
+cost under the group constraints; with a shared curvature bound along candidate deletion segments, it also minimizes
+a common upper bound on pruning-induced loss increase. Experiments compare immediate pruning performance and
+fixed-mask recovery against magnitude pruning, activation-aware scoring, and second-order compensation baselines.
+APBR-SAM thus connects the allocation of training perturbations to the structured parameter changes imposed after
+training.
+I. Introduction
+Post-training N:M pruning converts a dense model into a structured sparse model by retaining N coordinates in each
+group of M weights. The local pattern supports structured sparse execution [1], but imposes a discrete decision about
+which learned weights to remove. Each candidate mask changes the parameter support and produces a specific deletion
+displacement. The quality of the final model therefore depends on both the dense training trajectory and the support
+selected after it.
+SAM offers a natural starting point for robust dense training [2]. It uses the current mini-batch gradient to ap-
+proximate a worst-case direction in a local Euclidean ball, then updates the model using a second gradient at the
+perturbed weights. Post-training pruning produces a different kind of parameter change: selected coordinates move
+all the way to zero, with their locations constrained by the N:M pattern. The displacement is finite, determined by
+the removed weights, and unrestricted by SAM’s training radius. Its direction is set by a discrete mask instead of
+the current adversarial-gradient construction. Moreover, this deletion direction has nonzero support only on removed
+weights, whereas the dense SAM perturbation generally spends part of its fixed norm budget on coordinates that the
+eventual mask retains. Retained-coordinate perturbations still help dense generalization; they are only directionally
+redundant for representing the structured deletion itself. Local perturbation optimization therefore leaves an explicit
+scale, direction, and support mismatch between the changes explored during training and those later applied to the
+model.
+A second gap concerns how this limited budget is allocated and what information survives into pruning. Conven-
+tional SAM uses a single Euclidean constraint and normalizes the current stochastic gradient, so its finite energy is
+consumed by the instantaneous direction across both future-removed and future-retained coordinates. The rule main-
+tains no persistent coordinate-scale state describing how that allocation evolves across mini-batches. A subsequent
+magnitude mask therefore ranks the final weights independently of the exploration history. A shared radius answers
+how far the local probe can move. It does not align the probe with a support-constrained deletion, nor does it specify
+how accumulated coordinate geometry should influence which positions are retained within a group.
+These gaps motivate a different design question: can the same finite perturbation budget be redistributed across
+coordinates during training so that its allocation becomes useful for N:M support selection? Changing a common
+1
+radius only changes the overall exploration scale. Learning coordinate scales instead changes how the fixed budget
+is spent and turns that allocation into a persistent state that pruning can use. Rather than predicting a mask at every
+training step, the method learns a geometry that connects local exploration with the later deletion decision, and it keeps
+SAM’s two-gradient update throughout.
+APBR-SAM implements this idea with positive coordinate scales initialized to the identity geometry. The scales
+reweight the first SAM gradient, and global L2 normalization fixes the actual perturbation radius. Each step measures
+how much of the perturbation energy each coordinate carries. Negative feedback decreases scales with above-average
+energy share and increases those with below-average share, altering their future directional weights. The state is
+updated recursively throughout training, so it records the feedback trajectory rather than being assigned from a single
+final gradient.
+After dense training, APBR-SAM retains this state with the model weights and uses their ratio to construct the
+N:M mask. Deleting a weight moves its coordinate by its full magnitude; dividing that magnitude by the learned scale
+expresses the deletion in geometry-normalized coordinates. Selecting the largest ratios within each group exactly
+minimizes the corresponding normalized squared deletion cost. Thus the final score is the support-selection stage of
+the same geometry-learning process, rather than a detached post-training rule.
+The theory makes this connection precise at two levels. We characterize the feedback dynamics under a fixed
+nonzero gradient, and we derive the deletion-cost interpretation of the ranking.
+Under a common transformed-
+curvature bound along all candidate deletion segments, that cost controls an upper bound on the loss increase. The
+same groupwise ranking minimizes this common bound with the weights and geometry fixed. Actual post-pruning
+accuracy and recovery remain the empirical questions.
+Our completed CIFAR-100 comparisons evaluate them
+against magnitude and activation-aware pruning and second-order compensation baselines under a fixed-final-artifact
+protocol.
+Our contributions are:
+• A persistent coordinate-geometry mechanism that reallocates a finite actual L2 perturbation budget across co-
+ordinates using global energy feedback, rather than enlarging the perturbation radius, and preserves the product
+of coordinate scales in exact arithmetic.
+• A training-to-pruning transfer through normalized weight scores, with groupwise deletion-cost optimality and
+a conditional common loss-increment upper bound.
+• A structured-pruning evaluation that follows dense models through immediate pruning and fixed-mask recovery,
+reporting complete-method comparisons.
+II. Related Work
+Sharpness-aware optimization.
+SAM uses a first gradient to construct a local worst-case perturbation and a second
+gradient to update the model [2]. ASAM makes the neighborhood invariant to parameter rescaling [3], while SSAM
+sparsifies the perturbation through Fisher-guided or dynamic masks [4]. GEAR-SAM reallocates a fixed perturbation
+budget across parameter blocks using an exponential moving average of gradient energy [5]. APBR-SAM instead
+learns persistent coordinate-level scales and transfers the resulting geometry from dense training to post-training sup-
+port selection.
+Compression-aware training.
+CrAM incorporates a target compression operator into optimization and studies one-
+shot N:M pruning [6]. AdaSAP couples adaptive perturbations with channel pruning and fine-tuning [7]. These
+methods expose the model to compression or pruning during optimization. APBR-SAM instead keeps dense two-pass
+optimization and constructs the discrete N:M mask only after dense training.
+Post-training weight selection and compensation.
+Magnitude pruning removes small connections and commonly
+recovers the retained weights by fine-tuning [8]. Wanda augments weight magnitude with input-activation norms
+but performs no pruning-time weight reconstruction [9]. SparseGPT uses calibration activations and an approxi-
+mate inverse-Hessian procedure to select weights and compensate pruning error in one shot [10]; ROSE reorders
+SparseGPT’s pruning sequence according to estimated column and block losses [11]. OBC develops the related Exac-
+tOBS framework for post-training pruning and quantization [12]. For N:M sparsity, SR-STE instead trains the sparse
+model from scratch [1]. APBR-SAM differs in that its ranking state is learned during dense SAM training and then
+frozen as the support used in recovery.
+2
+III. Method
+A. SAM and a persistent geometric state
+The training stage learns a relative coordinate geometry without knowing the final mask. We keep SAM’s local two-
+gradient optimization and add a state that persists across the local probes. Let wt ∈Rd collect all trainable parameters
+and LBt be the mini-batch cross-entropy. Standard SAM computes
+g1,t = ∇wLBt(wt),
+ϵSAM
+t
+= ρ
+g1,t
+∥g1,t∥2
+.
+(1)
+The second gradient is g2,t = ∇wLBt(wt + ϵt). The model is restored to wt before the base optimizer applies this
+gradient. The perturbation is treated as fixed during the second backward pass. Both passes use the same augmented
+mini-batch.
+A single current gradient supplies a probe direction, whereas post-training support selection needs a persistent
+coordinate comparison. We maintain log-scales st ∈Rd, initialized at zero, with
+ai,t = exp(si,t),
+At = diag(a1,t, . . . , ad,t).
+(2)
+Each si,t stores the recursively updated relative scale of a parameter coordinate. Its mapping to parameter names,
+shapes, and coordinates is fixed at initialization, allowing the saved state to be matched to the weights at pruning time.
+Geometry includes all trainable parameters, including BN affine parameters and biases; the mask later acts on the
+eligible weight tensors.
+B. Redistributing a fixed L2 budget
+An N:M deletion changes only the coordinates removed by its mask. Standard SAM does not know that mask during
+dense training and applies a dense probe, so its finite squared-norm budget is distributed across both eventual deletion
+coordinates and coordinates that remain unchanged by pruning. APBR-SAM does not assume the future support in
+advance. Instead, it learns a persistent relative allocation from repeated probes and later uses that allocation to decide
+which coordinates to remove within each group.
+To learn an allocation while keeping total exploration fixed, APBR-SAM constructs
+ϵt = ρ
+A2
+tg1,t
+∥A2
+tg1,t∥2
+.
+(3)
+For nonzero numerator, ∥ϵt∥2 = ρ. The denominator fixes the total perturbation energy, while A2
+t changes its coordi-
+nate distribution. Holding the gradient fixed, a larger ai,t gives that coordinate more weight before global normaliza-
+tion. A common rescaling of all ai cancels, so the state represents relative geometry. At initialization, A0 = I gives
+the usual SAM direction.
+This choice separates learning where to explore from changing how far the overall probe moves. The actual
+perturbations remain on the same Euclidean sphere, while their directions evolve with the learned scales. The second
+gradient still drives the base SGD update.
+C. Global energy feedback
+The scales are learned from the energy distribution of the current probe. Squared perturbation coordinates measure
+each coordinate’s share of the fixed global energy and remove the sign of the displacement. After constructing the
+perturbation, we update the log-scales:
+pi,t =
+ϵ2
+i,t
+P
+j ϵ2
+j,t
+,
+si,t+1 = si,t + γ(1 −dpi,t).
+(4)
+The reference share is 1/d. An above-average share decreases the log-scale and therefore its future directional weight;
+a below-average share increases it. This negative feedback counters concentration in the current energy allocation.
+Because the update acts on the existing st, its effect persists across mini-batches. The resulting scales summarize the
+feedback history of the coordinate geometry. Energy normalization spans the full trainable vector, matching the single
+global perturbation budget.
+The update preserves the sum of log-scales:
+X
+i
+si,t+1 =
+X
+i
+si,t + γ
+ 
+d −d
+X
+i
+pi,t
+!
+= 0.
+(5)
+3
+Consequently det At = Q
+i ai,t = 1 in exact arithmetic. This fixes the common multiplicative scale of the auxiliary
+geometry while allowing individual coordinates to expand or contract relative to each other. The actual perturbation
+budget is fixed independently by Eq. (3). Adding a common constant to every si leaves its normalized direction
+unchanged.
+A geometry candidate is committed once after a successful SGD update. All-zero perturbations skip feedback.
+Log-scales use FP64 and model weights use FP32. The log-domain implementation checks finite values and log-
+volume; numerical settings are given in Appendix E.
+D. Fixed-gradient characterization
+For a fixed gradient whose components are nonzero, energy shares take the form
+pi =
+exp(4si + 2 log |gi|)
+P
+j exp(4sj + 2 log |gj|).
+(6)
+This makes the dependence on state explicit and removes the common factor ρ.
+Proposition 1. For fixed gi̸ = 0, positive γ, and P
+i si = 0, the feedback fixed point has pi = 1/d and
+s∗
+i = −1
+2 log |gi| + 1
+2d
+X
+j
+log |gj|,
+a∗
+i ∝|gi|−1/2.
+(7)
+For d > 1, its linearized eigenvalue on the zero-sum subspace is 1 −4γ. The strict linear stability range is 0 < γ <
+1/2.
+Proposition 1 characterizes the fixed-gradient dynamics; it does not establish convergence under stochastic training.
+Appendix A gives the derivation and the zero-gradient case.
+E. Post-training N:M weight selection
+Pruning converts the continuous training state into a discrete support choice. A deletion in coordinate i has displace-
+ment −wi; in the learned normalized coordinates its magnitude is |wi|/ai. Using weights and geometry from the same
+selected dense checkpoint, we compute
+Ii = |wi|
+ai
+= |wi| exp(−si).
+(8)
+Each eligible group G of M coordinates retains the N largest scores. The resulting sparse weights are ew = m ⊙w,
+with P
+i∈G mi = N. At equal weight magnitude, a larger learned scale gives a smaller normalized deletion. The ratio
+therefore uses both the size of the weight removed and the coordinate geometry learned during training. The SAM
+baseline applies the same grouping constraints to the plain magnitude |wi|.
+The relevant parameter change is now the finite deletion displacement, not the training probe. For frozen A and
+pruning displacement δm = (m −1) ⊙w, define
+CA(m) =
+A−1δm
+2
+2 =
+X
+i:mi=0
+I2
+i .
+(9)
+Equation (9) shows what the ratio score optimizes: each deleted coordinate contributes its squared normalized dis-
+placement. Retaining the N largest scores exactly minimizes this cost within each group, since exchanging a retained
+smaller score with a deleted larger score reduces the sum. The final mask thus selects a small deletion in the metric
+supplied by the learned state.
+Connection to pruning loss.
+To connect that metric to task loss, the analysis follows the entire segment from the
+dense weights to each candidate pruned model. Let L be a fixed loss, with auxiliary model state held fixed, and let
+g = ∇L(w). A curvature bound shared by these candidate segments makes their normalized deletion costs comparable
+through a common loss-increment upper bound.
+Proposition 2 (Conditional pruning-loss bound). Fix w, a positive diagonal matrix A, and a family M of candidate
+masks. Suppose L is twice differentiable along every segment w + tδm, and a single βA ≥0 satisfies
+sup
+m∈M
+t∈[0,1]
+A∇2L(w + tδm)A
+
+2 ≤βA,
+(10)
+where the matrix norm is spectral. Then every m ∈M satisfies
+L(w + δm) −L(w) ≤∥Ag∥2
+p
+CA(m) + βA
+2 CA(m).
+(11)
+4
+For qm = A−1δm, the curvature assumption gives the Taylor upper bound g⊤δm + (βA/2)∥qm∥2
+2; Cauchy–
+Schwarz bounds its linear term by ∥Ag∥2∥qm∥2. Appendix B provides the complete argument.
+Corollary 1 (Minimum common upper bound). For fixed w, A, g and the shared βA, the function UA(c) =
+∥Ag∥2
+√c + (βA/2)c is nondecreasing for c ≥0.
+If M consists of independent N:M groups with all other
+coordinates retained, keeping the N largest Ii in each group minimizes UA(CA(m)) over M.
+The resulting chain is explicit: the learned state defines the normalized deletion cost, groupwise ranking minimizes
+that cost, and the common curvature condition transfers this minimum to the stated upper bound. The comparison fixes
+w, A, g and βA across masks. Realized loss changes and accuracy are assessed by the pruning and recovery evaluations.
+Mask construction uses Ii directly, without estimating βA.
+Groups follow a fixed stored order, and ties retain lower indices. The concrete structured pattern and implementa-
+tion details used in the experiments are specified in Appendix E.
+F. From dense training to sparse recovery
+The pipeline retains the information needed to transfer between stages. Dense training saves unperturbed weights
+together with their matching geometric state. The selected checkpoint supplies both w and s for Eq. (8). The learned
+state is therefore used in the support decision after local exploration ends. A one-time mask application produces
+the Raw Hard model, retaining the parent’s BN buffers. Fixed-mask recovery initializes a fresh SGD optimizer and
+updates sparse weights under the fixed support, with geometry held fixed. Immediate pruning performance tests the
+selected support before weight adaptation; recovery measures the quality reachable under a shared optimization budget.
+Algorithm 1 summarizes this training-to-pruning transfer without changing the definitions above.
+Algorithm 1 APBR-SAM training, support selection, and fixed-mask recovery
+Require: training data D, parameters w, radius ρ, feedback rate γ, admissible groups G
+1: Initialize s ←0 and A ←I
+2: for each dense-training mini-batch Bt do
+3:
+g1,t ←∇wLBt(wt)
+4:
+if ∥A2
+tg1,t∥2 > 0 then
+5:
+Compute ϵt by Eq. (3) and pt by Eq. (4)
+6:
+Form candidate bst+1 ←st + γ(1 −dpt)
+7:
+else
+8:
+ϵt ←0 and bst+1 ←st
+9:
+end if
+10:
+g2,t ←∇wLBt(wt + ϵt)
+11:
+Restore wt and apply the base-optimizer update using g2,t
+12:
+Commit st+1 ←bst+1 after the successful parameter update
+13: end for
+14: Save the matched dense weights w and geometric state s
+15: for each eligible group G ∈G do
+16:
+Compute Ii = |wi| exp(−si) for i ∈G and retain the N largest scores
+17: end for
+18: Form the fixed mask m and initialize ew ←m ⊙w
+19: for 20 fixed-mask fine-tuning epochs do
+20:
+Update surviving weights and project weights, gradients, and optimizer state onto m
+21: end for
+22: return final sparse weights ew and mask m
+IV. Experiments
+Setup.
+We evaluate ResNet-18 on CIFAR-100 and compare a SAM baseline, Wanda [9], SparseGPT [10],
+ROSE [11], and APBR-SAM under the same structured sparsity target. The SAM baseline prunes the final Dense-
+SAM checkpoint by magnitude [8], whereas APBR-SAM applies the learned score to its own final checkpoint. Every
+sparse model is fine-tuned for 20 epochs with its mask fixed. We conduct three independent runs and report mean
+accuracy and sample standard deviation; complete implementation details are provided in Appendix E.
+5
+A. Main results
+Table 1 reports accuracy at each method’s saved post-pruning endpoint and after the common 20-epoch fixed-mask
+fine-tuning.
+Table 1: CIFAR-100 accuracy before and after fixed-mask fine-tuning; three-seed mean ± sample SD. Native denotes
+each method’s saved post-pruning endpoint, and every method is then fine-tuned for 20 epochs. SAM denotes the
+Dense-SAM checkpoint pruned by magnitude.
+Method
+Raw/Native (%)
+Recovery-20 (%)
+SAM
+55.54 ± 1.36
+78.33 ± 0.05
+Wanda
+56.48 ± 3.83
+78.80 ± 0.13
+SparseGPT
+77.26 ± 0.42
+78.54 ± 0.08
+ROSE
+77.82 ± 0.19
+78.69 ± 0.16
+APBR-SAM
+59.47 ± 3.46
+78.86 ± 0.25
+Raw Hard results.
+SparseGPT [10] and ROSE [11] retain 77.26±0.42% and 77.82±0.19% accuracy, respectively.
+Their native second-order compensation produces these values, so they should not be read as mask-only pruning. In
+contrast, SAM, Wanda, and APBR-SAM apply their masks without a pruning-time weight reconstruction, leading to
+substantially larger immediate drops. Among these three mask-only rules, APBR-SAM retains the highest immediate
+accuracy at 59.47 ± 3.46%.
+Results after 20 epochs.
+APBR-SAM has the highest mean accuracy at 78.86 ± 0.25%, followed by Wanda at
+78.80 ± 0.13%. The Recovery-20 column spans only 0.53 points, showing that the common fine-tuning stage largely
+closes the Raw Hard gap. Thus, Table 1 supports APBR-SAM as the strongest mean endpoint in these runs, while the
+small margins do not establish a decisive ranking. The paired differences in Table 3 put APBR-SAM +0.53 ± 0.28
+points above the SAM baseline and +0.32±0.32 points above SparseGPT, which is the same order as the seed-to-seed
+spread.
+B. Ablation study
+To isolate the support rule from dense training, we apply either magnitude |wi| or the learned score |wi|e−si to the
+same APBR-SAM parent. Both sparse models then receive the same 20-epoch fine-tuning. Table 2 reports the two
+rules on that common parent.
+Table 2: Same-parent score ablation on CIFAR-100; three-seed mean ± sample SD.
+Mask on the same APBR parent
+Raw Hard (%)
+Recovery-20 (%)
+Magnitude, |wi|
+54.59 ± 4.41
+78.41 ± 0.30
+Geometry, |wi|e−si
+59.47 ± 3.46
+78.86 ± 0.25
+On that common parent the learned score gives a pai

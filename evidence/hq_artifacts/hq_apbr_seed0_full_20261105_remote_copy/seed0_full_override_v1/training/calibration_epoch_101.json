@@ -1,0 +1,845 @@
+{
+  "layers": {
+    "layer1.0.conv1.weight": {
+      "weight_shape": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 576,
+      "patch_columns": 1048576,
+      "unfold_seconds": 0.018445566296577454,
+      "gram_seconds": 0.06222384050488472,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 216,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.0008033933117985725,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.00043506920337677,
+          "inverse_diagonal_seconds": 0.0007067173719406128,
+          "damped_diagonal_ratio_proxy": 1479.462646484375,
+          "q_min": 43.87188720703125,
+          "q_max": 1244.7203369140625,
+          "q_mean": 902.735790265931,
+          "q_std": 351.7272081471641
+        }
+      ],
+      "cholesky_seconds": 0.00043506920337677,
+      "inverse_diagonal_seconds": 0.0007067173719406128,
+      "q_previous_spearman": 0.9843970432358152,
+      "target_previous_geometry_spearman": 0.9655907383826378,
+      "geometry_min": -0.9384662822134303,
+      "geometry_max": 0.7282788869380727
+    },
+    "layer1.0.conv2.weight": {
+      "weight_shape": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 576,
+      "patch_columns": 1048576,
+      "unfold_seconds": 0.01837513968348503,
+      "gram_seconds": 0.06291579082608223,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 9,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.0004254444211255759,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.0004642382264137268,
+          "inverse_diagonal_seconds": 0.0006079226732254028,
+          "damped_diagonal_ratio_proxy": 865.5487060546875,
+          "q_min": 56.66634750366211,
+          "q_max": 2350.4833984375,
+          "q_mean": 1119.1767005324364,
+          "q_std": 628.1855938943529
+        }
+      ],
+      "cholesky_seconds": 0.0004642382264137268,
+      "inverse_diagonal_seconds": 0.0006079226732254028,
+      "q_previous_spearman": 0.9467680660892149,
+      "target_previous_geometry_spearman": 0.9734081331645129,
+      "geometry_min": -0.6376479261538281,
+      "geometry_max": 1.0469195850475854
+    },
+    "layer1.1.conv1.weight": {
+      "weight_shape": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 576,
+      "patch_columns": 1048576,
+      "unfold_seconds": 0.018398702144622803,
+      "gram_seconds": 0.06339368969202042,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 9,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.0013071958674117923,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.0004506409168243408,
+          "inverse_diagonal_seconds": 0.0005613602697849274,
+          "damped_diagonal_ratio_proxy": 723.1774291992188,
+          "q_min": 22.54727554321289,
+          "q_max": 764.9962768554688,
+          "q_mean": 257.5652194056246,
+          "q_std": 150.37752755969115
+        }
+      ],
+      "cholesky_seconds": 0.0004506409168243408,
+      "inverse_diagonal_seconds": 0.0005613602697849274,
+      "q_previous_spearman": 0.9698260737425228,
+      "target_previous_geometry_spearman": 0.9778730776517697,
+      "geometry_min": -1.3019542627649654,
+      "geometry_max": 0.48859844347893056
+    },
+    "layer1.1.conv2.weight": {
+      "weight_shape": [
+        64,
+        64,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 576,
+      "patch_columns": 1048576,
+      "unfold_seconds": 0.018919825553894043,
+      "gram_seconds": 0.0629107877612114,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 9,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.00015332574548665434,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.00036814063787460327,
+          "inverse_diagonal_seconds": 0.0005516931414604187,
+          "damped_diagonal_ratio_proxy": 1544.0662841796875,
+          "q_min": 68.80442810058594,
+          "q_max": 6522.06201171875,
+          "q_mean": 2542.880890753534,
+          "q_std": 2442.2746510218567
+        }
+      ],
+      "cholesky_seconds": 0.00036814063787460327,
+      "inverse_diagonal_seconds": 0.0005516931414604187,
+      "q_previous_spearman": 0.9627844401995838,
+      "target_previous_geometry_spearman": 0.9837989170619718,
+      "geometry_min": -0.688883428672086,
+      "geometry_max": 1.5367981434241291
+    },
+    "layer2.0.conv1.weight": {
+      "weight_shape": [
+        128,
+        64,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 576,
+      "patch_columns": 262144,
+      "unfold_seconds": 0.010132137686014175,
+      "gram_seconds": 0.01744232326745987,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.0018086973577737808,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.0003895573318004608,
+          "inverse_diagonal_seconds": 0.0007140599191188812,
+          "damped_diagonal_ratio_proxy": 58.03245162963867,
+          "q_min": 14.314172744750977,
+          "q_max": 456.9365234375,
+          "q_mean": 155.3145160443253,
+          "q_std": 116.38607104364667
+        }
+      ],
+      "cholesky_seconds": 0.0003895573318004608,
+      "inverse_diagonal_seconds": 0.0007140599191188812,
+      "q_previous_spearman": 0.9854485343983123,
+      "target_previous_geometry_spearman": 0.9877225403762592,
+      "geometry_min": -1.4893065871168618,
+      "geometry_max": 0.20290650271663196
+    },
+    "layer2.0.conv2.weight": {
+      "weight_shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 1152,
+      "patch_columns": 262144,
+      "unfold_seconds": 0.012215755879878998,
+      "gram_seconds": 0.04740406945347786,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.00033239941694773734,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.0007021464407444,
+          "inverse_diagonal_seconds": 0.000979699194431305,
+          "damped_diagonal_ratio_proxy": 259.49530029296875,
+          "q_min": 82.29530334472656,
+          "q_max": 2689.7138671875,
+          "q_mean": 333.9704041812155,
+          "q_std": 376.1302477641472
+        }
+      ],
+      "cholesky_seconds": 0.0007021464407444,
+      "inverse_diagonal_seconds": 0.000979699194431305,
+      "q_previous_spearman": 0.8524312292766022,
+      "target_previous_geometry_spearman": 0.9145684952486732,
+      "geometry_min": -0.6593190530255343,
+      "geometry_max": 1.1284145116562863
+    },
+    "layer2.0.shortcut.0.weight": {
+      "weight_shape": [
+        128,
+        64,
+        1,
+        1
+      ],
+      "groups": 1,
+      "features": 64,
+      "patch_columns": 262144,
+      "unfold_seconds": 0.007364194840192795,
+      "gram_seconds": 0.002636197954416275,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.0019119670614600182,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.0003982372581958771,
+          "inverse_diagonal_seconds": 0.0005039386451244354,
+          "damped_diagonal_ratio_proxy": 30.797000885009766,
+          "q_min": 6.4675140380859375,
+          "q_max": 209.92132568359375,
+          "q_mean": 64.9995597153902,
+          "q_std": 58.73619569292032
+        }
+      ],
+      "cholesky_seconds": 0.0003982372581958771,
+      "inverse_diagonal_seconds": 0.0005039386451244354,
+      "q_previous_spearman": 0.9787545787545786,
+      "target_previous_geometry_spearman": 0.9802197802197801,
+      "geometry_min": -1.8886955579588762,
+      "geometry_max": -0.12003689893391005
+    },
+    "layer2.1.conv1.weight": {
+      "weight_shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 1152,
+      "patch_columns": 262144,
+      "unfold_seconds": 0.01359793171286583,
+      "gram_seconds": 0.04714817926287651,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.0011930272448807955,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.0007377006113529205,
+          "inverse_diagonal_seconds": 0.0009202063083648682,
+          "damped_diagonal_ratio_proxy": 60.630035400390625,
+          "q_min": 19.259212493896484,
+          "q_max": 401.5240173339844,
+          "q_mean": 86.9606110635731,
+          "q_std": 57.14359009450346
+        }
+      ],
+      "cholesky_seconds": 0.0007377006113529205,
+      "inverse_diagonal_seconds": 0.0009202063083648682,
+      "q_previous_spearman": 0.889309607405504,
+      "target_previous_geometry_spearman": 0.9188397584814442,
+      "geometry_min": -1.30134265694566,
+      "geometry_max": 0.15331657015271263
+    },
+    "layer2.1.conv2.weight": {
+      "weight_shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 1152,
+      "patch_columns": 262144,
+      "unfold_seconds": 0.015599146485328674,
+      "gram_seconds": 0.046796102076768875,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.00012050112127326429,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.0007043927907943726,
+          "inverse_diagonal_seconds": 0.0009020678699016571,
+          "damped_diagonal_ratio_proxy": 424.9794006347656,
+          "q_min": 71.44932556152344,
+          "q_max": 8297.177734375,
+          "q_mean": 1769.338868704107,
+          "q_std": 2673.963779492395
+        }
+      ],
+      "cholesky_seconds": 0.0007043927907943726,
+      "inverse_diagonal_seconds": 0.0009020678699016571,
+      "q_previous_spearman": 0.8850996776437097,
+      "target_previous_geometry_spearman": 0.9208724442136995,
+      "geometry_min": -0.4974286251975931,
+      "geometry_max": 1.6940680566761495
+    },
+    "layer3.0.conv1.weight": {
+      "weight_shape": [
+        256,
+        128,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 1152,
+      "patch_columns": 65536,
+      "unfold_seconds": 0.01162784919142723,
+      "gram_seconds": 0.012261971831321716,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.001221305108629167,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.0006995536386966705,
+          "inverse_diagonal_seconds": 0.0008693486452102661,
+          "damped_diagonal_ratio_proxy": 15.692541122436523,
+          "q_min": 18.265581130981445,
+          "q_max": 237.8021240234375,
+          "q_mean": 62.80850441422727,
+          "q_std": 27.341284632987172
+        }
+      ],
+      "cholesky_seconds": 0.0006995536386966705,
+      "inverse_diagonal_seconds": 0.0008693486452102661,
+      "q_previous_spearman": 0.8382943430163295,
+      "target_previous_geometry_spearman": 0.8931063329296972,
+      "geometry_min": -1.3505332684414284,
+      "geometry_max": -0.09959866018766403
+    },
+    "layer3.0.conv2.weight": {
+      "weight_shape": [
+        256,
+        256,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 2304,
+      "patch_columns": 65536,
+      "unfold_seconds": 0.012272443622350693,
+      "gram_seconds": 0.03728825971484184,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.00021367486624512821,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.0013889148831367493,
+          "inverse_diagonal_seconds": 0.0023017413914203644,
+          "damped_diagonal_ratio_proxy": 69.23788452148438,
+          "q_min": 59.65159225463867,
+          "q_max": 1284.658203125,
+          "q_mean": 234.23185229963724,
+          "q_std": 134.06031792016256
+        }
+      ],
+      "cholesky_seconds": 0.0013889148831367493,
+      "inverse_diagonal_seconds": 0.0023017413914203644,
+      "q_previous_spearman": 0.5882544812762924,
+      "target_previous_geometry_spearman": 0.7468231738742481,
+      "geometry_min": -0.5623782807893594,
+      "geometry_max": 0.8266922512897111
+    },
+    "layer3.0.shortcut.0.weight": {
+      "weight_shape": [
+        256,
+        128,
+        1,
+        1
+      ],
+      "groups": 1,
+      "features": 128,
+      "patch_columns": 65536,
+      "unfold_seconds": 0.010199807584285736,
+      "gram_seconds": 0.004151221364736557,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.0013492676662281156,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.000443924218416214,
+          "inverse_diagonal_seconds": 0.0006984993815422058,
+          "damped_diagonal_ratio_proxy": 12.343279838562012,
+          "q_min": 11.667755126953125,
+          "q_max": 64.87555694580078,
+          "q_mean": 29.94100297987461,
+          "q_std": 11.015948577017609
+        }
+      ],
+      "cholesky_seconds": 0.000443924218416214,
+      "inverse_diagonal_seconds": 0.0006984993815422058,
+      "q_previous_spearman": 0.7467954587071964,
+      "target_previous_geometry_spearman": 0.8321278154184215,
+      "geometry_min": -1.5135694258616224,
+      "geometry_max": -0.8389873304976877
+    },
+    "layer3.1.conv1.weight": {
+      "weight_shape": [
+        256,
+        256,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 2304,
+      "patch_columns": 65536,
+      "unfold_seconds": 0.012655932456254959,
+      "gram_seconds": 0.03748069331049919,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.0006341017433442175,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.0014895200729370117,
+          "inverse_diagonal_seconds": 0.002327132970094681,
+          "damped_diagonal_ratio_proxy": 121.40496826171875,
+          "q_min": 24.675020217895508,
+          "q_max": 654.3192138671875,
+          "q_mean": 84.41665861093335,
+          "q_std": 49.112703675969136
+        }
+      ],
+      "cholesky_seconds": 0.0014895200729370117,
+      "inverse_diagonal_seconds": 0.002327132970094681,
+      "q_previous_spearman": 0.6295677868692131,
+      "target_previous_geometry_spearman": 0.7944871727248153,
+      "geometry_min": -1.151691282446051,
+      "geometry_max": 0.30198384712929277
+    },
+    "layer3.1.conv2.weight": {
+      "weight_shape": [
+        256,
+        256,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 2304,
+      "patch_columns": 65536,
+      "unfold_seconds": 0.01233641803264618,
+      "gram_seconds": 0.03723740950226784,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 117,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 6.0826412664027885e-05,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.04114453122019768,
+          "inverse_diagonal_seconds": 0.002481900155544281,
+          "damped_diagonal_ratio_proxy": 714.1403198242188,
+          "q_min": 139.1337432861328,
+          "q_max": 16440.228515625,
+          "q_mean": 2725.622499843438,
+          "q_std": 4891.329862875491
+        }
+      ],
+      "cholesky_seconds": 0.04114453122019768,
+      "inverse_diagonal_seconds": 0.002481900155544281,
+      "q_previous_spearman": 0.7733859911471187,
+      "target_previous_geometry_spearman": 0.8542023886258605,
+      "geometry_min": -0.2140165537318565,
+      "geometry_max": 2.0054495588108203
+    },
+    "layer4.0.conv1.weight": {
+      "weight_shape": [
+        512,
+        256,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 2304,
+      "patch_columns": 16384,
+      "unfold_seconds": 0.009887993335723877,
+      "gram_seconds": 0.010671347379684448,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.0005515736411325634,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.0013479888439178467,
+          "inverse_diagonal_seconds": 0.002274174243211746,
+          "damped_diagonal_ratio_proxy": 21.663177490234375,
+          "q_min": 24.5942325592041,
+          "q_max": 425.6336364746094,
+          "q_mean": 91.15317853788534,
+          "q_std": 36.25800924534839
+        }
+      ],
+      "cholesky_seconds": 0.0013479888439178467,
+      "inverse_diagonal_seconds": 0.002274174243211746,
+      "q_previous_spearman": 0.4738124467614678,
+      "target_previous_geometry_spearman": 0.6826150221707736,
+      "geometry_min": -0.9736729552689549,
+      "geometry_max": -0.030282081231262862
+    },
+    "layer4.0.conv2.weight": {
+      "weight_shape": [
+        512,
+        512,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 4608,
+      "patch_columns": 16384,
+      "unfold_seconds": 0.011190507560968399,
+      "gram_seconds": 0.034473877400159836,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.00010036019375547767,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.005411453545093536,
+          "inverse_diagonal_seconds": 0.009411513805389404,
+          "damped_diagonal_ratio_proxy": 301.3683776855469,
+          "q_min": 144.6255340576172,
+          "q_max": 8587.3994140625,
+          "q_mean": 572.547491401434,
+          "q_std": 543.5462855072499
+        }
+      ],
+      "cholesky_seconds": 0.005411453545093536,
+      "inverse_diagonal_seconds": 0.009411513805389404,
+      "q_previous_spearman": 0.48005949277726284,
+      "target_previous_geometry_spearman": 0.6289579153943748,
+      "geometry_min": -0.28418680961089937,
+      "geometry_max": 1.6233258803061676
+    },
+    "layer4.0.shortcut.0.weight": {
+      "weight_shape": [
+        512,
+        256,
+        1,
+        1
+      ],
+      "groups": 1,
+      "features": 256,
+      "patch_columns": 16384,
+      "unfold_seconds": 0.010375402867794037,
+      "gram_seconds": 0.0038778558373451233,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.0006651547155342996,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.000276368111371994,
+          "inverse_diagonal_seconds": 0.00041983649134635925,
+          "damped_diagonal_ratio_proxy": 13.883795738220215,
+          "q_min": 16.094274520874023,
+          "q_max": 124.63365173339844,
+          "q_mean": 42.62881840020418,
+          "q_std": 16.337022451155654
+        }
+      ],
+      "cholesky_seconds": 0.000276368111371994,
+      "inverse_diagonal_seconds": 0.00041983649134635925,
+      "q_previous_spearman": 0.3710016594186313,
+      "target_previous_geometry_spearman": 0.5625271801327535,
+      "geometry_min": -1.2829228513794655,
+      "geometry_max": -0.5833998575708541
+    },
+    "layer4.1.conv1.weight": {
+      "weight_shape": [
+        512,
+        512,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 4608,
+      "patch_columns": 16384,
+      "unfold_seconds": 0.010267507284879684,
+      "gram_seconds": 0.03457926586270332,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 0.00020784055232070386,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.005401611328125,
+          "inverse_diagonal_seconds": 0.009419739246368408,
+          "damped_diagonal_ratio_proxy": 95.67110443115234,
+          "q_min": 62.912479400634766,
+          "q_max": 1333.331298828125,
+          "q_mean": 237.56643812937867,
+          "q_std": 116.9940498328901
+        }
+      ],
+      "cholesky_seconds": 0.005401611328125,
+      "inverse_diagonal_seconds": 0.009419739246368408,
+      "q_previous_spearman": 0.412429692810959,
+      "target_previous_geometry_spearman": 0.6259843478397192,
+      "geometry_min": -0.6576497509622173,
+      "geometry_max": 0.3680615737988041
+    },
+    "layer4.1.conv2.weight": {
+      "weight_shape": [
+        512,
+        512,
+        3,
+        3
+      ],
+      "groups": 1,
+      "features": 4608,
+      "patch_columns": 16384,
+      "unfold_seconds": 0.011306054890155792,
+      "gram_seconds": 0.0347861647605896,
+      "groups_diagnostics": [
+        {
+          "dead_coordinates": 0,
+          "dead_policy": "ordinary_relative_damping_only",
+          "damping": 9.084938938030973e-05,
+          "symmetry_correction_max_abs": 0.0,
+          "cholesky_status": "PASS",
+          "cholesky_seconds": 0.005429103970527649,
+          "inverse_diagonal_seconds": 0.009431064128875732,
+          "damped_diagonal_ratio_proxy": 61.27051544189453,
+          "q_min": 150.9629669189453,
+          "q_max": 3730.447265625,
+          "q_mean": 799.4641957051224,
+          "q_std": 481.0755705965948
+        }
+      ],
+      "cholesky_seconds": 0.005429103970527649,
+      "inverse_diagonal_seconds": 0.009431064128875732,
+      "q_previous_spearman": 0.40599757750621424,
+      "target_previous_geometry_spearman": 0.6422016197032671,
+      "geometry_min": -0.2355744869262034,
+      "geometry_max": 1.0827689902218376
+    }
+  },
+  "test_accessed": false,
+  "hessian_definition": "XXT/n_all_patch_columns",
+  "gram_dtype": "float32",
+  "gram_chunk_columns": 0,
+  "collection_policy": "single_layer_stream",
+  "eligible_coordinates": 11157504,
+  "calibration_samples": 1024,
+  "calibration_batches": 8,
+  "calibration_ids_sha256": "3b7da27d79762235c87f18571bc73224d6e6f2b3ba663b7d9a4a3de312f23157",
+  "parameters_sha256_before": "ac680c14037e4b940a63a191d74bd27c3339ef3711bd52fa5619737158118a3d",
+  "parameters_sha256_after": "ac680c14037e4b940a63a191d74bd27c3339ef3711bd52fa5619737158118a3d",
+  "buffers_sha256_before": "8522c38bc0ae00cac19b932a9539f3b926cb895f0ef3594df1858c0579cf6241",
+  "buffers_sha256_after": "8522c38bc0ae00cac19b932a9539f3b926cb895f0ef3594df1858c0579cf6241",
+  "bn_unchanged": true,
+  "parameters_unchanged": true,
+  "rng_restored": true,
+  "layer_count": 19,
+  "model_forward_passes": 19,
+  "total_forwarded_samples": 19456,
+  "gram_storage_bytes": 84934656,
+  "collection_seconds": 18.263980619609356,
+  "status": "HQ_CALIBRATION_REFRESH_PASS",
+  "eta": 0.1,
+  "log_target_global_center": 2.8307933508305947,
+  "geometry_center_sum": 1.3969838619232178e-09,
+  "log_geometry_drift": {
+    "rms": 0.016995102567339736,
+    "max_abs": 0.0924280610670773
+  },
+  "current_geometry_hash": "62f47ea03a2e319d24b1eab2f372dfc424c944a7a71d751214794928798b337c",
+  "q_diagonal_hash": "ec83268a6d541a8f6b1751e45647463f61d1fb2f693c8b1e563947f0796003c1",
+  "q_diagonal_statistics": {
+    "layer1.0.conv1.weight": {
+      "min": 43.87188720703125,
+      "max": 1244.7203369140625,
+      "mean": 902.735790265931,
+      "std": 351.7272081471641
+    },
+    "layer1.0.conv2.weight": {
+      "min": 56.66634750366211,
+      "max": 2350.4833984375,
+      "mean": 1119.1767005324364,
+      "std": 628.1855938943529
+    },
+    "layer1.1.conv1.weight": {
+      "min": 22.54727554321289,
+      "max": 764.9962768554688,
+      "mean": 257.5652194056246,
+      "std": 150.37752755969115
+    },
+    "layer1.1.conv2.weight": {
+      "min": 68.80442810058594,
+      "max": 6522.06201171875,
+      "mean": 2542.880890753534,
+      "std": 2442.2746510218567
+    },
+    "layer2.0.conv1.weight": {
+      "min": 14.314172744750977,
+      "max": 456.9365234375,
+      "mean": 155.3145160443253,
+      "std": 116.38607104364667
+    },
+    "layer2.0.conv2.weight": {
+      "min": 82.29530334472656,
+      "max": 2689.7138671875,
+      "mean": 333.9704041812155,
+      "std": 376.1302477641472
+    },
+    "layer2.0.shortcut.0.weight": {
+      "min": 6.4675140380859375,
+      "max": 209.92132568359375,
+      "mean": 64.9995597153902,
+      "std": 58.73619569292032
+    },
+    "layer2.1.conv1.weight": {
+      "min": 19.259212493896484,
+      "max": 401.5240173339844,
+      "mean": 86.9606110635731,
+      "std": 57.14359009450346
+    },
+    "layer2.1.conv2.weight": {
+      "min": 71.44932556152344,
+      "max": 8297.177734375,
+      "mean": 1769.338868704107,
+      "std": 2673.963779492395
+    },
+    "layer3.0.conv1.weight": {
+      "min": 18.265581130981445,
+      "max": 237.8021240234375,
+      "mean": 62.80850441422727,
+      "std": 27.341284632987172
+    },
+    "layer3.0.conv2.weight": {
+      "min": 59.65159225463867,
+      "max": 1284.658203125,
+      "mean": 234.23185229963724,
+      "std": 134.06031792016256
+    },
+    "layer3.0.shortcut.0.weight": {
+      "min": 11.667755126953125,
+      "max": 64.87555694580078,
+      "mean": 29.94100297987461,
+      "std": 11.015948577017609
+    },
+    "layer3.1.conv1.weight": {
+      "min": 24.675020217895508,
+      "max": 654.3192138671875,
+      "mean": 84.41665861093335,
+      "std": 49.112703675969136
+    },
+    "layer3.1.conv2.weight": {
+      "min": 139.1337432861328,
+      "max": 16440.228515625,
+      "mean": 2725.622499843438,
+      "std": 4891.329862875491
+    },
+    "layer4.0.conv1.weight": {
+      "min": 24.5942325592041,
+      "max": 425.6336364746094,
+      "mean": 91.15317853788534,
+      "std": 36.25800924534839
+    },
+    "layer4.0.conv2.weight": {
+      "min": 144.6255340576172,
+      "max": 8587.3994140625,
+      "mean": 572.547491401434,
+      "std": 543.5462855072499
+    },
+    "layer4.0.shortcut.0.weight": {
+      "min": 16.094274520874023,
+      "max": 124.63365173339844,
+      "mean": 42.62881840020418,
+      "std": 16.337022451155654
+    },
+    "layer4.1.conv1.weight": {
+      "min": 62.912479400634766,
+      "max": 1333.331298828125,
+      "mean": 237.56643812937867,
+      "std": 116.9940498328901
+    },
+    "layer4.1.conv2.weight": {
+      "min": 150.9629669189453,
+      "max": 3730.447265625,
+      "mean": 799.4641957051224,
+      "std": 481.0755705965948
+    }
+  },
+  "spearman_stability": {
+    "layer1.0.conv1.weight": 0.9843970432358152,
+    "layer1.0.conv2.weight": 0.9467680660892149,
+    "layer1.1.conv1.weight": 0.9698260737425228,
+    "layer1.1.conv2.weight": 0.9627844401995838,
+    "layer2.0.conv1.weight": 0.9854485343983123,
+    "layer2.0.conv2.weight": 0.8524312292766022,
+    "layer2.0.shortcut.0.weight": 0.9787545787545786,
+    "layer2.1.conv1.weight": 0.889309607405504,
+    "layer2.1.conv2.weight": 0.8850996776437097,
+    "layer3.0.conv1.weight": 0.8382943430163295,
+    "layer3.0.conv2.weight": 0.5882544812762924,
+    "layer3.0.shortcut.0.weight": 0.7467954587071964,
+    "layer3.1.conv1.weight": 0.6295677868692131,
+    "layer3.1.conv2.weight": 0.7733859911471187,
+    "layer4.0.conv1.weight": 0.4738124467614678,
+    "layer4.0.conv2.weight": 0.48005949277726284,
+    "layer4.0.shortcut.0.weight": 0.3710016594186313,
+    "layer4.1.conv1.weight": 0.412429692810959,
+    "layer4.1.conv2.weight": 0.40599757750621424
+  },
+  "skipped_calibration_epochs": [],
+  "peak_allocated_bytes": 1666277376,
+  "peak_reserved_bytes": 2237661184,
+  "current_allocated_bytes": 700490752,
+  "current_reserved_bytes": 2237661184,
+  "memory_scope": "since most recent caller reset_peak_memory_stats",
+  "calibration_duration": 19.13312503695488,
+  "calibration_epoch": 101
+}

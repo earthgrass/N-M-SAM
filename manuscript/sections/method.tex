@@ -1,0 +1,109 @@
+\section{Method}
+\label{sec:method}
+\subsection{Problem formulation}
+We consider dense supervised training followed by post-training $N{:}M$ pruning: exactly $N$ positions remain in each complete contiguous group of $M$ eligible weights. Let $\Pset$ denote all trainable coordinates and $\E\subset\Pset$ the prunable coordinates. Dense optimization does not enforce a sparse support. After training, a fixed final checkpoint is compressed without gradient-based recovery. Our objective is to change the training trajectory so that an unchanged second-order compressor can better reconstruct the resulting network. This is a hypothesis about \emph{training--compression compatibility}, rather than a new pruning solver.
+
+HC-SAM augments the two-gradient SAM update with a persistent log-scale state. The state is estimated from training-side activation statistics at epoch boundaries and held fixed within the next epoch. It is neither optimized through the task loss nor updated from realized perturbation energy. The native SparseGPT endpoint does not read this state: any downstream effect must be mediated by the learned dense weights and activations.
+
+The method can be understood as separating two questions. The task gradient tells us which direction currently changes the classification loss. Reconstruction statistics tell us which weight coordinates can be changed while allowing other coordinates to offset their effect on a layer output. HC-SAM retains the task gradient as the signed direction and uses the second signal only to change its relative scale. It does not substitute a reconstruction loss for the classification objective, delete weights during training, or prescribe the final sparse support.
+
+Our design hypothesis is that perturbing conditionally replaceable coordinates during dense training can prepare a model for the changes later made by a reconstruction-based compressor. This is different from treating large inverse-Gram entries as a list of weights to remove. The final selection still depends on learned weight values and on compensation already performed by the compressor. We therefore evaluate the training procedure through its eventual compressed model rather than treating the geometry state itself as a pruning result.
+
+\subsection{Conditional reconstruction geometry}
+For an eligible convolution $\ell$, flatten its weights in output-row OIHW order as $W_\ell\in\R^{m_\ell\times d_\ell}$. Unfold calibration inputs into $X_{\ell,e}\in\R^{d_\ell\times n_{\ell,e}}$, where each column is an input patch. Input-channel and kernel coordinates follow exactly the same order as the flattened weights. For a row displacement $\Delta w$, the local physical output error is
+\begin{equation}
+ \frac{\|X_{\ell,e}^{\top}\Delta w\|_2^2}{2n_{\ell,e}}
+ =\frac12\Delta w^\top H_{\ell,e}\Delta w,
+ \quad H_{\ell,e}=\frac{X_{\ell,e}X_{\ell,e}^{\top}}{n_{\ell,e}}.
+\end{equation}
+We use relative damping and its inverse,
+\begin{equation}
+ B_{\ell,e}=H_{\ell,e}+\delta_{\ell,e}I,\quad
+ \delta_{\ell,e}=\alpha\frac{\operatorname{tr}H_{\ell,e}}{d_\ell},\quad
+ Q_{\ell,e}=B_{\ell,e}^{-1}.
+ \label{eq:gram}
+\end{equation}
+All subsequent properties assume $B_{\ell,e}\succ0$. A failed factorization is an error, not an invitation to search for another damping value. The additional term $\delta\|\Delta w\|^2/2$ is part of the damped objective. Consequently, damped costs and undamped physical reconstruction MSE must be distinguished.
+
+The diagonal $Q_{jj}$ measures conditional freedom within this quadratic model. With the current row $w$, deleting one coordinate while allowing the remaining coordinates to adjust costs $w_j^2/(2Q_{jj})$ \cite{obc}. Thus, a large $Q_{jj}$ means lower cost \emph{at fixed $w_j$}. It does not imply small absolute cost, and it does not identify the final multi-coordinate pruning support. Importantly, $H$ is an activation reconstruction Gram, not the cross-entropy Hessian or a full-network curvature matrix.
+
+The distinction between a Gram diagonal and an inverse-Gram diagonal matters. The former measures the energy of an input feature considered by itself. The latter also reflects relationships with the other features through the matrix inversion. For example, changing a coefficient connected to a redundant feature may be partly offset by changing coefficients connected to correlated features. Conditional compensability captures this possibility within the damped local model. It does not assert that the feature is unimportant for classification, nor that several individually replaceable features can all be removed safely together.
+
+Only the inverse diagonal is retained as the training signal. This choice provides one scale per input coordinate while avoiding a distinct curvature matrix for every output row. Nevertheless, computing that diagonal still requires a dense layerwise factorization and solve. The method reduces the state used by the optimizer; it does not make curvature estimation free.
+
+\subsection{Historical compensability estimation}
+Write $i=(\ell,o,j)$ for a weight coordinate and $D=|\E|=\sum_\ell m_\ell d_\ell$. Broadcast each inverse-Gram diagonal across output rows:
+\begin{align}
+ u_{i,e}&=\tfrac12\log Q_{\ell,e,jj},\\
+ \bar u_e&=\frac{1}{2D}\sum_\ell m_\ell\sum_j\log Q_{\ell,e,jj},\qquad
+ \widehat u_{i,e}=u_{i,e}-\bar u_e.
+ \label{eq:center}
+\end{align}
+This is one global, coordinate-weighted centering operation. Averaging layer means equally would define a different algorithm. Starting from $s_{i,-1}=0$, update only after completing epoch $e$:
+\begin{equation}
+ s_{i,e}=(1-\eta)s_{i,e-1}+\eta\widehat u_{i,e}.
+ \label{eq:history}
+\end{equation}
+Epoch $e+1$ uses $s_e$; epoch $0$ uses the zero state and therefore the ordinary SAM direction. The coefficient $\eta$ controls memory rather than an energy-feedback rate. With identical zero initialization, $s_{\ell,o,j,e}$ is identical across output rows $o$. HC-SAM therefore learns a layerwise input-feature geometry broadcast to weights, \emph{not} independently learned output-specific scales. The perturbations can still differ across rows because their task gradients differ.
+
+The log-domain update stabilizes relative scale estimates across epochs. A constant common rescaling of every $Q$ is removed by global centering. Layer-specific rescaling is not removed and must not be introduced through inconsistent Gram conventions. Noneligible coordinates retain unit scale, so centering also fixes the relative budget between eligible and noneligible parameters.
+
+History is introduced because the reconstruction geometry changes with the dense model. An estimate from one epoch describes that checkpoint and its calibration activations; it is not a permanent property of a weight coordinate. The moving state blends recent estimates instead of replacing the perturbation geometry abruptly at every refresh. Whether this memory is useful or merely delays adaptation is an empirical question, which motivates the Direct-Q control. The logarithmic representation makes the blend multiplicative in scale and keeps all resulting direction weights positive.
+
+The timing is deliberately conservative. Statistics measured after epoch $e$ affect only epoch $e+1$ and later. Within an epoch, every mini-batch uses the same committed geometry, so the optimizer does not need a new factorization for each update. The first epoch begins with no reconstruction preference and follows the ordinary SAM direction. Historical guidance emerges only after observing the trained network's own activations.
+
+\subsection{Competitive fixed-budget perturbation}
+For a mini-batch in epoch $e$, compute the center task gradient $g_1=\nabla_w\mathcal{L}(w)$. Define
+\begin{equation}
+ b_i=\begin{cases}\exp(2s_{i,e-1})&i\in\E,\\1&i\notin\E,\end{cases}
+ \quad z=b\odot g_1,\quad
+ \epsilon=\rho\frac{z}{\|z\|_2}.
+ \label{eq:perturb}
+\end{equation}
+The denominator includes \emph{all} trainable coordinates with valid gradients, including parameters excluded from pruning. If $z=0$, set $\epsilon=0$ and record that step. Evaluate $g_2=\nabla_w\mathcal{L}(w+\epsilon)$, restore the center weights, and apply the original SGD update using $g_2$. Geometry is detached; no gradient is propagated through the calibration calculation or the perturbation construction. Batch-normalization running statistics are updated on the center pass only, and calibration uses evaluation mode without changing buffers.
+
+Equation~\eqref{eq:perturb} redistributes a fixed Euclidean budget. It is generally \emph{not} the maximizer of $g_1^\top\epsilon$ over the Euclidean ball; that maximizer is the ordinary SAM direction. It can instead be viewed as maximizing $(b\odot g_1)^\top\epsilon$ over that ball, an objective-preconditioning instance of the preconditioned SAM framework \cite{preconditioned}. The proposed ingredient is the historical reconstruction-based choice of $b$, not the general normalized preconditioning formula.
+
+At a fixed nonzero gradient, increasing one coordinate's scale gives that coordinate a larger share of the perturbation energy. Because the total radius is unchanged, this share is taken from other coordinates rather than added to the overall budget. The resulting probe asks the classifier to remain useful under a different distribution of local parameter changes. The second task gradient then updates the restored dense model in the usual way. No second-order term is added to the supervised loss, and no gradient through $Q$ is needed.
+
+Giving more budget to a compensable coordinate is a deliberate choice, not a rule dictated by OBS. Our hypothesis emphasizes directions that a later compressor may alter; an alternative policy could instead emphasize coordinates that are difficult to compensate. The singleton cost identity does not decide which policy will train the better classifier. HC-SAM fixes the former policy and tests it, while retaining task-gradient dependence: even a large geometry scale produces no perturbation at a coordinate whose current gradient is zero.
+
+\subsection{Native SparseGPT reconstruction}
+After the last epoch, freeze the dense checkpoint and collect the prescribed training-side calibration activations. The main endpoint runs native SparseGPT selection and OBS compensation \cite{sparsegpt}. At each $N{:}M$ group, its implementation ranks the current individual weights with a factor-based score, selects the required deletions, and propagates errors in its prescribed column order. Later groups see weights modified by earlier compensation. We do not replace this procedure by a globally precomputed mask, enumerate joint deletion sets, or introduce geometry into its score.
+
+Two auxiliary endpoints isolate different operations. \emph{Final-Q mask-only} ranks $|w_{o,j}|/\sqrt{Q_{jj}}$ on the frozen dense weights and directly zeros selected positions. \emph{Final-Q fixed-mask OBS} starts again from the original dense weights and compensates using that externally fixed mask. The latter must not start from an already zeroed model, which would lose the original deletion displacement. Neither auxiliary endpoint is called native SparseGPT. All endpoints retain the same original BN buffers and use zero recovery epochs.
+
+Keeping the native compressor unchanged is important for interpretation. HC-SAM does not seek a favorable result by modifying both the trained model and its final reconstruction algorithm simultaneously. Instead, its learned weights and activations are presented to the existing compressor under a frozen protocol. If the resulting sparse model performs better, the observation concerns the training-to-compression pipeline; additional controls are still needed to attribute that difference specifically to the history mechanism.
+
+\subsection{Training-to-pruning algorithm}
+Algorithm~\ref{alg:hc} states the time ordering explicitly. The final refresh estimates the auxiliary Final-Q target; it cannot retroactively change the last training epoch. The main native endpoint recomputes its own reconstruction factors under the frozen compressor convention.
+\begin{algorithm}[t]
+\caption{HC-SAM with a native post-training endpoint}
+\label{alg:hc}
+\begin{algorithmic}[1]
+\Require Dense initialization $w_0$, train data, calibration IDs, $T,\rho,\eta,\alpha$, eligibility $\E$
+\State Initialize $s_{-1}=0$; initialize SGD and scheduler
+\For{$e=0,\ldots,T-1$}
+  \For{training mini-batch $\mathcal B$}
+    \State $g_1\gets\nabla\mathcal L_{\mathcal B}(w)$ at center weights
+    \State $\epsilon\gets$ Eq.~\eqref{eq:perturb} using $s_{e-1}$
+    \State Save center; add $\epsilon$; freeze BN running updates
+    \State $g_2\gets\nabla\mathcal L_{\mathcal B}(w+\epsilon)$
+    \State Restore center even on an exception
+    \State Update restored $w$ by SGD with $g_2$
+  \EndFor
+  \For{each eligible layer $\ell$, serially}
+    \State Stream fixed calibration batches in evaluation mode
+    \State Accumulate $H_{\ell,e}$; factor $B_{\ell,e}$
+    \State Extract $\diag Q_{\ell,e}$; release layer matrices
+  \EndFor
+  \State Compute weighted global target by Eq.~\eqref{eq:center}
+  \State Update $s_e$ by Eq.~\eqref{eq:history}; advance scheduler
+  \State Save weights, geometry, optimizer, RNG, and evidence
+\EndFor
+\State Freeze final dense checkpoint and calibration protocol
+\State Run native SparseGPT $N{:}M$ selection and compensation
+\State Audit masks, zero entries, finite values; freeze hashes
+\State Evaluate fixed dense and sparse endpoints once
+\end{algorithmic}
+\end{algorithm}

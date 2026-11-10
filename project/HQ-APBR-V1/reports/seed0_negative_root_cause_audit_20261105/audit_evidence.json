@@ -1,0 +1,179 @@
+{
+  "status": "READ_ONLY_ROOT_CAUSE_AUDIT_COMPLETE",
+  "test_repeated": false,
+  "dataset_opened": false,
+  "training_started": false,
+  "transfer": {
+    "status": "LOCAL_TRANSFER_SHA256_PASS",
+    "verified_files": 351,
+    "verified_bytes": 2150679355,
+    "original_run_manifest_files": 234,
+    "local_root": "C:\\Users\\earthgrass73\\Desktop\\NM\u7a00\u758f\\HQ-APBR-V1\\artifacts\\hq_apbr_seed0_full_20261105_remote_copy",
+    "remote_files_deleted": false,
+    "test_repeated": false,
+    "transport": "bounded compressed SSH channels; previous stalls retained"
+  },
+  "formal_local_audit_status": "COMPLETED_SEED0_LOCAL_AUDIT_PASS",
+  "parent_sha256": "5bf3011c4fc15c999c6dc62f6a2d6b7a2ffebcd6931145367f58e8fbee5fdbdc",
+  "config_sha256": "56ff197b0860dfd0f4a0768c5609031214e6405c51557009a9977582b38400e7",
+  "calibration_ids_sha256": "3b7da27d79762235c87f18571bc73224d6e6f2b3ba663b7d9a4a3de312f23157",
+  "eligible_layer_mapping_sha256": "99e0e044a7e4aea0c9f547d3283bdfd5e48f8081a0a7a65ff74491bcd9272c6a",
+  "mask_identity": {
+    "mask_only_equals_fixed_obs": true,
+    "mask_only_hash": "5e5aeb5a51dec89e8387447a706948b1e9c7abedecee0b7923b6584061eaea8c",
+    "fixed_obs_hash": "5e5aeb5a51dec89e8387447a706948b1e9c7abedecee0b7923b6584061eaea8c",
+    "native_hash": "6d9c2e54985f4e77dd97a2b90f68ef2576e8102b6319cc615b9204b6507f18f0",
+    "static_native_coordinate_agreement": 0.7923028304538362,
+    "static_native_identical_group_rate": 0.606638904185022,
+    "static_native_difference_count": 2317382,
+    "magnitude_native_coordinate_agreement": 0.78732734489721,
+    "magnitude_native_identical_group_rate": 0.5972791047173275,
+    "static_magnitude_coordinate_agreement": 0.9528046774619127,
+    "static_magnitude_identical_group_rate": 0.9062019605818649,
+    "static_native_keep_support_jaccard": 0.6560442886121634
+  },
+  "bn_state_hashes": {
+    "dense": "263e76f336191cf41addbf0c66688704b60a3b9ba3a1c9c7c4a04179df6c0444",
+    "final_q_mask_only": "263e76f336191cf41addbf0c66688704b60a3b9ba3a1c9c7c4a04179df6c0444",
+    "final_q_fixed_obs": "263e76f336191cf41addbf0c66688704b60a3b9ba3a1c9c7c4a04179df6c0444",
+    "sparsegpt_native": "263e76f336191cf41addbf0c66688704b60a3b9ba3a1c9c7c4a04179df6c0444"
+  },
+  "geometry_history_availability": {
+    "per_epoch_q_summary": "AVAILABLE",
+    "per_epoch_geometry_drift": "AVAILABLE",
+    "full_s_tensors": "AVAILABLE_AT_EPOCHS_0_9_49_99_149_199_ONLY",
+    "ordinary_sam_direction_cosine": "NOT AVAILABLE",
+    "per_coordinate_perturbation_energy": "NOT AVAILABLE",
+    "per_layer_perturbation_energy": "AVAILABLE_EACH_EPOCH"
+  },
+  "geometry_drift_train_ce_correlation": {
+    "pearson": 0.8575837817681256,
+    "spearman": 0.9495162379059479,
+    "adversarial_ce_pearson": 0.8734404880639539,
+    "interpretation": "association only; same-epoch post-training refresh versus epoch CE"
+  },
+  "final_q_history_s_relationship": {
+    "per_layer_spearman_logq_vs_s_median": 0.9994824943691862,
+    "per_layer_spearman_logq_vs_s_min": 0.9675595354057003,
+    "per_layer_spearman_logq_vs_s_max": 0.9999532187978802
+  },
+  "native_mask_score_diagnostics": {
+    "top_within_layer_q_decile_delete_rate": 0.5517367021276596,
+    "bottom_within_layer_q_decile_delete_rate": 0.4492746622008474,
+    "dense_abs_weight_mean_deleted": 0.004093987694558209,
+    "dense_abs_weight_mean_kept": 0.008517829651897464,
+    "interpretation": "Associations with the final native mask; native SparseGPT used evolving compensated weights, so these are not a causal score decomposition."
+  },
+  "reconstruction_summary": {
+    "sum_layer_mse_mask_only": 0.01968446279324153,
+    "sum_layer_mse_fixed_obs": 0.0031051945006060305,
+    "sum_layer_mse_native": 0.002057881373298109,
+    "native_lower_than_fixed_obs_layer_count": 19,
+    "layer_count": 19
+  },
+  "compensability_alignment_A": {
+    "status": "NOT AVAILABLE",
+    "reason": "Only per-layer perturbation energy was logged; the requested deleted-coordinate energy fraction requires per-coordinate energy.",
+    "random_2_4_expectation": 0.5
+  },
+  "energy_concentration": {
+    "mean_top1_share_of_total": 0.28415185367136303,
+    "mean_top3_share_of_total": 0.6348958599149076,
+    "final_top1_layer": "layer4.1.conv2.weight",
+    "final_top1_share_of_total": 0.3688345099407055,
+    "final_top3_share_of_total": 0.723800685108022
+  },
+  "native_reconstruction_error_top5": [
+    {
+      "layer": "layer3.0.conv1.weight",
+      "mse": 0.00028496457827179586
+    },
+    {
+      "layer": "layer2.0.conv1.weight",
+      "mse": 0.0002780965980749916
+    },
+    {
+      "layer": "layer4.0.conv1.weight",
+      "mse": 0.00023273672183175958
+    },
+    {
+      "layer": "layer4.1.conv1.weight",
+      "mse": 0.00019777641205919952
+    },
+    {
+      "layer": "layer2.1.conv1.weight",
+      "mse": 0.00015637435113984485
+    }
+  ],
+  "historical_reference": {
+    "status": "REFERENCE_COMPARISON_COMPLETE",
+    "comparison_status": "REFERENCE_ONLY",
+    "strict_ranking_allowed": false,
+    "reason": "Historical hardware/environment and execution records differ; same initialization alone does not establish a paired causal experiment.",
+    "no_dataset_opened": true,
+    "no_evaluation_repeated": true,
+    "source_script_sha256": "62a2762c41b2916a714ea2b1d44c8a398621535ca681cb0f6ba305384fe70a00",
+    "reference_snapshot_sha256": "277e7c869f26e3eb0741d888d2cc89161b3e14e617742540aa955fe13d40686f",
+    "hq_evidence_sha256": "5255f0ad1747c92e5a88dce241a8ce610ce1fdb6b46480fb5b9303d4cbca45d8",
+    "rows": [
+      {
+        "reference_id": "sam_formal_original_sparsegpt",
+        "reference_accuracy_percent": 77.47,
+        "reference_ce": 0.8502597255706787,
+        "hq_accuracy_percent": 76.59,
+        "hq_ce": 0.8831226616859436,
+        "hq_minus_reference_accuracy_pp": -0.8799999999999955,
+        "hq_minus_reference_ce": 0.03286293611526481,
+        "reference_evaluation_sha256": "8756114b8effaa1cea9e1222fe85c795faeee6b722d2bc3a52ac53e494389111",
+        "reference_checkpoint_sha256": "77c6ab8a4468842ba211dec422db81f14933ea1403b9c9c35883463e321b7bcf"
+      },
+      {
+        "reference_id": "sam_paired_rerun_original_sparsegpt",
+        "reference_accuracy_percent": 77.51,
+        "reference_ce": 0.8502324131965637,
+        "hq_accuracy_percent": 76.59,
+        "hq_ce": 0.8831226616859436,
+        "hq_minus_reference_accuracy_pp": -0.9200000000000017,
+        "hq_minus_reference_ce": 0.032890248489379825,
+        "reference_evaluation_sha256": "79d04021a2bf77a6e7ddecd2e28c4783d7db13e46649bdb769c681e24ba18d02",
+        "reference_checkpoint_sha256": "c18df55168194e11a95ca51ecc04b046b00ff7b52281f0bcff0c2e34fce96bd4"
+      },
+      {
+        "reference_id": "apbr_original_sparsegpt",
+        "reference_accuracy_percent": 76.99000000000001,
+        "reference_ce": 0.8581003943443298,
+        "hq_accuracy_percent": 76.59,
+        "hq_ce": 0.8831226616859436,
+        "hq_minus_reference_accuracy_pp": -0.4000000000000057,
+        "hq_minus_reference_ce": 0.025022267341613724,
+        "reference_evaluation_sha256": "a3caa429207d5a10789fa0215c33ed39b2757816190f87c3d789e70eb5654ada",
+        "reference_checkpoint_sha256": "0ff0eb2f8a9371ab47f39a8a8d0ea8b237e4f0ed89eb6ff583f05a4d4d1d6e04"
+      }
+    ],
+    "hq_dense_accuracy_percent": 78.51,
+    "hq_dense_to_native_drop_pp": 1.9200000000000017
+  },
+  "classification": {
+    "verified_implementation_issue": [],
+    "observed_mechanism_behavior": [
+      "Static Final-Q support and native SparseGPT support differ.",
+      "Native SparseGPT has lower reconstruction MSE than static-mask fixed OBS on the frozen HC parent.",
+      "Perturbation energy is concentrated in a small number of late layers by the final epoch."
+    ],
+    "supported_hypothesis": [
+      "The static Final-Q mask is less compatible with the frozen OBS reconstruction path than the native dynamic mask on this parent.",
+      "HC-SAM Seed 0 did not improve native SparseGPT endpoint accuracy over the audited SAM/APBR references."
+    ],
+    "inconclusive": [
+      "Whether poor coordinate-level energy/mask alignment caused the negative native endpoint.",
+      "Whether concentration in late layers causally reduced accuracy.",
+      "Whether the result is stable across seeds."
+    ],
+    "not_available": [
+      "Per-coordinate cumulative perturbation energy and alignment A.",
+      "Cosine between HC perturbations and ordinary SAM perturbations.",
+      "Exact spectral Gram condition numbers.",
+      "Same-protocol historical SAM/APBR per-layer reconstruction traces."
+    ]
+  }
+}

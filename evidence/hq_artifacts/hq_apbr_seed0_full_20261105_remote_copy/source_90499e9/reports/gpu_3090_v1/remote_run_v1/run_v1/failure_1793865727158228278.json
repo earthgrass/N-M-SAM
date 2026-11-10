@@ -1,0 +1,9 @@
+{
+  "status": "FAILED",
+  "type": "RuntimeError",
+  "message": "Calibration overhead exceeds frozen limit; no adaptive fallback",
+  "traceback": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/hq_apbr_v1_20261105/source_ec63a17/scripts/run_gpu_exploration.py\", line 204, in main\n    if gate['status']!='GPU_SMOKE_PASS':raise RuntimeError('Calibration overhead exceeds frozen limit; no adaptive fallback')\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Calibration overhead exceeds frozen limit; no adaptive fallback\n",
+  "automatic_retry": false,
+  "peak_allocated_bytes": 1666932736,
+  "peak_reserved_bytes": 2248146944
+}

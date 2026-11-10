@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hq-apbr-v1"
+version = "0.1.0"
+description = "Independent HQ-APBR mathematical and numerical research workspace"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,46 @@
+{
+  "train_seconds_mean": 45.93512246633569,
+  "calibration_seconds_mean": 14.034356797734896,
+  "calibration_to_train_percent": 30.55256205754149,
+  "peak_allocated_gib": 1.5528182983398438,
+  "peak_reserved_gib": 2.126953125,
+  "resources_source": {
+    "peak_allocated_bytes": 1667325952,
+    "peak_reserved_bytes": 2283798528,
+    "frozen_limits": {
+      "peak_allocated_bytes": 21474836480,
+      "peak_reserved_bytes": 23622320128,
+      "maximum_calibration_to_train_ratio": 0.3
+    }
+  },
+  "performance_source": {
+    "train_seconds_mean": 45.93512246633569,
+    "calibration_seconds_mean": 14.034356797734896,
+    "epoch_train_plus_calibration_seconds_mean": 59.969479264070586,
+    "calibration_to_train_ratio": 0.30552562057541494,
+    "frozen_maximum_ratio": 0.3,
+    "excess_percentage_points": 0.5525620575414947,
+    "phase_seconds_mean": {
+      "unfold_seconds": 0.206015112499396,
+      "gram_seconds": 0.6540887095034122,
+      "cholesky_seconds": 0.026472151279449463,
+      "inverse_diagonal_seconds": 0.06453228617707889
+    },
+    "other_unseparated_calibration_seconds_mean": 13.083248538275559,
+    "other_fraction_of_calibration": 0.9322300071768986,
+    "estimated_200_training_seconds": 9187.024493267138,
+    "estimated_200_calibration_seconds": 2806.871359546979,
+    "estimated_200_compute_seconds": 11993.895852814117,
+    "estimate_excludes": [
+      "checkpoint_serialization_and_verification",
+      "history_and_status_io",
+      "gate_and_smoke",
+      "final_pruning",
+      "final_test"
+    ],
+    "full_network_passes_per_refresh": 19,
+    "fixed_images_per_refresh": 1024,
+    "forwarded_images_per_refresh": 19456
+  },
+  "scope": "three temporary smoke epochs; full training pending; not SAM speed comparison"
+}

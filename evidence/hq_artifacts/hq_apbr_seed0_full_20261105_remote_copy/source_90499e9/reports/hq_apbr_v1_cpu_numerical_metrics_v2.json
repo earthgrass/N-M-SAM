@@ -1,0 +1,37 @@
+{
+  "status": "CPU_NUMERICAL_GATE_PASS",
+  "synthetic_only": true,
+  "test_accessed": false,
+  "cuda_available": false,
+  "python": "3.12.10",
+  "pytorch": "2.13.0+cpu",
+  "source_sha256": {
+    "math_core": "f36a17ab52f6f15abcca403451721343f32e4d54fd54e1b08ba3afb9c69132f6",
+    "gate_runner": "91b88242450f220675f22e90952be2eb27ca097e512bc24f864ec2717b893e12"
+  },
+  "test_a": {
+    "inverse_diag_max_abs_error": 1.1102230246251565e-15,
+    "obs_cost_abs_error": 1.0408340855860843e-17,
+    "undamped_vs_damped_cost_gap": 0.0012515399408601982,
+    "symmetrization_max_abs_correction": 0.0,
+    "relative_damping": 0.06728442578782826
+  },
+  "test_b_d": {
+    "global_center_sum_abs_error": 2.220446049250313e-16,
+    "exp_2u_reconstruction_max_abs_error": 1.7763568394002505e-15,
+    "eligible_coordinate_count_in_toy": 20
+  },
+  "test_c": {
+    "ema_explicit_max_abs_error": 2.7755575615628914e-17,
+    "ema_center_sum_abs_error": 6.661338147750939e-16
+  },
+  "test_e_f": {
+    "global_radius_relative_error": 1.7842161359471476e-08,
+    "eligible_direction_max_abs_error": 2.625291789515316e-10,
+    "zero_direction": false
+  },
+  "test_g": {
+    "stable_2_of_4_with_dense_tail": true
+  },
+  "phase_3_gpu_gate": "NOT_RUN_CPU_ONLY"
+}

@@ -1,0 +1,34 @@
+{
+  "experiment_id": "hq_apbr_v1_seed0_exploratory_20261105",
+  "seed": 0,
+  "config_sha256": "56ff197b0860dfd0f4a0768c5609031214e6405c51557009a9977582b38400e7",
+  "source_commit": "ec63a173a02b9e319b99abc251f3cb7c3494c96d",
+  "source_manifest_sha256": "5ba28563953e14ee1f5137545f9ddd35feae3afc41ca96833afd961e08b94aa8",
+  "dataset": {
+    "archive_bytes": 169001437,
+    "archive_md5": "eb9058c3a382ffc7106e4002c42a8d85",
+    "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+    "train_samples": 50000,
+    "test_accessed": false
+  },
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "cudnn": 91002,
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "total_memory": 25296044032,
+    "compute_capability": [
+      8,
+      6
+    ],
+    "free_memory": 25019023360,
+    "nvidia_smi": "Thu Nov  5 15:58:35 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 580.105.08             Driver Version: 580.105.08     CUDA Version: 13.0     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 3090        On  |   00000000:4F:00.0 Off |                  N/A |\n| 30%   26C    P2             33W /  350W |     265MiB /  24576MiB |      1%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A            2182      C   /root/miniconda3/bin/python             256MiB |\n+-----------------------------------------------------------------------------------------+\n",
+    "driver": "580.105.08",
+    "gpu_uuid": "GPU-1101bca3-6fa0-a02d-2684-488db2491be8",
+    "compute_processes": "pid, process_name, used_gpu_memory [MiB]\n2182, /root/miniconda3/bin/python, 256 MiB\n",
+    "disk_free_bytes": 53517496320,
+    "deterministic": true,
+    "tf32": false
+  }
+}

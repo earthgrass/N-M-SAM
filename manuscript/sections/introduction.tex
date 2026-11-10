@@ -1,0 +1,48 @@
+\section{Introduction}
+Structured $N{:}M$ sparsity constrains a fixed number of surviving weights within small groups, providing a regular representation for sparse execution \cite{nm}. Producing such a representation is not merely a matter of ranking individual magnitudes: deleting weights changes layer outputs, and surviving weights can partly compensate for those changes. Second-order post-training methods use calibration activations to model this reconstruction problem. Optimal Brain Compression and SparseGPT demonstrate how reconstruction geometry can guide deletion and compensation without retraining a dense model for each sparse support \cite{obc,sparsegpt}. Their effectiveness raises a complementary question: can the dense training procedure prepare a model for this specific kind of reconstruction?
+
+Sharpness-aware minimization (SAM) trains against a local perturbation computed from the task gradient \cite{sam}. Its Euclidean perturbation and a structured pruning displacement differ in direction, support, and magnitude. A pruning displacement sets selected weights exactly to zero and is constrained by the $N{:}M$ pattern; a SAM perturbation explores a small neighborhood and need not emphasize those coordinates. This mismatch motivates studying where the perturbation budget is allocated. However, keeping a fixed SAM radius cannot reproduce arbitrarily large finite deletions, and changing the direction alone should not be presented as resolving that discrepancy completely.
+
+There is also a difference in the information available to the two stages. A task gradient measures local loss change at the current parameters. An activation reconstruction Gram describes how changes to several input-connected weights can offset each other in a layer output. In a fixed positive-definite quadratic model, the inverse-Gram diagonal controls the optimal cost of deleting one weight while allowing the other weights to adjust. Standard SAM does not explicitly use this conditional reconstruction information. Incorporating it into training offers a testable bridge between a dense optimization objective and a later second-order compressor, without requiring a sparse model to be trained at each step.
+
+We study \emph{Historical Compensability-Guided SAM} (HC-SAM). At each epoch boundary, a fixed set of training images supplies activation statistics for a damped inverse-Gram diagonal. We globally center its log scale, maintain an exponential history, and use the resulting positive scales to precondition the next epoch's SAM direction. A single normalization preserves the global $L_2$ perturbation radius. The final model is pruned with unchanged native SparseGPT. This isolates the proposed training signal from changes to the downstream selection or compensation algorithm. The method uses shared input-feature statistics, not independent second-order matrices for every output row.
+
+Our contributions are threefold. First, we specify a causal training-to-pruning protocol that uses historical conditional reconstruction statistics to allocate a fixed perturbation budget. Second, we characterize the signal through its OBS interpretation, relative geometric history, and budget-competition identities, while distinguishing these properties from unproven performance claims. Third, we formulate an explicit post-hoc perturbation-to-pruning alignment diagnostic to distinguish support-level association from task-level performance. Completed numerical tests support implementation feasibility. Accuracy gains, the value of history over an instantaneous estimate, and the proposed mechanism remain empirical questions; this draft does not claim an established state-of-the-art result.
+
+\begin{figure*}[t]
+\centering
+\setlength{\fboxsep}{7pt}
+\fbox{\begin{minipage}[c]{.18\textwidth}\centering
+\textbf{Epoch $e$: dense training}\\[3pt]
+Task gradient $g_1$\\
+Historical scale $b_{e-1}$\\
+$\epsilon=\rho(b\odot g_1)/\|b\odot g_1\|$\\
+Adversarial gradient $\to$ SGD
+\end{minipage}}
+\hfill$\longrightarrow$\hfill
+\fbox{\begin{minipage}[c]{.18\textwidth}\centering
+\textbf{After epoch $e$}\\[3pt]
+Fixed training images\\
+$H=XX^\top/n$\\
+$Q=(H+\delta I)^{-1}$\\
+Extract shared $\diag Q$
+\end{minipage}}
+\hfill$\longrightarrow$\hfill
+\fbox{\begin{minipage}[c]{.18\textwidth}\centering
+\textbf{Historical geometry}\\[3pt]
+Weighted global centering\\
+$s_e=(1-\eta)s_{e-1}+\eta\widehat u_e$\\
+$b_e=\exp(2s_e)$\\
+Used only from epoch $e+1$
+\end{minipage}}
+\hfill$\longrightarrow$\hfill
+\fbox{\begin{minipage}[c]{.18\textwidth}\centering
+\textbf{After dense training}\\[3pt]
+Freeze final parent\\
+Native SparseGPT\\
+Dynamic $N{:}M$ + OBS\\
+No recovery training
+\end{minipage}}
+\caption{HC-SAM separates training-time geometry estimation from the final compressor. The first three boxes repeat across epochs; the last is executed only after dense training. Calibration uses training data, with BN statistics frozen. The final native mask is never fed back into training. This is a conceptual diagram, not an empirical result.}
+\label{fig:overview}
+\end{figure*}

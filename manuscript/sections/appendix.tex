@@ -1,0 +1,99 @@
+\section{Proofs and Counterexample Boundaries}
+\label{app:proofs}
+\subsection{Conditional deletion cost}
+For Proposition~\ref{prop:obs}, introduce a multiplier $\gamma$ for $e_j^\top\Delta w+w_j=0$. Stationarity of $\frac12\Delta w^\top B\Delta w+\gamma(e_j^\top\Delta w+w_j)$ gives $\Delta w=-\gamma Qe_j$. The constraint implies $\gamma=w_j/Q_{jj}$ because positive definiteness ensures $Q_{jj}>0$. Substitution gives
+\begin{equation}
+ \tfrac12\Delta w^{*\top}B\Delta w^*
+ =\tfrac12\frac{w_j^2}{Q_{jj}^2}e_j^\top QBQe_j
+ =\frac{w_j^2}{2Q_{jj}}.
+\end{equation}
+Strict convexity makes the feasible minimizer unique. For a deletion set $S$, replace $e_j$ by the column selector $E_S$ to obtain
+\begin{equation}
+ \Delta w^*=-QE_S(Q_{SS})^{-1}w_S,\qquad
+ C_S=\tfrac12w_S^\top(Q_{SS})^{-1}w_S.
+\end{equation}
+This proves a local constrained quadratic identity, not a globally optimal sequence of structured deletions. It also shows why the diagonal is insufficient for group interactions. For instance, let $Q_{SS}=\left[\begin{smallmatrix}1&r\\r&1\end{smallmatrix}\right]$ with $|r|<1$ and $w_S=(1,1)^\top$. Each singleton cost is $1/2$, but the pair costs $1/(1+r)$, which differs from their sum unless $r=0$. With $w_S=(1,-1)^\top$, the pair instead costs $1/(1-r)$. The same diagonal permits opposite interaction effects.
+
+If a prior set is fixed, the free-coordinate objective must be formed before applying the identity. Inverting the appropriate free Hessian is generally not equivalent to selecting a principal block of the original inverse. SparseGPT's factor-based sequential approximation has its own active-subproblem interpretation; our training statistic should not be conflated with every diagonal used during that process.
+
+\subsection{Weighted centering and log history}
+Equation~\eqref{eq:center} counts each feature $m_\ell$ times because the shared statistic affects that many weight coordinates. Thus $\sum_{i\in\E}\widehat u_{i,e}=0$. The zero initial state and Eq.~\eqref{eq:history} imply by induction that $\sum_i s_{i,e}=0$. Expanding the recursion yields
+\begin{equation}
+ 2s_{i,e}=\eta\sum_{k=0}^{e}(1-\eta)^{e-k}
+ \big(\log Q_{k,ii}-\log G_k\big).
+\end{equation}
+Exponentiation proves Eq.~\eqref{eq:product}. The omitted initialization term is $(1-\eta)^{e+1}2s_{i,-1}=0$, equivalently a unit-scale factor with that weight. This is a geometric average of relative inverse-diagonal values and the initial unit value. It is not an arithmetic mean of $Q$, and it is not an average of realized perturbation energy. The limits $\eta=0$ and $\eta=1$ follow directly from the recurrence.
+
+Multiplying every layer's $Q$ by the same positive constant adds a common shift to $u$ which centering removes. Different constants for different layers do not cancel. Because noneligible coordinates use $b=1$, replacing global centering with layerwise centering changes the physical direction even if within-layer ratios remain the same. Direct-Q is therefore defined with the exact same conventions, not merely as an informal ``multiply gradients by $Q$'' rule.
+
+\subsection{Radius and energy derivatives}
+Let $Z=\sum_jb_j^2g_j^2>0$. Then $\epsilon_i^2=\rho^2b_i^2g_i^2/Z$, so $\|\epsilon\|_2^2=\rho^2$ and $p_i=b_i^2g_i^2/Z$. Setting $h_i=\log b_i$ and using the quotient rule,
+\begin{align}
+ \partial_{h_i}p_i
+ &=\frac{2b_i^2g_i^2Z-2(b_i^2g_i^2)^2}{Z^2}
+ =2p_i(1-p_i),\\
+ \partial_{h_i}p_j
+ &=-\frac{2b_i^2g_i^2b_j^2g_j^2}{Z^2}
+ =-2p_ip_j\quad(j\ne i).
+\end{align}
+The sum of these derivatives is zero. This establishes redistribution, not an increase in total energy. If all valid gradients vanish, the defined zero perturbation has norm zero and the proportions are undefined. The proof is in exact arithmetic; the implementation separately measures the norm after casting the perturbation to parameter precision.
+
+The fixed-radius construction is not standard SAM's Euclidean inner maximizer unless $b\odot g$ is parallel to $g$. For $g=(1,1)$ and $b=(2,1)$ it is not. It does maximize the linear surrogate $(b\odot g)^\top\epsilon$ over the same ball. No claim that this surrogate is the first-order expansion of the original loss is needed or made.
+
+\subsection{Random-mask alignment and streaming estimators}
+Let $D_{\rm GPT}\subset\E$ be the frozen final native deletion set. For a training step with nonzero eligible energy, define the post-hoc support alignment
+\begin{equation}
+ \mathcal A_t^{\E}=\frac{\sum_{i\in D_{\rm GPT}}\epsilon_{i,t}^2}{\sum_{i\in\E}\epsilon_{i,t}^2}.
+ \label{eq:align}
+\end{equation}
+The final mask is not available to the training algorithm and is used only retrospectively. This diagnostic measures energy on a support, not directional agreement or classification performance.
+Condition on a fixed energy vector $h_i=\epsilon_i^2$ and choose uniformly two deletions in every complete group of four, independently of $h$. Each coordinate has deletion probability $1/2$, so linearity of expectation gives
+\begin{equation}
+ \mathbb E_D\left[\frac{\sum_{i\in D}h_i}{\sum_{i\in\E}h_i}\right]
+ =\frac{\sum_{i\in\E}(1/2)h_i}{\sum_{i\in\E}h_i}=\tfrac12.
+\end{equation}
+The denominator must be nonzero. No independence between different mask entries is required. Dense tails, if included in $\E$ but never deleted, change this reference to one half of the energy on complete groups divided by total eligible energy. The current 19-layer setup has no incomplete four-element groups; general implementations must check this condition rather than assume it.
+
+To recover pooled alignment, store $S_i=\sum_t\epsilon_{i,t}^2$ and compute $\sum_{D}S_i/\sum_\E S_i$ after freezing the mask. To recover the arithmetic mean of stepwise alignment, instead store
+\begin{equation}
+ R_i=\sum_{t:Z_t^\E>0}\frac{\epsilon_{i,t}^2}{Z_t^\E},\qquad
+ Z_t^\E=\sum_{j\in\E}\epsilon_{j,t}^2,
+\end{equation}
+and divide $\sum_D R_i$ by the number of nonzero eligible-energy steps. These statistics coincide only under additional conditions such as constant $Z_t^\E$. Step counts, zero-step handling, and aggregation scope must be logged. Layerwise totals alone cannot determine either numerator for an arbitrary future within-layer mask.
+
+\section{Implementation and Evaluation Protocol}
+\label{app:protocol}
+\paragraph{Frozen training.}
+The exploratory configuration uses 50,000 training images, 10,000 test images, batch size 128, 391 batches per epoch, and 200 epochs (78,200 optimizer steps). The optimizer is SGD with initial learning rate 0.1, momentum 0.9, weight decay $5\times10^{-4}$, and cosine scheduling. The perturbation radius is $\rho=0.05$, historical coefficient $\eta=0.1$, and relative damping coefficient $\alpha=0.01$. The full specification is versioned separately. No validation split or test-based model selection is introduced. The fixed last parent has zero-based epoch index 199. Smoke checkpoints are temporary and are not training initializations.
+
+The eligible set contains 11,157,504 coordinates in 19 internal convolutions, including projection shortcuts. Strict $2{:}4$ masks remove 5,578,752 positions. The first convolution, final linear layer, BN affine parameters, and biases are excluded from pruning but not from the global perturbation normalization. We record coordinate mappings and keep-masks as Boolean tensors. Every complete group retains exactly two positions; an incomplete tail, if encountered in another architecture, remains dense. Deleted weights must be exactly zero, and all output tensors must be finite.
+
+\paragraph{Calibration and precision.}
+The calibration index list contains 1,024 fixed training IDs drawn with the frozen generator and seed. Calibration has no augmentation, uses batch size 128, and streams one layer at a time. Convolutional unfold columns are accumulated into a Gram normalized by the total number of patches, not the number of batches. This protocol repeats the dataset traversal for each layer; it does not cache all unfolded activations. Gram arithmetic is FP32, while geometry is FP64. AMP and TF32 are disabled in the frozen configuration. CPU/GPU numerical tests compare explicitly stated tensors and precisions, not nominal dtype labels alone.
+
+If $B=LL^\top$ is its Cholesky decomposition, $Q=L^{-\top}L^{-1}$ and $Q_{jj}=\sum_k(L^{-1})_{kj}^2$. This extracts the required diagonal without treating a Cholesky diagonal as an inverse-Hessian diagonal. It still requires a dense triangular solve, and therefore does not eliminate the cubic decomposition/solve cost. The calculation has $O(d^2n)$ Gram cost, $O(d^3)$ factor/solve cost, and $O(d^2)$ working matrix memory per layer. Geometry can be represented by $O(\sum_\ell d_\ell)$ shared values, although the current implementation may retain broadcast tensors for parameter mapping. A memory bound on one matrix is not a total-process bound.
+
+\paragraph{Gram conventions and dead features.}
+HC training uses $H=XX^\top/n$. The audited native SparseGPT adapter uses $2XX^\top/n$, its historical zero-diagonal replacement rule, relative damping, block size 128, and FP32 compensation. In the absence of special dead-feature replacement, doubling both Gram and damping halves $Q$; the common log shift cancels under global centering. Dead-feature handling can break this simple scaling equivalence. The HC path rejects an invalid damped system rather than silently borrowing the native replacement rule. Main native evaluation preserves its own frozen convention; auxiliary static masks and fixed-mask compensation record theirs separately.
+
+\paragraph{BN and checkpoint semantics.}
+The center pass uses the ordinary training BN update. The adversarial pass prevents a second running-statistics update. Calibration preserves all BN buffers and restores model mode. Resume validation includes model weights, historical geometry, optimizer momentum, scheduler state, and Python, NumPy, CPU, and CUDA RNG state. Configuration and source hashes accompany checkpoints. Exceptions restore perturbed parameters before propagating the error; numerical failure does not silently switch to SAM.
+
+\paragraph{Evaluation ordering.}
+The final dense parent is immutable. The native, mask-only, and fixed-mask endpoints are independently derived from its original weights, sharing its BN buffers. The final calibration activations are collected from that dense parent, not from a model incrementally pruned by a preceding endpoint. Layer audit records include masks, reconstruction diagnostics, compensation statistics, and hashes. All endpoint checkpoints and the pre-test manifest are finalized before any test-loader access. Test accuracy and mean cross-entropy are evaluated once per frozen endpoint. The evaluation scripts contain no best-epoch selection, recovery optimizer, or damping search.
+
+\paragraph{Reproducibility identities.}
+The implementation is independently versioned as HQ-APBR-V1. The formal training source starts from commit \texttt{90499e9}, with a separate baseline mathematical implementation and immutable configuration digest in the accompanying evidence manifest. The final paper import records the complete source commit, configuration hash, dense parent hash, sparse checkpoint and mask hashes, calibration IDs, and evaluation JSON hash. Absolute machine paths and credentials are excluded from the manuscript. Paper-generation scripts read existing records; they do not launch evaluation or touch the test dataset.
+
+\section{Additional Diagnostics and Reporting Plan}
+\paragraph{Layer reconstruction.}
+On fixed calibration inputs $X_\ell$ from the dense parent, report $\| (W'_\ell-W_\ell)X_\ell\|_F^2$ with its explicit element-count normalization, alongside a relative error denominator when nonzero. This is the physical local error, distinct from the damped quadratic cost. State whether later-layer inputs are dense-parent or propagated sparse inputs; the current endpoint builder uses the dense parent. A separately measured end-to-end sparse forward pass addresses accumulated network effects.
+
+\paragraph{Completed validation versus open evidence.}
+The numerical audit and three-epoch smoke support finite geometry, positive-definite solves, preserved BN statistics, fixed radius, and resume integrity. The complete-run learning trajectory, final accuracy, native mask identity, and final calibration cost remain to be imported. Direct-Q and multiple matched seeds remain unmeasured. No significance test or mean-plus-standard-deviation claim is justified by a single exploratory run.
+
+\paragraph{Interpreting potential outcomes.}
+Improved sparse accuracy with unchanged dense accuracy would be consistent with improved compatibility, but still needs the history control. Better dense and sparse accuracy together could be explained partly by a better parent. Improved alignment without improved accuracy would show that support-energy association is insufficient. Worse performance than Direct-Q would weaken the proposed value of historical smoothing. These outcomes should all be retained, without changing the pruning endpoint or selecting a different historical reference after test evaluation.
+
+\paragraph{Scope of novelty.}
+The general perturbation form is covered by preconditioned SAM; historical energy allocation appears in GEAR-SAM; compression-aware optimization and OBS reconstruction have their own precedents. The proposed research contribution is the particular conditional-compensability history and its experimentally tested connection to an unchanged native compressor. Until the required comparisons exist, the draft presents this as a hypothesis and a reproducible implementation, not as a proven superior optimizer or a first use of second-order information in training.

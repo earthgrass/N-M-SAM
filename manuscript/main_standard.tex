@@ -1,0 +1,44 @@
+% Standard reading edition, matching the supplied APBR-SAM_draft_1030.pdf.
+% Scientific body is shared with the preserved CVPR edition.
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,graphicx,microtype,float,array,xcolor}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{titlesec}
+\usepackage{algorithm,algpseudocode}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+\titleformat{\section}{\Large\bfseries}{\thesection.}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection.}{0.6em}{}
+\setlength{\emergencystretch}{2em}
+\newcommand{\pending}{\textsc{Pending}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\Pset}{\mathcal{P}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Center}{\operatorname{Center}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\title{Historical Compensability-Guided Sharpness-Aware Training for Post-Training N:M Pruning}
+\author{}\date{}
+\begin{document}
+\maketitle
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/method}
+\input{sections/theory}
+\input{sections/experiments}
+\input{sections/conclusion}
+\label{main-end}
+\clearpage
+\appendix
+\input{sections/appendix}
+\section*{LLM Usage Statement}
+An OpenAI Codex assistant was used to organize the draft, inspect implementation and experiment records, assist with mathematical exposition and literature discovery, and generate LaTeX and audit scripts. Human authors must verify the scientific claims, citations, and final manuscript. No model-generated experimental observations are reported as measurements.
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+\end{document}

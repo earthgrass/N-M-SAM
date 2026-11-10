@@ -1,0 +1,18 @@
+\newcommand{\MainResultsTable}{
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{llrrrrr}
+\toprule
+Training & Evidence cohort & Dense Acc. & Dense CE & Native Acc. & Native CE & Drop (pp)\\
+\midrule
+SAM & Historical reference & 78.84 & 0.7999 & 77.47 & 0.8503 & 1.37\\
+Original APBR & Historical reference & 78.68 & 0.8031 & 76.99 & 0.8581 & 1.69\\
+\midrule
+Direct-Q SAM & Not run & \pending & \pending & \pending & \pending & \pending\\
+\HCResultRow
+\bottomrule
+\end{tabular}
+\caption{Dense and native SparseGPT endpoints (accuracy in \%). Existing reference records are not a matched HC-SAM cohort. The native endpoint includes dynamic selection and OBS compensation, with zero recovery epochs. Historical SAM replay is listed separately in the appendix.}
+\label{tab:main}
+\end{table*}
+}

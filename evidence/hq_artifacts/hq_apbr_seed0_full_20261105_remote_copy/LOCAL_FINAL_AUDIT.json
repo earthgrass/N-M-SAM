@@ -1,0 +1,65 @@
+{
+  "status": "COMPLETED_SEED0_LOCAL_AUDIT_PASS",
+  "test_repeated": false,
+  "dataset_opened": false,
+  "training_epochs": 200,
+  "steps": 78200,
+  "refreshes": 200,
+  "layers_per_refresh": 19,
+  "geometry_sum": 2.2400854504667222e-09,
+  "geometry_max_abs": 2.1073649466548954,
+  "results": [
+    {
+      "endpoint": "dense",
+      "accuracy_percent": 78.51,
+      "ce": 0.8292574928283691,
+      "mask_layers": 0,
+      "eligible_coordinates": 0,
+      "deletions": 0,
+      "checkpoint_sha256": "59c99e53eaf8595d7024b7d548e755a1771335a4c9501ad022d0160073cc9b23",
+      "mask_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "audit": "PASS"
+    },
+    {
+      "endpoint": "final_q_mask_only",
+      "accuracy_percent": 48.06,
+      "ce": 2.084160765838623,
+      "mask_layers": 19,
+      "eligible_coordinates": 11157504,
+      "deletions": 5578752,
+      "checkpoint_sha256": "fa9cef48794111f644361c263b15da7e1bdbdf9390ad9c71d373e8fb8bf6bd3f",
+      "mask_sha256": "5e5aeb5a51dec89e8387447a706948b1e9c7abedecee0b7923b6584061eaea8c",
+      "audit": "PASS"
+    },
+    {
+      "endpoint": "final_q_fixed_obs",
+      "accuracy_percent": 74.72,
+      "ce": 0.9600373350143433,
+      "mask_layers": 19,
+      "eligible_coordinates": 11157504,
+      "deletions": 5578752,
+      "checkpoint_sha256": "38d531cb8d4edf7bc69e13a91285211068c08a58a9768fb54b75224f766e5d86",
+      "mask_sha256": "5e5aeb5a51dec89e8387447a706948b1e9c7abedecee0b7923b6584061eaea8c",
+      "audit": "PASS"
+    },
+    {
+      "endpoint": "sparsegpt_native",
+      "accuracy_percent": 76.59,
+      "ce": 0.8831226616859436,
+      "mask_layers": 19,
+      "eligible_coordinates": 11157504,
+      "deletions": 5578752,
+      "checkpoint_sha256": "6b0cd1c92421a30ed3c93ebb88d0464d2256fec0f608095e76b8da2860880988",
+      "mask_sha256": "6d9c2e54985f4e77dd97a2b90f68ef2576e8102b6319cc615b9204b6507f18f0",
+      "audit": "PASS"
+    }
+  ],
+  "train_seconds": 9489.209607686847,
+  "calibration_seconds": 3429.829722788185,
+  "performance_gate": "FAIL",
+  "override": "EXPLICIT RESEARCH OVERRIDE APPROVED",
+  "parent_sha256": "5bf3011c4fc15c999c6dc62f6a2d6b7a2ffebcd6931145367f58e8fbee5fdbdc",
+  "config_sha256": "56ff197b0860dfd0f4a0768c5609031214e6405c51557009a9977582b38400e7",
+  "peak_training_allocated_bytes": 1669029888,
+  "peak_training_reserved_bytes": 2237661184
+}

@@ -1,0 +1,16 @@
+﻿id,claim,classification,evidence,boundary
+C1,Transfer and local evidence are complete.,VERIFIED IMPLEMENTATION STATE,351/351 files; transfer and original manifests PASS,Not an efficacy claim
+C2,"All endpoints share parent, Epoch, calibration IDs, config, mapping, and BN state.",VERIFIED IMPLEMENTATION STATE,Endpoint checkpoint metadata and tensor hashes,Pruning algorithms differ
+C3,Mask-only and Fixed OBS use identical support.,VERIFIED IMPLEMENTATION STATE,Bitwise Mask equality and identical SHA256,Only these two branches
+C4,The 26.66 pp Mask-only to Fixed OBS gain is a same-support compensation gain.,SUPPORTED HYPOTHESIS,Same parent/support/BN/config; fixed OBS changes survivors,One parent and Seed
+C5,Native GPT's 1.87 pp advantage is purely compensation.,REJECTED CLAIM,Native support differs; 79.23% coordinate agreement,Selection and dynamic path confounded
+C6,Native GPT has lower layer reconstruction MSE.,OBSERVED MECHANISM BEHAVIOR,Lower than Fixed OBS in 19/19 layers,Layer sums are not end-to-end MSE
+C7,Historical s tracks Q ranking.,VERIFIED MECHANISM BEHAVIOR,Per-layer Spearman median 0.99948,Expected from EMA; not usefulness
+C8,Perturbation energy concentrates in late layers.,OBSERVED MECHANISM BEHAVIOR,Final top-one 36.88%; top-three 72.38%,Coordinate concentration unavailable
+C9,Energy/Mask alignment A is worse than random 0.5.,NOT AVAILABLE,Per-coordinate energy was not logged,No A value computed
+C10,High Q coordinates are more often deleted by Native GPT.,OBSERVED ASSOCIATION,Top Q decile 55.17%; bottom 44.93% deletion,Post-hoc; evolving weights
+C11,Dense magnitude relates to Native support.,OBSERVED ASSOCIATION,Mean abs weight deleted 0.00409; retained 0.00852,Not a causal score decomposition
+C12,Geometry drift causes CE to fall.,INCONCLUSIVE,High correlation with common Epoch trend,No causal intervention
+C13,A software defect explains the result.,NOT SUPPORTED,All identity and numerical audits pass,No evidenced defect
+C14,HC-SAM improves Native GPT over references.,NOT SUPPORTED,HC 76.59; SAM 77.47/77.51; APBR 76.99,"Reference-only, one Seed"
+C15,Expand unchanged HC-SAM immediately.,NOT RECOMMENDED,No positive task signal; alignment A unavailable,A bounded redesign remains possible

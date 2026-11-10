@@ -1,0 +1,45 @@
+{
+  "schema_version": "ai-research-writing/paper-state-v1",
+  "mode": "full-paper",
+  "stage": "drafting",
+  "target_venue": "CVPR 2027",
+  "main_tex": "main.tex",
+  "bibliography": "references.bib",
+  "required_artifacts": [
+    "project_inventory.md",
+    "experiment_inventory.md",
+    "paper_story.md",
+    "claim_evidence_map.md",
+    "numeric_evidence.json",
+    "OPEN_ISSUES.md",
+    "references.bib",
+    "citation_verification.md",
+    "literature/comparison_matrix.md",
+    "figures/figure_plan.md",
+    "reviewer_analysis.md",
+    "build_check.md",
+    "main_standard.tex",
+    "main_standard.pdf",
+    "review/standard_build.json"
+  ],
+  "blockers": [
+    "Final HC accuracy pending",
+    "Direct-Q matched control not run",
+    "Coordinate-level alignment logs unavailable",
+    "Single-seed exploratory evidence only"
+  ],
+  "build": {
+    "status": "passed",
+    "command": "python scripts/build.py",
+    "pdf": "main.pdf",
+    "log": "review\\build-attestation.log",
+    "external_inputs": [],
+    "input_sha256": "117278d152266a0421ab6310ff1268a6babe0c758353b25d581a0bd9e2f9b3e0",
+    "pdf_sha256": "dc39008faa15e7816267784cf73aba22d1ac7fee4e3ff05a1f1c0bf280fcb868",
+    "log_sha256": "4fcc5320c20ecf1be18ef158709a7d9a357e2b70cfee5ec1f0d9527c371e6eb4",
+    "exit_code": 0,
+    "tool_version": "Python 3.12.10",
+    "attestation": "executed",
+    "ran_at": "2026-11-05T08:59:11.410841+00:00"
+  }
+}

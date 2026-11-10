@@ -1,0 +1,20 @@
+\newcommand{\PerformanceTable}{
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lr}
+\toprule Measurement (three-epoch smoke) & Value\\
+\midrule
+Training per epoch & 45.94 s\\
+Calibration per epoch & 14.03 s\\
+Calibration / training & 30.55\%\\
+Peak allocated (gate + smoke) & 1.553 GiB\\
+Peak reserved (gate + smoke) & 2.127 GiB\\
+Numerical / resume checks & Pass\\
+30\% performance gate & Fail\\
+Full-run cost & \pending\\
+\bottomrule
+\end{tabular}
+\caption{Synchronized RTX 3090 measurements. Checkpoint I/O and final evaluation are outside the training/calibration timers. An explicit research exception permits training without changing the failed performance gate.}
+\label{tab:cost}
+\end{table}
+}

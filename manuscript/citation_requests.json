@@ -1,0 +1,161 @@
+{
+  "schema_version": "ai-research-writing/citation-requests-v1",
+  "entries": [
+    {
+      "key": "sam",
+      "identifier": "arxiv:2010.01412",
+      "claim_support": [
+        {
+          "claim": "SAM uses a normalized current gradient to approximate the Euclidean perturbation inner step.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Section 2, first-order inner maximization and Algorithm 1.",
+          "source": "https://arxiv.org/html/2010.01412v3"
+        }
+      ]
+    },
+    {
+      "key": "asam",
+      "identifier": "arxiv:2102.11600",
+      "claim_support": [
+        {
+          "claim": "ASAM adapts the perturbation region to parameter scale through a normalization operator.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Sections 3-4 define the transformed neighborhood and corresponding perturbation.",
+          "source": "https://arxiv.org/html/2102.11600v3"
+        }
+      ]
+    },
+    {
+      "key": "ssam",
+      "identifier": "arxiv:2210.05177",
+      "claim_support": [
+        {
+          "claim": "SSAM masks the SAM perturbation using Fisher-based or dynamically updated sparse masks.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Section 4.1 masks the already normalized perturbation; Sections 4.2-4.3 define mask construction.",
+          "source": "https://arxiv.org/html/2210.05177v2"
+        }
+      ]
+    },
+    {
+      "key": "preconditioned",
+      "identifier": "arxiv:2501.06603",
+      "claim_support": [
+        {
+          "claim": "The preSAM framework separates objective preconditioning from constraint preconditioning.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Section III-A, equations 4-5, and Section III-C; objective preconditioning includes D=I.",
+          "source": "https://arxiv.org/html/2501.06603v1"
+        }
+      ]
+    },
+    {
+      "key": "gear",
+      "identifier": "arxiv:2607.18306",
+      "claim_support": [
+        {
+          "claim": "GEAR-SAM uses an EMA of squared block-gradient norms to allocate a fixed global perturbation budget.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Section III-C equations 16-17; Section III-D constrains squared block radii to the global budget.",
+          "source": "https://arxiv.org/html/2607.18306v1"
+        }
+      ]
+    },
+    {
+      "key": "cram",
+      "identifier": "arxiv:2207.14200",
+      "claim_support": [
+        {
+          "claim": "CrAM incorporates a compression operator into training to prepare dense models for one-shot compression.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Section 3.1 equations 1-2; Section 4 also evaluates semi-structured sparsity.",
+          "source": "https://arxiv.org/html/2207.14200v4"
+        }
+      ]
+    },
+    {
+      "key": "adasap",
+      "identifier": "arxiv:2306.14306",
+      "claim_support": [
+        {
+          "claim": "AdaSAP adapts neuron perturbations before channel pruning and subsequently trains for robustness.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Section 3 describes three stages; Section 3.1 gives importance-dependent neuron radii.",
+          "source": "https://arxiv.org/html/2306.14306v2"
+        }
+      ]
+    },
+    {
+      "key": "obc",
+      "identifier": "arxiv:2208.11580",
+      "claim_support": [
+        {
+          "claim": "OBC uses ExactOBS for layerwise post-training pruning and extends the procedure to N:M sparsity.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Sections 3-4 define quadratic layer reconstruction, inverse-Hessian compensation and the N:M extension.",
+          "source": "https://arxiv.org/html/2208.11580v2"
+        }
+      ]
+    },
+    {
+      "key": "sparsegpt",
+      "identifier": "arxiv:2301.00774",
+      "claim_support": [
+        {
+          "claim": "SparseGPT performs approximate second-order layer reconstruction for one-shot pruning, including 2:4 and 4:8 patterns.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Sections 3.1-3.3; the official ICML abstract explicitly identifies both semi-structured patterns.",
+          "source": "https://arxiv.org/html/2301.00774v3"
+        }
+      ]
+    },
+    {
+      "key": "rose",
+      "identifier": "arxiv:2603.05878",
+      "claim_support": [
+        {
+          "claim": "ROSE changes column and block processing order within the SparseGPT pruning workflow.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Abstract and Section 4.2 describe two-level reordering based on estimated pruning losses.",
+          "source": "https://arxiv.org/html/2603.05878v1"
+        }
+      ]
+    },
+    {
+      "key": "nm",
+      "identifier": "arxiv:2102.04010",
+      "claim_support": [
+        {
+          "claim": "SR-STE trains N:M sparse networks from scratch using a sparse-refined straight-through estimator.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Official abstract identifies the training setting and the SR-STE estimator.",
+          "source": "https://arxiv.org/abs/2102.04010"
+        }
+      ]
+    },
+    {
+      "key": "wanda",
+      "identifier": "arxiv:2306.11695",
+      "claim_support": [
+        {
+          "claim": "Wanda prunes per-output weights using magnitude multiplied by the corresponding input activation scale, without a compensating weight update.",
+          "relation": "direct",
+          "status": "verified",
+          "evidence": "Official abstract states magnitude times input activations and no retraining or weight update.",
+          "source": "https://arxiv.org/abs/2306.11695"
+        }
+      ]
+    }
+  ]
+}

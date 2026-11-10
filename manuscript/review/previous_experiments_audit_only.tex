@@ -1,0 +1,75 @@
+\section{Experiments}
+\label{sec:experiments}
+We organize evaluation around three questions: does HC-SAM improve the native SparseGPT endpoint (RQ1); does it allocate more eligible perturbation energy to the final deleted support (RQ2); and does historical averaging provide value beyond Direct-Q at acceptable cost (RQ3)? The current evidence establishes numerical and execution properties. Final task-level findings are \pending; no outcome is inferred from a successful numerical gate.
+
+\subsection{Experimental setup}
+The initial study uses CIFAR-100 with its full training split, CIFAR-ResNet18, and output-row contiguous $2{:}4$ sparsity. The same 19 internal convolutions are eligible for all endpoints. The first convolution, classification head, BN affine parameters, and biases remain dense. Training lasts 200 epochs; the final epoch is selected by schedule, never by test accuracy. Calibration uses 1,024 fixed training images without augmentation. All final artifacts are frozen before a single evaluation of each endpoint on the full test set. No recovery or BN-only calibration is used. Appendix~\ref{app:protocol} provides implementation details and the reproducibility record.
+
+The four intended training comparisons are SAM, original APBR, Direct-Q SAM, and HC-SAM. Direct-Q uses the same centering and noneligible convention with $\eta=1$; SAM is the zero-state control. Each model must be passed through the same native compressor. Historical SAM/APBR artifacts are available but were produced in different hardware or execution environments. We report them as references, not silently as a new matched cohort. The current exploratory HC run is a single seed, and Direct-Q has not been run.
+
+\subsection{Dense and native sparse endpoints}
+\MainResultsTable
+Table~\ref{tab:main} separates previously measured references from the unfinished current experiment. The accuracy drop is dense accuracy minus sparse accuracy in percentage points. It must be considered alongside absolute sparse accuracy: a small drop from a weak dense model is not sufficient evidence of a better sparse model. Cross-entropy and physical reconstruction errors provide complementary measurements, but neither replaces task accuracy. Existing records contain two native SAM evaluations from separate executions; both are preserved, with their identities and differences in Appendix~\ref{app:history}.
+
+An improvement in HC-SAM's final accuracy would support a compatibility claim only after checking the dense parent, calibration, pruning range, compensation code, and evaluation pipeline. It would not alone identify historical averaging as the cause. That interpretation requires the Direct-Q control and repeated matched seeds. Conversely, failure to improve the native endpoint remains a relevant result even if training loss or an intermediate reconstruction measure improves.
+
+\subsection{Historical-Q and perturbation ablations}
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lccc}
+\toprule Training geometry & History & Dense & Native GPT\\
+\midrule Unit scale (SAM) & None & \pending & \pending\\
+Direct-Q & Latest only & \pending & \pending\\
+HC-SAM & Log-EMA & \pending & \pending\\
+\bottomrule
+\end{tabular}
+\caption{Planned matched-cohort history ablation (accuracy, \%). No new SAM or Direct-Q run is implied by this table. Existing references are kept separately in Table~\ref{tab:main}.}
+\label{tab:ablation}
+\end{table}
+Table~\ref{tab:ablation} tests the value of the historical estimator, holding the physical radius and compressor constant. Comparing history to Direct-Q is more informative than comparing HC-SAM to an unrelated pruning rule. A zero-state control checks the ordinary SAM limit. The state trajectory should also reveal whether geometry evolves materially or simply stabilizes near its initialization. Relevant summaries are the coordinate-weighted log-scale distribution, epoch-to-epoch drift, inverse-diagonal rank stability, and eligible versus noneligible energy shares. These measurements describe the implemented mechanism; they do not by themselves demonstrate useful sparsity.
+
+\begin{figure}[t]
+\centering\fbox{\parbox{.91\linewidth}{\centering\textbf{TODO: historical geometry evolution}\\
+Import the completed formal run's per-epoch geometry drift, inverse-diagonal statistics, and layerwise energy shares. Label warm-start epoch and refresh timing. No synthetic curve is substituted.}}
+\caption{Planned geometry diagnostic. A formal complete-run trajectory is \pending. Temporary smoke statistics are used only for implementation validation.}
+\label{fig:evolution}
+\end{figure}
+
+\subsection{Perturbation-to-pruning alignment}
+Let $D_{\rm GPT}\subset\E$ be the deleted support of the final native mask. For a training step with nonzero eligible perturbation energy define
+\begin{equation}
+ \mathcal A_t^{\E}=\frac{\sum_{i\in D_{\rm GPT}}\epsilon_{i,t}^2}
+ {\sum_{i\in\E}\epsilon_{i,t}^2}.
+ \label{eq:align}
+\end{equation}
+The mask is used only in this post-hoc analysis. A uniformly random legal $2{:}4$ mask independent of the fixed energy vector gives expected alignment $1/2$. It is a reference, not a threshold proving useful training. The analysis should compare identical coordinate definitions and relate alignment to physical layer MSE and final task accuracy. Energy overlap measures support association, not directional agreement with the deletion displacement.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lccc}
+\toprule Training & Alignment & Layer MSE & Native CE\\
+\midrule SAM (matched) & \pending & \pending & \pending\\
+Direct-Q & \pending & \pending & \pending\\
+HC-SAM & Unavailable & \pending & \pending\\
+\bottomrule
+\end{tabular}
+\caption{Diagnostic structure. Exact HC-SAM support alignment is unavailable in the present run because only layer-aggregated perturbation energies are logged. This cannot be recovered from log geometry alone.}
+\label{tab:diagnostics}
+\end{table}
+
+\begin{figure}[t]
+\centering\fbox{\parbox{.91\linewidth}{\centering\textbf{TODO: alignment measurements}\\
+Requires per-coordinate energy accumulators or stepwise perturbations and the frozen final native mask. Current layerwise aggregates are insufficient. Random-mask expectation: $0.5$.}}
+\caption{Planned alignment analysis; no empirical trend is available. Future instrumented measurements must distinguish a pooled energy ratio from an arithmetic mean of stepwise ratios.}
+\label{fig:alignment}
+\end{figure}
+
+This diagnostic exposes an instrumentation limitation: the current training implementation records per-layer energy, not coordinatewise energy. Hence RQ2 cannot be answered from this run as logged. A future instrumented run may accumulate each coordinate's squared perturbation energy online, without retaining every perturbation. That supports a \emph{pooled} alignment ratio. Computing the mean of Eq.~\eqref{eq:align} instead requires normalized coordinate contributions at each nonzero step. We will not substitute one estimator for the other or alter a running experiment retrospectively.
+
+\subsection{Computational overhead and numerical validation}
+\PerformanceTable
+The completed three-epoch GPU smoke used an RTX 3090. Mean training time was 45.94 seconds and full calibration time was 14.03 seconds per epoch. Calibration divided by training time was 30.55\%, exceeding the preregistered 30\% gate. The numerical checks passed, but the performance gate \emph{failed}; full training was separately authorized under an explicit research cost exception. The threshold and failed result are retained. Table~\ref{tab:cost} is a smoke measurement, not the final training cost or a matched speed comparison with SAM.
+
+Layer-serial calibration bounds memory but traverses the fixed image set for every eligible layer. Most measured calibration wall time lies outside the separately timed Gram and factorization operations; current profiling cannot attribute that remainder to one bottleneck. Thus, it would be misleading to call the additional computation negligible or to equate inverse-diagonal kernel time with total overhead. The final accounting must include training, calibration, checkpoint I/O, and post-training pruning separately.
+
+The numerical gate covered all 19 real layers, synchronized timings, finite values, Cholesky success, fixed-radius perturbations, BN isolation, and bitwise checkpoint-resume checks. Small FP64 references and selected real-layer submatrices test arithmetic consistency; they do not amount to a full FP64 decomposition of every large layer. There was no OOM or Cholesky failure in the gate. These results validate execution properties only, not the pruning hypothesis.

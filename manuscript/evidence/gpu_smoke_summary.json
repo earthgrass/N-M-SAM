@@ -1,0 +1,493 @@
+{
+  "status": "USER_PAUSED_BEFORE_FORMAL_TRAINING",
+  "reason": "calibration_to_train_ratio_exceeds_frozen_0.30",
+  "numeric_gate": "PASS",
+  "memory_gate": "PASS",
+  "three_epoch_smoke": "PASS",
+  "performance_policy_gate": "BLOCKED",
+  "formal_200_epoch_started": false,
+  "final_test_accessed": false,
+  "recovery_epochs": 0,
+  "formal_accuracy_results": null,
+  "source_identity": {
+    "experiment_id": "hq_apbr_v1_seed0_exploratory_20261105",
+    "seed": 0,
+    "config_sha256": "56ff197b0860dfd0f4a0768c5609031214e6405c51557009a9977582b38400e7",
+    "source_commit": "ec63a173a02b9e319b99abc251f3cb7c3494c96d",
+    "source_manifest_sha256": "5ba28563953e14ee1f5137545f9ddd35feae3afc41ca96833afd961e08b94aa8",
+    "dataset": {
+      "archive_bytes": 169001437,
+      "archive_md5": "eb9058c3a382ffc7106e4002c42a8d85",
+      "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+      "train_samples": 50000,
+      "test_accessed": false
+    },
+    "environment": {
+      "python": "3.12.3",
+      "torch": "2.8.0+cu128",
+      "cuda_build": "12.8",
+      "cudnn": 91002,
+      "gpu": "NVIDIA GeForce RTX 3090",
+      "total_memory": 25296044032,
+      "compute_capability": [
+        8,
+        6
+      ],
+      "free_memory": 25019023360,
+      "nvidia_smi": "Thu Nov  5 15:58:35 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 580.105.08             Driver Version: 580.105.08     CUDA Version: 13.0     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 3090        On  |   00000000:4F:00.0 Off |                  N/A |\n| 30%   26C    P2             33W /  350W |     265MiB /  24576MiB |      1%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A            2182      C   /root/miniconda3/bin/python             256MiB |\n+-----------------------------------------------------------------------------------------+\n",
+      "driver": "580.105.08",
+      "gpu_uuid": "GPU-1101bca3-6fa0-a02d-2684-488db2491be8",
+      "compute_processes": "pid, process_name, used_gpu_memory [MiB]\n2182, /root/miniconda3/bin/python, 256 MiB\n",
+      "disk_free_bytes": 53517496320,
+      "deterministic": true,
+      "tf32": false
+    }
+  },
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "cudnn": 91002,
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "total_memory": 25296044032,
+    "compute_capability": [
+      8,
+      6
+    ],
+    "free_memory": 25019023360,
+    "driver": "580.105.08",
+    "gpu_uuid": "GPU-1101bca3-6fa0-a02d-2684-488db2491be8",
+    "disk_free_bytes": 53517496320,
+    "deterministic": true,
+    "tf32": false
+  },
+  "math_gate": {
+    "status": "CPU_GPU_MATH_PASS",
+    "cases": [
+      {
+        "dtype": "torch.float32",
+        "relative_l2": 1.6532368808002334e-07,
+        "tolerance": 5e-05,
+        "cholesky": "PASS",
+        "geometry_max_abs": 1.963868844212513e-07,
+        "epsilon_max_abs": 2.7939677238464355e-09
+      },
+      {
+        "dtype": "torch.float64",
+        "relative_l2": 3.78388447410913e-16,
+        "tolerance": 1e-10,
+        "cholesky": "PASS",
+        "geometry_max_abs": 6.38378239159465e-16,
+        "epsilon_max_abs": 0.0
+      }
+    ],
+    "test_accessed": false
+  },
+  "resume_gate": {
+    "status": "REAL_STEP_RESUME_PASS",
+    "sam_direction_max_abs": 2.836747893877889e-11,
+    "first_step": {
+      "center_loss": 4.700812339782715,
+      "adversarial_loss": 4.945575714111328,
+      "count": 128,
+      "correct": 1,
+      "g1_norm": 7.166963812811416,
+      "g2_norm": 7.412298299902642,
+      "eps_norm": 0.04999999999907951,
+      "physical_addition_norm": 0.0499999994328509,
+      "zero_perturbation": false,
+      "perturbation_energy_distribution": {
+        "layer1.0.conv1.weight": 0.15259582301055064,
+        "layer1.0.conv2.weight": 0.09939337467038858,
+        "layer1.1.conv1.weight": 0.06629388897622639,
+        "layer1.1.conv2.weight": 0.04057383829484551,
+        "layer2.0.conv1.weight": 0.03870887112079684,
+        "layer2.0.conv2.weight": 0.05695276672750821,
+        "layer2.0.shortcut.0.weight": 0.0030793983840234395,
+        "layer2.1.conv1.weight": 0.04988071233489472,
+        "layer2.1.conv2.weight": 0.03641781921414448,
+        "layer3.0.conv1.weight": 0.036422593178856835,
+        "layer3.0.conv2.weight": 0.050936757239146285,
+        "layer3.0.shortcut.0.weight": 0.0028083762833569477,
+        "layer3.1.conv1.weight": 0.04535418227886955,
+        "layer3.1.conv2.weight": 0.03510097412453543,
+        "layer4.0.conv1.weight": 0.033247850344250075,
+        "layer4.0.conv2.weight": 0.05605180431678599,
+        "layer4.0.shortcut.0.weight": 0.003599789425663617,
+        "layer4.1.conv1.weight": 0.050244736553027324,
+        "layer4.1.conv2.weight": 0.047241399823539226,
+        "noneligible": 0.09509504366177027
+      },
+      "direction_path": "cached_fp64_scale"
+    },
+    "resume_bitwise_equal": true,
+    "resume_step_info_equal": true,
+    "checkpoint_sha256": "31cbfcd9300c98fcc50ca914963f4047b9446c101a845fee36553dcbf28ee0c0",
+    "test_accessed": false,
+    "peak_allocated_bytes": 1577286656,
+    "peak_reserved_bytes": 2283798528
+  },
+  "smoke_epochs": [
+    {
+      "epoch_index": 0,
+      "train_seconds": 46.028492514044046,
+      "calibration_seconds": 14.086014047265053,
+      "train_loss": 4.021585210418701,
+      "adversarial_train_loss": 4.075879995574951,
+      "steps": 391,
+      "phase_seconds": {
+        "unfold_seconds": 0.20874294638633728,
+        "gram_seconds": 0.6581176742911339,
+        "cholesky_seconds": 0.0266781747341156,
+        "inverse_diagonal_seconds": 0.04404104873538017
+      },
+      "collection_seconds": 13.55514333024621,
+      "geometry_center_sum": 9.640643838793039e-11,
+      "log_geometry_drift": {
+        "rms": 0.041053753393497476,
+        "max_abs": 0.13416485852104776
+      },
+      "q_min": 8.330572128295898,
+      "q_max": 681.04541015625,
+      "geometry_min": -0.13416485852104776,
+      "geometry_max": 0.0860199839198495,
+      "spearman_min": null,
+      "spearman_max": null,
+      "spearman_mean": null,
+      "noneligible_energy_fraction": 0.4801845153744817,
+      "maximum_eligible_layer_energy_fraction": 0.06752024872142075,
+      "geometry_used_sha256": "700fa4c37095e9208fd2bb7041675c8976dee1063a6924ff975f634033ca19f5",
+      "geometry_saved_sha256": "bdbf9cf8f6f4c90bf284d8b2819707261486115cb010d2e4e121a65961014df7",
+      "buffers_sha256_before": "0e7d338b16c5c37220f75a222a15243185f9d2ca0be3218d49be2c0bb1f75790",
+      "buffers_sha256_after": "0e7d338b16c5c37220f75a222a15243185f9d2ca0be3218d49be2c0bb1f75790",
+      "parameters_sha256_before": "6d2ae90495e3530ddbd479d085132b05273c41788c3d93a0ae14aece9d528d2e",
+      "parameters_sha256_after": "6d2ae90495e3530ddbd479d085132b05273c41788c3d93a0ae14aece9d528d2e",
+      "perturbation_relative_radius_error_max": 2.7044948225363186e-09,
+      "skipped_calibration_epochs": [],
+      "test_accessed": false
+    },
+    {
+      "epoch_index": 1,
+      "train_seconds": 45.773034036159515,
+      "calibration_seconds": 13.64798453822732,
+      "train_loss": 3.4606737452697756,
+      "adversarial_train_loss": 3.5163485205078127,
+      "steps": 782,
+      "phase_seconds": {
+        "unfold_seconds": 0.19546985253691673,
+        "gram_seconds": 0.6485328748822212,
+        "cholesky_seconds": 0.026325013488531113,
+        "inverse_diagonal_seconds": 0.043262556195259094
+      },
+      "collection_seconds": 13.184831239283085,
+      "geometry_center_sum": 4.256435204297304e-10,
+      "log_geometry_drift": {
+        "rms": 0.03500658621554326,
+        "max_abs": 0.15729025573443234
+      },
+      "q_min": 5.399155139923096,
+      "q_max": 692.16845703125,
+      "geometry_min": -0.26835718758489047,
+      "geometry_max": 0.15384690946671414,
+      "spearman_min": 0.65063515678645,
+      "spearman_max": 0.8648782432873685,
+      "spearman_mean": 0.7520834726072522,
+      "noneligible_energy_fraction": 0.3819860793476306,
+      "maximum_eligible_layer_energy_fraction": 0.09697641268857189,
+      "geometry_used_sha256": "bdbf9cf8f6f4c90bf284d8b2819707261486115cb010d2e4e121a65961014df7",
+      "geometry_saved_sha256": "a1400f843f4d4b23cad010b33d642846fb2eb54c8a0cb3a86fca3ab0c1d8fd0e",
+      "buffers_sha256_before": "a5e2d3549aa49d27f688c0646e319e2efa07ee7f30b2f94103b2c23054240d65",
+      "buffers_sha256_after": "a5e2d3549aa49d27f688c0646e319e2efa07ee7f30b2f94103b2c23054240d65",
+      "parameters_sha256_before": "bd3d9b208d5abfff083976bf7c84b8e1f586c0aee0fcc4f328912b4bcabfe43e",
+      "parameters_sha256_after": "bd3d9b208d5abfff083976bf7c84b8e1f586c0aee0fcc4f328912b4bcabfe43e",
+      "perturbation_relative_radius_error_max": 1.3879609961353623e-09,
+      "skipped_calibration_epochs": [],
+      "test_accessed": false
+    },
+    {
+      "epoch_index": 2,
+      "train_seconds": 46.00384084880352,
+      "calibration_seconds": 14.369071807712317,
+      "train_loss": 3.016484719619751,
+      "adversarial_train_loss": 3.081709408416748,
+      "steps": 1173,
+      "phase_seconds": {
+        "unfold_seconds": 0.213832538574934,
+        "gram_seconds": 0.6556155793368816,
+        "cholesky_seconds": 0.026413265615701675,
+        "inverse_diagonal_seconds": 0.10629325360059738
+      },
+      "collection_seconds": 13.664975367486477,
+      "geometry_center_sum": 6.111804395914078e-10,
+      "log_geometry_drift": {
+        "rms": 0.029756976958451052,
+        "max_abs": 0.17654819903503896
+      },
+      "q_min": 2.314446210861206,
+      "q_max": 662.38818359375,
+      "geometry_min": -0.4128359634331838,
+      "geometry_max": 0.18253484238112605,
+      "spearman_min": 0.7866256425848664,
+      "spearman_max": 0.9444715293999448,
+      "spearman_mean": 0.8440572767303468,
+      "noneligible_energy_fraction": 0.3489439752870843,
+      "maximum_eligible_layer_energy_fraction": 0.10100203875681281,
+      "geometry_used_sha256": "a1400f843f4d4b23cad010b33d642846fb2eb54c8a0cb3a86fca3ab0c1d8fd0e",
+      "geometry_saved_sha256": "b9973891ca1db03e6e14fca9c20158e8098eeb8ec03deb063e496ce4e61ba054",
+      "buffers_sha256_before": "5fb4e6034bab177fd7f482d917212740f9a96d202b20a17292d9256813f569b3",
+      "buffers_sha256_after": "5fb4e6034bab177fd7f482d917212740f9a96d202b20a17292d9256813f569b3",
+      "parameters_sha256_before": "6bef8c9c7c4bb9939a0f3f820793b861315439cf5cbb9e7ae9d7a8721fd28634",
+      "parameters_sha256_after": "6bef8c9c7c4bb9939a0f3f820793b861315439cf5cbb9e7ae9d7a8721fd28634",
+      "perturbation_relative_radius_error_max": 9.290075653201058e-10,
+      "skipped_calibration_epochs": [],
+      "test_accessed": false
+    }
+  ],
+  "layer_timing_means": [
+    {
+      "layer": "layer1.0.conv1.weight",
+      "K": 576,
+      "patch_columns": 1048576,
+      "unfold_seconds": 0.018447281171878178,
+      "gram_seconds": 0.06265240907669067,
+      "cholesky_seconds": 0.0003521156807740529,
+      "inverse_diagonal_seconds": 0.0004407962163289388
+    },
+    {
+      "layer": "layer1.0.conv2.weight",
+      "K": 576,
+      "patch_columns": 1048576,
+      "unfold_seconds": 0.018228118618329365,
+      "gram_seconds": 0.0621507503092289,
+      "cholesky_seconds": 0.00032608335216840106,
+      "inverse_diagonal_seconds": 0.0004168550173441569
+    },
+    {
+      "layer": "layer1.1.conv1.weight",
+      "K": 576,
+      "patch_columns": 1048576,
+      "unfold_seconds": 0.01825144017736117,
+      "gram_seconds": 0.06261746833721797,
+      "cholesky_seconds": 0.0003303450842698415,
+      "inverse_diagonal_seconds": 0.0004167395333449046
+    },
+    {
+      "layer": "layer1.1.conv2.weight",
+      "K": 576,
+      "patch_columns": 1048576,
+      "unfold_seconds": 0.018240780880053837,
+      "gram_seconds": 0.06240280717611313,
+      "cholesky_seconds": 0.0003295006851355235,
+      "inverse_diagonal_seconds": 0.0004299357533454895
+    },
+    {
+      "layer": "layer2.0.conv1.weight",
+      "K": 576,
+      "patch_columns": 262144,
+      "unfold_seconds": 0.009347685923178991,
+      "gram_seconds": 0.016870586822430294,
+      "cholesky_seconds": 0.00032880033055941266,
+      "inverse_diagonal_seconds": 0.0004191882908344269
+    },
+    {
+      "layer": "layer2.0.conv2.weight",
+      "K": 1152,
+      "patch_columns": 262144,
+      "unfold_seconds": 0.011628414193789164,
+      "gram_seconds": 0.04692658533652624,
+      "cholesky_seconds": 0.0006272184352080027,
+      "inverse_diagonal_seconds": 0.0007658166189988455
+    },
+    {
+      "layer": "layer2.0.shortcut.0.weight",
+      "K": 64,
+      "patch_columns": 262144,
+      "unfold_seconds": 0.006143007427453995,
+      "gram_seconds": 0.002292578419049581,
+      "cholesky_seconds": 0.00024925917387008667,
+      "inverse_diagonal_seconds": 0.00038850555817286175
+    },
+    {
+      "layer": "layer2.1.conv1.weight",
+      "K": 1152,
+      "patch_columns": 262144,
+      "unfold_seconds": 0.011731519053379694,
+      "gram_seconds": 0.04719439893960953,
+      "cholesky_seconds": 0.0006333577136198679,
+      "inverse_diagonal_seconds": 0.0007767453789710999
+    },
+    {
+      "layer": "layer2.1.conv2.weight",
+      "K": 1152,
+      "patch_columns": 262144,
+      "unfold_seconds": 0.011879953245321909,
+      "gram_seconds": 0.04723643139004707,
+      "cholesky_seconds": 0.0006545421977837881,
+      "inverse_diagonal_seconds": 0.0008252399663130442
+    },
+    {
+      "layer": "layer3.0.conv1.weight",
+      "K": 1152,
+      "patch_columns": 65536,
+      "unfold_seconds": 0.008560857425133387,
+      "gram_seconds": 0.011630076915025711,
+      "cholesky_seconds": 0.0006681481997172037,
+      "inverse_diagonal_seconds": 0.0008413369456926981
+    },
+    {
+      "layer": "layer3.0.conv2.weight",
+      "K": 2304,
+      "patch_columns": 65536,
+      "unfold_seconds": 0.009292905529340109,
+      "gram_seconds": 0.03767895822723707,
+      "cholesky_seconds": 0.0013304725289344788,
+      "inverse_diagonal_seconds": 0.002203411112229029
+    },
+    {
+      "layer": "layer3.0.shortcut.0.weight",
+      "K": 128,
+      "patch_columns": 65536,
+      "unfold_seconds": 0.006689039369424184,
+      "gram_seconds": 0.0024756031731764474,
+      "cholesky_seconds": 0.0002243878940741221,
+      "inverse_diagonal_seconds": 0.0003630518913269043
+    },
+    {
+      "layer": "layer3.1.conv1.weight",
+      "K": 2304,
+      "patch_columns": 65536,
+      "unfold_seconds": 0.009273060907920202,
+      "gram_seconds": 0.03743477165699005,
+      "cholesky_seconds": 0.001293126493692398,
+      "inverse_diagonal_seconds": 0.0021955432991186776
+    },
+    {
+      "layer": "layer3.1.conv2.weight",
+      "K": 2304,
+      "patch_columns": 65536,
+      "unfold_seconds": 0.009278626491626104,
+      "gram_seconds": 0.03742103154460589,
+      "cholesky_seconds": 0.0013312386969725292,
+      "inverse_diagonal_seconds": 0.02312096084157626
+    },
+    {
+      "layer": "layer4.0.conv1.weight",
+      "K": 2304,
+      "patch_columns": 16384,
+      "unfold_seconds": 0.007489851365486781,
+      "gram_seconds": 0.010138358920812607,
+      "cholesky_seconds": 0.001340785374244054,
+      "inverse_diagonal_seconds": 0.0022308441499869027
+    },
+    {
+      "layer": "layer4.0.conv2.weight",
+      "K": 4608,
+      "patch_columns": 16384,
+      "unfold_seconds": 0.00800614058971405,
+      "gram_seconds": 0.03494111821055412,
+      "cholesky_seconds": 0.005409492800633113,
+      "inverse_diagonal_seconds": 0.009439545373121897
+    },
+    {
+      "layer": "layer4.0.shortcut.0.weight",
+      "K": 256,
+      "patch_columns": 16384,
+      "unfold_seconds": 0.006586001565059026,
+      "gram_seconds": 0.002434428781270981,
+      "cholesky_seconds": 0.00023177141944567362,
+      "inverse_diagonal_seconds": 0.0003864814837773641
+    },
+    {
+      "layer": "layer4.1.conv1.weight",
+      "K": 4608,
+      "patch_columns": 16384,
+      "unfold_seconds": 0.008065834641456604,
+      "gram_seconds": 0.03472228472431501,
+      "cholesky_seconds": 0.005398043741782506,
+      "inverse_diagonal_seconds": 0.009432959059874216
+    },
+    {
+      "layer": "layer4.1.conv2.weight",
+      "K": 4608,
+      "patch_columns": 16384,
+      "unfold_seconds": 0.008874593923489252,
+      "gram_seconds": 0.034868061542510986,
+      "cholesky_seconds": 0.005413461476564407,
+      "inverse_diagonal_seconds": 0.009438329686721167
+    }
+  ],
+  "performance": {
+    "train_seconds_mean": 45.93512246633569,
+    "calibration_seconds_mean": 14.034356797734896,
+    "epoch_train_plus_calibration_seconds_mean": 59.969479264070586,
+    "calibration_to_train_ratio": 0.30552562057541494,
+    "frozen_maximum_ratio": 0.3,
+    "excess_percentage_points": 0.5525620575414947,
+    "phase_seconds_mean": {
+      "unfold_seconds": 0.206015112499396,
+      "gram_seconds": 0.6540887095034122,
+      "cholesky_seconds": 0.026472151279449463,
+      "inverse_diagonal_seconds": 0.06453228617707889
+    },
+    "other_unseparated_calibration_seconds_mean": 13.083248538275559,
+    "other_fraction_of_calibration": 0.9322300071768986,
+    "estimated_200_training_seconds": 9187.024493267138,
+    "estimated_200_calibration_seconds": 2806.871359546979,
+    "estimated_200_compute_seconds": 11993.895852814117,
+    "estimate_excludes": [
+      "checkpoint_serialization_and_verification",
+      "history_and_status_io",
+      "gate_and_smoke",
+      "final_pruning",
+      "final_test"
+    ],
+    "full_network_passes_per_refresh": 19,
+    "fixed_images_per_refresh": 1024,
+    "forwarded_images_per_refresh": 19456
+  },
+  "resources": {
+    "peak_allocated_bytes": 1667325952,
+    "peak_reserved_bytes": 2283798528,
+    "frozen_limits": {
+      "peak_allocated_bytes": 21474836480,
+      "peak_reserved_bytes": 23622320128,
+      "maximum_calibration_to_train_ratio": 0.3
+    }
+  },
+  "numerics": {
+    "cholesky_cases_passed": 76,
+    "cholesky_cases_total": 76,
+    "dead_coordinates_total_across_refreshes": 10,
+    "geometry_abs_center_sum_max": 6.111804395914078e-10,
+    "smoke_radius_relative_error_max": 2.7044948225363186e-09,
+    "q_nonfinite_recorded": false,
+    "bn_hashes_unchanged": true,
+    "parameter_hashes_unchanged_during_calibration": true,
+    "rng_restored_after_calibration": true
+  },
+  "failure_records": [
+    {
+      "path": "remote_run_v1\\run_v1\\failure_1793865727158228278.json",
+      "sha256": "2e8ac82280bf0113156c2a257525b6708ed459641961821d1a4ee7e1ae5fc2b4",
+      "status": "FAILED",
+      "type": "RuntimeError",
+      "message": "Calibration overhead exceeds frozen limit; no adaptive fallback",
+      "traceback": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/hq_apbr_v1_20261105/source_ec63a17/scripts/run_gpu_exploration.py\", line 204, in main\n    if gate['status']!='GPU_SMOKE_PASS':raise RuntimeError('Calibration overhead exceeds frozen limit; no adaptive fallback')\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Calibration overhead exceeds frozen limit; no adaptive fallback\n",
+      "automatic_retry": false,
+      "peak_allocated_bytes": 1666932736,
+      "peak_reserved_bytes": 2248146944
+    }
+  ],
+  "gpu_gate_status": "GPU_SMOKE_BLOCKED",
+  "user_decision": "保持暂停，先看报告",
+  "automatic_restart": false,
+  "checkpoint_local_transfer_verification": {
+    "status": "PASS",
+    "verified_files": 18,
+    "all_manifest_entries_verified": true,
+    "checkpoint_local_path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\HQ-APBR-V1\\artifacts\\gpu_deploy_20261105\\smoke_final.pt",
+    "checkpoint_bytes": 179290175,
+    "checkpoint_sha256": "ad09999870de610ccd48b875c50ebf8a4fb19f9061148dcfb9e956ac423fe134",
+    "verification_manifest": "remote_run_v1/LOCAL_VERIFICATION.json"
+  }
+}

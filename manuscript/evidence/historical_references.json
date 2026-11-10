@@ -1,0 +1,354 @@
+{
+  "audit_date": "2026-11-05",
+  "audit_mode": "read_existing_json_and_checkpoint_identity_only",
+  "new_test_evaluation_performed": false,
+  "test_dataset_opened_by_this_audit": false,
+  "hq_final_available": false,
+  "hq_accuracy": null,
+  "comparison_status": "REFERENCE_ONLY",
+  "hq_frozen_config": {
+    "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\HQ-APBR-V1\\configs\\hq_apbr_v1_seed0_gpu_v1.json",
+    "sha256": "56ff197b0860dfd0f4a0768c5609031214e6405c51557009a9977582b38400e7",
+    "bytes": 1342
+  },
+  "parents": {
+    "dense_sam": {
+      "checkpoint": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\cifar100_50k10k_final_v1\\seed0_remote_copy\\dense_sam\\final_epoch_200.pt",
+        "sha256": "3a0716555d33ec92efe8362e24abec9be27625d24ffb6dfb1d51fddb5b91bd13",
+        "bytes": 89933515
+      },
+      "evaluation": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\cifar100_50k10k_final_v1\\seed0_remote_copy\\test_final\\dense_final.json",
+        "sha256": "7be29c7080f41b2fc8ba55985797ff11812f1e6d40721f958dc84c5fa4f9565b",
+        "bytes": 760
+      },
+      "accuracy_percent": 78.84,
+      "ce": 0.7998860813140869,
+      "completed_epochs": 200,
+      "steps": 78200,
+      "identity": {
+        "protocol_id": "cifar100_50k10k_final_v1",
+        "method": "dense_sam",
+        "seed": 0,
+        "model_id": "ssam2022_cifar_resnet18_c100_v1",
+        "architecture_sha256": "95367b739c42cca14cb51d1a776e5dbdbe71f9ed4a1afbd2c5c0b1bb994827ea",
+        "random_initialization": true,
+        "external_pretraining": false,
+        "initial_model_sha256": "87aa9dd7492a89adf9e3ab78ca4a3227f30bc8de53b18a3bd73cd61ab0bd759d",
+        "config_sha256": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6",
+        "source_sha256": {
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_50k_formal_training.py": "993e800776db5bcff401c2f81690cb66e646b9fa325a1b8b5260343f9d3d0cf6",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/configs/cifar100_50k10k_final_v1.yaml": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/cifar100_model.py": "9dfd402b4aac66d8ed18062089a07f3779ba119c909859e031b15abd94ade889",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/benchmark/model.py": "befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/src/vpr_sam/optim/step.py": "3c022f2815d577ef3d94ffeed40cb93c06e2359a2734c857a06f1a0c1f738ac2",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/src/vpr_sam/optim/geometry.py": "8e0e6d42bcf34a7a8c3b79dc4b76081e9d8c0d6313b183ce0f59109bd39058b5",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/src/vpr_sam/repro.py": "4ddb0609a19314c34db7a2ec7ea0925e4e011696d4d7bd28eac4defe14148c13"
+        },
+        "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+        "train_pickle_sha256": "735e79b04f092ca3d2e6d07f368c0a7d70d48c48d28865950cc24454cf45129b",
+        "train_size": 50000,
+        "validation_size": 0,
+        "test_loader_constructed": false,
+        "test_accessed": false,
+        "gpu": {
+          "name": "NVIDIA GeForce RTX 4080 SUPER",
+          "uuid": "GPU-15f4db77-e52f-c08d-e296-eb814b27dcef",
+          "memory_total_mib": 32760,
+          "memory_free_mib": 32227,
+          "driver": "595.71.05",
+          "compute_capability": [
+            8,
+            9
+          ]
+        },
+        "python": "3.12.3",
+        "torch": "2.8.0+cu128",
+        "torch_cuda_build": "12.8",
+        "started_at_unix": 1793025201.377866
+      }
+    },
+    "apbr_sam": {
+      "checkpoint": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\cifar100_50k10k_final_v1\\seed0_remote_copy\\apbr_sam\\final_epoch_200.pt",
+        "sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+        "bytes": 179712079
+      },
+      "evaluation": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\cifar100_50k10k_final_v1\\seed0_remote_copy\\test_final\\apbr_final.json",
+        "sha256": "3b740bb734ad98b0bb3b143a070448121042e19c32cfb83dfad1c8a1a5fec8b5",
+        "bytes": 759
+      },
+      "accuracy_percent": 78.68,
+      "ce": 0.8031096732139588,
+      "completed_epochs": 200,
+      "steps": 78200,
+      "identity": {
+        "protocol_id": "cifar100_50k10k_final_v1",
+        "method": "apbr_sam",
+        "seed": 0,
+        "model_id": "ssam2022_cifar_resnet18_c100_v1",
+        "architecture_sha256": "95367b739c42cca14cb51d1a776e5dbdbe71f9ed4a1afbd2c5c0b1bb994827ea",
+        "random_initialization": true,
+        "external_pretraining": false,
+        "initial_model_sha256": "87aa9dd7492a89adf9e3ab78ca4a3227f30bc8de53b18a3bd73cd61ab0bd759d",
+        "config_sha256": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6",
+        "source_sha256": {
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_50k_formal_training.py": "993e800776db5bcff401c2f81690cb66e646b9fa325a1b8b5260343f9d3d0cf6",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/configs/cifar100_50k10k_final_v1.yaml": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/cifar100_model.py": "9dfd402b4aac66d8ed18062089a07f3779ba119c909859e031b15abd94ade889",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/experiments/post_training_nm_benchmark/benchmark/model.py": "befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/src/vpr_sam/optim/step.py": "3c022f2815d577ef3d94ffeed40cb93c06e2359a2734c857a06f1a0c1f738ac2",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/src/vpr_sam/optim/geometry.py": "8e0e6d42bcf34a7a8c3b79dc4b76081e9d8c0d6313b183ce0f59109bd39058b5",
+          "/root/autodl-tmp/cifar100_gate_transfer/project/vpr_sam_research/src/vpr_sam/repro.py": "4ddb0609a19314c34db7a2ec7ea0925e4e011696d4d7bd28eac4defe14148c13"
+        },
+        "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+        "train_pickle_sha256": "735e79b04f092ca3d2e6d07f368c0a7d70d48c48d28865950cc24454cf45129b",
+        "train_size": 50000,
+        "validation_size": 0,
+        "test_loader_constructed": false,
+        "test_accessed": false,
+        "gpu": {
+          "name": "NVIDIA GeForce RTX 4080 SUPER",
+          "uuid": "GPU-15f4db77-e52f-c08d-e296-eb814b27dcef",
+          "memory_total_mib": 32760,
+          "memory_free_mib": 32227,
+          "driver": "595.71.05",
+          "compute_capability": [
+            8,
+            9
+          ]
+        },
+        "python": "3.12.3",
+        "torch": "2.8.0+cu128",
+        "torch_cuda_build": "12.8",
+        "started_at_unix": 1793036095.1721318
+      }
+    }
+  },
+  "references": [
+    {
+      "reference_id": "sam_formal_original_sparsegpt",
+      "parent_method": "dense_sam",
+      "seed": 0,
+      "endpoint": "Original SparseGPT Native (dynamic selection plus OBS)",
+      "accuracy_percent": 77.47,
+      "ce": 0.8502597255706787,
+      "test_samples": 10000,
+      "dense_accuracy_percent": 78.84,
+      "dense_ce": 0.7998860813140869,
+      "accuracy_delta_vs_dense_pp": -1.3700000000000045,
+      "checkpoint": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\cifar100_50k10k_final_v1\\seed0_remote_copy\\methods\\sparsegpt\\raw_hard.pt",
+        "sha256": "77c6ab8a4468842ba211dec422db81f14933ea1403b9c9c35883463e321b7bcf",
+        "bytes": 56122469
+      },
+      "evaluation": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\cifar100_50k10k_final_v1\\seed0_remote_copy\\test_final\\sparsegpt_raw.json",
+        "sha256": "8756114b8effaa1cea9e1222fe85c795faeee6b722d2bc3a52ac53e494389111",
+        "bytes": 758
+      },
+      "status_file": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\cifar100_50k10k_final_v1\\seed0_remote_copy\\methods\\sparsegpt\\status.json",
+        "sha256": "9fcee5bf3385a0b817e4f662b771ae4c34fdeb84e6149829adf836de89f3b1de",
+        "bytes": 661
+      },
+      "parent_sha256": "3a0716555d33ec92efe8362e24abec9be27625d24ffb6dfb1d51fddb5b91bd13",
+      "protocol_id": "cifar100_50k10k_final_v1",
+      "recorded_test_pickle_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+      "test_selected_hyperparameters": false,
+      "test_selected_checkpoint": false,
+      "calibration_ids_match_hq": true,
+      "calibration_count": 1024,
+      "mask_tensor_sha256": "66f3b3cf830040ae8a96e1d4432f770dee48a11ee0cb1c41dbe2fb231b7f0f83",
+      "mask_audit": {
+        "layers": 19,
+        "eligible_coordinates": 11157504,
+        "deleted_coordinates": 5578752,
+        "strict_2_4": true,
+        "deleted_weights_zero": true
+      },
+      "algorithm": {
+        "source": "formal SparseGPT postprocess; inspected source",
+        "dynamic_mask": true,
+        "blocksize": 128,
+        "percdamp": 0.01,
+        "compute_dtype": "float32"
+      },
+      "recovery_at_this_endpoint": 0,
+      "bn_only_at_this_endpoint": false,
+      "comparison_status": "REFERENCE_ONLY_PENDING_HQ_FINAL_AND_FULL_PROTOCOL_AUDIT"
+    },
+    {
+      "reference_id": "sam_paired_rerun_original_sparsegpt",
+      "parent_method": "dense_sam",
+      "seed": 0,
+      "endpoint": "Original SparseGPT Native (dynamic selection plus OBS)",
+      "accuracy_percent": 77.51,
+      "ce": 0.8502324131965637,
+      "test_samples": 10000,
+      "dense_accuracy_percent": 78.84,
+      "dense_ce": 0.7998860813140869,
+      "accuracy_delta_vs_dense_pp": -1.3299999999999983,
+      "checkpoint": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\apbr_weights_original_sparsegpt_seed012\\remote_seed01_copy\\artifacts\\seed0\\dense_sam_original_sparsegpt\\sparsegpt_final.pt",
+        "sha256": "c18df55168194e11a95ca51ecc04b046b00ff7b52281f0bcff0c2e34fce96bd4",
+        "bytes": 56122661
+      },
+      "evaluation": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\apbr_weights_original_sparsegpt_seed012\\remote_seed01_copy\\artifacts\\test_final\\seed0_dense_sam_sparsegpt.json",
+        "sha256": "79d04021a2bf77a6e7ddecd2e28c4783d7db13e46649bdb769c681e24ba18d02",
+        "bytes": 697
+      },
+      "status_file": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\apbr_weights_original_sparsegpt_seed012\\remote_seed01_copy\\artifacts\\seed0\\dense_sam_original_sparsegpt\\status.json",
+        "sha256": "b0ec3c3cfa395f61a207a9c0c7060e1c86133e11d393f5fe2abd4e56427e6209",
+        "bytes": 907
+      },
+      "parent_sha256": "3a0716555d33ec92efe8362e24abec9be27625d24ffb6dfb1d51fddb5b91bd13",
+      "protocol_id": "cifar100_50k10k_final_v1",
+      "recorded_test_pickle_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+      "test_selected_hyperparameters": false,
+      "test_selected_checkpoint": false,
+      "calibration_ids_match_hq": true,
+      "calibration_count": 1024,
+      "mask_tensor_sha256": "b0cb4a0fcdf29c76d1e542337b041251d2e197ba568312d1aabe408c0aeec672",
+      "mask_audit": {
+        "layers": 19,
+        "eligible_coordinates": 11157504,
+        "deleted_coordinates": 5578752,
+        "strict_2_4": true,
+        "deleted_weights_zero": true
+      },
+      "algorithm": {
+        "dynamic_mask": true,
+        "external_mask": false,
+        "apbr_geometry_used": false,
+        "keep_n": 2,
+        "m": 4,
+        "blocksize": 128,
+        "percdamp": 0.01,
+        "compute_dtype": "float32",
+        "recovery_epochs": 0,
+        "bn_calibration": false
+      },
+      "recovery_at_this_endpoint": 0,
+      "bn_only_at_this_endpoint": false,
+      "comparison_status": "REFERENCE_ONLY_PENDING_HQ_FINAL_AND_FULL_PROTOCOL_AUDIT"
+    },
+    {
+      "reference_id": "apbr_original_sparsegpt",
+      "parent_method": "apbr_sam",
+      "seed": 0,
+      "endpoint": "Original SparseGPT Native (dynamic selection plus OBS)",
+      "accuracy_percent": 76.99000000000001,
+      "ce": 0.8581003943443298,
+      "test_samples": 10000,
+      "dense_accuracy_percent": 78.68,
+      "dense_ce": 0.8031096732139588,
+      "accuracy_delta_vs_dense_pp": -1.6899999999999977,
+      "checkpoint": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\apbr_weights_original_sparsegpt_seed012\\remote_seed01_copy\\artifacts\\seed0\\apbr_sam_original_sparsegpt\\sparsegpt_final.pt",
+        "sha256": "0ff0eb2f8a9371ab47f39a8a8d0ea8b237e4f0ed89eb6ff583f05a4d4d1d6e04",
+        "bytes": 56122661
+      },
+      "evaluation": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\apbr_weights_original_sparsegpt_seed012\\remote_seed01_copy\\artifacts\\test_final\\seed0_apbr_sam_sparsegpt.json",
+        "sha256": "a3caa429207d5a10789fa0215c33ed39b2757816190f87c3d789e70eb5654ada",
+        "bytes": 696
+      },
+      "status_file": {
+        "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\apbr_weights_original_sparsegpt_seed012\\remote_seed01_copy\\artifacts\\seed0\\apbr_sam_original_sparsegpt\\status.json",
+        "sha256": "858bde2aeb10c646422cfa494ee7cc287b64eeea2a10021dff296d03eda2ac93",
+        "bytes": 904
+      },
+      "parent_sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+      "protocol_id": "cifar100_50k10k_final_v1",
+      "recorded_test_pickle_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+      "test_selected_hyperparameters": false,
+      "test_selected_checkpoint": false,
+      "calibration_ids_match_hq": true,
+      "calibration_count": 1024,
+      "mask_tensor_sha256": "24bfc8bbba216bd866077d1085850a79687ce44945d2af19a003dee86242fbfe",
+      "mask_audit": {
+        "layers": 19,
+        "eligible_coordinates": 11157504,
+        "deleted_coordinates": 5578752,
+        "strict_2_4": true,
+        "deleted_weights_zero": true
+      },
+      "algorithm": {
+        "dynamic_mask": true,
+        "external_mask": false,
+        "apbr_geometry_used": false,
+        "keep_n": 2,
+        "m": 4,
+        "blocksize": 128,
+        "percdamp": 0.01,
+        "compute_dtype": "float32",
+        "recovery_epochs": 0,
+        "bn_calibration": false
+      },
+      "recovery_at_this_endpoint": 0,
+      "bn_only_at_this_endpoint": false,
+      "comparison_status": "REFERENCE_ONLY_PENDING_HQ_FINAL_AND_FULL_PROTOCOL_AUDIT"
+    }
+  ],
+  "shared_nominal_protocol": {
+    "dataset": "official CIFAR100 Train50000 Test10000",
+    "model": "ssam2022_cifar_resnet18_c100_v1",
+    "dense_epochs": 200,
+    "seed": 0,
+    "batch_size": 128,
+    "optimizer": "SGD lr0.1 momentum0.9 wd0.0005; cosine200",
+    "rho": 0.05,
+    "calibration_count": 1024,
+    "calibration_seed": 20261027,
+    "calibration_batch_size": 128,
+    "calibration_augmentation": "none",
+    "nm": "OIHW output-row contiguous 2:4;19Conv",
+    "sparsegpt_dtype": "float32",
+    "sparsegpt_blocksize": 128,
+    "sparsegpt_percdamp": 0.01,
+    "sparsegpt_gram": "2XXT/patch_count",
+    "native_compensation": "historical sequential SparseGPT OBS"
+  },
+  "differences_and_limits": [
+    "HQ training is new method with historical inverse-Gram geometry; original APBR uses energy feedback and elliptical perturbations.",
+    "HQ RTX3090/CUDA environment differs from historical Dense training RTX4080SUPER and paired native pruning RTX5090.",
+    "HQ calibration is layer-serial versus historical all-layer hook collection; same IDs and batches are frozen, but whole-network numerical replay has not been established.",
+    "Static Final-Q mask-only/fixed-mask OBS are distinct from dynamic native GPT and cannot be placed under one unnamed OBS endpoint.",
+    "Two SAM native records coexist: formal77.47 and paired rerun77.51; do not silently replace one with the more favorable result.",
+    "Only one seed in this comparison; no stability or causal contribution claim."
+  ],
+  "paired_rerun_environment_evidence": {
+    "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\apbr_weights_original_sparsegpt_seed012\\remote_seed01_copy\\artifacts\\preflight\\gpu_gate.json",
+    "sha256": "10571a6ba328ed7f64f10b525858f68225527c2bfd20f779ecf1efa47d7af03d",
+    "bytes": 4890
+  },
+  "pre_test_freeze_evidence": {
+    "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\apbr_weights_original_sparsegpt_seed012\\remote_seed01_copy\\artifacts\\pre_test_freeze.json",
+    "sha256": "27ebe5b440d18799259bc79bd1c21d6ae595c86bd7481bb47db843f1b9cf6b75",
+    "bytes": 6285
+  },
+  "historical_config_evidence": {
+    "path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\artifacts\\apbr_weights_original_sparsegpt_seed012\\remote_seed01_copy\\artifacts\\config_snapshot.yaml",
+    "sha256": "e4be5df7cf39b1ebd2730999cd6fd42458a5bcc0779e621894b1c588616879d6",
+    "bytes": 3096
+  },
+  "initialization_identity": {
+    "status": "SAME_CANONICAL_MODEL_HASH_VERIFIED",
+    "model_sha256": "87aa9dd7492a89adf9e3ab78ca4a3227f30bc8de53b18a3bd73cd61ab0bd759d",
+    "hq_evidence_path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\HQ-APBR-V1\\reports\\gpu_3090_v1\\formal_start\\INITIALIZATION_PROOF.json",
+    "hq_evidence_sha256": "cebfc1226d4a7188df04454f884df660012d08bc58b4880d004db6f8e34a3d08",
+    "hq_initial_checkpoint_sha256": "2c1d3f0b7e4bd15591106f88407024f6e6f0d3398da907c3b6447b60a34fd720",
+    "historical_matches": [
+      "dense_sam_seed0",
+      "apbr_sam_seed0"
+    ],
+    "hq_zero_geometry": true,
+    "smoke_state_reused": false,
+    "scope": "Canonical initial model tensor SHA equality, not same optimizer or training method; independent full run numerical identity not claimed"
+  }
+}

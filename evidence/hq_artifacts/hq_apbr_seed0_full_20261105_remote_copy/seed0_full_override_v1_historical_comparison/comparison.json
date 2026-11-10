@@ -1,0 +1,48 @@
+{
+  "status": "REFERENCE_COMPARISON_COMPLETE",
+  "comparison_status": "REFERENCE_ONLY",
+  "strict_ranking_allowed": false,
+  "reason": "Historical hardware/environment and execution records differ; same initialization alone does not establish a paired causal experiment.",
+  "no_dataset_opened": true,
+  "no_evaluation_repeated": true,
+  "source_script_sha256": "62a2762c41b2916a714ea2b1d44c8a398621535ca681cb0f6ba305384fe70a00",
+  "reference_snapshot_sha256": "277e7c869f26e3eb0741d888d2cc89161b3e14e617742540aa955fe13d40686f",
+  "hq_evidence_sha256": "5255f0ad1747c92e5a88dce241a8ce610ce1fdb6b46480fb5b9303d4cbca45d8",
+  "rows": [
+    {
+      "reference_id": "sam_formal_original_sparsegpt",
+      "reference_accuracy_percent": 77.47,
+      "reference_ce": 0.8502597255706787,
+      "hq_accuracy_percent": 76.59,
+      "hq_ce": 0.8831226616859436,
+      "hq_minus_reference_accuracy_pp": -0.8799999999999955,
+      "hq_minus_reference_ce": 0.03286293611526481,
+      "reference_evaluation_sha256": "8756114b8effaa1cea9e1222fe85c795faeee6b722d2bc3a52ac53e494389111",
+      "reference_checkpoint_sha256": "77c6ab8a4468842ba211dec422db81f14933ea1403b9c9c35883463e321b7bcf"
+    },
+    {
+      "reference_id": "sam_paired_rerun_original_sparsegpt",
+      "reference_accuracy_percent": 77.51,
+      "reference_ce": 0.8502324131965637,
+      "hq_accuracy_percent": 76.59,
+      "hq_ce": 0.8831226616859436,
+      "hq_minus_reference_accuracy_pp": -0.9200000000000017,
+      "hq_minus_reference_ce": 0.032890248489379825,
+      "reference_evaluation_sha256": "79d04021a2bf77a6e7ddecd2e28c4783d7db13e46649bdb769c681e24ba18d02",
+      "reference_checkpoint_sha256": "c18df55168194e11a95ca51ecc04b046b00ff7b52281f0bcff0c2e34fce96bd4"
+    },
+    {
+      "reference_id": "apbr_original_sparsegpt",
+      "reference_accuracy_percent": 76.99000000000001,
+      "reference_ce": 0.8581003943443298,
+      "hq_accuracy_percent": 76.59,
+      "hq_ce": 0.8831226616859436,
+      "hq_minus_reference_accuracy_pp": -0.4000000000000057,
+      "hq_minus_reference_ce": 0.025022267341613724,
+      "reference_evaluation_sha256": "a3caa429207d5a10789fa0215c33ed39b2757816190f87c3d789e70eb5654ada",
+      "reference_checkpoint_sha256": "0ff0eb2f8a9371ab47f39a8a8d0ea8b237e4f0ed89eb6ff583f05a4d4d1d6e04"
+    }
+  ],
+  "hq_dense_accuracy_percent": 78.51,
+  "hq_dense_to_native_drop_pp": 1.9200000000000017
+}
