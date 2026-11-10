@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vpr-sam-research"
+version = "0.1.0"
+description = "Independent reproducible VPR-SAM research infrastructure"
+requires-python = ">=3.12"
+dependencies = ["torch>=2.8", "torchvision>=0.23", "numpy>=1.26", "matplotlib>=3.8", "Pillow>=10"]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "build>=1"]
+
+[project.scripts]
+vpr = "vpr_sam.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

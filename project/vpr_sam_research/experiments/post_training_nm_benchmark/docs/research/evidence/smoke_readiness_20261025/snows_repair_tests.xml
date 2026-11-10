@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="12" time="3.048" timestamp="2026-10-25T16:54:03.022918+08:00" hostname="北京凌晨四点的雾霾"><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_full_patched_module_import_and_unused_placeholder_fails_explicitly" time="0.190"><failure message="ModuleNotFoundError: No module named 'joblib'">def test_full_patched_module_import_and_unused_placeholder_fails_explicitly():
+&gt;       module=load_candidate()
+               ^^^^^^^^^^^^^^^^
+
+tests\test_snows_repair.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+benchmark\snows_patch.py:30: in load_candidate
+    try:exec(compile(text,'controlled/SNOWS/SNOWS.py','exec'),module.__dict__)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'joblib'
+
+controlled/SNOWS/SNOWS.py:5: ModuleNotFoundError</failure></testcase><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_hvp_dense_offdiagonal_analytic_and_chunk_vs_unchunked[1]" time="2.363" /><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_hvp_dense_offdiagonal_analytic_and_chunk_vs_unchunked[2]" time="0.017" /><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_hvp_dense_offdiagonal_analytic_and_chunk_vs_unchunked[3]" time="0.019" /><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_hvp_dense_offdiagonal_analytic_and_chunk_vs_unchunked[100000]" time="0.016" /><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_hvp_permutation_gradient_and_step_coordinates" time="0.031" /><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_cg_zero_nearzero_and_regularized_spd[0.0]" time="0.009" /><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_cg_zero_nearzero_and_regularized_spd[1e-12]" time="0.008" /><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_cg_zero_nearzero_and_regularized_spd[1.0]" time="0.010" /><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_cg_unsafe_inputs_fail_without_choosing_new_damping_or_step" time="0.009" /><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_native_mask_routine_accepts_canonical_groups_and_preserves_transpose_mapping" time="0.109"><failure message="ModuleNotFoundError: No module named 'joblib'">def test_native_mask_routine_accepts_canonical_groups_and_preserves_transpose_mapping():
+&gt;       module=load_candidate();weight=torch.arange(1,73,dtype=torch.float64).reshape(2,4,3,3)
+               ^^^^^^^^^^^^^^^^
+
+tests\test_snows_repair.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+benchmark\snows_patch.py:30: in load_candidate
+    try:exec(compile(text,'controlled/SNOWS/SNOWS.py','exec'),module.__dict__)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+&gt;   ???
+E   ModuleNotFoundError: No module named 'joblib'
+
+controlled/SNOWS/SNOWS.py:5: ModuleNotFoundError</failure></testcase><testcase classname="experiments.post_training_nm_benchmark.tests.test_snows_repair" name="test_real_cifar_model_bridge_requires_functional_relu_and_projection_scope" time="0.056"><failure message="NameError: module is not installed as a submodule">def test_real_cifar_model_bridge_requires_functional_relu_and_projection_scope():
+&gt;       model=build_model().eval();graph=torch.fx.symbolic_trace(model)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_snows_repair.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\fx\_symbolic_trace.py:1417: in symbolic_trace
+    graph = tracer.trace(root, concrete_args)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\fx\_symbolic_trace.py:914: in trace
+    (self.create_arg(fn(*args)),),
+                     ^^^^^^^^^
+benchmark\model.py:66: in forward
+    loss = loss_fct(out,y.view(-1))
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\fx\_symbolic_trace.py:888: in module_call_wrapper
+    return self.call_module(mod, forward, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\fx\_symbolic_trace.py:562: in call_module
+    module_qualified_name = self.path_of_module(m)
+                            ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;torch.fx._symbolic_trace.Tracer object at 0x0000015BD1E14C50&gt;
+mod = CrossEntropyLoss()
+
+    @compatibility(is_backward_compatible=True)
+    def path_of_module(self, mod: torch.nn.Module) -&gt; str:
+        """
+        Helper method to find the qualified name of ``mod`` in the Module hierarchy
+        of ``root``. For example, if ``root`` has a submodule named ``foo``, which has
+        a submodule named ``bar``, passing ``bar`` into this function will return
+        the string "foo.bar".
+    
+        Args:
+    
+            mod (str): The ``Module`` to retrieve the qualified name for.
+        """
+        # Prefer the O(1) algorithm
+        if self.submodule_paths:
+            path = self.submodule_paths.get(mod)
+            if path is None:
+&gt;               raise NameError("module is not installed as a submodule")
+E               NameError: module is not installed as a submodule
+
+..\..\..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\fx\_symbolic_trace.py:516: NameError</failure></testcase></testsuite></testsuites>

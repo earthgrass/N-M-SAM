@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED_NO_CUDA",
+  "environment": {
+    "timestamp_utc": "2026-10-26T11:20:37.683997+00:00",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "torch": "2.13.0+cpu",
+    "torch_cuda_build": null,
+    "cuda_available": false,
+    "cuda_device_count": 0,
+    "nvidia_smi": {
+      "available": false,
+      "error": "FileNotFoundError(2, '系统找不到指定的文件。', None, 2, None)"
+    }
+  },
+  "statuses": {
+    "DATA_IDENTITY_PASS": false,
+    "CIFAR100_MODEL_IDENTITY_PASS": true,
+    "SPARSEGPT_GPU_NUMERICAL_PASS": false,
+    "SPARSEGPT_GPU_RESOURCE_PASS": false,
+    "FULL_EXPERIMENT_NOT_RUN": true
+  },
+  "scope": "one internal 3x3 Conv2d only; no training, full-model pruning, recovery, or seed queue",
+  "fixed_algorithm": {
+    "keep_n": 2,
+    "m": 4,
+    "blocksize": 128,
+    "percdamp": 0.01,
+    "compute_dtype": "torch.float32",
+    "retry_or_auto_tuning": false
+  },
+  "blocked_reason": "torch.cuda.is_available() is false; CPU execution is not accepted as a GPU gate"
+}

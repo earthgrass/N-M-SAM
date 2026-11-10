@@ -1,0 +1,33 @@
+{
+  "status": "READ_ONLY_CROSS_PARENT_COMPARISON_PASS",
+  "seed": 0,
+  "exploratory": true,
+  "same_initial_model_sha256": "87aa9dd7492a89adf9e3ab78ca4a3227f30bc8de53b18a3bd73cd61ab0bd759d",
+  "same_calibration_ids_sha256": "3b7da27d79762235c87f18571bc73224d6e6f2b3ba663b7d9a4a3de312f23157",
+  "same_test_pickle_sha256": "4b67687d9933c4db8f0831104447f15b93774f4f464bd0516f0f0f2ac83b7864",
+  "same_architecture_and_formal_config": true,
+  "same_conditional_obs_physical_core": true,
+  "different_dense_training": true,
+  "different_selection_rule": true,
+  "sam": {
+    "parent_sha256": "3a0716555d33ec92efe8362e24abec9be27625d24ffb6dfb1d51fddb5b91bd13",
+    "checkpoint_sha256": "c820fb06c637bbcaf46e931f7b32cffaf1b1c081976ad46ae8ebb29867bbca52",
+    "dense_test_accuracy": 0.7884,
+    "conditional_test_accuracy": 0.7784,
+    "conditional_test_ce": 0.8283696122169495,
+    "pruning_drop_percentage_points": -1.0000000000000009
+  },
+  "apbr": {
+    "parent_sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+    "checkpoint_sha256": "96b52828a7da67b8056dc8e07f0b5bd553666c334e43cb84506f7fa5b8d9eebc",
+    "dense_test_accuracy": 0.7868,
+    "conditional_geometric_test_accuracy": 0.7783,
+    "conditional_geometric_test_ce": 0.829064609336853,
+    "pruning_drop_percentage_points": -0.8500000000000063,
+    "same_parent_physical_test_accuracy": 0.7772,
+    "same_parent_unit_test_accuracy": 0.7776,
+    "same_parent_shuffled_test_accuracy": 0.7782
+  },
+  "apbr_minus_sam_final_percentage_points": -0.009999999999998899,
+  "test_re_evaluated_by_audit": false
+}

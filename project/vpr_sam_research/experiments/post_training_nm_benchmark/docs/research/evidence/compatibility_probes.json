@@ -1,0 +1,78 @@
+{
+  "stage2_grouping": {
+    "status": "DIFFERENT_GROUPS_REQUIRES_ADAPTER",
+    "weight_shape": [
+      1,
+      4,
+      3,
+      3
+    ],
+    "canonical_first_group": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "obc_and_snows_first_group": [
+      0,
+      9,
+      18,
+      27
+    ],
+    "canonical": "OIHW [out, in*kH*kW], consecutive groups per output row",
+    "upstream": "input-channel strided groups at each kernel spatial position",
+    "safe_adaptation_requirement": "Change grouping interface only; preserve compensation/optimization; never reinterpret a completed Mask"
+  },
+  "SNOWS": {
+    "status": "BLOCKED_NATIVE_HVP",
+    "pinned_default_hvp": [
+      {
+        "weight_coordinates": 8,
+        "kept_coordinates": 4,
+        "max_chunk_size": 100000,
+        "max_abs_hvp_error": 0.0,
+        "observed_hvp_values": [
+          1.0
+        ],
+        "expected_hvp_value": 1.0
+      },
+      {
+        "weight_coordinates": 200008,
+        "kept_coordinates": 100004,
+        "max_chunk_size": 100000,
+        "max_abs_hvp_error": 1.0,
+        "observed_hvp_values": [
+          1.0,
+          2.0
+        ],
+        "expected_hvp_value": 1.0
+      }
+    ],
+    "whole_module_syntax_error": {
+      "line": 965,
+      "message": "expected an indented block after function definition on line 913"
+    },
+    "execution_scope": "Untouched function bodies extracted for diagnostics only; full module is not importable",
+    "zero_rhs_cg_finite": false,
+    "zero_rhs_result": "[nan, nan, nan, nan]",
+    "core_code_modified": false,
+    "full_cifar_resnet18_integration": "pending; native named-stage and shortcut adapters are not verified",
+    "decision": "Do not run SNOWS pilot/queue until an official fix or explicitly approved controlled correction is audited"
+  },
+  "CAP": {
+    "status": "BLOCKED_OFFICIAL_NM_ENTRY",
+    "errors": {
+      "CAPHandle": {
+        "type": "TypeError",
+        "message": "CAPHandle.__init__() got an unexpected keyword argument 'n'"
+      },
+      "CAPNMHandle": {
+        "type": "AttributeError",
+        "message": "'CAPNMHandle' object has no attribute 'm'"
+      }
+    },
+    "source_scorer": "modifier_pruning_cap.py N:M branch constructs CAPHandle with n/m",
+    "core_code_modified": false,
+    "decision": "Conditional only; do not silently repair the official algorithm"
+  }
+}

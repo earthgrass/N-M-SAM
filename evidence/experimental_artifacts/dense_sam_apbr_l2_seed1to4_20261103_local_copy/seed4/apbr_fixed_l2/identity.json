@@ -1,0 +1,41 @@
+{
+  "protocol_id": "cifar100_50k10k_apbr_fixed_l2_seed1to4_20261103",
+  "method": "apbr_fixed_l2",
+  "seed": 4,
+  "model_id": "ssam2022_cifar_resnet18_c100_v1",
+  "architecture_sha256": "95367b739c42cca14cb51d1a776e5dbdbe71f9ed4a1afbd2c5c0b1bb994827ea",
+  "random_initialization": true,
+  "external_pretraining": false,
+  "initial_model_sha256": "6fcc7f17f76df6b0187520d6bdfcf01f04b26646966fe373d543e51c41ddbf00",
+  "config_sha256": "653c3912f35aae7f75149bf94f4265545776fa413958356f45dbccf909270600",
+  "source_sha256": {
+    "/root/autodl-tmp/apbr_l2_dense_seed1to4_20261103/project/vpr_sam_research/experiments/post_training_nm_benchmark/scripts/run_cifar100_apbr_fixed_l2_seed1to4_training.py": "79c672ec09afe304c3901a4807af0bb5122d176e62385604d698b4cef66d03ba",
+    "/root/autodl-tmp/apbr_l2_dense_seed1to4_20261103/project/vpr_sam_research/experiments/post_training_nm_benchmark/configs/cifar100_50k10k_apbr_fixed_l2_seed1to4_rtx5090_20261103.yaml": "653c3912f35aae7f75149bf94f4265545776fa413958356f45dbccf909270600",
+    "/root/autodl-tmp/apbr_l2_dense_seed1to4_20261103/project/vpr_sam_research/experiments/post_training_nm_benchmark/baseline_adapters/cifar100_model.py": "9dfd402b4aac66d8ed18062089a07f3779ba119c909859e031b15abd94ade889",
+    "/root/autodl-tmp/apbr_l2_dense_seed1to4_20261103/project/vpr_sam_research/experiments/post_training_nm_benchmark/benchmark/model.py": "befe89e8801d0b3b3146b113b5ed815bc0d9acd62bba6ba998eaf62a5b6aad71",
+    "/root/autodl-tmp/apbr_l2_dense_seed1to4_20261103/project/vpr_sam_research/src/vpr_sam/optim/step.py": "3c022f2815d577ef3d94ffeed40cb93c06e2359a2734c857a06f1a0c1f738ac2",
+    "/root/autodl-tmp/apbr_l2_dense_seed1to4_20261103/project/vpr_sam_research/src/vpr_sam/optim/geometry.py": "8e0e6d42bcf34a7a8c3b79dc4b76081e9d8c0d6313b183ce0f59109bd39058b5",
+    "/root/autodl-tmp/apbr_l2_dense_seed1to4_20261103/project/vpr_sam_research/src/vpr_sam/repro.py": "4ddb0609a19314c34db7a2ec7ea0925e4e011696d4d7bd28eac4defe14148c13"
+  },
+  "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+  "train_pickle_sha256": "735e79b04f092ca3d2e6d07f368c0a7d70d48c48d28865950cc24454cf45129b",
+  "train_size": 50000,
+  "validation_size": 0,
+  "test_loader_constructed": false,
+  "test_accessed": false,
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 5090",
+    "uuid": "GPU-1b337844-dce7-1dd0-b5c0-4f4436da910a",
+    "memory_total_mib": 32607,
+    "memory_free_mib": 32107,
+    "driver": "595.71.05",
+    "compute_capability": [
+      12,
+      0
+    ]
+  },
+  "python": "3.12.3",
+  "torch": "2.8.0+cu128",
+  "torch_cuda_build": "12.8",
+  "started_at_unix": 1793750670.4592376
+}

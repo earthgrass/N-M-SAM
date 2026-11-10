@@ -1,0 +1,124 @@
+schema_version: 1
+protocol_id: cifar100_50k10k_apbr_fixed_l2_seed0_20261102
+status: FROZEN
+device: cuda:0
+gpu_uuid: GPU-5d02d561-63eb-a7a6-b5f3-5d8bfdff2159
+seeds: [0]
+
+dataset:
+  identity: official_cifar100_python_archive
+  archive_md5: eb9058c3a382ffc7106e4002c42a8d85
+  archive_sha256: 85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7
+  train_size: 50000
+  test_size: 10000
+  validation_size: 0
+  train_all_official_train_samples: true
+  drop_last: false
+  normalize_mean: [0.507075159237132, 0.486548873314951, 0.440917843367034]
+  normalize_std: [0.267334285879241, 0.256438462917088, 0.276150471325684]
+  training_augmentation:
+    random_crop_padding: 4
+    horizontal_flip_probability: 0.5
+    cutout: 0
+  evaluation_augmentation: none
+
+model:
+  id: ssam2022_cifar_resnet18_c100_v1
+  architecture_sha256: 95367b739c42cca14cb51d1a776e5dbdbe71f9ed4a1afbd2c5c0b1bb994827ea
+  parameters: 11220132
+  random_initialization: true
+  external_pretraining: false
+
+training:
+  dense_epochs: 200
+  batch_size: 128
+  precision: fp32
+  amp: false
+  selection_mode: fixed_final_epoch
+  primary_checkpoint: final_epoch_200.pt
+  rolling_resume_checkpoint: last.pt
+  checkpoint_publication: every_epoch
+  retained_epoch_checkpoints: rolling_last_plus_final
+  optimizer:
+    base: SGD
+    learning_rate: 0.1
+    momentum: 0.9
+    weight_decay: 0.0005
+    nesterov: false
+  sam:
+    rho: 0.05
+    adaptive: false
+  scheduler:
+    name: CosineAnnealingLR
+    step: epoch_end
+    t_max: 200
+    eta_min: 0.0
+
+apbr_sam:
+  method: fixed_l2
+  geometry:
+    gamma: 5.482145661475941e-8
+    dtype: float64
+    warmup_steps: 0
+    volume_atol: 1.0e-10
+    volume_rtol: 1.0e-12
+    static_std: 0.1
+
+evaluation:
+  test_used_for_training: false
+  test_used_for_checkpoint_selection: false
+  test_used_for_hyperparameter_tuning: false
+  test_loader_constructed_during_training: false
+  primary_checkpoint: final
+  batch_size: 128
+  augmentation: none
+
+nm:
+  n: 2
+  m: 4
+  layout: oihw_output_row_contiguous_v1
+  scope: 19_internal_conv2d
+  excluded: [conv1, linear, batch_norm_affine, bias]
+  tail: dense
+  mask: bool_keep_true
+
+formal_calibration:
+  samples: 1024
+  source: official_train_only
+  selection_seed: 20261027
+  selection_rule: numpy_pcg64_permutation_of_0_to_49999_first_n
+  augmentation: none
+  batch_size: 128
+  passes: 1
+
+bn_only:
+  samples: 4096
+  source: official_train_only
+  selection_seed: 20261028
+  selection_rule: numpy_pcg64_permutation_of_0_to_49999_first_n
+  augmentation: none
+  batch_size: 128
+  passes: 1
+  update: batch_norm_running_buffers_only
+
+recovery:
+  epochs: 20
+  batch_size: 128
+  optimizer: SGD
+  learning_rate: 0.005
+  momentum: 0.9
+  weight_decay: 0.0005
+  nesterov: false
+  scheduler: CosineAnnealingLR_epoch_end
+  eta_min: 0.0
+  fixed_mask: true
+  selection_mode: fixed_final_epoch
+  primary_checkpoint: final_epoch_020.pt
+  parent: native_pruned_not_bn_only
+
+execution:
+  output_root: artifacts/cifar100_50k10k_final_v1
+  single_gpu_serial: true
+  seed0_before_seeds12: true
+  forbid_resume_from_protocols: [cifar100_45k5k]
+  formal_test_evaluation_after_pipeline_freeze: true

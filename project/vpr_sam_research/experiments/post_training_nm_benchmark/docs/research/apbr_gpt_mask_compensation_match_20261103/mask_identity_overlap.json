@@ -1,0 +1,398 @@
+{
+  "apbr_vpr_seed0": {
+    "status": "LOCAL_MASK_IDENTITY_PASS",
+    "protocol_id": "cifar100_50k10k_final_v1",
+    "parent_sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+    "apbr_mask_tensor_sha256": "79d9c410c67e931101cf46112e732c68133a9935e4f99a41503a0de8ee7b40f4",
+    "gpt_mask_tensor_sha256": "24bfc8bbba216bd866077d1085850a79687ce44945d2af19a003dee86242fbfe",
+    "file_sha256": {
+      "parent": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+      "raw": "74ea702356b6cb3f10ad34985ca8de6757ccb80702cced3debe4ec5936b9b9b3",
+      "gpt": "aea9e43dfe90f0e5cfa137769648e13a72d5971362a8291e81e3d7d565a217e1",
+      "status": "858bde2aeb10c646422cfa494ee7cc287b64eeea2a10021dff296d03eda2ac93"
+    },
+    "totals": {
+      "positions": 11157504,
+      "groups": 2789376,
+      "same_positions": 8773346,
+      "same_groups": 1658684,
+      "apbr_deleted": 5578752,
+      "gpt_deleted": 5578752,
+      "same_position_fraction": 0.7863179793616923,
+      "same_group_fraction": 0.5946433897760646
+    },
+    "layers": [
+      {
+        "layer": "layer1.0.conv1.weight",
+        "positions": 36864,
+        "groups": 9216,
+        "same_positions": 26942,
+        "same_groups": 4922,
+        "apbr_deleted": 18432,
+        "gpt_deleted": 18432
+      },
+      {
+        "layer": "layer1.0.conv2.weight",
+        "positions": 36864,
+        "groups": 9216,
+        "same_positions": 28572,
+        "same_groups": 5331,
+        "apbr_deleted": 18432,
+        "gpt_deleted": 18432
+      },
+      {
+        "layer": "layer1.1.conv1.weight",
+        "positions": 36864,
+        "groups": 9216,
+        "same_positions": 29184,
+        "same_groups": 5575,
+        "apbr_deleted": 18432,
+        "gpt_deleted": 18432
+      },
+      {
+        "layer": "layer1.1.conv2.weight",
+        "positions": 36864,
+        "groups": 9216,
+        "same_positions": 30002,
+        "same_groups": 5951,
+        "apbr_deleted": 18432,
+        "gpt_deleted": 18432
+      },
+      {
+        "layer": "layer2.0.conv1.weight",
+        "positions": 73728,
+        "groups": 18432,
+        "same_positions": 56720,
+        "same_groups": 10434,
+        "apbr_deleted": 36864,
+        "gpt_deleted": 36864
+      },
+      {
+        "layer": "layer2.0.conv2.weight",
+        "positions": 147456,
+        "groups": 36864,
+        "same_positions": 121614,
+        "same_groups": 24418,
+        "apbr_deleted": 73728,
+        "gpt_deleted": 73728
+      },
+      {
+        "layer": "layer2.0.shortcut.0.weight",
+        "positions": 8192,
+        "groups": 2048,
+        "same_positions": 6868,
+        "same_groups": 1396,
+        "apbr_deleted": 4096,
+        "gpt_deleted": 4096
+      },
+      {
+        "layer": "layer2.1.conv1.weight",
+        "positions": 147456,
+        "groups": 36864,
+        "same_positions": 119868,
+        "same_groups": 23651,
+        "apbr_deleted": 73728,
+        "gpt_deleted": 73728
+      },
+      {
+        "layer": "layer2.1.conv2.weight",
+        "positions": 147456,
+        "groups": 36864,
+        "same_positions": 122966,
+        "same_groups": 25021,
+        "apbr_deleted": 73728,
+        "gpt_deleted": 73728
+      },
+      {
+        "layer": "layer3.0.conv1.weight",
+        "positions": 294912,
+        "groups": 73728,
+        "same_positions": 237824,
+        "same_groups": 46309,
+        "apbr_deleted": 147456,
+        "gpt_deleted": 147456
+      },
+      {
+        "layer": "layer3.0.conv2.weight",
+        "positions": 589824,
+        "groups": 147456,
+        "same_positions": 493912,
+        "same_groups": 100949,
+        "apbr_deleted": 294912,
+        "gpt_deleted": 294912
+      },
+      {
+        "layer": "layer3.0.shortcut.0.weight",
+        "positions": 32768,
+        "groups": 8192,
+        "same_positions": 28730,
+        "same_groups": 6196,
+        "apbr_deleted": 16384,
+        "gpt_deleted": 16384
+      },
+      {
+        "layer": "layer3.1.conv1.weight",
+        "positions": 589824,
+        "groups": 147456,
+        "same_positions": 492750,
+        "same_groups": 100350,
+        "apbr_deleted": 294912,
+        "gpt_deleted": 294912
+      },
+      {
+        "layer": "layer3.1.conv2.weight",
+        "positions": 589824,
+        "groups": 147456,
+        "same_positions": 502378,
+        "same_groups": 104811,
+        "apbr_deleted": 294912,
+        "gpt_deleted": 294912
+      },
+      {
+        "layer": "layer4.0.conv1.weight",
+        "positions": 1179648,
+        "groups": 294912,
+        "same_positions": 949398,
+        "same_groups": 184036,
+        "apbr_deleted": 589824,
+        "gpt_deleted": 589824
+      },
+      {
+        "layer": "layer4.0.conv2.weight",
+        "positions": 2359296,
+        "groups": 589824,
+        "same_positions": 1952554,
+        "same_groups": 392631,
+        "apbr_deleted": 1179648,
+        "gpt_deleted": 1179648
+      },
+      {
+        "layer": "layer4.0.shortcut.0.weight",
+        "positions": 131072,
+        "groups": 32768,
+        "same_positions": 116596,
+        "same_groups": 25605,
+        "apbr_deleted": 65536,
+        "gpt_deleted": 65536
+      },
+      {
+        "layer": "layer4.1.conv1.weight",
+        "positions": 2359296,
+        "groups": 589824,
+        "same_positions": 1875528,
+        "same_groups": 357875,
+        "apbr_deleted": 1179648,
+        "gpt_deleted": 1179648
+      },
+      {
+        "layer": "layer4.1.conv2.weight",
+        "positions": 2359296,
+        "groups": 589824,
+        "same_positions": 1580940,
+        "same_groups": 233223,
+        "apbr_deleted": 1179648,
+        "gpt_deleted": 1179648
+      }
+    ],
+    "test_accessed": false,
+    "fixed_mask_obs_full_network_run": false
+  },
+  "apbr_l2_seed0": {
+    "status": "LOCAL_MASK_IDENTITY_PASS",
+    "protocol_id": "cifar100_50k10k_apbr_fixed_l2_seed0_20261102",
+    "parent_sha256": "d68fbffc5f862be07656c5b45b8dcde2a5411865c0e5e03f2f45c2f97926b742",
+    "apbr_mask_tensor_sha256": "8071bf6fee49b0126e3461f63f12eabfb8c9d7800b700018392446fb6004adc9",
+    "gpt_mask_tensor_sha256": "c60d24c84dcd9f52b002b3afae55bc195938403c5d8421a7e6b5a0e36ea53f02",
+    "file_sha256": {
+      "parent": "d68fbffc5f862be07656c5b45b8dcde2a5411865c0e5e03f2f45c2f97926b742",
+      "raw": "a89cc75085857f6f49b1511ca228414cc4f48030136a60277a73250bc83dd3da",
+      "gpt": "cb4d25f9eda8a4382b1988cc1402a1bd5b9c050e1fa8e177bbb0a35a450d28d8",
+      "status": "e74bb1436377503723be30a698757993872f4b1ce5abc53cf09d94ba1e0ec894"
+    },
+    "totals": {
+      "positions": 11157504,
+      "groups": 2789376,
+      "same_positions": 8761406,
+      "same_groups": 1652593,
+      "apbr_deleted": 5578752,
+      "gpt_deleted": 5578752,
+      "same_position_fraction": 0.7852478475472651,
+      "same_group_fraction": 0.5924597472696402
+    },
+    "layers": [
+      {
+        "layer": "layer1.0.conv1.weight",
+        "positions": 36864,
+        "groups": 9216,
+        "same_positions": 26856,
+        "same_groups": 4841,
+        "apbr_deleted": 18432,
+        "gpt_deleted": 18432
+      },
+      {
+        "layer": "layer1.0.conv2.weight",
+        "positions": 36864,
+        "groups": 9216,
+        "same_positions": 28458,
+        "same_groups": 5284,
+        "apbr_deleted": 18432,
+        "gpt_deleted": 18432
+      },
+      {
+        "layer": "layer1.1.conv1.weight",
+        "positions": 36864,
+        "groups": 9216,
+        "same_positions": 28760,
+        "same_groups": 5413,
+        "apbr_deleted": 18432,
+        "gpt_deleted": 18432
+      },
+      {
+        "layer": "layer1.1.conv2.weight",
+        "positions": 36864,
+        "groups": 9216,
+        "same_positions": 29834,
+        "same_groups": 5875,
+        "apbr_deleted": 18432,
+        "gpt_deleted": 18432
+      },
+      {
+        "layer": "layer2.0.conv1.weight",
+        "positions": 73728,
+        "groups": 18432,
+        "same_positions": 55896,
+        "same_groups": 10170,
+        "apbr_deleted": 36864,
+        "gpt_deleted": 36864
+      },
+      {
+        "layer": "layer2.0.conv2.weight",
+        "positions": 147456,
+        "groups": 36864,
+        "same_positions": 120822,
+        "same_groups": 24098,
+        "apbr_deleted": 73728,
+        "gpt_deleted": 73728
+      },
+      {
+        "layer": "layer2.0.shortcut.0.weight",
+        "positions": 8192,
+        "groups": 2048,
+        "same_positions": 6822,
+        "same_groups": 1379,
+        "apbr_deleted": 4096,
+        "gpt_deleted": 4096
+      },
+      {
+        "layer": "layer2.1.conv1.weight",
+        "positions": 147456,
+        "groups": 36864,
+        "same_positions": 119644,
+        "same_groups": 23583,
+        "apbr_deleted": 73728,
+        "gpt_deleted": 73728
+      },
+      {
+        "layer": "layer2.1.conv2.weight",
+        "positions": 147456,
+        "groups": 36864,
+        "same_positions": 122040,
+        "same_groups": 24588,
+        "apbr_deleted": 73728,
+        "gpt_deleted": 73728
+      },
+      {
+        "layer": "layer3.0.conv1.weight",
+        "positions": 294912,
+        "groups": 73728,
+        "same_positions": 236708,
+        "same_groups": 45833,
+        "apbr_deleted": 147456,
+        "gpt_deleted": 147456
+      },
+      {
+        "layer": "layer3.0.conv2.weight",
+        "positions": 589824,
+        "groups": 147456,
+        "same_positions": 493728,
+        "same_groups": 100877,
+        "apbr_deleted": 294912,
+        "gpt_deleted": 294912
+      },
+      {
+        "layer": "layer3.0.shortcut.0.weight",
+        "positions": 32768,
+        "groups": 8192,
+        "same_positions": 28536,
+        "same_groups": 6100,
+        "apbr_deleted": 16384,
+        "gpt_deleted": 16384
+      },
+      {
+        "layer": "layer3.1.conv1.weight",
+        "positions": 589824,
+        "groups": 147456,
+        "same_positions": 491034,
+        "same_groups": 99522,
+        "apbr_deleted": 294912,
+        "gpt_deleted": 294912
+      },
+      {
+        "layer": "layer3.1.conv2.weight",
+        "positions": 589824,
+        "groups": 147456,
+        "same_positions": 501710,
+        "same_groups": 104526,
+        "apbr_deleted": 294912,
+        "gpt_deleted": 294912
+      },
+      {
+        "layer": "layer4.0.conv1.weight",
+        "positions": 1179648,
+        "groups": 294912,
+        "same_positions": 947534,
+        "same_groups": 182989,
+        "apbr_deleted": 589824,
+        "gpt_deleted": 589824
+      },
+      {
+        "layer": "layer4.0.conv2.weight",
+        "positions": 2359296,
+        "groups": 589824,
+        "same_positions": 1949510,
+        "same_groups": 391044,
+        "apbr_deleted": 1179648,
+        "gpt_deleted": 1179648
+      },
+      {
+        "layer": "layer4.0.shortcut.0.weight",
+        "positions": 131072,
+        "groups": 32768,
+        "same_positions": 116444,
+        "same_groups": 25547,
+        "apbr_deleted": 65536,
+        "gpt_deleted": 65536
+      },
+      {
+        "layer": "layer4.1.conv1.weight",
+        "positions": 2359296,
+        "groups": 589824,
+        "same_positions": 1875928,
+        "same_groups": 358135,
+        "apbr_deleted": 1179648,
+        "gpt_deleted": 1179648
+      },
+      {
+        "layer": "layer4.1.conv2.weight",
+        "positions": 2359296,
+        "groups": 589824,
+        "same_positions": 1581142,
+        "same_groups": 232789,
+        "apbr_deleted": 1179648,
+        "gpt_deleted": 1179648
+      }
+    ],
+    "test_accessed": false,
+    "fixed_mask_obs_full_network_run": false
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "status": "DESIGN_PHASE_PASS",
+  "date": "2026-10-31",
+  "git": {
+    "root": "C:/Users/earthgrass73/Desktop/NM稀疏/APBR-post-training-benchmark",
+    "branch": "research/post-training-nm-benchmark",
+    "head": "55fe3e300dbbd09c1178a6316afebc9ecf367947",
+    "worktree_clean": false,
+    "existing_untracked_research_files_preserved": true
+  },
+  "parent": {
+    "path": "artifacts/apbr_unified_gpt_full_experiment/checkpoints/apbr_seed0_dense_final.pt",
+    "sha256": "4332079becdb58fb50f0e68b8bd0dcc251db0184a6050facb524817520a51d82",
+    "protocol_id": "cifar100_50k10k_final_v1",
+    "method": "apbr_sam",
+    "seed": 0,
+    "epoch": 200,
+    "steps": 78200,
+    "test_accessed": false
+  },
+  "geometry": {
+    "method": "vpr",
+    "stored_state": "log_scale_s",
+    "entries": 62,
+    "mapping_exact_model_parameters": true,
+    "eligible_tensors_fp64_finite_shape_matching": true
+  },
+  "scope": {
+    "eligible_layers": 19,
+    "eligible_positions": 11157504,
+    "deleted_positions": 5578752,
+    "strict_2_of_4": true,
+    "dense_tail": true,
+    "layout": "oihw_output_row_contiguous_v1"
+  },
+  "original_sparsegpt": {
+    "mask_file_sha256": "aea9e43dfe90f0e5cfa137769648e13a72d5971362a8291e81e3d7d565a217e1",
+    "mask_tensor_sha256": "24bfc8bbba216bd866077d1085850a79687ce44945d2af19a003dee86242fbfe",
+    "parent_sha256_matches": true,
+    "calibration_ids_sha256": "3b7da27d79762235c87f18571bc73224d6e6f2b3ba663b7d9a4a3de312f23157",
+    "percdamp": 0.01,
+    "blocksize": 128,
+    "compute_dtype": "float32"
+  },
+  "phase_actions": {
+    "gpu_accessed": false,
+    "training_run": false,
+    "pruning_run": false,
+    "test_accessed": false,
+    "historical_artifact_overwritten": false,
+    "formal_algorithm_edited": false
+  },
+  "next_gate": "isolated_implementation_and_cpu_numerical_validation"
+}

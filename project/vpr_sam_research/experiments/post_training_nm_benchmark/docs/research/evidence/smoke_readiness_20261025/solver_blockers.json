@@ -1,0 +1,17 @@
+{
+  "scope": "exact original solver AST statements; no solver patch or GPU execution",
+  "lifetime_hypothesis_corrected": {
+    "dense_target_deletion_is_after_backtracking": true,
+    "status": "NOT_A_BLOCKER",
+    "note": "An initial out-of-context harness selected post-loop cleanup; that false hypothesis was withdrawn."
+  },
+  "failure_reset_statement": "if bt == max_backtracking_steps - 1:\n    with torch.no_grad():\n        getattr(sub_model_sparse[mod_num], conv_layer).weight.data = W_original",
+  "unconditional_statement": "with torch.no_grad():\n    getattr(sub_model_sparse[mod_num], conv_layer).weight.data = W_new",
+  "after_rejection_reset": [
+    1.0
+  ],
+  "after_unconditional_write": [
+    7.0
+  ],
+  "decision": "BLOCKED_SOURCE: do not invent corrected Armijo batch/gradient/termination semantics or run full method"
+}

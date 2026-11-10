@@ -1,0 +1,167 @@
+name: OBC-seed0-4090-1024x10-CIFAR-controlled-pilot
+version: preexecution-acceptance-20261025
+purpose: formal
+device: cuda:0
+gpu_uuid: GPU-6d21beb3-4922-a03d-55b9-b081fff80cee
+threads: 4
+seeds:
+- 0
+execution:
+  approved: true
+  cuda_smoke_receipt: null
+  pilot_seed: 0
+  full_queue_requires_reviewed_pilot: true
+  smoke_lineage:
+    report: artifacts/accepted_obc_smoke_4090/SMOKE_REPORT.json
+    audit: artifacts/accepted_obc_smoke_4090/SMOKE_FINAL_AUDIT.json
+    report_sha256: 91f78bb8c7d4fbab64ee6d5404aaacc14b66ce56445f4314b1b29bf32baf2d47
+    audit_sha256: 1d777916046bec572a90bb0e6ef8fc71b2389eb47695e0d30dee4280c2869fd9
+    commit: 19ff5dc9f3d1720cbf434c388741d8138b09a948
+dense_training: prohibited; load existing Dense-SAM only for new competitors
+apbr_alias: Full VPR-L2 + Geometry-guided; fixed_l2/vpr_guided unchanged
+calibration:
+  approved: true
+  dataset: official_cifar10_train_50000
+  samples: 1024
+  index_file: configs/obc_seed0_1024_train_ids.json
+  index_sha256: e6de753094bd50b1f75b7833893ef7d465069f977596457bf0814e2839bd4702
+  batch_size: 128
+  rounds: 10
+  forward_passes_per_layer: 80
+  optimization_epochs: 0
+  random_seed: 0
+  augmentation: obc_random_resized_crop32_flip
+  preprocessing:
+    to_tensor: true
+    normalize_mean: &id001
+    - 0.4913725490196078
+    - 0.4823529411764706
+    - 0.4466666666666667
+    normalize_std: &id002
+    - 0.24705882352941178
+    - 0.24352941176470588
+    - 0.2615686274509804
+  status: USER_APPROVED_1024_TEN_AUGMENTED_ROUNDS
+  common_budget:
+    approved: false
+    status: PENDING_APPROVAL
+  method_native:
+    OBC:
+      samples: 1024
+      default_rounds: 10
+      noaug_rounds: 1
+      approved_for_local_run: false
+    SNOWS:
+      nm_parser_ngrads: 128
+      readme_example_ngrads: 3000
+      approved_for_local_run: false
+  index_file_sha256: 1ccaddc4a0a2f531f7500bf2e403e4302978dc35e98abac179d262bbc358f2f2
+  transform_spec:
+    size: 32
+    scale:
+    - 0.2
+    - 1.0
+    ratio:
+    - 0.75
+    - 1.3333333333333333
+    flip_probability: 0.5
+  sampling: official OBC RandomState(0) shuffle arange(50000), first1024; fixed saved
+    draw order
+  replay: identical shuffled augmented views for every layer; private CPU RNG; workers0
+nm_acceptance:
+  OBC: CPU_ADAPTER_PASS_CUDA_PENDING
+  SNOWS: BLOCKED
+  CAP: CONDITIONAL_BLOCKED
+pruning:
+  n: 2
+  m: 4
+  layout: oihw_output_row_contiguous_v1
+  scope: exclude_first_last
+  tail: dense
+  bn_affine: excluded
+  tie_break: native OBC argmin first index; existing magnitude stable lower index
+data:
+  train_size: 50000
+  test_size: 10000
+  validation_size: 0
+  batch_size: 128
+  evaluation_batch_size: 128
+  workers: 2
+  pin_memory: true
+  drop_last: true
+  normalize_mean: *id001
+  normalize_std: *id002
+  crop_padding: 4
+  horizontal_flip_probability: 0.5
+  cutout_size: 16
+  cutout_probability: 0.5
+recovery:
+  epochs: 20
+  learning_rate: 0.005
+  momentum: 0.9
+  weight_decay: 0.0005
+  nesterov: false
+  scheduler: CosineAnnealingLR_epoch_end
+  eta_min: 0.0
+  selection: strict_best_test_accuracy_earliest_tie
+  save_each_epoch: true
+common_bn:
+  samples: 4096
+  index_file: configs/bn_train_ids.json
+  index_sha256: 8a4758969d1a4ad9a56e0bb13de4042f6f55a976594e8dbeee577198640b02a3
+  augmentation: none
+  batch_size: 128
+  rounds: 1
+  momentum: null
+  separate_copy: true
+  enabled: false
+  status: SKIPPED_BY_LATEST_USER_REQUEST
+OBC:
+  status: CUDA_SINGLE_LAYER_PASS_FULL_MODEL_RESOURCE_PILOT_PENDING
+  gpu_smoke_config: configs/obc_cuda_smoke.yaml
+  gpu_smoke_config_approved: true
+  gpu_smoke_readiness: computed_by_benchmark.smoke_readiness_after_clean_commit
+  parallel: 32
+  relative_damping: 0.0
+  native_bn:
+    default_enabled: false
+    optional_postproc_bnt_batches: 100
+    momentum: 0.1
+  output: native compensated post-pruning; not Raw Hard
+SNOWS:
+  status: BLOCKED_PINNED_SOURCE
+  gpu_smoke_status: BLOCKED_SOURCE
+  isolated_patch: patches/snows_minimal_diagnostic.patch
+  approved_step_patch: patches/snows_step_acceptance.patch
+  patch_scope: diagnostic math kernels and explicit unused placeholder only; not accepted
+    full optimizer
+  unresolved:
+  - full CIFAR-ResNet18 representation-hook bridge
+  - Armijo last-batch objective vs current-batch gradient; unchanged pending review
+  - explicit Mask for retained zero-valued weights
+  - calibration and optimization configuration review
+  reasons:
+  - module syntax error
+  - chunked HVP error
+  - zero-RHS CG nonfinite
+CAP:
+  status: BLOCKED_PINNED_NM_CONSTRUCTORS
+MOONSHOT:
+  status: LITERATURE_ONLY_CODE_NOT_RELEASED_AT_PIN
+UniPTS:
+  status: LITERATURE_ONLY_NO_EQUIVALENT_NM_PATH
+minimum_free_disk_bytes: 23622320128
+precision:
+  model: float32
+  amp: false
+  tf32: false
+  compile: false
+  deterministic: true
+selection: maximum Test Accuracy earliest tie; Test reused for selection; biased endpoint
+  disclosed
+recovery_parent: native_complete before any BN recalibration
+provenance:
+  historical_protocol_sha256: 6986af80a36e600c82b4bc90d9779aff8753813f7d4aa20479a0ea262dece44a
+  base_commit: d0025b48664091444cc1ad363253010c336b23e6
+gpu_name: NVIDIA GeForce RTX 4090
+minimum_free_cuda_bytes: 12884901888

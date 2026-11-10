@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED_NO_CUDA",
+  "environment": {
+    "timestamp_utc": "2026-10-26T12:01:26.980376+00:00",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "torch": "2.13.0+cpu",
+    "torch_cuda_build": null,
+    "cuda_available": false,
+    "cuda_device_count": 0,
+    "nvidia_smi": {
+      "available": false,
+      "error": "FileNotFoundError(2, '系统找不到指定的文件。', None, 2, None)"
+    }
+  },
+  "statuses": {
+    "DATA_IDENTITY_PASS": true,
+    "CIFAR100_MODEL_IDENTITY_PASS": true,
+    "SPARSEGPT_GPU_NUMERICAL_PASS": false,
+    "SPARSEGPT_GPU_RESOURCE_PASS": false,
+    "FULL_EXPERIMENT_NOT_RUN": true
+  },
+  "scope": "one internal 3x3 Conv2d only; no training, full-model pruning, recovery, or seed queue",
+  "fixed_algorithm": {
+    "keep_n": 2,
+    "m": 4,
+    "blocksize": 128,
+    "percdamp": 0.01,
+    "compute_dtype": "torch.float32",
+    "retry_or_auto_tuning": false
+  },
+  "dataset_identity": {
+    "audit_path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\docs\\research\\cifar100_gpu_gate_20261026\\GPU_GATE_TESTS\\dataset_identity.json",
+    "archive_sha256": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+    "fixed_gpu_smoke_train_sample_ids": [
+      578,
+      995,
+      4938,
+      5017,
+      13134,
+      13507,
+      15801,
+      17174,
+      17804,
+      17871,
+      18490,
+      19027,
+      23387,
+      26614,
+      27491,
+      28495,
+      29392,
+      30266,
+      31460,
+      31595,
+      33164,
+      34103,
+      34463,
+      38132,
+      38877,
+      39322,
+      44262,
+      45400,
+      48413,
+      49010,
+      49258,
+      49701
+    ]
+  },
+  "model_identity": {
+    "audit_path": "C:\\Users\\earthgrass73\\Desktop\\NM稀疏\\APBR-post-training-benchmark\\vpr_sam_research\\experiments\\post_training_nm_benchmark\\docs\\research\\cifar100_gpu_gate_20261026\\GPU_GATE_TESTS\\model_identity.json",
+    "model_id": "ssam2022_cifar_resnet18_c100_v1",
+    "architecture_sha256": "95367b739c42cca14cb51d1a776e5dbdbe71f9ed4a1afbd2c5c0b1bb994827ea",
+    "initialized_state_sha256": "3b05fd6f017e5d33dcde5c517c34d14457cf7311a5339683c5d281f0a321f874"
+  },
+  "blocked_reason": "torch.cuda.is_available() is false; CPU execution is not accepted as a GPU gate"
+}
